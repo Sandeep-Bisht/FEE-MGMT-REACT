@@ -1,0 +1,642 @@
+.dashboard-card:hover{
+    transform: scale(1.1);
+    box-shadow: 5px 6px 22px -6px;
+}
+.dashboard-card{
+    padding: 10px;
+    box-shadow: 0px 0px 8px -3px;
+    border-radius: 8px;
+    height: 100px;
+    width: 100%;
+    transition: all .4s ease-in-out;
+    background-color:#ffffff !important;
+}
+.dashboard-card h4{
+    font-weight: 700;
+    color: #000000;
+    font-size: 20px;
+}
+.dashboard-card span{
+    /* filter: drop-shadow(0px 0px 1px grey); */
+    float: right;
+    font-size: 50px;
+}
+  .chartRow{
+      padding-top: 60px;
+      display: flex;
+      align-items: center;
+  }
+/* #content .row .col-12{
+    background-color: white;
+    padding: 50px;
+    margin-top: 11px;
+} */
+.layoutCard h3{
+    text-align: center;
+}
+.layoutCard{
+    background: white;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 8px -3px;
+}
+.printCard{
+    background: white;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 8px -3px;
+}
+.bg-white{
+  background: white;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0px 0px 8px -3px;
+}
+.receipt_h3{
+    font-size: 18px;
+    text-transform: uppercase;
+    margin: 0px !important;
+}
+/* .AllModalStudent  table thead tr th {
+    width: auto !important;
+} */
+.ReceiptLayoutCard{
+    background-color: white;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 8px -3px;
+}
+.form-control{
+    /* background-color:#e8e8d3 !important; */
+    border-radius: 0px;
+}
+input,textarea {
+    text-transform: uppercase;
+}
+.table-striped>tbody>tr:nth-of-type(odd) {
+    /* background-color: #e8e8d3 !important; */
+}
+.modal {
+    opacity: 1;
+}
+.modal-content {
+    /* background-color: #e8e8ae; */
+    position: absolute !important;
+}
+/* .modal-body th{
+    width: 40%;
+} */
+.feesLayoutCard label{
+text-align:right;
+width: 50%;
+font-size: 12px;
+}
+label{
+font-size: 12px ;
+}
+.feesLayoutCard input{
+    width: 40%;
+    }
+.modal-header {
+ padding: 15px !important;
+}
+.receipt_table th{
+    font-size: 20px;
+}
+.receipt_table td{
+    font-size: 20px;
+}
+.receipt_inputType{
+    border: none;
+    border-bottom: 1px solid black;
+}
+.receipt_inputType:focus{
+    border: none;
+    border-bottom: 1px solid black;
+}
+.errorMessage{
+    color:red
+}
+  /* studen display */
+  .student-profile .card {
+    border-radius: 10px;
+  }
+  .student-profile .card .card-header .profile_img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin: 10px auto;
+    border: 10px solid #ccc;
+    border-radius: 50%;
+  }
+  
+  .student-profile .card h3 {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  
+  .student-profile .card p {
+    font-size: 16px;
+    color: #000;
+  }
+  
+  .student-profile .table th,
+  .student-profile .table td {
+    font-size: 14px;
+    padding: 5px 10px;
+    color: #000;
+  }
+  /* print reciept from reciept page */
+  @media print {
+
+    @page {
+        size: auto;
+      }
+    /* @page {size: landscape ;  } */
+    tr th {
+      vertical-align: baseline !important;
+    }
+   html, body  {
+      visibility: hidden;
+      height: 100% !important;
+      /* overflow: hidden !important; */
+    }
+    #content {
+        /* background-color: #ecece1; */
+        width: 100% !important;
+        padding: 0px 0px !important;
+       
+    }
+    .printvoucherbydate{
+        /* display: block !important; */
+        width: 100%;
+        height: 100% !important;
+    }
+    .printvoucherbydate .table{
+        top:0px !important;
+        page-break-after: always;
+    }
+    .printvoucherbydate table th,.printvoucherbydate table td { 
+        padding: 3px !important;
+        font-size: 13px;
+    }
+    .printvoucherbydate, .printvoucherbydate * {
+        margin: 0mm 0mm 0mm  1mm;
+        visibility: visible;    
+    }
+    .printvoucherbydate {
+        position:relative;
+        left: 0;
+        top: 0;
+    }
+  /* summary */
+  .printsummary{
+      /* display: block !important; */
+      width: 100%;
+      height: 100% !important;
+  }
+  .printsummary .table{
+      top:0px !important;
+      page-break-after: always;
+  }
+  .printsummary table th,.printsummary table td { 
+      padding: 3px !important;
+      font-size: 13px;
+  }
+  .printsummary, .printsummary * {
+      margin: 0mm 0mm 0mm  1mm;
+      visibility: visible;    
+  }
+  .printsummary {
+      position:relative;
+      left: 0;
+  }
+    /* end summary */
+    .printAllStructure{
+        display: block !important;
+        width: 100%;
+        height: 50vh !important;
+    }
+    .printAllStructure h2 { 
+        font-size: 15px;
+    }
+    .printAllStructure .table{
+        top:0px !important;
+        page-break-after: always;
+    }
+    .layoutCard{
+        display: none !important;
+    }
+    .printCard{
+        background: white;
+        margin: 10px;
+        padding: 15px;
+        border-radius: 15px;
+        box-shadow: 0px 0px 8px -3px;
+    }
+    .printAllStructure table th,.printAllStructure table td { 
+        padding: 3px !important;
+        font-size: 13px;
+    }
+    .printAllStructure,.printAllStructure * {
+        margin: 0mm 0mm 0mm  0mm;
+        visibility: visible;    
+    }
+    .printAllStructure {
+        position:absolute;
+        left: 0;
+        top: 0;
+    }
+  /* print defaulter */
+  .printDefaulter, .printDefaulter * {
+      margin: 0mm 0mm 0mm  0mm;
+      visibility: visible;
+    }
+  .printDefaulter th, .printDefaulter td{
+    font-size: 14px !important;
+
+  }
+  .printDefaulter {
+    width: 100%;
+    height: 100% !important;
+    position: relative;
+    left: 0;
+    top: 0;
+  } 
+  /* end defaulter */
+
+
+  /* print student display */
+  .printStudentDisplay table th,.printStudentDisplay table td { 
+    padding: 3px !important;
+    font-size: 12px !important;
+    color: #000 !important;
+}
+  .printStudentDisplay, .printStudentDisplay * {
+    /* margin-top: -135px !important; */
+    /* top:0px !important; */
+    visibility: visible;
+  }
+  .printStudentDisplay {
+    width: 100%;
+    height: 100% !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+  } 
+  .printStudentSlip, .printStudentSlip * {
+    /* margin-top: -5px !important; */
+    visibility: visible;
+  }
+  .printStudentSlip h6{
+    font-size: 16px;
+  }
+  /* .printStudentSlip {
+    font-size: 20px;
+    width: 100%;
+    height: 100% !important;
+    position:unset;
+    left: 0;
+    top: 0;
+  }  */
+ 
+  .printStudentSlip .row{
+    /* break-before: page; */
+    display: flex !important; 
+    page-break-after: always;
+    page-break-before: always;
+    page-break-inside: avoid;
+    padding: 15px;
+  }
+  /* end print student display */
+  .printTc, .printTc * {
+    /* margin: 0mm 0mm 0mm  15mm; */
+    visibility: visible;
+  }
+  .printTc {
+    font-size: 26px !important;
+    width: 100%;
+    height: 100% !important;
+    position: relative;
+    left: 0;
+    top: 0;
+  } 
+  .printBonafide, .printBonafide * {
+    /* margin: 0mm 0mm 0mm  15mm; */
+    visibility: visible;
+  }
+  .printBonafide {
+    font-size: 20px !important;
+    width: 100%;
+    height: 100% !important;
+    position: relative;
+    left: 0;
+    top: 0;
+  } 
+
+  .CharactertCertificate, .CharactertCertificate * {
+    /* margin: 0mm 0mm 0mm  15mm; */
+    visibility: visible;
+  }
+  .CharactertCertificate {
+    font-size: 30px !important;
+    width: 100%;
+    height: 100% !important;
+    position: relative;
+    left: 0;
+    top: 0;
+  } 
+  .CharactertCertificate h6{
+    font-size: 23px !important;
+  }
+  .CharactertCertificate h5{
+    font-size: 33px !important;
+  }
+  
+  .printFeeCertificate, .printFeeCertificate * {
+    margin: 0mm 0mm 0mm  0mm;
+    visibility: visible;
+  }
+  .printFeeCertificate {
+    font-size: 20px !important;
+    width: 100%;
+    height: 100% !important;
+    position: relative;
+    left: 0;
+    top: 0;
+  } 
+
+    .printReciept, .printReciept * {
+      margin: 0mm 0mm 0mm  0mm;
+      visibility: visible;
+    }
+    .printReciept button{
+      display: none;
+    }
+    .printReciept label,.printReciept strong{
+      font-size: 16px !important;
+    }
+    .printReciept th , .printReciept td{
+      font-size: 16px !important;
+    }
+    .printReciept th:last-child{
+      display: none;
+    }
+    .printReciept {
+      position: relative;
+      left: 0;
+      top: 0;
+    } 
+  
+  }
+/* end student display */
+/* .print_table th{
+    width: 15% !important;
+} */
+/* PRINT ALL STRUCTURE */
+ 
+    /* @media print {
+    body * {
+      visibility: hidden;
+    }
+    .printAllStructure, .printAllStructure * {
+      visibility: visible;
+    }
+    .printAllStructure {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  } */
+
+/* end student display */
+/* .print_table th{
+    width: 15% !important;
+} */
+/* END ALL STRUCTURE */
+@media (min-width: 1200px){
+.modal-xl {
+    max-width: 1150px !important; 
+}
+}
+@media (min-width: 992px){
+.modal-lg {
+    width: 1000px;
+}
+}
+@media (min-width: 576px){
+    .print_table th{
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .print_table td{
+        font-size: 15px;
+    }
+.modal-dialog {
+
+    max-width: 1000px !important;
+    margin: 1.75rem auto;
+}
+}
+.orignalfeestructureTable th{
+    width: 20%;
+}
+
+    /* .sticky {
+        position: fixed;
+        top: 0;
+        width: 100%
+      } */
+.receiptSession{
+    border: none;
+}
+.receiptSession:hover{
+    border: none;
+}
+.recieptadmsn{
+    border: none;
+}
+.recieptadmsn:focus{
+    border: none;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 0px !important;
+    vertical-align: middle;
+}
+.table button{
+    padding: 0px 5px !important;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  .table td, .table th {
+    padding: 0px !important;
+  }
+  th{ 
+      text-transform: uppercase;
+  }
+  .FeeCertificateTableRow{
+      padding: 20px 0px  ;
+      /* border: 1px solid black; */
+      margin: auto;
+  }
+  .FeeCertificateTableRowDiv .row div{
+      padding: 10px;
+    border: 1px solid black;
+  }
+  /* scrollbar */
+/* width */
+::-webkit-scrollbar {
+    width: 20px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+      background: #00416A;  /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #E4E5E6, #00416A);  /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #E4E5E6, #00416A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+      background: #00416A;  /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #E4E5E6, #00416A);  /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #E4E5E6, #00416A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      
+  }
+  /* end scrollbar */
+
+  .printTc{
+  padding: 260px 50px 250px 120px;
+  }
+  th{  
+    word-break:initial;
+    font-size: 11px !important;
+  }
+  td{
+    font-size: 11px !important;
+  }
+  .CharactertCertificate p{
+    text-align: justify !important;
+  }
+  
+  p{
+    line-height: 35px;
+  }
+  tr th{
+    vertical-align: baseline !important;
+  }
+
+  #FeeTransectionDate td,#FeeTransectionDate th{
+    font-size: 13px !important;
+  }
+ 
+
+  /* Login Form Css */
+  .main-content{
+    width: 50%;
+    border-radius: 20px;
+    box-shadow: 0 5px 5px rgba(0,0,0,.4);
+    margin: 12em auto;
+    display: flex;
+  }
+  .company__info{
+    background-color: #008080;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
+  }
+  .fa-android{
+    font-size:3em;
+  }
+  @media screen and (max-width: 640px) {
+    .main-content{width: 90%;}
+    .company__info{
+      display: none;
+    }
+    .login_form{
+      border-top-left-radius:20px;
+      border-bottom-left-radius:20px;
+    }
+  }
+  @media screen and (min-width: 642px) and (max-width:800px){
+    .main-content{width: 70%;}
+  }
+  .row > h2{
+    color:#008080;
+  }
+  .login_form{
+    background-color: #fff;
+    border-top-right-radius:20px;
+    border-bottom-right-radius:20px;
+    border-top:1px solid #ccc;
+    border-right:1px solid #ccc;
+  }
+  form{
+    padding: 0 2em;
+  }
+  .form__input{
+    width: 100%;
+    border:0px solid transparent;
+    border-radius: 0;
+    border-bottom: 1px solid #aaa;
+    padding: 1em .5em .5em;
+    padding-left: 2em;
+    outline:none;
+    margin:1.5em auto;
+    transition: all .5s ease;
+  }
+  .form__input:focus{
+    border-bottom-color: #008080;
+    box-shadow: 0 0 5px rgba(0,80,80,.4); 
+    border-radius: 4px;
+  }
+  .login_form .btn{
+    transition: all .5s ease;
+    width: 70%;
+    border-radius: 30px;
+    color:#008080;
+    font-weight: 600;
+    background-color: #fff;
+    border: 1px solid #008080;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+  }
+  .login_form .btn:hover, .btn:focus{
+    background-color: #008080;
+    color:#fff;
+  }
+  .main-content .row{
+    display: block !important;
+  }
+  .loginBackground{
+    background-image: url('./images/loginbackground.jpg');
+    height: 90vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .ReceiptLayoutCard input {
+    font-weight: bold;
+  }
+
+  .certificate-logo
+  {
+    height: 100px;
+    width:100px;
+    margin-bottom: 20px;
+  }

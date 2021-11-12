@@ -1,0 +1,46 @@
+
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+}
+.employee_container{
+    width: 300px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    padding: 20px;
+
+}
+.employee_container>h3{
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.employee_container>h5{
+    margin-bottom: 5px;
+}
+.employee_container>form>input{
+    height: 30px;
+    margin-bottom:10px;
+    background-color: white;
+    width: 90%;
+}
+.employee_container>form>textarea{
+    height: 30px;
+    margin-bottom:10px;
+    background-color: white;
+    width: 90%;
+}
+.employee_container>form>select{
+    height: 30px;
+    margin-bottom:10px;
+    background-color: white;
+    width: 90%;
+}
+.employee_container>form>lable{
+padding: 5px ;
+margin: 5px;
+}
