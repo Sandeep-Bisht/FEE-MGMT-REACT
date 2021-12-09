@@ -175,7 +175,7 @@ ReactDOM.render(
       <AppRoute path="/AddressReport" layout={AdminLayout} component={AddressReport} />
       <AppRoute path="/StruckOff" layout={AdminLayout} component={StruckOff} />
       <AppRoute path="/SosByRange" layout={AdminLayout} component={SosByRange} />
-      {/* <AppRoute path="/DropStatus" layout={AdminLayout} component={DropStatus} /> */}
+      <AppRoute path="/DropStatus" layout={AdminLayout} component={DropStatus} />
       {/* <AppRoute path="/ParentUpdate" layout={AdminLayout} component={ParentUpdate} /> */}
       {/* Employees Route */}
       <AppRoute path ="/employee" layout={AdminLayout} component={Eform} />
@@ -204,7 +204,7 @@ ReactDOM.render(
 
       : dataAccess == "Cashier" ? 
       <Switch>
-         {/* <AppRoute path="/DropStatus" layout={AdminLayout} component={DropStatus} /> */}
+         <AppRoute path="/DropStatus" layout={AdminLayout} component={DropStatus} />
         <AppRoute path ="/FeeReceipt" layout={AdminLayout} component={FeeReceipt} />
         <AppRoute path ="/FeeVoucher" layout={AdminLayout} component={FeeVoucher} />
         <AppRoute path ="/SuspensionalVoucher" layout={AdminLayout} component={SuspensionalVoucher} />
@@ -219,7 +219,7 @@ ReactDOM.render(
         :
         dataAccess == "AdmissionCell" ? 
         <Switch>
-        {/* <AppRoute path="/DropStatus" layout={AdminLayout} component={DropStatus} /> */}
+        <AppRoute path="/DropStatus" layout={AdminLayout} component={DropStatus} />
       <AppRoute path="/AddressReport" layout={AdminLayout} component={AddressReport} />
       <AppRoute path="/StruckOff" layout={AdminLayout} component={StruckOff} />
       <AppRoute path="/SosByRange" layout={AdminLayout} component={SosByRange} />

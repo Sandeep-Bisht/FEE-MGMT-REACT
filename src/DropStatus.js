@@ -13,7 +13,8 @@ const [status, Setstatus]=useState([]);
 const [blank, setBlank]=useState();
 useEffect(()=>{
    Userdata=localStorage.getItem('user_id');
-   console.log(Userdata, "hello data")
+   
+   
    GetMessage();
 // scroll()
 },[])
@@ -22,6 +23,7 @@ $(document).ready(function(){
 });
 const SubmitMsg = async () => {
     if(!Userdata==[]){
+      if(message !=""){
       await fetch("http://144.91.110.221:4800/DropStatus", {
         method: "POST",
         headers: {
@@ -30,7 +32,8 @@ const SubmitMsg = async () => {
         },
         body: JSON.stringify({
             created_by: Userdata,
-            message:message
+            message:message,
+           
         }),
       })
         .then((res) => res.json())
@@ -44,7 +47,10 @@ const SubmitMsg = async () => {
           console.log(err, "error");
         });
     }
-   
+    else{
+      alert("please enter text")
+    }
+  }
     
   };
    // allcategory api //
@@ -56,7 +62,7 @@ const SubmitMsg = async () => {
             .then(async (data) => {
              
                 Setstatus(data)
-                console.log(data, "hello")
+               
               }
             )
             .catch((err) => {
@@ -66,14 +72,18 @@ const SubmitMsg = async () => {
   // End All Category API//
     return(
         <>
-                <div className="container">
+        <div className="chat-bg">
+                <div className="container ">
+                <div className="col-11 drop-status-div text-center" style={{postion:'fixed'}}>
+                  <h4 style={{color:'darkgreen'}}>SJS Fees Management Status Group</h4>
+                </div>
                     <div className="row">
-                    <div className="col-1"></div>
-                    <div className="col-9 drop-status-div">
+                   
+                    <div className="col-11 drop-status-div">
                         
                         <div className="show-msg-area" onLoad="window.scroll(0,0)">
                        
-                        {/* {} */}
+                       
                         {status.map((item,ind)=>
                         {   
                           if(sameDate!= Moment(item.createdAt).format('DD/MM/YYYY')){
@@ -85,28 +95,51 @@ const SubmitMsg = async () => {
                             return(
                           <>
                           {showDate?
-                          <div className="text-center mb-3"> { Moment(item.createdAt).format('DD/MMM/YYYY')} </div>
+                          <div className="text-center mb-3 date-div"> <span>{ Moment(item.createdAt).format('DD/MMM/YYYY')} </span></div>
                           :null}
-                            <div className="status-card">
+                          {item.created_by.username==localStorage.getItem('username')?
+                            <div className="row pl-4 pr-5">
+                              <div className="col-8"></div>
+                            <div className="status-card actived col-4">
                          
-                                <span>{item.message} <span className="test" data-hover={ Moment(item.createdAt).format('hh:mm:ss')}> {item.created_by.username}</span></span>
+                                <span style={{cursor:'pointer'}}>{item.message} <span className="test" data-hover={ Moment(item.createdAt).format('hh:mm:ss')} > {item.created_by.username}</span></span>
                             </div>
+                            {/* <div className="col-1"></div> */}
+                            </div>:
+                            <div className="row pl-4 pr-4">
+                            
+                            <div className="status-card not-active col-4">
+                              <div>
+                                <span style={{cursor:'pointer'}}>{item.message} <span className="test" data-hover={ Moment(item.createdAt).format('hh:mm:ss')} > {item.created_by.username}</span></span>
+                                </div>
+                            </div>
+                            <div className="col-8"></div>
+                            </div>
+                        }
+                            
                           </>
                         
                         )}  
                         )}          
 
                         </div>
-                        <footer>
-                        <textarea placeholder="type here....." rows="5"  value={message} onChange={(e)=>Setmessage(e.target.value)} style={{textTransform:'unset'}}></textarea>
                         
-                        <div>
-                        <button className="mt-2" onClick={()=>SubmitMsg()}>Submit</button>
+                        
+                        <div className="row align-items-center footer">
+                        <div className="col-1"></div>
+                        <div className="col-10 p-0">
+                        <input type="text" placeholder="type here....." className="form-control msg textarea" value={message}  onChange={(e)=>Setmessage(e.target.value)} onKeyPress={(e)=>{if(e.key=="Enter"){SubmitMsg(e)}}} style={{textTransform:'unset'}} />
+                      
                         </div>
-                        </footer>
+                        <div className="col-1"></div>
+                        </div>
+                    
+                    
+                        
+                        </div>
+                        <div className="col-1"></div>
                     </div>
-                    <div className="col-2"></div>
-                    </div>
+                </div>
                 </div>
         </>
     )

@@ -103,14 +103,84 @@ class StudentDisplay extends React.Component{
             security_deposit:'',
             cheque_no:'',
             left_on:'',
+            serverpagi:1,
+            servercontentsize:20,
+            PaginationCount:[]
         }
     }
     componentDidMount=()=>{
-        this.getStudent()
+        // this.getStudent()
         const admission_no=localStorage.getItem('StudentDisplay')
        this.searchByAdmission_no(admission_no)
        this.getSession()
     }
+   
+    PaginationCall=async(e) => {
+      let arr=[]
+      for(let i=1 ; i<=Math.ceil(localStorage.getItem("AllStudentcount")/this.state.servercontentsize); i++){
+        arr.push(i)
+        
+      }
+      
+      await this.setState({PaginationCount:arr})
+
+    };
+    ServerPagination = async(e) => {
+      await this.setState({ serverpagi: e.target.value });
+     
+     
+      await this.getStudent()
+    };
+    RangeContentSize = async(e) => {
+      await this.setState({ servercontentsize: e.target.value });
+     
+      await this.setState({serverpagi:1})
+      await this.getStudent()
+    };
+   PageIncreament=async()=>{
+   
+     await this.setState({serverpagi:parseInt(this.state.serverpagi)+1})
+   
+    await this.getStudent()
+     
+    
+   }
+   
+   PageDecreament=async()=>{
+    if(this.state.serverpagi>1)
+    {
+   await this.setState({serverpagi:parseInt(this.state.serverpagi)-1})
+    
+   await this.getStudent()
+    }
+    else{
+      alert("no previous page")
+    }
+  }
+
+  // GetAllStudentCount Api
+  getStudentCount = () => {
+    fetch("http://144.91.110.221:4800/getStudentCount"
+        , {
+          method: 'POST',
+          headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+          },
+            body: JSON.stringify({
+            session: this.state.session,
+            school_id: "100"
+          })
+        })
+        .then(res => res.json())
+        .then(data => {
+            this.setState({AllStudentcount: data.count})
+            localStorage.setItem("AllStudentcount", this.state.AllStudentcount);
+        })
+        .then(err => console.log(err))
+  }
+  // End GetAllStudentCount Api
+
     getSession = () => {
       fetch("http://144.91.110.221:4800/getSession"
       ,{
@@ -140,12 +210,16 @@ class StudentDisplay extends React.Component{
             },
               body: JSON.stringify({
               session: this.state.session,
-              school_id: "100"
+              school_id: "100",
+              page_no:this.state.serverpagi,
+              page_content_size:this.state.servercontentsize
             })
           })
           .then(res => res.json())
           .then(data => {
               this.setState({AllStudent: data})
+              this.getStudentCount();
+              this.PaginationCall();
           })
           .then(err => console.log(err))
     }
@@ -416,9 +490,50 @@ viewParent= async(e)=>{
                             <div className="col-12">                     
                         <div class="modal-header">
                             <h4 class="modal-title">Student Details </h4>
+                            
+                        </div>
+                         
+                        <div class="server-filter-div modal-header">
+                        <div className="col-9">
+                        {this.state.serverpagi==1?
+                            <button onClick={()=>this.PageDecreament()} className="btn btn-danger" disabled >Prev</button>:
+                            <button onClick={()=>this.PageDecreament()} className="btn btn-danger">Prev</button>
+                            }
+                            {this.state.AllStudent.length == this.state.servercontentsize?
+                            <span className="ml-5"><b>
+                            <select onChange={(e)=>this.ServerPagination(e)} value={this.state.serverpagi} style={{border:'0px', outline:'0px'}}>
+                            {this.state.PaginationCount.map((item,ind)=>(
+
+                                <option  value={item}>{item}</option>
+                            ))}
+                            </select>
+                            </b> ({this.state.servercontentsize})</span>:
+                            <span  className="ml-5"><b>Loading...</b></span>
+                            }
+                         
+
+                           
+                              
+                            {this.state.serverpagi==Math.ceil(localStorage.getItem("AllStudentcount")/this.state.servercontentsize)?
+                            <button onClick={()=>this.PageIncreament() } className="btn btn-danger ml-5" disabled>Next</button>:
+                            <button onClick={()=>this.PageIncreament() } className="btn btn-danger ml-5">Next</button>}
+                          </div>
+                            <div className="col-3 d-flex justify-content-center align-items-center">
+                            <span className="mr-2"><b>Load</b></span>
+                                <select onChange={(e)=>this.RangeContentSize(e)} value={this.state.servercontentsize} className="form-control">
+                                  <option value={20}>20</option>
+                                  <option value={50}>50</option>
+                                  <option value={100}>100</option>
+                                  <option  value={250}>250</option>
+                                  <option value={500}>500</option>
+                                  <option value={localStorage.getItem("AllStudentcount")}>ALL</option>
+                                </select>
+                              <span className="ml-2"><b>Entries</b></span>
+                             </div>
+                           
                         </div>
                         <div class="modal-body">
-                        {this.state.AllStudent !="" ?
+                        {this.state.AllStudent !=""?
                      
                         <DataTable
                         data={data}

@@ -41,8 +41,7 @@ class AdminLayout extends React.Component{
         if(localStorage.getItem('SessionAccess') == ""){            
         localStorage.setItem('SessionAccess','2021-2022')
         }else if(  localStorage.getItem('SessionAccess') != this.state.session ){
-            localStorage.setItem('SessionAccess',this.state.session)
-            
+            localStorage.setItem('SessionAccess',this.state.session)            
         }
         else{
             localStorage.setItem('SessionAccess',localStorage.getItem('SessionAccess'))
@@ -344,9 +343,9 @@ class AdminLayout extends React.Component{
                         </li>
                     </ul>
                 </li> */}
-                {/* <li>
+                <li>
                     <Link to="/DropStatus" onClick={()=>{{this.setState({NavHeading:'Dashboard'})}}}><i class="fas fa-file" ></i>Drop Status</Link>
-                </li> */}
+                </li>
 
                 <li>
                     <Link to="" onClick={()=>{this.logout()}}> <i class="fas fa-sign-out-alt"></i>Logout</Link>

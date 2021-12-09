@@ -178,6 +178,7 @@ class Dashboard extends React.Component{
         .then(res => res.json())
         .then(data => {
             this.setState({AllStudentcount: data.count})
+            
         })
         .then(err => console.log(err))
   }

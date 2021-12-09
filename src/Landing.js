@@ -30,18 +30,21 @@ class Landing extends React.Component{
               localStorage.setItem('access', res.user.role);
               localStorage.setItem('user_id', res.user._id);
               localStorage.setItem('SessionAccess','2021-2022')
+              localStorage.setItem('username',res.user.username)
               window.location.href = "/";
             }
             else if (res.user.role ==="Cashier"  ) {
               localStorage.setItem('access', res.user.role);
               localStorage.setItem('user_id', res.user._id);
               localStorage.setItem('SessionAccess','2021-2022')
+              localStorage.setItem('username',res.user.username)
               window.location.href = "/";
             }
             else if (res.user.role === "AdmissionCell"  ) {
               localStorage.setItem('access', res.user.role);
               localStorage.setItem('user_id', res.user._id);
               localStorage.setItem('SessionAccess','2021-2022')
+              localStorage.setItem('username',res.user.username)
               window.location.href = "/";
             }
             else {

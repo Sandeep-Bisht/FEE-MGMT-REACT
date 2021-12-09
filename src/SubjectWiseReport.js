@@ -251,12 +251,12 @@ class SubjectWiseReport extends React.Component{
                                <td>{item.student.parent_mobile}</td>
                                 <td>{item.student.gender}</td>
                                 <td>{Moment(item.student.dob).format("DD-MM-YYYY")}</td>
-                                <td>{item.student.subjects !="" && item.student.subjects !=undefined? JSON.parse(item.student.subjects).map((item,index)=>{
+                                <td>{item.student.subjects !=="" && Array.isArray(item.student.subjects) && item.student.subjects !==undefined? JSON.parse(item.student.subjects)?.map((item,index)=>{
                                   return(
                                     item+","
                                   )
                                 }) :null}</td>
-                                <td>{item.student.subjects !="" && item.student.subjects !=undefined? JSON.parse(item.student.subjects).length:0}</td>
+                                {/* <td>{item.student.subjects !="" && item.student.subjects !=undefined? JSON.parse(item.student.subjects).length:0}</td> */}
                               </tr>
                              
                               </tbody>
@@ -271,8 +271,10 @@ class SubjectWiseReport extends React.Component{
                                  var count=0
                                  if(item.class_name==this.state.class_name){
                                   this.state.AllStudent.map((el,ind)=>{
+                                    if(Array.isArray(el.student.subjects)){
                                     if(el.student.subjects.includes(item.subject)){
                                        count=count+1
+                                    }
                                     }
                                   })
                                   return(
@@ -282,7 +284,7 @@ class SubjectWiseReport extends React.Component{
                                     <th>:</th>
                                     <th colspan="8">{count}</th>
                                   </tr>
-                                   )
+                                   ) 
                         }})}
                       
                        
