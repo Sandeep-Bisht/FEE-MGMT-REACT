@@ -1,5 +1,5 @@
 import React from 'react';
-import DataTable from '@bit/adeoy.utils.data-table';
+// import DataTable from '@bit/adeoy.utils.data-table';
 import Moment from 'moment';
 import { CSVLink, CSVDownload } from "react-csv";
 import moment from 'moment';

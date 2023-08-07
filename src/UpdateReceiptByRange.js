@@ -1,5 +1,5 @@
 import React from 'react';
-import DataTable from '@bit/adeoy.utils.data-table';
+// import DataTable from '@bit/adeoy.utils.data-table';
 import Moment from 'moment';
 import { CSVLink, CSVDownload } from "react-csv";
 import $ from 'jquery'; 
@@ -336,7 +336,7 @@ printDefaulter() {
                 </div>
                 <div className="col-4 form-group">
                                     <label id="recpddate">Receipt Date </label>
-                                    <input type="date" className="w-100" className="form-control" value={this.state.receipt_date} onChange={(e)=>{this.setState({receipt_date:e.target.value.toUpperCase()})}} />
+                                    <input type="date" className="w-100 form-control" value={this.state.receipt_date} onChange={(e)=>{this.setState({receipt_date:e.target.value.toUpperCase()})}} />
                 </div>  
                 <div className="col-6 form-group">
                   <br/>

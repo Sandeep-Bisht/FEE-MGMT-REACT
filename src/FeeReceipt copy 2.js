@@ -1436,14 +1436,14 @@ class FeeReceipt extends React.Component{
                                 </div>
                                 <div className="col-3">
                                 <label> Mo.  - </label> {this.state.parent_mobile}<br/>{this.state.parent_phone}<br/>
-                                       { 
-                                        previouspaidamount =0,
-                                        previousannualamount=0,
-                                        previousmonthlyamount=0,
-                                        previousgrandTotal=0,
-                                        previousfine=0,
+                                       {/* { 
+                                        previouspaidamount = 0,
+                                        previousannualamount = 0,
+                                        previousmonthlyamount = 0,
+                                        previousgrandTotal = 0,
+                                        previousfine = 0,
                                         nothing = ""
-                                        }
+                                        } */}
                                 </div>
                             </div>
                             <table class="table print_table">
@@ -1620,7 +1620,8 @@ class FeeReceipt extends React.Component{
                             <h4 class="modal-title">Student Details </h4>
                         </div>
                         <div class="modal-body">
-                            {this.state.ModalAllStudent !="" ?
+                            {this.state.ModalAllStudent != "" ? (
+                           
                         <DataTable
                         data={data}
                         columns={columns}
@@ -1629,6 +1630,7 @@ class FeeReceipt extends React.Component{
                         responsive={true}
                       
                     />
+                            )
                     :
                     <lottie-player src="https://assets2.lottiefiles.com/private_files/lf30_uilaciwr.json"  background="transparent"  speed="1"  style={{width: "300px", height: "300px",margin:"auto"}}  loop  autoplay></lottie-player>
                   }

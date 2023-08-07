@@ -492,7 +492,7 @@ class UpdateTransferCertificate extends React.Component{
                 </div>
             </div>
 
-            {/* <div className= "row layoutCard">
+            <div className= "row layoutCard">
                 <div className="col-12">
                 <DataTable
                 data={data}
@@ -503,7 +503,7 @@ class UpdateTransferCertificate extends React.Component{
                 onClickRow={click}
                 />
                 </div>
-            </div> */}
+            </div>
             </>
         )
     }

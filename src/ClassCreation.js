@@ -246,14 +246,14 @@ class ClassCreation extends React.Component{
                         
                     </tbody>
                 </table>
-                {/* <DataTable
+                <DataTable
                 data={data}
                 columns={columns}
                 striped={true}
                 hover={true}
                 responsive={true}
                 onClickRow={click}
-                /> */}
+                />
                 </div>
             </div>
             </>

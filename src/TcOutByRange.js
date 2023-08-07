@@ -315,13 +315,13 @@ class TcOutByRange extends React.Component{
                   <h4 className="pb-5">TC STUDENTS</h4>
                 </div>
               <div className="col-12 ">
-                        {/* <DataTable
+                        <DataTable
                         data={data}
                         columns={columns}
                         striped={true}
                         hover={true}
                         responsive={true}
-                         /> */}
+                         />
                          {this.state.AllStudent != "" ?
                       <table class="table table-striped">
                         <thead>

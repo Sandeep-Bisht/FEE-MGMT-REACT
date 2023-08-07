@@ -187,13 +187,13 @@ printDefaulter() {
                   <h4>TOTAL STRENGTH (HOUSE WISE)</h4>
                 </div>
               <div className="col-12 ">
-                        {/* <DataTable
+                        <DataTable
                         data={data}
                         columns={columns}
                         striped={true}
                         hover={true}
                         responsive={true}
-                         /> */}
+                         />
                          {this.state.AllStudent != "" ?
                       <table class="table table-striped">
                         <thead>

@@ -85,6 +85,7 @@ class FeeCategory extends React.Component{
 
             <div className= "row layoutCard">
                 <div className="col-12">
+                    <p>table data</p>
                 <DataTable
                 data={data}
                 columns={columns}
