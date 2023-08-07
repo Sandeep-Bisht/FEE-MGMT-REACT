@@ -715,6 +715,7 @@ class StudentEdit extends React.Component{
                         </div>
                         <div class="modal-body">
                         {this.state.AllStudent !="" ?
+                        
                      
                         <DataTable
                         data={data}
@@ -762,7 +763,7 @@ class StudentEdit extends React.Component{
                         </div>
                         <div className="col-2 form-group">
                             <label>Admission No  *</label>
-                            <input type="text" value={this.state.admission_no} className="form-control" value={this.state.admission_no} onChange={(e)=>{this.setState({admission_no:e.target.value.toUpperCase()});this.searchByAdmission_no_with_session()}} />
+                            <input type="text" value={this.state.admission_no} className="form-control" onChange={(e)=>{this.setState({admission_no:e.target.value.toUpperCase()});this.searchByAdmission_no_with_session()}} />
                             <span className="errorMessage" style={{fontSize:'14px',fontWeight:600}}>{this.state.date_of_admissionErrorMessage}</span>
                         </div>
                         <div className="col-1 form-group">
@@ -1109,7 +1110,7 @@ class StudentEdit extends React.Component{
                         </div>
                         <div className="col-3 form-group">
                             <label>Account No *</label>
-                            <input type="text" value={this.state.account_no} className="form-control" value={this.state.account_no} onChange={(e)=>{{this.setState({account_no:e.target.value.toUpperCase()})}}}/>
+                            <input type="text" value={this.state.account_no} className="form-control"  onChange={(e)=>{{this.setState({account_no:e.target.value.toUpperCase()})}}}/>
                         </div>
                         <div className="col-3 form-group">
                             <label>Whatsapp No</label>
@@ -1121,11 +1122,11 @@ class StudentEdit extends React.Component{
                         </div>
                         <div className="col-3 form-group">
                             <label>Father Name *</label>
-                            <input type="text" value={this.state.father_name} className="form-control" value={this.state.father_name} onChange={(e)=>{{this.setState({father_name:e.target.value.toUpperCase()})}}}/>
+                            <input type="text" value={this.state.father_name} className="form-control"  onChange={(e)=>{{this.setState({father_name:e.target.value.toUpperCase()})}}}/>
                         </div>
                         <div className="col-3 form-group">
                             <label>Father Occu. </label>
-                            <input type="text" value={this.state.father_occu} className="form-control"value={this.state.father_occu}  onChange={(e)=>{{this.setState({father_occu:e.target.value.toUpperCase()})}}}/>
+                            <input type="text" value={this.state.father_occu} className="form-control" onChange={(e)=>{{this.setState({father_occu:e.target.value.toUpperCase()})}}}/>
                         </div>
                         <div className="col-3 form-group">
                             <label>Father Designation </label>
@@ -1137,7 +1138,7 @@ class StudentEdit extends React.Component{
                         </div>
                         <div className="col-3 form-group">
                             <label>Mother Name *</label>
-                            <input type="text" value={this.state.mother_name} className="form-control" value={this.state.mother_name} onChange={(e)=>{{this.setState({mother_name:e.target.value.toUpperCase()})}}}/>
+                            <input type="text" value={this.state.mother_name} className="form-control"  onChange={(e)=>{{this.setState({mother_name:e.target.value.toUpperCase()})}}}/>
                         </div>
                         <div className="col-3 form-group">
                             <label>Mother Occu </label>

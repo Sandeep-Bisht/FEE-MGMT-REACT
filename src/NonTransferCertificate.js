@@ -1,5 +1,5 @@
 import React from 'react';
-import DataTable from '@bit/adeoy.utils.data-table';
+// import DataTable from '@bit/adeoy.utils.data-table';
 import Moment from 'moment';
 class NonTransferCertificate extends React.Component{
     constructor(props){

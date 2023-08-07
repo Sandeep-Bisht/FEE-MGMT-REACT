@@ -105,6 +105,7 @@ const AppRoute = ({component:Component,layout:Layout, ...rest})=>(
   )}></Route>
   )
 const dataAccess = localStorage.getItem('access')
+// const dataAccess = "Admin"
 ReactDOM.render(
   <BrowserRouter >
       {dataAccess == "Admin" ? 

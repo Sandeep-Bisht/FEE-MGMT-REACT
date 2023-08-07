@@ -534,6 +534,7 @@ viewParent= async(e)=>{
                         </div>
                         <div class="modal-body">
                         {this.state.AllStudent !=""?
+                       
                      
                         <DataTable
                         data={data}

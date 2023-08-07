@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import ModalImage from "react-modal-image";
-import DataTable from '@bit/adeoy.utils.data-table';
+// import DataTable from '@bit/adeoy.utils.data-table';
 import Moment from 'moment';
 import { Redirect } from "react-router-dom";
 import $, { contains } from 'jquery';
@@ -1493,14 +1493,14 @@ class PreviousFeeReceipt extends React.Component{
                                 </div>
                                 <div className="col-3">
                                 <label> Mo.  - </label> {this.state.parent_mobile}<br/>{this.state.parent_phone}<br/>
-                                       { 
+                                       {/* { 
                                         previouspaidamount =0,
                                         previousannualamount=0,
                                         previousmonthlyamount=0,
                                         previousgrandTotal=0,
                                         previousfine=0,
                                         nothing = ""
-                                        }
+                                        } */}
                                 </div>
                             </div>
                             <table class="table print_table">
@@ -1678,14 +1678,15 @@ class PreviousFeeReceipt extends React.Component{
                         </div>
                         <div class="modal-body">
                             {this.state.ModalAllStudent !="" ?
-                        <DataTable
-                        data={data}
-                        columns={columns}
-                        striped={true}
-                        hover={true}
-                        responsive={true}
+                            "data"
+                    //     <DataTable
+                    //     data={data}
+                    //     columns={columns}
+                    //     striped={true}
+                    //     hover={true}
+                    //     responsive={true}
                       
-                    />
+                    // />
                     :
                     <lottie-player src="https://assets2.lottiefiles.com/private_files/lf30_uilaciwr.json"  background="transparent"  speed="1"  style={{width: "300px", height: "300px",margin:"auto"}}  loop  autoplay></lottie-player>
                   }

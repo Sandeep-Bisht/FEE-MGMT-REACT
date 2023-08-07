@@ -1,5 +1,5 @@
 import React from 'react';
-import DataTable from '@bit/adeoy.utils.data-table';
+// import DataTable from '@bit/adeoy.utils.data-table';
 import Moment from 'moment';
 import { CSVLink, CSVDownload } from "react-csv";
 
@@ -374,8 +374,9 @@ printDefaulter() {
                         </thead>
                         <tbody>
                         
-                        {console.log("Checked value "+this.state.CheckedValue),
-                        this.state.AllStudent.sort((a,b) => parseInt(a.admission_no) - parseInt(b.admission_no)).map((item,index)=>{
+                        { 
+                        this.state?.AllStudent.sort((a,b) => parseInt(a.admission_no) - parseInt(b.admission_no)).map(
+                          (item,index)=>{
                             return(
                               <tr>
                                 <td>{index+1}</td>
@@ -392,10 +393,11 @@ printDefaulter() {
                                 <td>{item.student.house}</td>
                                 {/* <td>{item.student.parent_address}</td> */}
                               </tr>
-                            )
-                         
-                        })
+                            )                         
                         }
+                        )
+                        }
+                        
                       
                          
                         </tbody>

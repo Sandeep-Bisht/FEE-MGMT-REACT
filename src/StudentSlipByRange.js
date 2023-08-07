@@ -276,6 +276,7 @@ class StudentSlipByRange extends React.Component{
                         </div>
                         <div class="modal-body">
                         {this.state.AllStudent !="" ?
+                       
                      
                         <DataTable
                         data={data}

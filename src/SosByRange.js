@@ -236,6 +236,7 @@ class SosByRange extends React.Component{
                         </div>
                         <div class="modal-body">
                         {this.state.AllStudent !="" ?
+                        
                      
                         <DataTable
                         data={data}
@@ -314,13 +315,13 @@ class SosByRange extends React.Component{
                   <h4 className="pb-5">STRUCKOFF STUDENTS</h4>
                 </div>
               <div className="col-12 ">
-                        {/* <DataTable
+                        <DataTable
                         data={data}
                         columns={columns}
                         striped={true}
                         hover={true}
                         responsive={true}
-                         /> */}
+                         />
                          {this.state.AllStudent != "" ?
                       <table class="table table-striped">
                         <thead>

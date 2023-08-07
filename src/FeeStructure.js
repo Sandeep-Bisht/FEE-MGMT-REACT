@@ -768,7 +768,7 @@ class FeeStructure extends React.Component{
                         
                     </tbody>
                 </table>
-                {/* <DataTable
+                <DataTable
                 pageSize={50}
                 data={data}
                 columns={columns}
@@ -776,7 +776,7 @@ class FeeStructure extends React.Component{
                 hover={true}
                 responsive={true}
                 onClickRow={click}
-                /> */}
+                />
                 </div>
             </div>
             </>

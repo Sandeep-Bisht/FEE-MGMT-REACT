@@ -1397,14 +1397,14 @@ class FeeReceipt extends React.Component{
                                 </div>
                                 <div className="col-3">
                                 <label> Mo.  - </label> {this.state.parent_mobile}<br/>{this.state.parent_phone}<br/>
-                                       { 
+                                       {/* { 
                                         previouspaidamount =0,
                                         previousannualamount=0,
                                         previousmonthlyamount=0,
                                         previousgrandTotal=0,
                                         previousfine=0,
                                         nothing = ""
-                                        }
+                                        } */}
                                 </div>
                             </div>
                             <table class="table print_table">
@@ -1582,6 +1582,7 @@ class FeeReceipt extends React.Component{
                         </div>
                         <div class="modal-body">
                             {this.state.ModalAllStudent !="" ?
+                            
                         <DataTable
                         data={data}
                         columns={columns}

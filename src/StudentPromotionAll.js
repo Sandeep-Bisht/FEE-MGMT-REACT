@@ -216,6 +216,7 @@ class StudentPromotionAll extends React.Component{
             <div className= "row layoutCard">
                 <div className="col-12">
                 {this.state.AllStudent !="" ?
+               
                      
                      <DataTable
                      data={data}
