@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import './Sidebar.css';
 import {Link} from "react-router-dom";
 class AdminLayout extends React.Component{
@@ -7,15 +7,22 @@ class AdminLayout extends React.Component{
         this.state={
             NavHeading:'Dashboard',
             AllSession:[],
-            session: localStorage.getItem('SessionAccess')
+            session: localStorage.getItem('SessionAccess'),
+            currentYear: null,
         }
     }
     componentDidMount=()=>{
-       this.getSession()
+       this.getSession();
+       this.getCurrentDate();
     }
     logout =()=>{
         localStorage.setItem('access','')
         window.location.href='/landing'
+    }
+    getCurrentDate=()=>{
+        const currentDate = new Date();
+        const currentYear = currentDate.getFullYear();
+        this.setState({ currentYear });
     }
     getSession = () => {
         fetch("http://144.91.110.221:4800/getSession"
@@ -50,19 +57,24 @@ class AdminLayout extends React.Component{
     }
   render(){
   const { history } = this.props;
+  const { currentYear } = this.state;
   return (
   <>
   <div className="row pt-0">
      <div className="col-12">
      <div className="wrapper">
         <nav id="sidebar">
-            <div className="sidebar-header text-center">
+            <div className="sidebar-header text-center constencia-sidebar">
+                <div>
             <Link to="/">
-            <img src={require('./images/logo.png').default} style={{height:"100px"}}/>
+            <img src={require('./images/logo.png').default} className='constencia-image' style={{height:"50px"}}/>
             </Link>
             </div>
+            <div className='w-100'>
+            <p className="text-center border-text constencia-sidebar-text">Constancia School <br/> Fees Management System</p>
+            </div>
+            </div>
             <ul className="list-unstyled components">
-                <p className="text-center border-text ">SJS Fees Management System</p>
                 <p className="text-center border-text ">Session - 
                             <select className="text-dark" value= { localStorage.getItem('SessionAccess') == "" ? this.state.session :localStorage.getItem('SessionAccess')}  onChange={(e)=>{this.setState({session:e.target.value.toUpperCase()});this.setSession()}}>
                                <option value="" className="text-dark">Select Session</option>
@@ -353,7 +365,7 @@ class AdminLayout extends React.Component{
             </ul>
             <ul className="list-unstyled CTAs text-center">
                 <li>
-                <h6><span>  <img src={require('./images/giks_logo.png').default} style={{height:"50px"}}/></span> Powered By GIKS @ 2020</h6>
+                <h6><span>  <img src={require('./images/giks_logo.png').default} style={{height:"32px"}}/></span> Powered By GIKS @ {currentYear}</h6>
                 </li>
                 
             </ul>

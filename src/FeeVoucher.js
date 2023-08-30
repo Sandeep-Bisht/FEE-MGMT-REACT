@@ -2269,7 +2269,7 @@ print_pnb_sr_no=0
                   
                 </tr>
               </thead>
-              <tbody>
+              <tbody className='dashboard-table'>
                 {this.state.Bank == '' || this.state.Bank == "SBI" ?
                   <tr><td colspan="20"><h4 className="text-center">SBI</h4></td></tr>
                   : null}

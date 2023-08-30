@@ -75,7 +75,7 @@ const SubmitMsg = async () => {
         <div className="chat-bg">
                 <div className="container ">
                 <div className="col-11 drop-status-div text-center" style={{postion:'fixed'}}>
-                  <h4 style={{color:'darkgreen'}}>SJS Fees Management Status Group</h4>
+                  <h4 style={{color:'darkgreen'}}>CONTANCIA Fees Management Status Group</h4>
                 </div>
                     <div className="row">
                    
