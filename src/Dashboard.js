@@ -199,7 +199,7 @@ class Dashboard extends React.Component{
                     <div className="col-lg-3 col-md-12">
                         <div className="dashboard-card">
                             <h4> Total Employes <span><img src={require('./images/TotalEmployes.png').default} style={{height:"43px"}}/></span></h4>
-                            <h3>30</h3>
+                            <h3>0</h3>
                         </div>
                     </div>
                     <div className="col-lg-3 col-md-12">
