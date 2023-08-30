@@ -289,67 +289,64 @@ class Dashboard extends React.Component{
                   </div>
                 </div>
                 <div className="row chartRow">
-                    <div className="col-lg-7 col-md-12">
-                    <div className={"my-pretty-chart-container"}>
-                    <Chart
-                      width={'100%'}
-                      height={'400px'}
-                      chartType="LineChart"
-                      loader={<div>Loading Chart</div>}
-                      data={[
-                        ['x', 'Students'],
-                        [0, 0],
-                        [1, 10],
-                        [2, 23],
-                        [3, 17],
-                        [4, 18],
-                        [5, 9],
-                        [6, 11],
-                        [7, 27],
-                        [8, 33],
-                        [9, 40],
-                        [10, 32],
-                        [11, 35],
-                      ]}
-                      options={{
-                        
-                        // backgroundColor:"#e8e8ae",
-                        hAxis: {
-                          title: 'Time',
-                        },
-                        vAxis: {
-                          title: 'Popularity',
-                        },
-                      }}
-                      rootProps={{ 'data-testid': '1' }}
-                    />
-      </div>
-                    </div>
-                    <div className="col-lg-5 col-md-12">
-                    <Chart
-  width={'100%'}
-  height={'300px'}
-  chartType="PieChart"
-  loader={<div>Loading Chart</div>}
-  data={[
-    ['Task', 'Hours per Day'],
-    // ['Total', paidamountbydate],
-    ['SBI', paidamountbydate_sbi],
-    ['PNB', paidamountbydate_pnb],
-    
-    // ['Watch TV', 2],
-    // ['Sleep', 7],
-  ]}
-  options={{
-    title: 'Today Transactiion By Bank',
-    // Just add this option
-    pieHole: 0.4,
-    // backgroundColor:"#e8e8ae"
-  }}
-  rootProps={{ 'data-testid': '3' }}
-/>
-                    </div>
-                </div>
+    <div className="col-lg-6 col-md-12">
+        <div className={"my-pretty-chart-container"}>
+            <Chart
+                width={'100%'}
+                height={'400px'}
+                chartType="LineChart"
+                loader={<div>Loading Chart</div>}
+                data={[
+                    ['x', 'Students'],
+                    [0, 0],
+                    [1, 10],
+                    [2, 23],
+                    [3, 17],
+                    [4, 18],
+                    [5, 9],
+                    [6, 11],
+                    [7, 27],
+                    [8, 33],
+                    [9, 40],
+                    [10, 32],
+                    [11, 35],
+                ]}
+                options={{
+                    hAxis: {
+                        title: 'Time',
+                    },
+                    vAxis: {
+                        title: 'Popularity',
+                    },
+                }}
+                rootProps={{ 'data-testid': '1' }}
+            />
+        </div>
+    </div>
+    <div className="col-lg-6 col-md-12">
+        <Chart
+            width={'100%'}
+            height={'300px'}
+            chartType="BarChart" 
+            loader={<div>Loading Chart</div>}
+            data={[
+                ['Task', 'Hours per Day'],
+                // ['Total', paidamountbydate],
+                ['SBI', paidamountbydate_sbi],
+                ['PNB', paidamountbydate_pnb],
+                // ['Watch TV', 2],
+                // ['Sleep', 7],
+            ]}
+            options={{
+                title: 'Today Transaction By Bank',
+                // Just add this option
+                bars: 'vertical',
+            }}
+            rootProps={{ 'data-testid': '3' }}
+        />
+    </div>
+</div>
+
             </>
         )
     }

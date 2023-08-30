@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import './Sidebar.css';
 import {Link} from "react-router-dom";
 class AdminLayout extends React.Component{
@@ -149,7 +149,7 @@ class AdminLayout extends React.Component{
                 :null}
                 {localStorage.getItem('access') == "Admin" ? 
                 <li className="">
-                    <a href="#Configuration" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle" onClick={()=>{this.setState({NavHeading:'Fees'})}}><i class="fas fa-school"></i>Configuration</a>
+                    <a href="#Configuration" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle" onClick={()=>{this.setState({NavHeading:'Fees'})}}><i class="fa fa-cogs"></i>Configuration</a>
                     <ul className="collapse list-unstyled" id="Configuration">
                         <li>
                         <Link to="/SessionCreation"  onClick={()=>{this.setState({NavHeading:'Configuration/Session Creation'})}}>Session Creation</Link>
@@ -184,7 +184,7 @@ class AdminLayout extends React.Component{
                 : null}
                   {localStorage.getItem('access') == "Admin" || localStorage.getItem('access') == "AdmissionCell"? 
                 <li className="">
-                    <a href="#Student" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle"><i class="fas fa-money-check-alt"></i>Student</a>
+                    <a href="#Student" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle"><i class="fa fa-user"></i>Student</a>
                     <ul className="collapse list-unstyled" id="Student">
                         <li>
                         <Link to="/StudentCreation" onClick={()=>{this.setState({NavHeading:'Student/Student Creation'})}}>Student Creation</Link>
@@ -262,7 +262,7 @@ class AdminLayout extends React.Component{
                 }
                 {localStorage.getItem('access') == "Admin" || localStorage.getItem('access') == "AdmissionCell"? 
                 <li className="">
-                    <a href="#TransferCertificate" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle"><i class="fas fa-money-check-alt"></i>Certificates</a>
+                    <a href="#TransferCertificate" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle"><i class="fa fa-book"></i>Certificates</a>
                     <ul className="collapse list-unstyled" id="TransferCertificate">
                         <li>
                         <Link to="/TransferCertificate" onClick={()=>{this.setState({NavHeading:'Certificates/Given TC'})}}>Given TC</Link>
@@ -296,7 +296,7 @@ class AdminLayout extends React.Component{
                 :null}
                 {localStorage.getItem('access') == "Admin" || localStorage.getItem('access') == "AdmissionCell"? 
                 <li className="">
-                <a href="#StudentpromotionDemotion" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle"><i class="fas fa-money-check-alt"></i>Student Promotion</a>
+                <a href="#StudentpromotionDemotion" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle"><i class="fa fa-graduation-cap"></i>Student Promotion</a>
                     <ul className="collapse list-unstyled" id="StudentpromotionDemotion">
                         <li>
                         <Link to="/StudentPromotionAll" onClick={()=>{this.setState({NavHeading:'Student/Student Promotion (Classwise)'})}}>Student Promotion (All)</Link>
@@ -317,7 +317,7 @@ class AdminLayout extends React.Component{
                 :null}
                  {localStorage.getItem('access') == "Admin" ? 
                 <li className="">
-                <a href="#employees" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle"><i class="fas fa-money-check-alt"></i>Employees</a>
+                <a href="#employees" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle"><i class="fas fa-users"></i>Employees</a>
                     <ul className="collapse list-unstyled" id="employees">
                         <li>
                         <Link to="/Employee" >Employee</Link>
@@ -363,7 +363,7 @@ class AdminLayout extends React.Component{
                     <Link to="" onClick={()=>{this.logout()}}> <i class="fas fa-sign-out-alt"></i>Logout</Link>
                 </li>
             </ul>
-            <ul className="list-unstyled CTAs text-center">
+            <ul className="list-unstyled CTAs text-center constancia-list-CTAs">
                 <li>
                 <h6><span>  <img src={require('./images/giks_logo.png').default} style={{height:"32px"}}/></span> Powered By GIKS @ {currentYear}</h6>
                 </li>
