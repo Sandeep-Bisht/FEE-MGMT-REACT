@@ -23,6 +23,21 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 
+ .constencia-sidebar{
+    display: flex;
+}
+.constencia-sidebar-text{
+    font-size: 14px;
+    line-height: 25px;
+}
+.table td{
+    padding: 5px;
+}
+.form-inline .form-control {
+    height: 25px;
+    padding: 0px 8px;
+}
+
 .navbar {
     margin: 0px !important;
     padding: 10px 10px;
@@ -37,6 +52,7 @@ a, a:hover, a:focus {
     outline: none !important;
     border: none;
 }
+
 
 .line {
     width: 100%;
@@ -71,21 +87,25 @@ a, a:hover, a:focus {
 }
 
 #sidebar .sidebar-header {
-    padding: 20px;
+    padding: 20px 10PX 10px 10px;
     background: #285d9c;
 }
 
 #sidebar ul.components {
-    padding: 20px 0;
+    padding: 0px 0px 20px 0px;
     border-bottom: 1px solid white;    
 }
+.constencia-image{
+    padding-right: 4px;
+}
+
 .border-text{
     border-bottom: 1px solid white;    
 }
 
 #sidebar ul p {
     color:white;
-    padding: 10px;
+    padding: 0px 10px 10px 10px;
 }
 
 #sidebar ul li a {
