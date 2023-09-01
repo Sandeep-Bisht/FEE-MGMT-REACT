@@ -96,7 +96,7 @@ class AdminLayout extends React.Component{
                     <a href="#orders" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle" onClick={()=>{this.setState({NavHeading:'Fees'})}}><i class="fas fa-money-check-alt"></i>Fees</a>
                     <ul className="collapse list-unstyled" id="orders">
                         <li>
-                        <Link to="/FeeReceipt"  onClick={()=>{this.setState({NavHeading:'Fees/Fee transaction'})}}>Fee transaction</Link>
+                        <Link to="/FeeReceipt"  onClick={()=>{this.setState({NavHeading:'Fees/Fee transaction'})}}>Fee Transaction</Link>
                         </li>
                         <li>
                         <Link to="/VoucherEntry"  onClick={()=>{this.setState({NavHeading:'Fees/Voucher Entry'})}}>Voucher Entry</Link>

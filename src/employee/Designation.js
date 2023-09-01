@@ -30,7 +30,7 @@ const EmployeeDesignation = () => {
                 setAllDesignation(data)
               }
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
     }
 
     const StoreEmployeeDesignation = () => {

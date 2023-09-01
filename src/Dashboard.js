@@ -324,27 +324,24 @@ class Dashboard extends React.Component{
         </div>
     </div>
     <div className="col-lg-6 col-md-12">
-        <Chart
-            width={'100%'}
-            height={'300px'}
-            chartType="BarChart" 
-            loader={<div>Loading Chart</div>}
-            data={[
-                ['Task', 'Hours per Day'],
-                // ['Total', paidamountbydate],
-                ['SBI', paidamountbydate_sbi],
-                ['PNB', paidamountbydate_pnb],
-                // ['Watch TV', 2],
-                // ['Sleep', 7],
-            ]}
-            options={{
-                title: 'Today Transaction By Bank',
-                // Just add this option
-                bars: 'vertical',
-            }}
-            rootProps={{ 'data-testid': '3' }}
-        />
-    </div>
+    <Chart
+        width={'100%'}
+        height={'300px'}
+        chartType="PieChart"
+        loader={<div>Loading Chart</div>}
+        data={[
+            ['Task', 'Hours per Day'],
+            ['SBI', paidamountbydate_sbi],
+            ['PNB', paidamountbydate_pnb],
+        ]}
+        options={{
+            title: 'Today Transaction By Bank',
+        }}
+        rootProps={{ 'data-testid': '3' }}
+    />
+</div>
+
+
 </div>
 
             </>
