@@ -173,7 +173,7 @@ getFine = () => {
         .then(res => res.json())
         .then(data => {
             console.log(data)
-            this.setState({fine_date:data[0].fine_date,defaultFine:data[0].amount})
+            this.setState({fine_date:data[0]?.fine_date,defaultFine:data[0]?.amount})
         })
         .then(err => console.log(err))
 }

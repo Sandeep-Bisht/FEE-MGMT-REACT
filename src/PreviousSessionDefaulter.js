@@ -330,7 +330,7 @@ paidFees.push({"fee_concession":fee_concession,"is_full_free_ship":item.is_full_
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                this.setState({_id:data[0].id,category: data[0].category,fine_date:data[0].fine_date,defaultFine:data[0].amount})
+                this.setState({_id:data[0]?.id,category: data[0]?.category,fine_date:data[0]?.fine_date,defaultFine:data[0]?.amount})
             })
             .then(err => console.log(err))
     }

@@ -119,7 +119,7 @@ class SecurityRegisterReportAll extends React.Component{
     $('#getBtn').text("Please Wait...")
      this.setState({StudentWithFees:[]})
      StudentWithFees=[]
-       fetch("http://192.168.29.123:4800/StudentStrenghtForSecurityAll"
+       await fetch("http://192.168.29.123:4800/StudentStrenghtForSecurityAll"
        ,{
            method: 'POST',
            headers: {
@@ -144,6 +144,8 @@ class SecurityRegisterReportAll extends React.Component{
                if(StudentWithFees[0] == undefined){
                  alert("No Result Found")
                }
+       }).catch((error)=>{
+           console.log(error);
        })
     }
     myLoop=(data)=> {            

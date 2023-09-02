@@ -97,7 +97,7 @@ class FeeSubCategoryFine extends React.Component{
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                this.setState({_id:data[0]._id,category:data[0].category,fine_date:data[0].fine_date,amount:data[0].amount})
+                this.setState({_id:data[0]?._id,category:data[0]?.category,fine_date:data[0]?.fine_date,amount:data[0]?.amount})
             })
             .then(err => console.log(err))
     }
