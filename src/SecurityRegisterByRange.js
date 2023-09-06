@@ -319,11 +319,11 @@ printDefaulter() {
                     <label>To</label>
                     <input type="text" className="form-control" value={this.state.ToAdmissionNo}  onChange={(e)=>{this.setState({ToAdmissionNo:e.target.value})}} />
                   </div>
-                  <div className="col-3 form-group">
+                  <div className="col-3 form-group d-flex align-items-end">
                   <br/>
                     <button className="btn btn-success" onClick={(e)=>{this.StudentStrenght()}}>Get Data</button>
                   </div>
-                <div className="col-3 form-group">
+                <div className="col-3 form-group d-flex align-items-end">
                   <br/>
                   {/* <button className="btn btn-primary mr-1"><CSVLink filename={"StudentData.csv"} data={csvData}>CSV</CSVLink></button> */}
                   {/* <button className="btn btn-success" id="getBtn" onClick={()=>{this.StudentStrenght()}}>Get Data</button> */}

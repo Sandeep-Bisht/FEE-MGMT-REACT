@@ -128,11 +128,11 @@ class BankCreation extends React.Component{
                             <input type="text" className="form-control" value={this.state.bank} onChange={(e)=>{{this.setState({bank:e.target.value.toUpperCase(),bankErrorMessage:undefined})}}}/>
                             <span className="errorMessage" style={{fontSize:'14px',fontWeight:600}}>{this.state.BankErrorMessage}</span>
                         </div>
-                        <div className="col-6 form-group">
+                        <div className="col-6 form-group d-flex align-items-end">
                          <label> </label>
-                         <button className="btn btn-info mt-5" onClick={()=>{this.submitBankData()}}>Save</button>
+                         <button className="btn btn-info" onClick={()=>{this.submitBankData()}}>Save</button>
                         {this.state.updateBtn ?
-                        <button className="btn btn-secondary ml-3 mt-5" type="submit" onClick={(e) => this.UpdateBankData(e)}>Update</button>
+                        <button className="btn btn-secondary ml-3" type="submit" onClick={(e) => this.UpdateBankData(e)}>Update</button>
                         :null
                         }
                         </div>

@@ -210,7 +210,7 @@ class Bonafide extends React.Component{
                              })}
                            </select>
                         </div>
-                        <div className="col-2 form-group">
+                        <div className="col-2 form-group d-flex align-items-end">
                             <br/>
                             <button className="btn btn-info" onClick={()=>{this.PrintTc()}}>PRINT</button>
                         </div>
@@ -221,7 +221,7 @@ class Bonafide extends React.Component{
                     </div>
                 </div>
             </div>
-            <div className= "row printBonafide bg-white pt-2 pb-2 pl-3 ml-2">
+            {/* <div className= "row printBonafide bg-white pt-2 pb-2 pl-3 ml-2">
             <div className="col-12">
             <div className= "row  ">
                 <div className="col-12 text-center mt-3 mb-3">
@@ -231,9 +231,7 @@ class Bonafide extends React.Component{
                 <h2 className="m-0"><u>ST. JUDE'S SCHOOL (UT056)</u></h2> 
                  <h4><u>WEST CANAL ROAD, P.O MAJRA,DEHRADUN </u></h4>
                 <h4 className="m-0 mt-4"><i>[Affilated to Council for the Indian School Certificate Examinations(CISCE), New Delhi<br/>vide letter No. UP-212/2000 dates 13 OCT 2000]</i></h4>
-               
-                {/* <p>0135-2640930,0135-2642828,FAX:0135-2644353</p> */}
-                </div>
+                               </div>
                 <div className="col-12">
                 <div className="row">
                 <div className="col-1"></div>
@@ -246,7 +244,6 @@ class Bonafide extends React.Component{
                 </div>
                 <div className="col-12 text-center">
                 <h4 className="m-0"><u>TO WHOM IT MAY CONCERN</u></h4> 
-                {/* <h6 className="m-3" style={{textAlign:'right'}}>ADMN. : {this.state.admission_no}</h6> */}
                 </div>
                 <div className="col-12 mt-4">
                 <div className="row">
@@ -267,6 +264,102 @@ class Bonafide extends React.Component{
                 </div>
                 </div>
                 </div>
+                </div> */}
+                <div className='row bonafied-certificat bg-white pt-2 pb-2 pl-3 ml-2'>
+                <div className='col-12 d-flex'>
+                  <div className='col-2'>
+                    <img src={require('./images/logo.png').default} alt='constancia-school-logo'style={{height:"100px"}}/>
+                  </div>
+                  <div className='col-10 text-center'>
+                    <h1>
+                      CONSTANCIA SCHOOL
+                    </h1>
+                    <h5>P.O. MAJRA, DEHRADUN (U.K.)-248001</h5>
+                    <h5>Affilliated to the Council for the indian School Certificate Examinations</h5>
+                    <h5>New Delhi (ICSE & ISC) Recongnised by UK Govt.</h5>
+                    <h4>SCHOOL CODE : UT015</h4>
+                    <h3>CHARACTER-CUM-EDUCATION CERTIFICATE</h3>
+                  </div>
+                  </div>
+                  <div className='col-12'>
+                    <div className='row'>
+                      <div className='col-3'>
+                      <p>Certify that Master / Miss</p>
+                      </div>
+                      <div className='transfer-certificate-dotted col-9'></div>
+                    </div>
+                  </div>
+                  <div className='col-12'>
+                    <div className='row'>
+                      <div className='col-2'>
+                      <p>S/o , D/o Shri</p>
+                      </div>
+                      <div className='transfer-certificate-dotted col-10'></div>
+                    </div>
+                  </div>
+                  <div className='col-12'>
+                    <div className='row'>
+                      <div className='col-4'>
+                      <p>was admitted into this school on the (Date)</p>
+                      </div>
+                      <div className='transfer-certificate-dotted col-8'></div>
+                    </div>
+                  </div>
+                  <div className='col-12'>
+                    <div className='row'>
+                      <div className='col-4'>
+                      <p>vide Registration / Admission Serial No</p>
+                      </div>
+                      <div className='transfer-certificate-dotted col-8'></div>
+                    </div>
+                  </div>
+                  <div className='col-12'>
+                    <div className='row'>
+                      <div className='col-8'>
+                        <div className='row'>
+                          <div className='col-5'>
+                          <p>He / She Passwd  Studing in class</p>
+                          </div>
+                          <div className='transfer-certificate-dotted col-7'></div>
+                        </div>
+                      </div>
+                      <div className='col-4'>
+                        <div className='row'>
+                          <div className='col-4'>
+                            <p>stream in</p>
+                          </div>
+                          <div className='transfer-certificate-dotted col-8'></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='col-12'>
+                    <div className='row'>
+                      <div className='col-5'>
+                      <p className=''>
+                      He / She has been a bonafide student of this school and bears
+                    </p>
+                      </div>
+                      <div className='col-7'>
+                        <h5>
+                         GOOD MORAL CHARACTER.
+                        </h5>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div className='col-12 transfer-certificate-dotted'></div>
+                  <div className='col-12 transfer-certificate-dotted'></div>
+                  <div className='col-12 transfer-certificate-dotted'></div>
+                  <div className='col-12 mt-2'>
+                    <h5>Station : Dehradun</h5>
+                  </div>
+                  <div className='col-12 mt-2'>
+                    <h5>Date................................</h5>
+                  </div>
+                  <div className='col-12 mt-5'>
+                    <h5 className='text-right'>(Head of the School)</h5>
+                  </div>
                 </div>
             </>
         )

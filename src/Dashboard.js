@@ -327,7 +327,7 @@ class Dashboard extends React.Component{
     <Chart
         width={'100%'}
         height={'300px'}
-        chartType="PieChart"
+        chartType="LineChart"
         loader={<div>Loading Chart</div>}
         data={[
             ['Task', 'Hours per Day'],

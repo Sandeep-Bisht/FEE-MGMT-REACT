@@ -710,11 +710,11 @@ class FeeStructure extends React.Component{
                             <label>Total Annual Fee</label>
                             <input type="text" value={this.state.total_annual_fee} className="form-control"/>
                         </div>
-                        <div className="col-3 form-group">
+                        <div className="col-3 form-group sjs-form-group">
                             <label>Total Monthly Fee</label>
                             <input type="text" value={this.state.total_monthly_fee} className="form-control" />
                         </div>
-                        <div className="col-3 form-group">
+                        <div className="col-3 form-group sjs-form-group">
                             <label>Grand Total</label>
                             <input type="text" value={this.state.grand_total} className="form-control" />
                         </div>

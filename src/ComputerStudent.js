@@ -161,7 +161,7 @@ class ComputerStudent extends React.Component{
                              })}
                   </select>
                 </div>
-                <div className="col-4 form-group">
+                <div className="col-4 form-group d-flex align-items-end">
                   <br/>
                   {/* <button className="btn btn-primary mr-1"><CSVLink filename={"StudentData.csv"} data={csvData}>CSV</CSVLink></button> */}
                   <button className="btn btn-success" id="getBtn" onClick={()=>{this.StudentStrenght()}}>Get Data</button>

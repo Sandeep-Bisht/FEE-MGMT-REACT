@@ -189,7 +189,7 @@ class FeeCategory extends React.Component{
                             <input type="text" value={this.state.amount} className="form-control" onChange={(e)=>{{this.setState({amount:e.target.value.toUpperCase(),amountErrorMessage:undefined})}}} />
                             <span className="errorMessage" style={{fontSize:'14px',fontWeight:600}}>{this.state.amountErrorMessage}</span>
                         </div>
-                        <div className="col-4 form-group">
+                        <div className="col-4 form-group sjs-form-group">
                            <label>Month </label>
                            <select className="form-control" value={this.state.month} onChange={(e)=>{{this.setState({month:e.target.value.toUpperCase(),monthErrorMessage:undefined})}}}>
                            <option value="">Select...</option>

@@ -212,9 +212,9 @@ class VehicleCreation extends React.Component{
                         </div>
                         <div className="col-3 form-group">
                          <label> </label>
-                         <button className="btn btn-success mt-5" onClick={()=>{this.submitVehicleData()}}>Save</button>
+                         <button className="btn btn-success d-flex align-items-end" onClick={()=>{this.submitVehicleData()}}>Save</button>
                          {this.state.updateBtn ?
-                        <button className="btn btn-secondary ml-3 mt-5" type="submit" onClick={(e) => this.updateVehicleData(e)}>Update</button>
+                        <button className="btn btn-secondary ml-3 " type="submit" onClick={(e) => this.updateVehicleData(e)}>Update</button>
                         :null
                         }
                         </div>

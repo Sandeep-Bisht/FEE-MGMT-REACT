@@ -2055,7 +2055,7 @@ print_pnb_sr_no=0
               })}
             </select>
           </div>
-          <div className="col-5 form-group">
+          <div className="col-5 form-group d-flex align-items-end">
             <br />
             <button onClick={() => { this.VoucherByDate() }} className="btn btn-primary mr-1 get_data_by_date">By Date</button>
             <button onClick={() => { this.VoucherInDetail() }} className="btn btn-primary mr-1 get_data_in_detail">Fee Report</button>
@@ -2103,7 +2103,7 @@ print_pnb_sr_no=0
               })}
             </select>
           </div>
-          <div className="col-4">
+          <div className="col-4 form-group d-flex align-items-end">
             <br />
             <button className="btn btn-primary get_data_btn mr-1" onClick={() => { this.getFeeSummary() }}>Get Data</button>
             <button onClick={() => { this.printsummary() }} className="btn btn-info mr-1">Print</button>

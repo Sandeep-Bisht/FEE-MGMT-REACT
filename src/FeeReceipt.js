@@ -2417,7 +2417,7 @@ class FeeReceipt extends React.Component{
                                     </div>
                                     <div className="col-8 form-group">    
                                         <input type="text"  id="admissionno" value={this.state.admission_no} onFocus={(e)=>{this.handleFocusInput(e)}} onChange={(e)=>{this.setState({admission_no:e.target.value.toUpperCase(),admission_noErrorMessage:undefined});this.searchByAdmission_no(e)}} onKeyPress={(e)=>{ if(e.key === 'Enter'){this.searchByAdmission_no(e)}}} tabindex="2" className="w-50" />
-                                        <button type="button" onClick={()=>{this.getStudent();}}  class="btn btn-success btn-sm" data-toggle="modal" data-target="#AllModalStudent">...</button>
+                                        <button type="button" onClick={()=>{this.getStudent();}}  class="ml-1 btn btn-success btn-sm" data-toggle="modal" data-target="#AllModalStudent">...</button>
                                         <span className="errorMessage" style={{fontSize:'14px',fontWeight:600}}>{this.state.admission_noErrorMessage}</span>
                                     </div>
                             </div>

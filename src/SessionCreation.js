@@ -117,7 +117,7 @@ setsession_code =async()=>{
                             <input type="date" className="form-control" onChange={(e)=>{{this.setState({to:e.target.value.toUpperCase(),toErrorMessage:undefined});this.setsession_code()}}}/>
                             <span className="errorMessage" style={{fontSize:'14px',fontWeight:600}}>{this.state.toErrorMessage}</span>
                         </div>
-                        <div className="col-6 form-group"> 
+                        <div className="col-6 form-group sjs-form-group"> 
                             <label>Session code</label>
                             <input type="text" className="form-control" value={this.state.session_code}/>
                             <span className="errorMessage" style={{fontSize:'14px',fontWeight:600}}>{this.state.toErrorMessage}</span>
