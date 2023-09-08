@@ -361,10 +361,10 @@ class SuspensionalVoucher extends React.Component{
                             <textarea className="form-control" onChange={(e)=>{{this.setState({remark:e.target.value.toUpperCase()})}}}>{this.state.remark}</textarea>
                         </div> */}
                         
-                        <div className="col-1 form-group">
-                         <button className="btn btn-success mt-5" onClick={()=>{this.submitSuspensionalFeeData()}}>Save</button>
+                        <div className="col-1 form-group d-flex align-items-end">
+                         <button className="btn btn-success" onClick={()=>{this.submitSuspensionalFeeData()}}>Save</button>
                          {this.state.updateBtn ?
-                        <button className="btn btn-secondary ml-3 mt-5" type="submit" onClick={(e) => this.updateSuspensionalFeeData(e)}>Update</button>
+                        <button className="btn btn-secondary ml-3" type="submit" onClick={(e) => this.updateSuspensionalFeeData(e)}>Update</button>
                         :null
                         }
                         </div>

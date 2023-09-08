@@ -365,7 +365,7 @@ class StudentPromotionDemotion extends React.Component{
                            </select>
                            <span className="errorMessage" style={{fontSize:'14px',fontWeight:600}}>{this.state.to_sectionErrorMessage}</span>
                         </div>
-                        <div className="col-2 form-group">
+                        <div className="col-2 form-group d-flex align-items-end">
                           <br/>
                           {this.state.show_btn ==true ?
                           <button onClick={()=>{this.upgradedata()}} className="btn btn-primary">Save</button>

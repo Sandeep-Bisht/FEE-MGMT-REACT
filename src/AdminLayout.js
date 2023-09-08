@@ -164,13 +164,13 @@ class AdminLayout extends React.Component{
                         <Link to="/CategoryCreation" onClick={()=>{this.setState({NavHeading:'Configuration/Category Creation'})}}>Category Creation</Link>
                         </li>
                         <li>
+                        <Link to="/SubjectCreation" onClick={()=>{this.setState({NavHeading:'Configuration/Subject Creation'})}}>Subject Creation</Link>
+                        </li>
+                        <li>
                         <Link to="/VehicleTypeCreation" onClick={()=>{this.setState({NavHeading:'Configuration/Vehicle Type Creation'})}}>Vehicle Type Creation</Link>
                         </li>
                         <li>
                         <Link to="/VehicleCreation" onClick={()=>{this.setState({NavHeading:'Configuration/Vehicle Creation '})}}>Vehicle Creation</Link>
-                        </li>
-                        <li>
-                        <Link to="/SubjectCreation" onClick={()=>{this.setState({NavHeading:'Configuration/Subject Creation'})}}>Subject Creation</Link>
                         </li>
                         <li>
                         <Link to="/HouseCreation" onClick={()=>{this.setState({NavHeading:'Configuration/House Creation'})}}>House Creation</Link>

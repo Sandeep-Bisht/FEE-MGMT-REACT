@@ -182,7 +182,7 @@ class NonTransferCertificate extends React.Component{
                             <label>Result Remark</label>
                             <input type="text" className="form-control" value={this.state.result_remark} onChange={(e)=>{{this.setState({result_remark:e.target.value.toUpperCase()});}}}/>
                         </div>
-                        <div className="col-2 form-group">
+                        <div className="col-2 form-group d-flex align-items-end">
                             <br/>
                             <button className="btn btn-info" onClick={()=>{this.PrintTc()}}>PRINT</button>
                         </div>

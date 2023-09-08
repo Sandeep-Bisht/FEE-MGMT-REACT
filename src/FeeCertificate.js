@@ -251,7 +251,7 @@ class FeeCertificate extends React.Component{
                             <label>Admission No</label>
                             <input type="text" placeholder="Enter Admission No" className="form-control" value={this.state.admission_no} onChange={(e)=>{{this.setState({admission_no:e.target.value.toUpperCase()});this.searchByAdmission_no_with_session()}}}/>
                         </div>
-                        <div className="col-2 form-group">
+                        <div className="col-2 form-group d-flex align-items-end">
                             <br/>
                             <button className="btn btn-info" onClick={()=>{this.PrintTc()}}>PRINT</button>
                         </div>

@@ -295,12 +295,12 @@ class SosByRange extends React.Component{
                            </select>
                            <span className="errorMessage" style={{fontSize:'14px',fontWeight:600}}>{this.state.sectionErrorMessage}</span>
                         </div>
-                  <div className="col-3 form-group">
+                  <div className="col-3 form-group d-flex align-items-end">
                   <br/>
                     <button className="btn btn-success" onClick={(e)=>{this.setRange()}}>Get Data</button>
                     
                   </div>
-                  <div className="col-3 form-group">
+                  <div className="col-3 form-group d-flex align-items-end">
                     <br/>
                     <button className="btn btn-info" onClick={(e)=>{this.printDefaulter()}}>Print</button>
                     

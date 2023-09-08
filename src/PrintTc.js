@@ -1,6 +1,7 @@
 import React from 'react';
 // import DataTable from '@bit/adeoy.utils.data-table';
 import Moment from 'moment';
+// import {logo} from 
 class PrintTc extends React.Component{
     constructor(props){
         super(props)
@@ -115,7 +116,7 @@ class PrintTc extends React.Component{
                 this.searchByAdmission_no()
                 
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
     }
       PrintTc() {
         window.print();
@@ -193,7 +194,7 @@ class PrintTc extends React.Component{
                 </div>
             </div>
 
-            <div className= "row printTc bg-white" style={{textAlign:"justify"}}>
+            {/* <div className= "row printTc bg-white" style={{textAlign:"justify"}}>
                 <div className="col-12 pb-5" style={{textAlign:"end"}}>
                 <h2>Admission No. {this.state.admission_no}</h2>
                 </div>
@@ -211,13 +212,207 @@ class PrintTc extends React.Component{
 
                 <p>{this.state.sex =="MALE" ? "His" :"Her" } date of birth, according to the admission Register of the School is
                 <p>(in figures) <strong> {Moment(this.state.dob).format("DD-MM-YYYY")}</strong> (in words) <strong style={{textTransform:"capitalize"}}>{this.state.newDOB} </strong>.</p>                
-                {/* (this following additional information must be supplied if scholor left at the school year) */}
+                
                 </p>
                 <br/>
                 <p>Promotion has been ($) <strong> {this.state.result_remark != '' ? this.state.result_remark.toUpperCase() : "GRANTED"} .</strong></p>
                 </div>
+                </div> */}
+                <div className='row transfer-certificat bg-white pt-2 pb-2 pl-3 ml-2'>
+                  <div className='col-12 d-flex'>
+                  <div className='col-2'>
+                    <img src={require('./images/logo.png').default} alt='constancia-school-logo'style={{height:"100px"}}/>
+                  </div>
+                  <div className='col-10 text-center'>
+                    <h1>
+                      CONSTANCIA SCHOOL
+                    </h1>
+                    <h5>P.O. MAJRA, DEHRADUN (U.K.)-248001</h5>
+                    <h5>Affilliated to the Council for the indian School Certificate Examinations</h5>
+                    <h5>New Delhi (ICSE & ISC) Recongnised by UK Govt.</h5>
+                    <h3>SCHOOL CODE : UT015</h3>
+                    <h2>TRANSFER CERTIFICATE</h2>
+                  </div>
+                  </div>
+                  <div className='col-12 mt-5'>
+                      <p>Serial No.......</p>
+                  </div>
+                  <div className='col-12'>
+                    <div className='row'>
+                    <div className='col-4'>
+                    <div className='row'>
+                      <div className='col-4'>
+                      <p>Index No.</p>
+                      </div>
+                      <div className='col-8 w-100 transfer-certificate-dotted'>
+                    </div>
+                    </div>
+                    </div>
+                    <div className='col-4'>
+                    <div className='row'>
+                      <div className='col-4'>
+                      <p>Roll No.</p>
+                      </div>
+                      <div className='col-8 w-100 transfer-certificate-dotted'>
+                    </div>
+                    </div>
+                    </div>
+                    <div className='col-4'>
+                    <div className='row'>
+                      <div className='col-4'>
+                      <p>Adm./Regn.No.</p>
+                      </div>
+                      <div className='col-8 w-100 transfer-certificate-dotted'>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                  </div>
+                  <div className='col-12 w-100'>
+                    <div className='row'>
+                      <div className='col-4'>
+                      <p>This is to certify that Master / Miss
+                  </p>
+                      </div>
+                      <div className='transfer-certificate-dotted col-8'></div>
+                    </div>
+
+                  </div>
+                  <div className='col-12'>
+                    <div className='row'>
+                      <div className='col-8'>
+                        <div className='row'>
+                          <div className='col-2'>
+                          <p>S/o, D/o</p>
+                          </div>
+                          <div className='transfer-certificate-dotted col-10'></div>
+                        </div>
+                      </div>
+                      <div className='col-4'>
+                      <p>Was admitted into this school on the
+                  </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='col-12'>
+                    <div className='row'>
+                    <div className='col-4'>
+                      <div className='row'>
+                        <div className='col-2'>
+                        <p>(Date)</p>
+                          </div>
+                          <div className='transfer-certificate-dotted col-10'>
+                          </div>
+                      </div>
+                    </div>
+                  <div className='col-8'>
+                    <div className='row'>
+                      <div className='col-3'>
+                      <p>on a transfer from
+                  </p>
+                      </div>
+                      <div className='transfer-certificate-dotted col-9'></div>
+                    </div>
+                  </div>
+                  </div>
+                  </div>
+                  <div className='col-12'>
+                    <div className='row'>
+                  <div className='col-2'>
+                  <p>and left on</p>
+                  </div>
+                  <div className='col-2'>
+                  <p>01 April</p>
+                  </div>
+                  <div className='col-8'>
+                  <p>with a <span className='transfer-character'> GOOD CHARACTER</span></p>
+                  </div>
+                  </div>
+                  </div>
+                  <div className='col-12'>
+                    <p>He / She was then studying in (*) XII (Twelth) class of the (**) ISC stream.</p>
+                  </div>
+                  <div className='col-12'>
+                    <div className='row'>
+                      <div className='col-3'>
+                        <p>The school year being from (*X)</p>
+                      </div>
+                      <div className='col-1'>
+                        <h5>01 April</h5>
+                      </div>
+                      <div className='col-1'>
+                        <p>to</p>
+                      </div>
+                      <div className='col-7'>
+                        <h5>31 March</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='col-12'>
+                    <p className='text-center'>
+                      All sums due (***) to this school on his / her accounts have been remitted or satisfactorily arranged for.
+                    </p>
+                  </div>
+                  <div className='col-12'>
+                    <div className='row'>
+                      <div className='col-6'>
+                        <p>His / Her date of birth according to the Admission Register is (in figure)</p>
+                      </div>
+                      <div className='transfer-certificate-dotted col-6'></div>
+                    </div>
+                  </div>
+                  <div className='col-12'>
+                    <div className='row'>
+                      <div className='col-2'>
+                        <p>(in words)</p>
+                      </div>
+                      <div className='transfer-certificate-dotted col-10'></div>
+                    </div>
+                  </div>
+                  <div className='col-12'>
+                    <div className='d-flex'>
+                      <p>Promotion has been (XX*)</p>
+                      <h5>Granted / Refused</h5>
+                    </div>
+                  </div>
+                  <div className='col-12'>
+                    <p>Station : Dehradun</p>
+                  </div>
+                  <div className='col-12'>
+                    <div className='row'>
+                      <div className='col-6'>
+                        <div className='row'>
+                          <div className='col-2'>
+                            <p>Date :</p>
+                          </div>
+                          <div className='transfer-certificate-dotted col-5'></div>
+                          <div className='col-5'></div>
+                        </div>
+                      </div>
+                      <div className='col-6'>
+                        <div className='row'>
+                          <div className='col-3'>
+                            <p>Signature</p>
+                          </div>
+                          <div className='transfer-certificate-dotted col-5'></div>
+                          <div className='col-4'></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='col-12 transfer-certificate-head-sign'>
+                    <p className='text-right'>(Head of the School)</p>
+                  </div>
+                  <div className='col-12'>
+                    <p>(*)  to be given in words</p>
+                    <p>(**)  Mention whether ISC / ICSE Stream</p>
+                    <p>(***)  sums to the school include payments for which provision is made in the rules supplied to the parent /
+                       guardian when the scholar was admitted into the school (Article 59 of the code)
+                    </p>
+                    <p>(XX*)  Granted / Refused / not applicable</p>
+                    <p>(*X)  insert month and year</p>
+                  </div>
                 </div>
-         
             </>
         )
     }

@@ -128,7 +128,7 @@ const PayCategory = () => {
                 <label>Description</label>
                 <input className="form-control" value={description} onChange={(e)=>{setDescription(e.target.value.toUpperCase())}}  />
                 </div>
-                <div className="col-4 form-group">
+                <div className="col-4 form-group d-flex align-items-end">
                     <br/>
                     <button className="btn btn-success" onClick={()=>{StorePayCategory()}}>Save</button>
                     {updateBtn==true?  <button className="btn btn-secondary mr-2" style={{float:"right"}} onClick={()=>{UpdatePayCategory()}}> Update Details</button>:null}

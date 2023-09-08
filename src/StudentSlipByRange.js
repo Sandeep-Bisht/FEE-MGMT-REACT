@@ -329,12 +329,12 @@ class StudentSlipByRange extends React.Component{
                     <label>To</label>
                     <input type="text" className="form-control"  onBlur={(e)=>{this.setState({ToAdmissionNo:e.target.value})}} />
                   </div>
-                  <div className="col-3 form-group">
+                  <div className="col-3 form-group d-flex align-items-end">
                   <br/>
                     <button className="btn btn-success" onClick={(e)=>{this.setRange()}}>Get Data</button>
                     
                   </div>
-                  <div className="col-3 form-group">
+                  <div className="col-3 form-group d-flex align-items-end">
                     <button className="btn btn-info" onClick={(e)=>{this.printStudentSlip()}}>Print</button>
                     
                   </div>

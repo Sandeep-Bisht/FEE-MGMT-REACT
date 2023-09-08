@@ -208,7 +208,7 @@ class CharacterCertificate extends React.Component{
                            <option value="Sports' Captain">School Sports' Captain</option>
                            </select>
                         </div>
-                        <div className="col-2 form-group">
+                        <div className="col-2 form-group d-flex align-items-end">
                             <br/>
                             <button className="btn btn-info" onClick={()=>{this.PrintTc()}}>PRINT</button>
                         </div>
