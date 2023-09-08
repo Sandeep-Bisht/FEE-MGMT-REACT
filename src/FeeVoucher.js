@@ -2061,7 +2061,8 @@ print_pnb_sr_no=0
             <button onClick={() => { this.VoucherInDetail() }} className="btn btn-primary mr-1 get_data_in_detail">Fee Report</button>
             <button onClick={() => { this.VoucherByClass() }} className="btn btn-primary mr-1 get_data_by_class">Classwise</button>
             <button onClick={() => { this.printVoucher() }} className="btn btn-info mr-1">Print</button>
-            <CSVLink filename={"DayBook.csv"} data={csvData}>CSV</CSVLink>
+            <button className="btn btn-primary">
+            <CSVLink filename={"DayBook.csv"} data={csvDataa}>CSV</CSVLink></button>
           </div>
           {/* <div className="col-4">
                 <div className="form-group">

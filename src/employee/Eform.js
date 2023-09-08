@@ -174,7 +174,7 @@ const Eform = () => {
                     })}
                 </select>
                 </div> */}
-                <div className="col-4 form-group">
+                <div className="col-4 form-group d-flex align-items-end">
                     <br/>
                     <button className="btn btn-success btn-block" onClick={()=>{StoreEmployee()}}>Save</button>
                 </div>

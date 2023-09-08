@@ -242,7 +242,7 @@ class StudentUpgrade extends React.Component{
                            </select>
                            <span className="errorMessage" style={{fontSize:'14px',fontWeight:600}}>{this.state.class_nameErrorMessage}</span>
               </div>
-              <div className="col-2 form-group">
+              <div className="col-2 form-group d-flex align-items-end">
                           <br/>
                           <button onClick={()=>{this.upgradedata()}} className="btn btn-primary">Upgrade</button>
                         </div>
