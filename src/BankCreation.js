@@ -1,5 +1,9 @@
 import React from 'react';
 import DataTable from '@bit/adeoy.utils.data-table';
+// import { NotificationContainer, NotificationManager } from 'react-notifications-component';
+// import 'react-notifications-component/dist/theme.css';
+
+
 class BankCreation extends React.Component{
     constructor(props){
         super(props)
@@ -99,7 +103,8 @@ class BankCreation extends React.Component{
             })
             .then(res => res.json())
             .then(data => {
-                alert("Bank Created Successfully") 
+              // NotificationManager?.success('Bank Created Successfully', 'Success', 3000);
+                // alert("Bank Created Successfully") 
                 this.getBankData()               
             })
             .then(err => {})
