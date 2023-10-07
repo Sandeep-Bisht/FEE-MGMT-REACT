@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ModalImage from "react-modal-image";
 import DataTable from "@bit/adeoy.utils.data-table";
-import Moment from "moment";
+import Moment, { months } from "moment";
 import { Redirect } from "react-router-dom";
 import $, { contains, timers } from "jquery";
 var SubtractTuitionFee = 0;
@@ -278,25 +278,25 @@ class FeeReceipt extends React.Component {
     }
   }
 
-  ChangemanualTutionFeeState(e) {
-    if(e.target.checked)
-    {
-      this.setState({
-        manualTutionFeeState:true,
-      },
-      ()=>{
-        this.getGrandTotal();
-      })
-    }
-    else{
-      this.setState({
-        manualTutionFeeState:false,
-      },
-      ()=>{
-        this.getGrandTotal();
-      })
-    }
-  }
+  // ChangemanualTutionFeeState(e) {
+  //   if(e.target.checked)
+  //   {
+  //     this.setState({
+  //       manualTutionFeeState:true,
+  //     },
+  //     ()=>{
+  //       this.getGrandTotal();
+  //     })
+  //   }
+  //   else{
+  //     this.setState({
+  //       manualTutionFeeState:false,
+  //     },
+  //     ()=>{
+  //       this.getGrandTotal();
+  //     })
+  //   }
+  // }
   
   
   getBankData = () => {
@@ -635,15 +635,16 @@ class FeeReceipt extends React.Component {
   //         .then(err => console.log(err))
   // }
   getGrandTotal = () => {
-    if(this.state.manualTutionFeeState)
-    {
-      let lastDate=this.state.last_receipt_submission_month;
-      let currentDate=this.state.receipt_date;
-      let newFormMonths=Moment(currentDate).format("MM");
-      let newFormDate=Moment(currentDate).format("DD")
+      let lastDate=this.state.AllOldFees.length>0?this.state.AllOldFees[this.state.AllOldFees.length-1].receipt_date:"";
+      let currentDate=Moment(this.state.receipt_date).format("MM-YYYY");
+      let lastDateMonth=Moment(lastDate).format("MM-YYYY");
+      let monthsDifference = Moment(currentDate, "MM-YYYY").diff(Moment(lastDateMonth, "MM-YYYY"), 'months');
+                  console.log(monthsDifference,"montheeeeeeeeeee")
+      if(monthsDifference>0) 
+      {
       let tutionFee=this.state.StudentTutionFee
-      this.state.totalNewPaybleMonth=Number(newFormMonths)-Number(lastDate)
-        return ((tutionFee*this.state.totalNewPaybleMonth) + (this.state.delayFineFee ? Number(this.state.delayFineFee) : 0) + (this.state.showTotalAnnualFee && this.state.admission_no ? this.state.annual_fee : 0) + (this.state.TakeOneTimeFee ? this.state.one_time_fees : 0) + (this.state.AllDueFees ? this.state.AllDueFees : 0))
+      console.log(Number(this.state.total_monthly_fee)*Number(monthsDifference),"insideeeeeeeee",monthsDifference)
+      return ((tutionFee*Number(monthsDifference)) + (this.state.showTotalAnnualFee && this.state.admission_no ? this.state.annual_fee : 0) + (this.state.TakeOneTimeFee ? this.state.one_time_fees : 0) + (this.state.AllDueFees ? this.state.AllDueFees : 0))
   }
     else{ 
       let currentDate=new Date();
@@ -653,7 +654,7 @@ class FeeReceipt extends React.Component {
         parseInt(Number(newFormMonths)-Number(paidFeeLastMonths))
         : (this.state.admission_no ? this.state.StudentTutionFee : 0)
         :
-        0) + (this.state.delayFineFee ? Number(this.state.delayFineFee) : 0) + (this.state.showTotalAnnualFee && this.state.admission_no ? this.state.annual_fee : 0) + (this.state.TakeOneTimeFee ? this.state.one_time_fees : 0) + (this.state.AllDueFees ? this.state.AllDueFees : 0);
+        0) + (this.state.showTotalAnnualFee && this.state.admission_no ? this.state.annual_fee : 0) + (this.state.TakeOneTimeFee ? this.state.one_time_fees : 0) + (this.state.AllDueFees ? this.state.AllDueFees : 0)
     }
   };
   getCertificateDetails = async () => {
@@ -1680,7 +1681,7 @@ class FeeReceipt extends React.Component {
           data.append("fine", this.state.delayFineFee);
           data.append("paid_fine", this.state.manualFine>0?this.state.manualFine:0)
           data.append("dues_fine",(this.state.delayFineFee-this.state.manualFine))
-          data.append("dues_fee",this.getDuesFee())
+          data.append("dues_fee",this.getGrandTotal()-this.state.paid_amount)
           data.append("balance", this.state.remaning_balance);
           data.append(
             "paid_month",
@@ -1882,13 +1883,15 @@ class FeeReceipt extends React.Component {
     }
   };
 
-  getDuesFee = ()=>{
-    let lastDate=Moment(this.state.last_fee_date).format("DDMMYYY");
-    let currentDate=this.state.receipt_date;
-    let newFormMonths=Moment(currentDate).format("MM");
-    console.log(newFormMonths,"checkckckckckckckckckckck",lastDate)
-     console.log(parseInt(((this.state.StudentTutionFee)*(newFormMonths-lastDate))-this.state.paid_amount))
-  }
+  // getDuesFee = ()=>{
+  //   let lastDate=this.state.last_receipt_submission_month;
+  //   let currentDate=this.state.receipt_date;
+  //   let newFormMonths=Moment(currentDate).format("MM");
+  //   if(newFormMonths == lastDate)
+  //   {
+  //     console.log(parseInt(((this.state.StudentTutionFee)*(newFormMonths-lastDate))-this.state.paid_amount))
+  //   }
+  // }
 
   UpdateBalance = () => {
     if (this.checkValidation()) {
@@ -2745,6 +2748,7 @@ class FeeReceipt extends React.Component {
                   </thead>
                   <tbody>
                     {this.state.AllOldFees.map((item, index) => {
+                      console.log(item,"check itemmmmmmmmmmmmm")
                       // {JSON.parse(item.paid_fees).map((e,i)=>{
                       //         if(e.fee_sub_category =="TUITION FEE"){
                       //             SubtractTuitionFee = e.amount
