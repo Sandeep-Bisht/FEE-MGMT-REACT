@@ -87,7 +87,7 @@ class StruckOff extends React.Component{
               body: JSON.stringify({
                 session: this.state.session,
                 admission_no: admission_no,
-                school_id:"100",
+                school_id:"UT015",
               })
             })
         .then((data) => data.json())
@@ -183,7 +183,7 @@ class StruckOff extends React.Component{
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              school_id: "100",
+              school_id: "UT015",
               session:this.state.session,
             })
             })
@@ -204,7 +204,7 @@ class StruckOff extends React.Component{
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          school_id: "100",
+          school_id: "UT015",
           session: this.state.session,
         })
       })
@@ -244,7 +244,7 @@ class StruckOff extends React.Component{
           },
           body: JSON.stringify({
             session: this.state.session,
-            school_id: "100"
+            school_id: "UT015"
           })
         })
 

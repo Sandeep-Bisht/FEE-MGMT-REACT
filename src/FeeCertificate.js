@@ -73,7 +73,7 @@ class FeeCertificate extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
           .then(res => res.json())
@@ -104,7 +104,7 @@ class FeeCertificate extends React.Component{
         body: JSON.stringify({
           admission_no: this.state.admission_no,
           session: this.state.session,
-          school_id:"100",
+          school_id:"UT015",
         })
       })
             .then(res => res.json())
@@ -266,7 +266,7 @@ class FeeCertificate extends React.Component{
             <div className= "row printFeeCertificate bg-white">
             <div className="text-center w-100"><img src={require("./images/logo.png").default} className="certificate-logo" /></div>
                 <div className="col-12 text-center">
-                <h3>ST. JUDE'S SCHOOL (UT056)</h3>
+                <h3>CONSTANCIA SCHOOL (UT056)</h3>
                 <h4 className="pt-2"><strong><i>[Affilated to Council for the Indian School Certificate Examinations(CISCE), New Delhi<br/>
                 vide letter No. UP-212/2000 dated 13 oct 2000]</i></strong>
                 </h4>

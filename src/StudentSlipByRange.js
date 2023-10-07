@@ -117,7 +117,7 @@ class StudentSlipByRange extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
           .then(res => res.json())
@@ -137,7 +137,7 @@ class StudentSlipByRange extends React.Component{
             },
               body: JSON.stringify({
               session: this.state.session,
-              school_id: "100"
+              school_id: "UT015"
             })
           })
           .then(res => res.json())
@@ -349,7 +349,7 @@ class StudentSlipByRange extends React.Component{
                   // {index%4==0 ? :null}
               <div className= "row bg-white  mb-3 pt-5 pb-5" style={{borderBottom:"2px dashed black"}}>
                 <div className="col-12 text-center">
-                  <h3>  ST. JUDE'S SCHOOL</h3>
+                  <h3>  CONSTANCIA SCHOOL</h3>
                   <h6>WEST CANAL ROAD, P.O MAJRA DEHRADUN<br/>
                   0135-2640930,0135-2642828,FAX:0135-2644353
                   </h6>

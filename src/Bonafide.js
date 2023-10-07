@@ -29,6 +29,7 @@ class Bonafide extends React.Component{
             security_deposit:'',
             return_mode:'',
             bank:'',
+            father_name:"",
             tc_no:'',
             cheque_no:'',
             reason:'',
@@ -62,7 +63,7 @@ class Bonafide extends React.Component{
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        school_id: "100",
+        school_id: "UT015",
         session: this.state.session,
       })
     })
@@ -85,14 +86,26 @@ class Bonafide extends React.Component{
           body: JSON.stringify({
             admission_no: this.state.admission_no,
             session: this.state.session,
-            school_id:"100",
+            school_id:"UT015",
           })
         })
               .then(res => res.json())
               .then(data => {
                   console.log(data)
                   if(data[0] !=undefined){
-                  this.setState({name:data[0].student.name,account_no:data[0].account_no,admission_no:data[0].admission_no,class_name:data[0].class_name,section:data[0].section,father_name:data[0].student.father_name,mother_name:data[0].student.mother_name,fee_concession:data[0].student.fee_concession,dob:data[0].student.dob,date_of_admission:data[0].student.date_of_admission,sex:data[0].student.sex})
+                  this.setState({
+                    name:data[0].student.name,
+                    account_no:data[0].account_no,
+                    admission_no:data[0].admission_no,
+                    class_name:data[0].class_name,
+                    section:data[0].section,
+                    father_name:data[0].student.father_name,
+                    mother_name:data[0].student.mother_name,
+                    fee_concession:data[0].student.fee_concession,
+                    dob:data[0].student.dob,
+                    date_of_admission:data[0].student.date_of_admission,
+                    sex:data[0].student.sex
+                  })
                   this.FeesClasswise(data[0].class_name,data[0].section); 
                   
                   let date = Moment(this.state.dob).format("DD")
@@ -228,7 +241,7 @@ class Bonafide extends React.Component{
                 <img src={require('./images/logo.png').default} className="certificate-logo"/>
                 </div>
                 <div className="col-12 text-center">
-                <h2 className="m-0"><u>ST. JUDE'S SCHOOL (UT056)</u></h2> 
+                <h2 className="m-0"><u>CONSTANCIA SCHOOL (UT056)</u></h2> 
                  <h4><u>WEST CANAL ROAD, P.O MAJRA,DEHRADUN </u></h4>
                 <h4 className="m-0 mt-4"><i>[Affilated to Council for the Indian School Certificate Examinations(CISCE), New Delhi<br/>vide letter No. UP-212/2000 dates 13 OCT 2000]</i></h4>
                                </div>
@@ -265,8 +278,8 @@ class Bonafide extends React.Component{
                 </div>
                 </div>
                 </div> */}
-                <div className='row bonafied-certificat bg-white pt-2 pb-2 pl-3 ml-2'>
-                <div className='col-12 d-flex'>
+                <div className='row printBonafide bonafied-certificat bg-white pt-2 pb-2 pl-3 ml-2'>
+                {/* <div className='col-12 d-flex'>
                   <div className='col-2'>
                     <img src={require('./images/logo.png').default} alt='constancia-school-logo'style={{height:"100px"}}/>
                   </div>
@@ -280,13 +293,32 @@ class Bonafide extends React.Component{
                     <h4>SCHOOL CODE : UT015</h4>
                     <h3>CHARACTER-CUM-EDUCATION CERTIFICATE</h3>
                   </div>
+                  </div> */}
+                  <div className='col-12 d-flex'>
+                  <div className='col-2 text-center'>
+                    <p className='m-0'>Estd.-1973</p>
+                    <img src={require('./images/logo.png').default} alt='constancia-school-logo' style={{ height: "100px" }} />
                   </div>
-                  <div className='col-12'>
+                  <div className='col-8 text-center'>
+                    <h1>
+                      CONSTANCIA SCHOOL
+                    </h1>
+                    <h5>P.O. MAJRA, DEHRADUN (U.K.)-248001</h5>
+                    <h5>Affilliated to the Council for the indian School Certificate Examinations</h5>
+                    <h5>New Delhi (ICSE & ISC) Recongnised by UK Govt.</h5>
+                    <h4>SCHOOL CODE : UT015</h4>
+                    <h3>CHARACTER-CUM-EDUCATION CERTIFICATE</h3>
+                  </div>
+                  <div className='col-2 p-0 text-center'>
+                    <p style={{fontSize:"12px"}}>Ph. 0135-260177,2642360</p>
+                  </div>
+                </div>
+                  <div className='col-12 mt-4'>
                     <div className='row'>
                       <div className='col-3'>
                       <p>Certify that Master / Miss</p>
                       </div>
-                      <div className='transfer-certificate-dotted col-9'></div>
+                      <div className='transfer-certificate-dotted col-9'>{this.state.name}</div>
                     </div>
                   </div>
                   <div className='col-12'>
@@ -294,7 +326,7 @@ class Bonafide extends React.Component{
                       <div className='col-2'>
                       <p>S/o , D/o Shri</p>
                       </div>
-                      <div className='transfer-certificate-dotted col-10'></div>
+                      <div className='transfer-certificate-dotted col-10'>{this.state.father_name}</div>
                     </div>
                   </div>
                   <div className='col-12'>
@@ -302,45 +334,44 @@ class Bonafide extends React.Component{
                       <div className='col-4'>
                       <p>was admitted into this school on the (Date)</p>
                       </div>
-                      <div className='transfer-certificate-dotted col-8'></div>
-                    </div>
-                  </div>
-                  <div className='col-12'>
-                    <div className='row'>
-                      <div className='col-4'>
-                      <p>vide Registration / Admission Serial No</p>
-                      </div>
-                      <div className='transfer-certificate-dotted col-8'></div>
-                    </div>
-                  </div>
-                  <div className='col-12'>
-                    <div className='row'>
-                      <div className='col-8'>
-                        <div className='row'>
-                          <div className='col-5'>
-                          <p>He / She Passwd  Studing in class</p>
-                          </div>
-                          <div className='transfer-certificate-dotted col-7'></div>
-                        </div>
-                      </div>
-                      <div className='col-4'>
-                        <div className='row'>
-                          <div className='col-4'>
-                            <p>stream in</p>
-                          </div>
-                          <div className='transfer-certificate-dotted col-8'></div>
-                        </div>
-                      </div>
+                      <div className='transfer-certificate-dotted col-8'>{this.state.date_of_admission}</div>
                     </div>
                   </div>
                   <div className='col-12'>
                     <div className='row'>
                       <div className='col-5'>
+                      <p>vide Registration / Admission Serial No</p>
+                      </div>
+                      <div className='transfer-certificate-dotted col-7'>{this.state.admission_no}</div>
+                    </div>
+                  </div>
+                  <div className='col-12'>
+                    <div className='row'>
+                          <div className='col-4'>
+                          <p>He / She Passed  Studing in class</p>
+                          </div>
+                          <div className='transfer-certificate-dotted col-6'>{this.state.class_name}</div>
+                          <div className='col-2 text-right'>
+                          <p>of ICSE / ISC</p>
+                        </div>
+                      </div>
+                      </div>
+                      <div className='col-12'>
+                        <div className='row'>
+                          <div className='col-2'>
+                            <p>stream in</p>
+                          </div>
+                          <div className='transfer-certificate-dotted col-10'></div>
+                          </div>
+                      </div>
+                  <div className='col-12'>
+                    <div className='row'>
+                      <div className='col-12'>
                       <p className=''>
                       He / She has been a bonafide student of this school and bears
                     </p>
                       </div>
-                      <div className='col-7'>
+                      <div className='col-12'>
                         <h5>
                          GOOD MORAL CHARACTER.
                         </h5>
@@ -348,14 +379,14 @@ class Bonafide extends React.Component{
                     </div>
 
                   </div>
-                  <div className='col-12 transfer-certificate-dotted'></div>
-                  <div className='col-12 transfer-certificate-dotted'></div>
-                  <div className='col-12 transfer-certificate-dotted'></div>
+                  <div className='col-12'>
+                    <div contentEditable="true" style={{ border:"none",borderBottom:"1px dotted",width:"100%",minHeight: "20px"}}></div>
+                  </div>
                   <div className='col-12 mt-2'>
                     <h5>Station : Dehradun</h5>
                   </div>
                   <div className='col-12 mt-2'>
-                    <h5>Date................................</h5>
+                    <h5>Date : {Moment().format("DD/MM/YYYY")}</h5>
                   </div>
                   <div className='col-12 mt-5'>
                     <h5 className='text-right'>(Head of the School)</h5>

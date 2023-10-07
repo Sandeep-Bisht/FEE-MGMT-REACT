@@ -128,7 +128,7 @@ class FeeVoucher extends React.Component {
         },
         body: JSON.stringify({
           session: this.state.session,
-          school_id: "100"
+          school_id: "UT015"
         })
       })
       .then(res => res.json())
@@ -2623,7 +2623,7 @@ print_pnb_sr_no=0
 
         <div className="row bg-white printvoucherbydate" style={{display:'none'}}>
         <div className="col-12 text-center pb-5">
-                <h3>ST. JUDE'S SCHOOL (UT056)</h3>
+                <h3>CONSTANCIA SCHOOL (UT056)</h3>
                 <h4 className="pt-2" style={{fontWeight:"unset"}}>WEST CANAL ROAD, P.O MAJRA, DEHRADUN<br/>
                 0135-2640930,0135-262828,FAX:0135-2644353</h4>
         </div>

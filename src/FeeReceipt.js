@@ -18,6 +18,7 @@ var defaultDate = localStorage.getItem("R_date");
 var defaultDateStatus = false;
 var countAdmission_no = "";
 class FeeReceipt extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -39,20 +40,24 @@ class FeeReceipt extends React.Component {
       name: "",
       sex: "",
       dob: "",
+      annual: false,
       nationality: "",
       father_name: "",
       mother_name: "",
       parent_address: "",
       gaurdian_name: "",
       gaurdian_address: "",
-
       fee_concession: "",
       bus_fare_concession: "",
       vehicle_no: "",
       is_teacher_ward: false,
       paid_upto_month: "",
+      manualTutionFeeState:false,
+      previousReceiptDate:"",
+      delayFineFee: "",
       paid_upto_year: "",
       last_school_performance: "",
+      RTE_SW_Student:"",
       is_full_free_ship: false,
       avail_transport: false,
       take_computer: false,
@@ -63,9 +68,11 @@ class FeeReceipt extends React.Component {
       is_repeater: false,
       other_details: "",
       misc_details: "",
-
+      AllDueFees:0,
       fine: "",
-
+      previousPaidFine:"",
+      previousDuesFine:"",
+      previousDuesFee:"",
       last_fee_status: true,
       last_fee_date: null,
       last_fees_date: "",
@@ -92,7 +99,7 @@ class FeeReceipt extends React.Component {
       bank_v_no: "",
       check_no: "",
       bank_date: "",
-
+      showTotalAnnualFee: false,
       annual_fee: "0",
       one_time_fees: "0",
       fees: [],
@@ -126,17 +133,15 @@ class FeeReceipt extends React.Component {
       StudentTutionFee: "0",
       RemainStudentTutionFee: "0",
       SubtractStudentTutionFee: "0",
-
       ModalAllStudent: [],
-
       fne_date: "",
       defaultFine: "",
       AllBank: [],
       manualFine: "",
-      manualFineState: "false",
-
+      manualFineState:false,
       Rpaidmonth: "",
       Rreceiptdate: "",
+      last_receipt_submission_month:"",
       Rlastpaiddate: "",
       Rbank: "",
       Rreceiptno: "",
@@ -152,6 +157,7 @@ class FeeReceipt extends React.Component {
       serverpagi: 1,
       servercontentsize: 20,
       PaginationCount: [],
+      totalNewPaybleMonth:0,
     };
   }
   componentDidMount() {
@@ -190,7 +196,7 @@ class FeeReceipt extends React.Component {
     }, 4000);
 
     this.getStudent();
-    this.getFeeReceipt();
+    // this.getFeeReceipt();
     this.getFeeCategory();
     this.getSession();
     this.getBankData();
@@ -233,21 +239,66 @@ class FeeReceipt extends React.Component {
   //         .then(err => console.log(err))
   // }
 
+  // ChangemanualFineState(e) {
+  //   if (e.target.checked) {
+  //     this.setState({ manualFineState: "true" ,
+  //   },
+  //   ()=>{
+  //     this.getFineFee();
+  //   });
+  //     // $(document).ready(function () {
+  //     //   $(".manualFine").css("display", "block");
+  //     //   $(".manualFine").css("display", "initial");
+  //     //   $(".defaultFine").css("display", "none");
+  //     // });
+      
+  //   } else{
+  //     this.setState({manualFine:false},
+  //       ()=>{
+  //         this.getFineFee();
+  //       })
+  //   }
+    
+  //   // else {
+  //   //   this.setState({ manualFineState: "false" });
+  //   //   $(".manualFine").css("display", "none");
+  //   //   $(".defaultFine").css("display", "block");
+  //   //   $(".defaultFine").css("display", "initial");
+  //   // }
+  // }
   ChangemanualFineState(e) {
     if (e.target.checked) {
-      this.setState({ manualFineState: "true" });
-      $(document).ready(function () {
-        $(".manualFine").css("display", "block");
-        $(".manualFine").css("display", "initial");
-        $(".defaultFine").css("display", "none");
+      this.setState({ manualFineState: true }, () => {
+        this.getFineFee();
       });
     } else {
-      this.setState({ manualFineState: "false" });
-      $(".manualFine").css("display", "none");
-      $(".defaultFine").css("display", "block");
-      $(".defaultFine").css("display", "initial");
+      this.setState({ manualFineState: false }, () => {
+        this.getFineFee();
+      });
     }
   }
+
+  ChangemanualTutionFeeState(e) {
+    if(e.target.checked)
+    {
+      this.setState({
+        manualTutionFeeState:true,
+      },
+      ()=>{
+        this.getGrandTotal();
+      })
+    }
+    else{
+      this.setState({
+        manualTutionFeeState:false,
+      },
+      ()=>{
+        this.getGrandTotal();
+      })
+    }
+  }
+  
+  
   getBankData = () => {
     fetch("http://144.91.110.221:4800/getBankData", {
       method: "POST",
@@ -257,14 +308,12 @@ class FeeReceipt extends React.Component {
       },
       body: JSON.stringify({
         session: this.state.session,
-        school_id: "100",
+        school_id: "UT015",
       }),
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         this.setState({ AllBank: data });
-        console.log(data);
       })
       .then((err) => console.log(err));
   };
@@ -272,7 +321,6 @@ class FeeReceipt extends React.Component {
     fetch("http://144.91.110.221:4800/getFine")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         this.setState({
           category: data[0]?.category,
           fine_date: data[0]?.fine_date,
@@ -282,7 +330,6 @@ class FeeReceipt extends React.Component {
       .then((err) => console.log(err));
   };
   getStudent = async () => {
-    // await console.log("wait wait")
     fetch("http://144.91.110.221:4800/getStudent", {
       method: "POST",
       headers: {
@@ -291,7 +338,7 @@ class FeeReceipt extends React.Component {
       },
       body: JSON.stringify({
         session: this.state.session,
-        school_id: "100",
+        school_id: "UT015",
         page_no: this.state.serverpagi,
         page_content_size: this.state.servercontentsize,
       }),
@@ -305,7 +352,6 @@ class FeeReceipt extends React.Component {
       .then((err) => console.log(err));
   };
   GetDefaulterMoneySingleStudent = async () => {
-    await console.log("wait wait");
     var a = this.state.session.split("-")[0];
     a = a - 1;
     var b = this.state.session.split("-")[1];
@@ -349,7 +395,7 @@ class FeeReceipt extends React.Component {
         alert("Category Created Successfully");
         this.getFeeCategory();
       })
-      .then((err) => {});
+      .then((err) => { });
   };
   getFeeCategory = () => {
     fetch("http://144.91.110.221:4800/getCategory")
@@ -367,7 +413,7 @@ class FeeReceipt extends React.Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        school_id: "100",
+        school_id: "UT015",
       }),
     })
       .then((res) => res.json())
@@ -377,7 +423,6 @@ class FeeReceipt extends React.Component {
       .then((err) => console.log(err));
   };
   viewParent = async () => {
-    await console.log("wait wait");
     const account_no = this.state.account_no;
     if (account_no == "0") {
       return false;
@@ -449,8 +494,6 @@ class FeeReceipt extends React.Component {
       cheque_no: "",
       left_on: "",
     });
-    // await console.log("wait")
-    console.log("checking response search by addmission no", e?.target?.value);
     const admission_no = e?.target?.value;
     if (admission_no == "0") {
       return false;
@@ -463,8 +506,8 @@ class FeeReceipt extends React.Component {
       },
       body: JSON.stringify({
         session: this.state.session,
-        admission_no: admission_no,
-        school_id: "100",
+        admission_no: this.state.admission_no ? this.state.admission_no : admission_no,
+        school_id: "UT015",
       }),
     })
       .then((data) => data.json())
@@ -473,6 +516,7 @@ class FeeReceipt extends React.Component {
           // balance:data[0].balance,
           this.setState({
             AllStudent: data,
+            annual: true,
             _id: data[0].student._id,
             account_no: data[0].account_no,
             name: data[0].student.name,
@@ -491,13 +535,15 @@ class FeeReceipt extends React.Component {
               data[0].student.no_exempt_security_deposit,
             is_repeater: data[0].student.is_repeater,
             paid_upto_month: data[0].student.paid_upto_month,
+            last_fees_date:data[0].student.paid_upto_month?data[0].student.paid_upto_month:"",
+            // RTE_SW_Student:(data[0].student.paid_upto_month=="RTE" || data[0].student.paid_upto_month=="S/W") ? data[0].student.paid_upto_month : "",
+            date_of_admission: data[0].student.date_of_admission,
             father_name: data[0].student.father_name,
             mother_name: data[0].student.mother_name,
             parent_mobile: data[0].student.parent_mobile,
             parent_phone: data[0].student.parent_phone,
             studentSession: data[0].session,
           });
-
           if (data[0].student.tc_status == 1) {
             this.getCertificateDetails();
             if (
@@ -507,7 +553,7 @@ class FeeReceipt extends React.Component {
             ) {
               // tcstatusConfirmBox=false
               this.getFine();
-
+              this.getFineFee()
               this.FeesClasswise(data[0].class_name, data[0].section);
             } else {
               // tcstatusConfirmBox=false
@@ -515,15 +561,71 @@ class FeeReceipt extends React.Component {
             }
           } else {
             this.getFine();
-
+            this.getFineFee()
             this.FeesClasswise(data[0].class_name, data[0].section);
           }
         }
-        // else{
-        //     this.setState({AllStudent:[],fees:[],report_card_and_diary:'0',annual_prize_day:'0',development_fund:'0',school_magazin:'0',annual_sports_day:'0',examination_fee:'0',med_board_reg:'0',library_fee:'0', tution_fee:'0',computer_fee:'0',science_fee:'0',bus_fare:'0'})
-        // }
-      });
+        else{
+            this.setState({AllStudent:[],fees:[],report_card_and_diary:'0',annual_prize_day:'0',development_fund:'0',school_magazin:'0',annual_sports_day:'0',examination_fee:'0',med_board_reg:'0',library_fee:'0', tution_fee:'0',computer_fee:'0',science_fee:'0',bus_fare:'0'})
+        }
+      }).catch((error) => {
+        console.log(error)
+      })
   };
+
+  getFineFee = () => {
+    let currentDate=new Date();
+    let paidFeeLastMonths=Moment(this.state.paid_upto_month).format("M");
+    const newFormMonths=Moment(currentDate).format("M");
+    let duesMonthForPay = ""
+    // if(this.state.fromtomonths.length>0)
+    // {
+    //   this.setState({
+    //     delayFineFee: parseInt(newFormMonths-paidFeeLastMonths )* 30
+    //   })
+    // }
+    // else{
+      console.log(this.state.manualFineState,"check manual fine fee")
+      if(this.state.manualFineState)
+      {
+        this.setState({
+          delayFineFee:this.state.manualFine,
+        })
+      }
+      else{
+        const priviousPaidDate = this.state.paid_upto_month
+        const PriviousDateParts = priviousPaidDate.split("-");
+        const PriviousMonth = PriviousDateParts[1];
+        const PriviousYear = PriviousDateParts[0];
+        const receiptDate = this.state.receipt_date;
+        const day = receiptDate.split("-")[2];
+        const month = receiptDate.split("-")[1];
+        const year = receiptDate.split("-")[0];
+        let totalFineFinaly=0;
+        if (year == PriviousYear && month > PriviousMonth) {
+          if (day > 15) {
+            console.log("check insede get Fine Fee")
+            duesMonthForPay = (month - PriviousMonth)
+            for(let i=1; i<=duesMonthForPay; i++)
+            {
+              totalFineFinaly=(i*30)+totalFineFinaly;
+            }
+          }
+          else {
+            console.log("check insede else part get Fine Fee")
+            duesMonthForPay = (month - PriviousMonth) - 1
+            for(let i=1; i<=duesMonthForPay; i++)
+            {
+              totalFineFinaly=(i*30)+totalFineFinaly;
+            }
+          }
+        }
+        this.setState({
+          delayFineFee: totalFineFinaly
+        })
+      }
+    // }
+  }
   // getFeeReceipt = () => {
   //     fetch("http://144.91.110.221:4800/getFeeReceipt")
   //         .then(res => res.json())
@@ -532,8 +634,29 @@ class FeeReceipt extends React.Component {
   //         })
   //         .then(err => console.log(err))
   // }
+  getGrandTotal = () => {
+    if(this.state.manualTutionFeeState)
+    {
+      let lastDate=this.state.last_receipt_submission_month;
+      let currentDate=this.state.receipt_date;
+      let newFormMonths=Moment(currentDate).format("MM");
+      let newFormDate=Moment(currentDate).format("DD")
+      let tutionFee=this.state.StudentTutionFee
+      this.state.totalNewPaybleMonth=Number(newFormMonths)-Number(lastDate)
+        return ((tutionFee*this.state.totalNewPaybleMonth) + (this.state.delayFineFee ? Number(this.state.delayFineFee) : 0) + (this.state.showTotalAnnualFee && this.state.admission_no ? this.state.annual_fee : 0) + (this.state.TakeOneTimeFee ? this.state.one_time_fees : 0) + (this.state.AllDueFees ? this.state.AllDueFees : 0))
+  }
+    else{ 
+      let currentDate=new Date();
+      let paidFeeLastMonths=Moment(this.state.paid_upto_month).format("M");
+      const newFormMonths=Moment(currentDate).format("M");
+      return (this.state.Allfees && this.state.Allfees.length > 0 ? this.state.Allfees.find((item) => item.fee_category === "MONTHLY" && item.fee_sub_category === 'TUITION FEE') ? parseInt(this.state.admission_no && this.state.AllDueFees > 0 ?  0 : this.state.admission_no ? this.state.StudentTutionFee : 0) *
+        parseInt(Number(newFormMonths)-Number(paidFeeLastMonths))
+        : (this.state.admission_no ? this.state.StudentTutionFee : 0)
+        :
+        0) + (this.state.delayFineFee ? Number(this.state.delayFineFee) : 0) + (this.state.showTotalAnnualFee && this.state.admission_no ? this.state.annual_fee : 0) + (this.state.TakeOneTimeFee ? this.state.one_time_fees : 0) + (this.state.AllDueFees ? this.state.AllDueFees : 0);
+    }
+  };
   getCertificateDetails = async () => {
-    await console.log("wait wait");
     fetch("http://144.91.110.221:4800/getTransferCertificate", {
       method: "POST",
       headers: {
@@ -546,7 +669,6 @@ class FeeReceipt extends React.Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         this.setState({
           left_on: data.left_on,
           date_of_tc: data.date_of_tc,
@@ -560,7 +682,6 @@ class FeeReceipt extends React.Component {
   };
   getFeeReceipt = (class_names, sections) => {
     var fetchPromise = "";
-    console.log("checking response FeesClasswise");
     // const currentMonth =  Moment().format('MM')
     fetchPromise = fetch("http://144.91.110.221:4800/getFeeReceipt", {
       method: "POST",
@@ -574,9 +695,7 @@ class FeeReceipt extends React.Component {
     })
       .then((data) => data.json())
       .then(async (data) => {
-        await console.log("Class Wise" + data);
         this.set_receipt_no(data);
-        await console.log("Class Wise" + data);
       });
     // alert(val)
     if (fetchPromise != "") {
@@ -584,20 +703,28 @@ class FeeReceipt extends React.Component {
     }
   };
   set_receipt_no = (data) => {
-    if (data != "") {
-      console.log("receiptno " + data.receipt_no);
-      var receipt_no = parseInt(data.receipt_no) + 1;
-      this.setState({ receipt_no: receipt_no });
+    if (data && data.receipt_no !== undefined) {
+      let formattedReceiptNo;
+
+      // Check if the received receipt_no starts with "PRE" or "SEC"
+      if (data.receipt_no.startsWith("PRE")) {
+        formattedReceiptNo = data.receipt_no;
+      } else if (data.receipt_no.startsWith("SEC")) {
+        formattedReceiptNo = data.receipt_no;
+      } else {
+        // Default to "PRE" format if it doesn't start with "PRE" or "SEC"
+        formattedReceiptNo = "PRE" + data.receipt_no.padStart(3, '0');
+      }
+
+      this.setState({ receipt_no: formattedReceiptNo });
     } else {
-      this.setState({ receipt_no: "1" });
+      this.setState({ receipt_no: "PRE001" });
     }
-    return true;
   };
+
 
   SearchOldfee = async () => {
     this.setState({ AllOldFees: [] });
-    console.log("checking response SearchOldfee");
-    await console.log("wait wait");
     const admission_no = this.state.admission_no.toUpperCase();
     fetch("http://144.91.110.221:4800/SearchOldfee", {
       method: "POST",
@@ -611,29 +738,38 @@ class FeeReceipt extends React.Component {
     })
       .then((data) => data.json())
       .then(async (data) => {
-        console.log("single parent" + data);
         if (data[0] != undefined) {
           var A = Moment(data[data.length - 1].last_fee_date);
           var aa = this.state.session.split("-")[0];
           var B = Moment(aa + "-04-01");
+          this.state.last_receipt_submission_month=Moment(data[data.length-1].receipt_date).format("MM");
           var last_date;
           // alert(Moment(data[data.length-1].last_fee_date).format("YYYY-MM-DD"))
+          data.map((item)=>{
+              previousmonthlyamount =  parseInt(previousmonthlyamount)+parseInt(item.total_monthly_fee);
+              previousannualamount  =  parseInt(previousannualamount)+(parseInt(item.total_annual_fee)>0?parseInt(item.total_annual_fee):0);
+              previousfine =parseInt(previousfine)+(parseInt(item.fine) > 0 ? parseInt(item.fine) : 0);
+              previouspaidamount = parseInt(previouspaidamount) + (parseInt(item.paid_amount) > 0 ? parseInt(item.paid_amount) : 0);
+          })
           if (parseInt(A.diff(B, "days")) < 0) {
             last_date = aa + "-03-31";
             await this.GetDefaulterMoneySingleStudent();
             await this.setState({
               AllOldFees: data,
               last_session: data[data.length - 1].session,
-              last_fees_date: last_date,
+              last_fee_date: data.last_fee_date,
+              previousPaidFine : data[data.length - 1].paid_fine,
+              AllDueFees:data[data.length - 1].grand_total-data[data.length - 1].paid_amount
             });
+
           } else {
             last_date = data[data.length - 1].last_fee_date;
-
             this.setState({
               AllOldFees: data,
               last_session: data[data.length - 1].session,
-              last_fees_date: last_date,
+              last_fee_date: data.last_fee_date,
               balance: data[data.length - 1].balance,
+              AllDueFees:data[data.length - 1].grand_total-data[data.length - 1].paid_amount
             });
 
             if (parseInt(data[data.length - 1].balance) > 0) {
@@ -644,13 +780,13 @@ class FeeReceipt extends React.Component {
           }
         } else {
           if (this.state.AllStudent[0] != undefined) {
-            console.log(" PAID UPTO MONTH state " + this.state.paid_upto_month);
-            await this.setState({
-              last_fees_date: this.state.paid_upto_month,
+            this.setState({
+              last_fee_date: this.state.last_fee_date,
               last_session: this.state.studentSession,
+              date_of_admission: this.state.date_of_admission,
               last_fee_status: false,
             });
-            //    await this.setBalance()
+            //  await this.setBalance()
           }
         }
       })
@@ -684,10 +820,9 @@ class FeeReceipt extends React.Component {
     }
   };
   FeesClasswise = (class_names, sections) => {
-    console.log("checking response FeesClasswise");
     const currentMonth = Moment().format("MM");
-    // fetch("http://144.91.110.221:4800/FeesClasswise", {
-        fetch("http://localhost:4800/FeesClasswise", {
+    fetch("http://144.91.110.221:4800/FeesClasswise", {
+      // fetch("http://144.91.110.221:4800/FeesClasswise", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -701,7 +836,7 @@ class FeeReceipt extends React.Component {
     })
       .then((data) => data.json())
       .then(async (data) => {
-        await console.log("response of Class Wise" + data);
+        console.log("inside the fees class wise ",data)
         if (data[0] != undefined) {
           this.setState({
             Allfees: JSON.parse(data[0].fees),
@@ -715,19 +850,18 @@ class FeeReceipt extends React.Component {
           });
           await this.SearchOldfee();
         }
-      });
+      }).catch((error) => {
+      })
   };
   setBalance = async () => {
-    await console.log("wait");
     if (
       this.state.is_full_free_ship == "false" ||
-      this.state.is_full_free_ship == ""
+      this.state.is_full_free_ship == ""  ||
+      this.state.is_full_free_ship == undefined
     ) {
       if (this.state.last_fees_date == "") {
         this.searchByAdmission_no();
       }
-      console.log("checking response setBalance");
-      await console.log("wait");
       // alert(this.state.paid_amount)
       var calculateOneTimeFee = 0;
       var grand_total = 0;
@@ -744,14 +878,13 @@ class FeeReceipt extends React.Component {
               this.setState({
                 StudentTutionFee:
                   parseInt(item.amount) -
-                  (parseInt(item.amount) *
-                    parseInt(this.state.fee_concession)) /
-                    100,
+                    (this.state.fee_concession.includes("%")? parseInt(item.amount) * parseInt(this.state.fee_concession)/100 : 
+                    parseInt(this.state.fee_concession))
               });
               monthlytotal =
-                parseInt(item.amount) -
-                (parseInt(item.amount) * parseInt(this.state.fee_concession)) /
-                  100;
+              parseInt(item.amount) -
+              (this.state.fee_concession.includes("%")? parseInt(item.amount) * parseInt(this.state.fee_concession)/100 : 
+              parseInt(this.state.fee_concession))
             } else {
               this.setState({ StudentTutionFee: item.amount });
               monthlytotal = item.amount;
@@ -815,10 +948,8 @@ class FeeReceipt extends React.Component {
       var show_annual_fees = 0;
       var total_monthly_fee = 0;
       if (this.state.paid_amount == "0") {
-        await console.log("wair");
         var dateStart = Moment(this.state.last_fees_date).add(1, "month");
         var dateEnd = Moment(this.state.receipt_date);
-
         if (
           dateEnd.isAfter(dateStart, "days") ||
           dateStart.format("M") === dateEnd.format("M")
@@ -847,7 +978,6 @@ class FeeReceipt extends React.Component {
           // alert("doe")
           this.setOneTimeFeeForExtraAmontInMarchMonth();
         }
-        await console.log("month set");
       } else {
         var EndDate = Moment(this.state.last_fees_date);
         if (
@@ -874,18 +1004,21 @@ class FeeReceipt extends React.Component {
               parseInt(this.state.paid_amount) + parseInt(this.state.balance),
             one_time: 0,
           });
-          this.setState({
-            fromtomonths: fromtomonths,
-            fine: 0,
-            remaning_balance:
-              parseInt(this.state.paid_amount) + parseInt(this.state.balance),
-            annual_fee: parseInt(this.state.paid_amount),
-            one_time_fees: 0,
-            total_monthly_fee: 0,
-            grand_total:
-              parseInt(this.state.paid_amount) + parseInt(this.state.balance),
-            last_fee_date: this.state.last_fees_date,
-          });
+          this.setState(
+            {
+              fromtomonths: fromtomonths,
+              fine: 0,
+              remaning_balance:
+                parseInt(this.state.paid_amount) + parseInt(this.state.balance),
+              annual_fee: parseInt(this.state.paid_amount),
+              one_time_fees: 0,
+              total_monthly_fee: 0,
+              grand_total:
+                parseInt(this.state.paid_amount) + parseInt(this.state.balance),
+              last_fee_date: this.state.last_fees_date,
+            }
+          );
+          
         } else {
           // this code for set All fees not paid to set 0
           {
@@ -934,6 +1067,7 @@ class FeeReceipt extends React.Component {
               LastPaidDate.add(1, "month");
               monthlyfee = monthlytotal;
             }
+
             remainbalance = paidAmount - parseInt(monthlyfee);
             months.push(LastPaidDate.format("YYYY-MM-DD"));
             fromtomonths.push(LastPaidDate.format("M"));
@@ -941,6 +1075,7 @@ class FeeReceipt extends React.Component {
             shortmonths.push(LastPaidDate.format("M"));
             var last_fee_date = lastmonth[months.length - 1];
             {
+
               this.setState({
                 remaning_balance: remainbalance,
                 months: shortmonths,
@@ -1094,159 +1229,175 @@ class FeeReceipt extends React.Component {
           feemonths: months,
           fromtomonths: fromtomonths,
           last_fee_date: last_fee_date,
+        },
+        ()=>{
+          this.getFineFee();
         });
       }
       // alert(last_fee_date)
       // }
-      await console.log("short Monts" + shortmonths);
-      shortmonths.map((i, ind) => {
-        var annual_fees = 0;
-        var one_time_fees = 0;
-        this.state.Allfees.map((item, index) => {
-          if (item.fee_category == "ANNUAL") {
-            if (i == item.month) {
-              if (item.fee_sub_category.includes("COMPUTER") != true) {
-                annual_fees = annual_fees + parseInt(item.amount);
-              } else {
-                if (this.state.take_computer == "true") {
-                  annual_fees = annual_fees + parseInt(item.amount);
-                }
-              }
-            } else if (item.month == "") {
-              if (item.fee_sub_category.includes("COMPUTER") != true) {
-                if (parseInt(item.amount) > 0) {
-                  annual_fees = annual_fees + parseInt(item.amount);
-                } else {
-                  annual_fees = annual_fees + parseInt(item.amount);
-                }
-              } else {
-                if (this.state.take_computer == "true") {
-                  if (parseInt(item.amount) > 0) {
-                    annual_fees = annual_fees + parseInt(item.amount);
-                  } else {
-                    annual_fees = annual_fees + parseInt(item.amount);
-                  }
-                }
-              }
-            } else {
-              annual_fees = annual_fees + 0;
-            }
-          }
-        });
-        // alert(annual_fees)
-        show_annual_fees = show_annual_fees + annual_fees;
-        if (this.state.TakeOneTimeFee == true) {
-          if (getOneTimeFees == true) {
-            this.state.Allfees.map((item, index) => {
-              if (item.fee_category == "ONE TIME") {
-                one_time_fees = one_time_fees + parseInt(item.amount);
-                plus_one_time_fees = parseInt(one_time_fees);
-              }
-              getOneTimeFees = false;
-            });
-          }
-        }
+      // comment Deepak
 
-        this.state.Allfees.map((item, index) => {
-          if (item.fee_category == "MONTHLY") {
-            // if(this.state.is_teacher_ward=="false"){
-            if (item.fee_sub_category == "TUITION FEE") {
-              if (
-                parseInt(this.state.fee_concession) > 0 &&
-                this.state.fee_concession != ""
-              ) {
-                total_monthly_fee =
-                  total_monthly_fee +
-                  (parseInt(item.amount) *
-                    parseInt(this.state.fee_concession)) /
-                    100;
-              } else {
-                total_monthly_fee = total_monthly_fee + parseInt(item.amount);
-              }
-              if (parseInt(this.state.fee_concession) == 100) {
-                total_monthly_fee = 0;
-              }
-            } else {
-              total_monthly_fee = total_monthly_fee + parseInt(item.amount);
-            }
-            // }
-          }
-        });
-        if (this.state.is_teacher_ward == "false") {
-          if (
-            fromtomonths.length - 1 > 1 ||
-            parseInt(Moment(this.state.receipt_date).format("D")) >
-              parseInt(this.state.fine_date)
-          ) {
-            var finemonthscount;
-            finemonthscount = fromtomonths.length - 1;
-            finemonths = finemonthscount * parseInt(this.state.defaultFine);
+
+      // shortmonths.map((i, ind) => {
+      //   var annual_fees = 0;
+      //   var one_time_fees = 0;
+      //   this.state.Allfees.map((item, index) => {
+      //     console.log( this.state.Allfees,"inside the all fees to check the feeeeeeeeeeeeeeeeeee")
+      //     const newItem=item.filter((ele)=>{
+      //         return ele.fee_category=="ANNUAL"
+      //     })
+      //     console.log(newItem,"check the newItem Annual")
+      //     if (item.fee_category == "ANNUAL") {
+      //       if (i == item.month) {
+      //         if (item.fee_sub_category.includes("COMPUTER") != true) {
+      //           console.log(item.amount,"check amounttttttttttt")
+      //           annual_fees = annual_fees + parseInt(item.amount);
+      //         } else {
+      //           if (this.state.take_computer == "true") {
+      //             annual_fees = annual_fees + parseInt(item.amount);
+      //           }
+      //         }
+      //       } else if (item.month == "") {
+      //         if (item.fee_sub_category.includes("COMPUTER") != true) {
+      //           if (parseInt(item.amount) > 0) {
+      //             annual_fees = annual_fees + parseInt(item.amount);
+      //           } else {
+      //             annual_fees = annual_fees + parseInt(item.amount);
+      //           }
+      //         } else {
+      //           if (this.state.take_computer == "true") {
+      //             if (parseInt(item.amount) > 0) {
+      //               annual_fees = annual_fees + parseInt(item.amount);
+      //             } else {
+      //               annual_fees = annual_fees + parseInt(item.amount);
+      //             }
+      //           }
+      //         }
+      //       } else {
+      //         annual_fees = annual_fees + 0;
+      //       }
+      //     }
+      //   });
+      //   // alert(annual_fees)
+      //   console.log(annual_fees,"check after after after")
+      //   show_annual_fees = show_annual_fees + annual_fees;
+      //   if (this.state.TakeOneTimeFee == true) {
+      //     if (getOneTimeFees == true) {
+      //       this.state.Allfees.map((item, index) => {
+      //         if (item.fee_category == "ONE TIME") {
+      //           one_time_fees = one_time_fees + parseInt(item.amount);
+      //           plus_one_time_fees = parseInt(one_time_fees);
+      //         }
+      //         getOneTimeFees = false;
+      //       });
+      //     }
+      //   }
+
+      this.state.Allfees.map((item, index) => {
+        if (item.fee_category == "MONTHLY") {
+          // if(this.state.is_teacher_ward=="false"){
+          if (item.fee_sub_category == "TUITION FEE") {
             if (
-              parseInt(Moment(this.state.receipt_date).format("D")) >
-              parseInt(this.state.fine_date)
+              parseInt(this.state.fee_concession) > 0 &&
+              this.state.fee_concession != ""
             ) {
-              finemonths = finemonths + parseInt(this.state.defaultFine);
+              this.setState({
+                total_monthly_fee: this.state.StudentTutionFee
+              })
+
+            } else {
+              this.setState({
+                total_monthly_fee: this.state.StudentTutionFee
+              })
             }
-          }
-          if (this.state.manualFineState == "false") {
-            this.setState({ fine: finemonths });
+            if (parseInt(this.state.fee_concession) == 100) {
+              total_monthly_fee = 0;
+              this.setState({
+                total_monthly_fee: 0
+              })
+            }
           } else {
-            this.setState({ fine: this.state.manualFine });
+            this.setState({
+              total_monthly_fee: this.state.StudentTutionFee
+            })
           }
+          // }
         }
-        paidFees.push({
-          tuition_fee: this.state.StudentTutionFee,
-          fee_month: i,
-          annual_fees: annual_fees,
-          one_time: one_time_fees,
-        });
-        if (getgrandtotal == true) {
-          grand_total =
-            grand_total +
-            monthlytotal +
-            annual_fees +
-            plus_one_time_fees +
-            parseInt(this.state.fine);
-          getgrandtotal = false;
-        } else {
-          grand_total = grand_total + monthlytotal + annual_fees;
-        }
-        remainbalance =
-          parseInt(this.state.paid_amount) +
-          parseInt(this.state.surplus) +
-          parseInt(this.state.due) -
-          grand_total;
-        {
-          this.setState({
-            total_monthly_fee: total_monthly_fee,
-            grand_total: grand_total,
-            paidFees: paidFees,
-            remaning_balance: remainbalance,
-            one_time_fees: plus_one_time_fees,
-            annual_fee: show_annual_fees,
-          });
-        }
-        console.log("paid Fees" + JSON.stringify(paidFees));
       });
+      //   if (this.state.is_teacher_ward == "false") {
+      //     if (
+      //       fromtomonths.length - 1 > 1 ||
+      //       parseInt(Moment(this.state.receipt_date).format("D")) >
+      //         parseInt(this.state.fine_date)
+      //     ) {
+      //       var finemonthscount;
+      //       finemonthscount = fromtomonths.length - 1;
+      //       finemonths = finemonthscount * parseInt(this.state.defaultFine);
+      //       if (
+      //         parseInt(Moment(this.state.receipt_date).format("D")) >
+      //         parseInt(this.state.fine_date)
+      //       ) {
+      //         finemonths = finemonths + parseInt(this.state.defaultFine);
+      //       }
+      //     }
+      //     if (this.state.manualFineState == "false") {
+      //       this.setState({ fine: finemonths });
+      //     } else {
+      //       this.setState({ fine: this.state.manualFine });
+      //     }
+      //   }
+      //   paidFees.push({
+      //     tuition_fee: this.state.StudentTutionFee,
+      //     fee_month: i,
+      //     annual_fees: annual_fees,
+      //     one_time: one_time_fees,
+      //   });
+      //   if (getgrandtotal == true) {
+      //     grand_total =
+      //       grand_total +
+      //       monthlytotal +
+      //       annual_fees +
+      //       plus_one_time_fees +
+      //       parseInt(this.state.fine);
+      //     getgrandtotal = false;
+      //   } else {
+      //     grand_total = grand_total + monthlytotal + annual_fees;
+      //   }
+      //   remainbalance =
+      //     parseInt(this.state.paid_amount) +
+      //     parseInt(this.state.surplus) +
+      //     parseInt(this.state.due) -
+      //     grand_total;
+      //   {
+      //     this.setState({
+      //       total_monthly_fee: total_monthly_fee,
+      //       grand_total: grand_total,
+      //       paidFees: paidFees,
+      //       remaning_balance: remainbalance,
+      //       one_time_fees: plus_one_time_fees,
+      //       annual_fee: show_annual_fees,
+      //     });
+      //   }
+      // });
     }
     // else{
     //     {this.setState({total_monthly_fee:0,grand_total:0,paidFees:0,remaning_balance:0,one_time_fees:0,annual_fee:0})}
     // }
     // this.FeesClasswise(this.state.class_name,this.state.section)
-    await console.log("wait");
     if (
       parseInt(total_monthly_fee) +
-        show_annual_fees +
-        plus_one_time_fees +
-        parseInt(this.state.fine) -
-        parseInt(this.state.due) -
-        parseInt(this.state.surplus) ==
-        parseInt(this.state.remaning_balance) * -1 &&
+      show_annual_fees +
+      plus_one_time_fees +
+      parseInt(this.state.fine) -
+      parseInt(this.state.due) -
+      parseInt(this.state.surplus) ==
+      parseInt(this.state.remaning_balance) * -1 &&
       parseInt(total_monthly_fee) +
-        show_annual_fees +
-        plus_one_time_fees +
-        parseInt(this.state.fine) !=
-        "0"
+      show_annual_fees +
+      plus_one_time_fees +
+      parseInt(this.state.fine) !=
+      "0"
     ) {
       this.setState({
         paid_amount: parseInt(this.state.remaning_balance) * -1,
@@ -1264,6 +1415,7 @@ class FeeReceipt extends React.Component {
       this.searchByAdmission_no();
     }
   };
+
   SetAddOrSubFee = (index, a) => {
     this.state.Allfees[index].amount = a;
     this.setState({ fees: this.state.Allfees });
@@ -1293,54 +1445,111 @@ class FeeReceipt extends React.Component {
 
     // alert(fee_date.format("YYYY-MM-DD"))
   };
-  grand_total = () => {
-    //    let grand_total = parseInt(this.state.tution_fee)+parseInt(this.state.science_fee)+parseInt(this.state.bus_fare)
-    const paidFees = [];
-    let grand_total = 0;
-    if (this.state.TakeOneTimeFee == true) {
-      this.state.fees.map((item, index) => {
-        if (item.fee_category == "ONE TIME") {
-          grand_total = parseInt(item.amount) + grand_total;
-          paidFees.push({
-            fee_category: item.fee_category,
-            fee_sub_category: item.fee_sub_category,
-            amount: item.amount,
-          });
-        }
-      });
-    }
-    this.state.fees.map((item, index) => {
-      if (
-        item.fee_category == "ANNUAL" &&
-        this.state.months.includes(item.month)
-      ) {
-        grand_total = parseInt(item.amount) + grand_total;
-        paidFees.push({
-          fee_category: item.fee_category,
-          fee_sub_category: item.fee_sub_category,
-          amount: item.amount,
-          month: item.month,
-        });
-      }
-    });
-    this.state.fees.map((item, index) => {
-      if (item.fee_category == "MONTHLY") {
-        grand_total = parseInt(item.amount) + grand_total;
-        paidFees.push({
-          fee_category: item.fee_category,
-          fee_sub_category: item.fee_sub_category,
-          amount: item.amount,
-        });
-      }
-    });
-    this.setState({ grand_total: grand_total, paidFees: paidFees });
-  };
+  // grand_total = () => {
+  //   console.log(this.state.StudentTutionFee,"check the StudentTutionFee")
+  //    let grand_total = parseInt(this.state.tution_fee)+parseInt(this.state.science_fee)+parseInt(this.state.bus_fare)
+  // const paidFees = [];
+  // let grand_total = 0;
+  // if (this.state.TakeOneTimeFee == true) {
+  //   this.state.fees.map((item, index) => {
+  //     if (item.fee_category == "ONE TIME") {
+  //       grand_total = parseInt(item.amount) + grand_total;
+  //       paidFees.push({
+  //         fee_category: item.fee_category,
+  //         fee_sub_category: item.fee_sub_category,
+  //         amount: item.amount,
+  //       });
+  //     }
+  //   });
+  // }
+  // this.state.fees.map((item, index) => {
+  //   if (
+  //     item.fee_category == "ANNUAL" &&
+  //     this.state.months.includes(item.month)
+  //   ) {
+  //     grand_total = parseInt(item.amount) + grand_total;
+  //     paidFees.push({
+  //       fee_category: item.fee_category,
+  //       fee_sub_category: item.fee_sub_category,
+  //       amount: item.amount,
+  //       month: item.month,
+  //     });
+  //   }
+  // });
+  // this.state.fees.map((item, index) => {
+  //   if (item.fee_category == "MONTHLY") {
+  //     grand_total = parseInt(item.amount) + grand_total;
+  //     paidFees.push({
+  //       fee_category: item.fee_category,
+  //       fee_sub_category: item.fee_sub_category,
+  //       amount: item.amount,
+  //     });
+  //   }
+  // });
+  // this.setState({ grand_total: grand_total, paidFees: paidFees });
+  // };
   searchByAdmission = (admsn_no) => {
     {
       this.setState({ admission_no: admsn_no });
     }
     this.searchByAdmission_no();
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    // Check if the state or props that you depend on have changed
+    if (
+      prevProps.shortmonths !== this.props.shortmonths ||
+      prevState.Allfees !== this.state.Allfees
+    ) {
+      const AnnualFees = this.state.Allfees.filter((ele) => {
+        return ele.fee_category === "ANNUAL";
+      });
+
+      let annualFee = 0;
+      AnnualFees.forEach((item) => {
+        annualFee = Number(annualFee) + Number(item.amount);
+      });
+
+      // Total One Time fee for every class
+      const OneTimeFee = this.state.Allfees.filter((ele) => {
+        return ele.fee_category === "ONE TIME";
+      });
+
+      let oneTimeFee = 0;
+      OneTimeFee.forEach((item) => {
+        oneTimeFee = Number(oneTimeFee) + Number(item.amount);
+      });
+
+      this.setState({
+        one_time_fees: oneTimeFee,
+        annual_fee: annualFee,
+        // grand_total:oneTimeFee+annualFee+this.state.StudentTutionFee*this.state.fromtomonths.length
+      },
+      );
+    }
+  }
+  closeAnnualFeeModal = () => {
+    this.setState({
+      showTotalAnnualFee: false
+    })
+  }
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.showTotalAnnualFee !== this.state.showTotalAnnualFee) {
+  //     console.log('showTotalAnnualFee changed:', this.state.showTotalAnnualFee);
+  //     if (this.state.showTotalAnnualFee) {
+  //       console.log('Logging tution fee and annual_fee:', this.state.annual_fee);
+  //     }
+  //   }
+
+  //   if (prevState.StudentTutionFee !== this.state.StudentTutionFee && this.state.fromtomonths.length>0) {
+  //     console.log('StudentTutionFee changed:', this.state.StudentTutionFee);
+  //     console.log('Logging tution fee StudentTutionFee and fromtomonths.length:', this.state.fromtomonths.length);
+  //   }
+  // }
+
+
+
 
   // show modal call if its need from Fee Detail Button
 
@@ -1371,7 +1580,6 @@ class FeeReceipt extends React.Component {
   //     })
   // }
   ShowModal = async (data) => {
-    await console.log("wait");
     localStorage.setItem("StudentDisplay", data);
     this.setState({ redirect: true });
     // if(admission_no =='0'){
@@ -1423,14 +1631,11 @@ class FeeReceipt extends React.Component {
     }
   };
   submitReceiptData = async () => {
-    // alert(this.state.receipt_no)
     if (
       this.state.session == this.state.last_session ||
       this.state.fromtomonths[this.state.fromtomonths.length - 1] != 3 ||
       this.state.fromtomonths[0] == 4
     ) {
-      // console.log("wait")
-      // console.log(JSON.stringify(this.state.Allfees))
       if (this.checkValidation()) {
         if (submitonce == 0) {
           submitonce = 1;
@@ -1472,16 +1677,19 @@ class FeeReceipt extends React.Component {
           data.append("fees", JSON.stringify(this.state.Actualfees));
           data.append("paid_months", JSON.stringify(this.state.months));
           data.append("paid_amount", this.state.paid_amount);
-          data.append("fine", this.state.fine);
+          data.append("fine", this.state.delayFineFee);
+          data.append("paid_fine", this.state.manualFine>0?this.state.manualFine:0)
+          data.append("dues_fine",(this.state.delayFineFee-this.state.manualFine))
+          data.append("dues_fee",this.getDuesFee())
           data.append("balance", this.state.remaning_balance);
           data.append(
             "paid_month",
             this.state.fromtomonths[this.state.fromtomonths.length - 1]
           );
-          data.append("total_annual_fee", this.state.annual_fee);
+          data.append("total_annual_fee", this.state.showTotalAnnualFee?this.state.annual_fee:0);
           data.append("total_one_time_fee", this.state.one_time_fees);
           data.append("total_monthly_fee", this.state.total_monthly_fee);
-          data.append("grand_total", this.state.grand_total);
+          data.append("grand_total", this.getGrandTotal());
           data.append("payment_mode", this.state.payment_mode);
           data.append("bank", this.state.bank);
           data.append("bank_v_no", this.state.bank_v_no);
@@ -1493,7 +1701,7 @@ class FeeReceipt extends React.Component {
             body: data,
           })
             .then((res) => res.json())
-            .then(() => {
+            .then((data) => {
               this.UpdateBalance();
             })
             .then((data) => {
@@ -1573,7 +1781,7 @@ class FeeReceipt extends React.Component {
                 misc_details: "",
 
                 fine: "",
-
+                manualFine: "",
                 last_fee_status: true,
                 last_fee_date: null,
                 last_fees_date: "",
@@ -1623,7 +1831,7 @@ class FeeReceipt extends React.Component {
                 registration_fee: "0",
                 admission_fee: "0",
                 security_fee: "0",
-                TakeOneTimeFee: false,
+                // TakeOneTimeFee: false,
                 TakeAnnualFee: false,
                 TakeHalfYearlyFee: false,
                 description: "",
@@ -1662,17 +1870,26 @@ class FeeReceipt extends React.Component {
               this.getFeeReceipt();
               $("#admissionno").focus();
             })
-            .then((err) => {});
+            .then((err) => { });
         }
       }
     } else {
       window.confirm(
         "Student Previous Session (" +
-          this.state.last_session +
-          ") Fee is not paid! Please First Pay Previous Session Fee"
+        this.state.last_session +
+        ") Fee is not paid! Please First Pay Previous Session Fee"
       );
     }
   };
+
+  getDuesFee = ()=>{
+    let lastDate=Moment(this.state.last_fee_date).format("DDMMYYY");
+    let currentDate=this.state.receipt_date;
+    let newFormMonths=Moment(currentDate).format("MM");
+    console.log(newFormMonths,"checkckckckckckckckckckck",lastDate)
+     console.log(parseInt(((this.state.StudentTutionFee)*(newFormMonths-lastDate))-this.state.paid_amount))
+  }
+
   UpdateBalance = () => {
     if (this.checkValidation()) {
       const data = new FormData();
@@ -1685,7 +1902,8 @@ class FeeReceipt extends React.Component {
         body: data,
       })
         .then((res) => res.json())
-        .then((res) => {})
+        .then((res) => {
+        })
         .then((err) => console.log(err));
     }
   };
@@ -1882,7 +2100,7 @@ class FeeReceipt extends React.Component {
       },
       body: JSON.stringify({
         session: this.state.session,
-        school_id: "100",
+        school_id: "UT015",
       }),
     })
       .then((res) => res.json())
@@ -1892,10 +2110,16 @@ class FeeReceipt extends React.Component {
       })
       .then((err) => console.log(err));
   };
+
+  getAnnualFeeAmount = () => {
+    this.setState({
+      showTotalAnnualFee: true,
+    })
+  }
   // End GetAllStudentCount Api
 
   // End StudentCount Api
-  render() { 
+  render() {
     //commented by sandeep on 4 sept
     // $("#recpddate").on("click", function () {
     //   localStorage.setItem("R_date", Moment().format("YYYY-MM-DD"));
@@ -1916,24 +2140,22 @@ class FeeReceipt extends React.Component {
     }
     window.addEventListener("keyup", (event) => {
       if (event.keyCode == 120) {
-        console.log("F9 Pressed");
         this.submitReceiptData();
       }
     });
-
     const data = [];
     {
       this.state.ModalAllStudent.map((item, index) => {
         data.push({
-          admission_no: item.admission_no,
-          account_no: item.account_no,
-          student_name: item.student.name,
-          class_section: item.class_name + "-" + item.section,
+          admission_no: item?.admission_no,
+          account_no: item?.account_no,
+          student_name: item?.student?.name,
+          class_section: item?.class_name + "-" + item?.section,
           parent_name:
-            item.student.mother_name + "/" + item.student.father_name,
-          gaurdian_name: item.gaurdian_name,
-          mobile: item.student.parent_mobile + "," + item.student.parent_phone,
-          address: item.parent_address,
+            item?.student?.mother_name + "/" + item?.student?.father_name,
+          gaurdian_name: item?.gaurdian_name,
+          mobile: item?.student?.parent_mobile + "," + item?.student?.parent_phone,
+          address: item?.parent_address,
           action: (
             <button
               type="button"
@@ -1983,7 +2205,6 @@ class FeeReceipt extends React.Component {
 
     countAdmission_no = "";
 
-    
     return (
       <>
         {/* Confirmation Modal */}
@@ -2365,7 +2586,7 @@ class FeeReceipt extends React.Component {
                 <div className="row">
                   <div className="col-12 text-center pb-3">
                     <h3 className="m-0">
-                      ST. JUDES'S SCHOOL ({" "}
+                      CONSTANCIA SCHOOL ({" "}
                       <select
                         value={this.state.session}
                         className="receiptSession"
@@ -2411,7 +2632,7 @@ class FeeReceipt extends React.Component {
                                     <p>0135-2640930,0135-2642828,FAX:0135-2644353</p> */}
                   </div>
                   <div className="col-5">
-                    <strong>Admn No - </strong> 
+                    <strong>Admn No - </strong>
                     <input
                       id="FeeDetailAdmnNo"
                       value={this.state.admission_no}
@@ -2513,8 +2734,11 @@ class FeeReceipt extends React.Component {
                       <th scope="col">ANNUAL</th>
                       <th scope="col">MONTHLY</th>
                       <th scope="col">FINE</th>
-                      <th scope="col">PAID</th>
-                      <th scope="col">DUES</th>
+                      <th scope="col">PAID FINE</th>
+                      <th scope="col">PAID FEE</th>
+                      <th scope="col">DUES FINE</th>
+                      <th scope="col">DUES FEE</th>
+                      <th scope="col">TOTAL DUES</th>
                       <th scope="col">SURPLUS</th>
                       <th scope="col">ACTION</th>
                     </tr>
@@ -2535,75 +2759,81 @@ class FeeReceipt extends React.Component {
                             <td>
                               {item.paid_month == "1"
                                 ? "Jan" +
-                                  "-" +
-                                  Moment(item.last_fee_date).format("YYYY")
+                                "-" +
+                                Moment(item.last_fee_date).format("YYYY")
                                 : item.paid_month == "2"
-                                ? "Feb" +
+                                  ? "Feb" +
                                   "-" +
                                   Moment(item.last_fee_date).format("YYYY")
-                                : item.paid_month == "3"
-                                ? "Mar" +
-                                  "-" +
-                                  Moment(item.last_fee_date).format("YYYY")
-                                : item.paid_month == "4"
-                                ? "Apr" +
-                                  "-" +
-                                  Moment(item.last_fee_date).format("YYYY")
-                                : item.paid_month == "5"
-                                ? "May" +
-                                  "-" +
-                                  Moment(item.last_fee_date).format("YYYY")
-                                : item.paid_month == "6"
-                                ? "Jun" +
-                                  "-" +
-                                  Moment(item.last_fee_date).format("YYYY")
-                                : item.paid_month == "7"
-                                ? "July" +
-                                  "-" +
-                                  Moment(item.last_fee_date).format("YYYY")
-                                : item.paid_month == "8"
-                                ? "Aug" +
-                                  "-" +
-                                  Moment(item.last_fee_date).format("YYYY")
-                                : item.paid_month == "9"
-                                ? "Sept" +
-                                  "-" +
-                                  Moment(item.last_fee_date).format("YYYY")
-                                : item.paid_month == "10"
-                                ? "Oct" +
-                                  "-" +
-                                  Moment(item.last_fee_date).format("YYYY")
-                                : item.paid_month == "11"
-                                ? "Nov" +
-                                  "-" +
-                                  Moment(item.last_fee_date).format("YYYY")
-                                : item.paid_month == "12"
-                                ? "Dec" +
-                                  "-" +
-                                  Moment(item.last_fee_date).format("YYYY")
-                                : null}
+                                  : item.paid_month == "3"
+                                    ? "Mar" +
+                                    "-" +
+                                    Moment(item.last_fee_date).format("YYYY")
+                                    : item.paid_month == "4"
+                                      ? "Apr" +
+                                      "-" +
+                                      Moment(item.last_fee_date).format("YYYY")
+                                      : item.paid_month == "5"
+                                        ? "May" +
+                                        "-" +
+                                        Moment(item.last_fee_date).format("YYYY")
+                                        : item.paid_month == "6"
+                                          ? "Jun" +
+                                          "-" +
+                                          Moment(item.last_fee_date).format("YYYY")
+                                          : item.paid_month == "7"
+                                            ? "July" +
+                                            "-" +
+                                            Moment(item.last_fee_date).format("YYYY")
+                                            : item.paid_month == "8"
+                                              ? "Aug" +
+                                              "-" +
+                                              Moment(item.last_fee_date).format("YYYY")
+                                              : item.paid_month == "9"
+                                                ? "Sept" +
+                                                "-" +
+                                                Moment(item.last_fee_date).format("YYYY")
+                                                : item.paid_month == "10"
+                                                  ? "Oct" +
+                                                  "-" +
+                                                  Moment(item.last_fee_date).format("YYYY")
+                                                  : item.paid_month == "11"
+                                                    ? "Nov" +
+                                                    "-" +
+                                                    Moment(item.last_fee_date).format("YYYY")
+                                                    : item.paid_month == "12"
+                                                      ? "Dec" +
+                                                      "-" +
+                                                      Moment(item.last_fee_date).format("YYYY")
+                                                      : null}
                             </td>
                             <td>{item.bank}</td>
                             <td>{item.receipt_no}</td>
                             <td>{item.total_one_time_fee}</td>
                             <td>{item.total_annual_fee}</td>
                             <td>
-                              {parseInt(item.paid_amount) -
+                              {/* {parseInt(item.paid_amount) -
                                 (parseInt(item.total_one_time_fee) +
                                   parseInt(item.total_annual_fee) +
                                   parseInt(item.balance)) >
-                              0
+                                0
                                 ? parseInt(item.paid_amount) -
-                                  (parseInt(item.total_one_time_fee) +
-                                    parseInt(item.total_annual_fee) +
-                                    parseInt(item.balance))
-                                : 0}
+                                (parseInt(item.total_one_time_fee) +
+                                  parseInt(item.total_annual_fee) +
+                                  parseInt(item.balance))
+                                : 0} */}
+                                {item.total_monthly_fee}
                             </td>
                             <td>{item.fine}</td>
+                            <td>{item.paid_fine}</td>
                             {/* <td>{item.grand_total}</td> */}
                             <td>{item.paid_amount}</td>
+                            <td>{item.fine-item.paid_fine}</td>
                             <td>
-                              {parseInt(item.balance) < 0 ? item.balance : "0"}
+                              {parseInt(item.dues_fee)}
+                            </td>
+                            <td>
+                              {parseInt(Number(item.dues_fee)+Number(item.dues_fine))}
                             </td>
                             <td>
                               {parseInt(item.balance) > 0 ? item.balance : "0"}
@@ -2648,44 +2878,45 @@ class FeeReceipt extends React.Component {
                               {item.paid_month == "1"
                                 ? "Jan"
                                 : item.paid_month == "2"
-                                ? "Feb"
-                                : item.paid_month == "3"
-                                ? "Mar"
-                                : item.paid_month == "4"
-                                ? "Apr"
-                                : item.paid_month == "5"
-                                ? "May"
-                                : item.paid_month == "6"
-                                ? "Jun"
-                                : item.paid_month == "7"
-                                ? "July"
-                                : item.paid_month == "8"
-                                ? "Aug"
-                                : item.paid_month == "9"
-                                ? "Sept"
-                                : item.paid_month == "10"
-                                ? "Oct"
-                                : item.paid_month == "11"
-                                ? "Nov"
-                                : item.paid_month == "12"
-                                ? "Dec"
-                                : null}
+                                  ? "Feb"
+                                  : item.paid_month == "3"
+                                    ? "Mar"
+                                    : item.paid_month == "4"
+                                      ? "Apr"
+                                      : item.paid_month == "5"
+                                        ? "May"
+                                        : item.paid_month == "6"
+                                          ? "Jun"
+                                          : item.paid_month == "7"
+                                            ? "July"
+                                            : item.paid_month == "8"
+                                              ? "Aug"
+                                              : item.paid_month == "9"
+                                                ? "Sept"
+                                                : item.paid_month == "10"
+                                                  ? "Oct"
+                                                  : item.paid_month == "11"
+                                                    ? "Nov"
+                                                    : item.paid_month == "12"
+                                                      ? "Dec"
+                                                      : null}
                             </td>
                             <td>{item.bank}</td>
                             <td>{item.receipt_no}</td>
                             <td>{item.total_one_time_fee}</td>
                             <td>{item.total_annual_fee}</td>
                             <td>
-                              {parseInt(item.paid_amount) -
+                              {/* {parseInt(item.paid_amount) -
                                 (parseInt(item.total_one_time_fee) +
                                   parseInt(item.total_annual_fee) +
                                   parseInt(item.balance)) >
-                              0
+                                0
                                 ? parseInt(item.paid_amount) -
-                                  (parseInt(item.total_one_time_fee) +
-                                    parseInt(item.total_annual_fee) +
-                                    parseInt(item.balance))
-                                : 0}
+                                (parseInt(item.total_one_time_fee) +
+                                  parseInt(item.total_annual_fee) +
+                                  parseInt(item.balance))
+                                : 0} */}
+                                {item.total_monthly_fee}
                             </td>
                             <td>{item.fine}</td>
                             {/* <td>{item.grand_total}</td> */}
@@ -2718,7 +2949,7 @@ class FeeReceipt extends React.Component {
                         );
                       }
                     })}
-                    {this.state.AllOldFees.map((item, index) => {
+                    {/* {this.state.AllOldFees.map((item, index) => {
                       if (item.session == this.state.session) {
                         previouspaidamount =
                           parseInt(previouspaidamount) +
@@ -2731,9 +2962,9 @@ class FeeReceipt extends React.Component {
                         var a;
                         if (
                           parseInt(item.paid_amount) -
-                            (parseInt(item.total_one_time_fee) +
-                              parseInt(item.total_annual_fee) +
-                              parseInt(item.balance)) >
+                          (parseInt(item.total_one_time_fee) +
+                            parseInt(item.total_annual_fee) +
+                            parseInt(item.balance)) >
                           0
                         ) {
                           a =
@@ -2752,42 +2983,43 @@ class FeeReceipt extends React.Component {
                         previousfine =
                           parseInt(previousfine) + parseInt(item.fine);
                       }
-                    })}
+                    })} */}
 
                     {this.state.AllOldFees.map((item, index) => {
                       if (this.state.session == "") {
-                        previouspaidamount =
-                          parseInt(previouspaidamount) +
-                          parseInt(item.paid_amount) +
-                          parseInt(item.fine);
-                        //   alert(previouspaidamount)
-                        previousannualamount =
-                          parseInt(previousannualamount) +
-                          parseInt(item.total_annual_fee);
-                        var a;
-                        if (
-                          parseInt(item.paid_amount) -
-                            (parseInt(item.total_one_time_fee) +
-                              parseInt(item.total_annual_fee) +
-                              parseInt(item.balance)) >
-                          0
-                        ) {
-                          a =
-                            parseInt(item.paid_amount) -
-                            (parseInt(item.total_one_time_fee) +
-                              parseInt(item.total_annual_fee) +
-                              parseInt(item.balance));
-                        } else {
-                          a = 0;
-                        }
-                        previousmonthlyamount =
-                          parseInt(previousmonthlyamount) + a;
-                        previousgrandTotal =
-                          parseInt(previousgrandTotal) +
-                          parseInt(item.grand_total);
-                        previousfine =
-                          parseInt(previousfine) + parseInt(item.fine);
+                        // previouspaidamount =
+                        //   parseInt(previouspaidamount) +
+                        //   parseInt(item.paid_amount) +
+                        //   parseInt(item.fine);
+                        // //   alert(previouspaidamount)
+                        // previousannualamount =
+                        //   parseInt(previousannualamount) +
+                        //   parseInt(item.total_annual_fee);
+                        // var a;
+                        // if (
+                        //   parseInt(item.paid_amount) -
+                        //   (parseInt(item.total_one_time_fee) +
+                        //     parseInt(item.total_annual_fee) +
+                        //     parseInt(item.balance)) >
+                        //   0
+                        // ) {
+                        //   a =
+                        //     parseInt(item.paid_amount) -
+                        //     (parseInt(item.total_one_time_fee) +
+                        //       parseInt(item.total_annual_fee) +
+                        //       parseInt(item.balance));
+                        // } else 
+                        //   a = 0;
+                        // }
+                        //   parseInt(previousmonthlyamount) + a;
+                        // previousgrandTotal =
+                        //   parseInt(previousgrandTotal) +
+                        //   parseInt(item.grand_total);
+                        // previousfine =
+                        //   parseInt(previousfine) + parseInt(item.fine);
                       }
+           
+
                     })}
 
                     <td>
@@ -2804,7 +3036,7 @@ class FeeReceipt extends React.Component {
                       <strong>{previousmonthlyamount}</strong>
                     </td>
                     <td>
-                      <strong>{previousfine}</strong>
+                      <strong>{previousfine > 0 ? previousfine : 0}</strong>
                     </td>
                     {/* <td><strong>{previousgrandTotal}</strong></td> */}
                     <td>
@@ -2906,7 +3138,7 @@ class FeeReceipt extends React.Component {
                         </button>
                       )}
                       {this.state.AllStudent.length <=
-                      this.state.servercontentsize ? (
+                        this.state.servercontentsize ? (
                         <span className="ml-5">
                           <b>
                             <select
@@ -2928,10 +3160,10 @@ class FeeReceipt extends React.Component {
                       )}
 
                       {this.state.serverpagi ==
-                      Math.ceil(
-                        localStorage.getItem("AllStudentcount") /
+                        Math.ceil(
+                          localStorage.getItem("AllStudentcount") /
                           this.state.servercontentsize
-                      ) ? (
+                        ) ? (
                         <button
                           onClick={() => this.PageIncreament()}
                           className="btn btn-danger ml-5"
@@ -3080,28 +3312,28 @@ class FeeReceipt extends React.Component {
                               {item.month == "1"
                                 ? "Jan"
                                 : item.month == "2"
-                                ? "Feb"
-                                : item.month == "3"
-                                ? "Mar"
-                                : item.month == "4"
-                                ? "Apr"
-                                : item.month == "5"
-                                ? "May"
-                                : item.month == "6"
-                                ? "Jun"
-                                : item.month == "7"
-                                ? "July"
-                                : item.month == "8"
-                                ? "Aug"
-                                : item.month == "9"
-                                ? "Sept"
-                                : item.month == "10"
-                                ? "Oct"
-                                : item.month == "11"
-                                ? "Nov"
-                                : item.month == "12"
-                                ? "Dec"
-                                : null}
+                                  ? "Feb"
+                                  : item.month == "3"
+                                    ? "Mar"
+                                    : item.month == "4"
+                                      ? "Apr"
+                                      : item.month == "5"
+                                        ? "May"
+                                        : item.month == "6"
+                                          ? "Jun"
+                                          : item.month == "7"
+                                            ? "July"
+                                            : item.month == "8"
+                                              ? "Aug"
+                                              : item.month == "9"
+                                                ? "Sept"
+                                                : item.month == "10"
+                                                  ? "Oct"
+                                                  : item.month == "11"
+                                                    ? "Nov"
+                                                    : item.month == "12"
+                                                      ? "Dec"
+                                                      : null}
                               )
                             </td>
                           );
@@ -3147,6 +3379,7 @@ class FeeReceipt extends React.Component {
           </div>
         </div>
         {/* end fee structure Modal */}
+
         <div className="row">
           <div className="col-12">
             <div className="row ReceiptLayoutCard">
@@ -3214,9 +3447,6 @@ class FeeReceipt extends React.Component {
                       </div>
                     </div>
                   </div>
-                  
-                
-
                   <div className="col-3 form-group">
                     <div className="form-row">
                       <div className="col-4 form-group">
@@ -3231,26 +3461,36 @@ class FeeReceipt extends React.Component {
                             this.handleFocusInput(e);
                           }}
                           onChange={(e) => {
+                            const newValue = e.target.value;
                             this.setState({
-                              admission_no: e.target.value.toUpperCase(),
+                              admission_no: newValue,
                               admission_noErrorMessage: undefined,
+                            }, () => {
+                              if (newValue) {
+                                this.searchByAdmission_no(e);
+                              } else {
+                                this.setState({
+                                  annual: false,
+                                });
+                              }
                             });
-                            this.searchByAdmission_no(e);
                           }}
                           onKeyPress={(e) => {
                             if (e.key === "Enter") {
                               this.searchByAdmission_no(e);
                             }
                           }}
-                          tabindex="2"
+                          tabIndex="2" // corrected attribute name to tabIndex
                           className="w-50"
                         />
+
+
                         <button
                           type="button"
                           onClick={() => {
                             this.getStudent();
                           }}
-                          class="btn btn-success btn-sm"
+                          class="btn btn-success btn-sm ml-2"
                           data-toggle="modal"
                           data-target="#AllModalStudent"
                         >
@@ -3285,7 +3525,7 @@ class FeeReceipt extends React.Component {
                       </div>
                     </div>
                   </div>
-                    {/* <div className="col-3 form-group">
+                  {/* <div className="col-3 form-group">
                             <label>Ref Receipt No *</label>
                             <input type="text" onChange={(e)=>{this.setState({ref_receipt_no:e.target.value.toUpperCase()})}} className="" />
                         </div> */}
@@ -3350,7 +3590,7 @@ class FeeReceipt extends React.Component {
                             });
                           }}
                         />
-                         {/* <label>  UPI</label>
+                        {/* <label>  UPI</label>
                         <input
                           type="radio"
                           className=""
@@ -3422,349 +3662,380 @@ class FeeReceipt extends React.Component {
                             <input type="text" className="" defaultValue="0" value={this.state.check_no} onChange={(e)=>{this.setState({check_no:e.target.value.toUpperCase()})}}/>
                         </div> */}
 
-                        { this?.state?.AllStudent?.length > 0 && (
-                          <>
-                  <table class="table" id="FeeTransectionDate">
-                    <thead class="thead-light">
-                      <tr>
-                        <th scope="col">Admn No.</th>
-                        <th scope="col">Ac No.</th>
-                        <th scope="col">Student Name</th>
-                        <th scope="col">Class/Section</th>
-                        <th scope="col">Parents Name</th>
-                        <th scope="col">Mobile No.</th>
+                  {this?.state?.AllStudent?.length > 0 && (
+                    <>
+                      <table class="table" id="FeeTransectionDate">
+                        <thead class="thead-light">
+                          <tr>
+                            <th scope="col">Admn No.</th>
+                            <th scope="col">Ac No.</th>
+                            <th scope="col">Student Name</th>
+                            <th scope="col">Class/Section</th>
+                            <th scope="col">Parents Name</th>
+                            <th scope="col">Mobile No.</th>
 
-                        <th scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {this.state.AllStudent.map((item, index) => {
-                        if (item.admission_no != countAdmission_no) {
-                          countAdmission_no = item.admission_no;
-                          return (
-                            <tr
-                              className={
-                                (item.class_name == "12SCI" ||
-                                  item.class_name == "12COM") &&
-                                item.session != this.state.session &&
-                                item.student.tc_status == 0
-                                  ? "bg-primary"
-                                  : item.student.tc_status == 1
-                                  ? "bg-danger"
-                                  : item.student.tc_status == "sos"
-                                  ? "bg-primary"
-                                  : null
-                              }
-                            >
-                              {/* <tr  className={item.student.tc_status==1 ? "bg-danger":null}> */}
-                              <td>{item.admission_no}</td>
-                              <td>{item.account_no}</td>
-                              <td>{item.student.name}</td>
-                              <td>
-                                {item.class_name}-{item.section}
-                              </td>
-                              <td>
-                                {item.student.father_name} /{" "}
-                                {item.student.mother_name}
-                              </td>
-                              <td>{item.student.parent_mobile}</td>
-                              <td>
-                                <button
-                                  type="button"
-                                  className="btn btn-info btn-sm"
-                                  onClick={(e) => {
-                                    this.viewParent();
-                                  }}
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {this.state.admission_no && this.state.AllStudent.map((item, index) => {
+                            if (item.admission_no != countAdmission_no) {
+                              countAdmission_no = item.admission_no;
+                              return (
+                                <tr
+                                  className={
+                                    (item.class_name == "12SCI" ||
+                                      item.class_name == "12COM") &&
+                                      item.session != this.state.session &&
+                                      item.student.tc_status == 0
+                                      ? "bg-primary"
+                                      : item.student.tc_status == 1
+                                        ? "bg-danger"
+                                        : item.student.tc_status == "sos"
+                                          ? "bg-primary"
+                                          : null
+                                  }
                                 >
-                                  Get Details
-                                </button>
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    this.ShowModal(item.admission_no);
-                                  }}
-                                  class="btn btn-info btn-sm"
-                                  data-toggle="modal"
-                                  data-target="#myModal"
-                                >
-                                  Show
-                                </button>
-                              </td>
-                            </tr>
-                          );
+                                  {/* <tr  className={item.student.tc_status==1 ? "bg-danger":null}> */}
+                                  <td>{item.admission_no}</td>
+                                  <td>{item.account_no}</td>
+                                  <td>{item.student.name}</td>
+                                  <td>
+                                    {item.class_name}-{item.section}
+                                  </td>
+                                  <td>
+                                    {item.student.father_name} /{" "}
+                                    {item.student.mother_name}
+                                  </td>
+                                  <td>{item.student.parent_mobile}</td>
+                                  <td>
+                                    <button
+                                      type="button"
+                                      className="btn btn-info btn-sm"
+                                      onClick={(e) => {
+                                        this.viewParent();
+                                      }}
+                                    >
+                                      Get Details
+                                    </button>
+                                    <button
+                                      type="button"
+                                      onClick={() => {
+                                        this.ShowModal(item.admission_no);
+                                      }}
+                                      class="btn btn-info btn-sm ml-2"
+                                      data-toggle="modal"
+                                      data-target="#myModal"
+                                    >
+                                      Show
+                                    </button>
+                                  </td>
+                                </tr>
+                              );
+                            }
+                          })}
+                        </tbody>
+                      </table>
+                      {/* {
+                        this.state.RTE_SW_Student!="" ?
+                        <div className="col-2 ">
+                        <label
+                          style={{
+                            backgroundColor: "#000a80",
+                            color: "white",
+                            padding: "5px",
+                          }}
+                        >
+                          Paid Upto :{" "}
+                          {this.state.RTE_SW_Student}
+                        </label>
+                      </div> 
+                      :  */}
+                      <div className="col-2 ">
+                      <label
+                        style={{
+                          backgroundColor: "#000a80",
+                          color: "white",
+                          padding: "5px",
+                        }}
+                      >
+                        Paid Upto :{" "}
+                        {Moment(this.state.admission_no ? this.state.last_fees_date : "").format("M") == "1"
+                          ? "Jan " +
+                          Moment(this.state.admission_no ? this.state.last_fees_date : "").format("YYYY")
+                          : Moment(this.state.admission_no ? this.state.last_fees_date : "").format("M") == "2"
+                            ? "Feb " +
+                            Moment(this.state.admission_no ? this.state.last_fees_date : "").format("YYYY")
+                            : Moment(this.state.admission_no ? this.state.last_fees_date : "").format("M") == "3"
+                              ? "Mar " +
+                              Moment(this.state.admission_no ? this.state.last_fees_date : "").format("YYYY")
+                              : Moment(this.state.admission_no ? this.state.last_fees_date : "").format("M") == "4"
+                                ? "Apr " +
+                                Moment(this.state.admission_no ? this.state.last_fees_date : "").format("YYYY")
+                                : Moment(this.state.admission_no ? this.state.last_fees_date : "").format("M") == "5"
+                                  ? "May " +
+                                  Moment(this.state.admission_no ? this.state.last_fees_date : "").format("YYYY")
+                                  : Moment(this.state.admission_no ? this.state.last_fees_date : "").format("M") == "6"
+                                    ? "Jun " +
+                                    Moment(this.state.admission_no ? this.state.last_fees_date : "").format("YYYY")
+                                    : Moment(this.state.admission_no ? this.state.last_fees_date : "").format("M") == "7"
+                                      ? "July " +
+                                      Moment(this.state.admission_no ? this.state.last_fees_date : "").format("YYYY")
+                                      : Moment(this.state.admission_no ? this.state.last_fees_date : "").format("M") == "8"
+                                        ? "Aug " +
+                                        Moment(this.state.admission_no ? this.state.last_fees_date : "").format("YYYY")
+                                        : Moment(this.state.admission_no ? this.state.last_fees_date : "").format("M") == "9"
+                                          ? "Sept " +
+                                          Moment(this.state.admission_no ? this.state.last_fees_date : "").format("YYYY")
+                                          : Moment(this.state.admission_no ? this.state.last_fees_date : "").format("M") == "10"
+                                            ? "Oct " +
+                                            Moment(this.state.admission_no ? this.state.last_fees_date : "").format("YYYY")
+                                            : Moment(this.state.admission_no ? this.state.last_fees_date : "").format("M") == "11"
+                                              ? "Nov " +
+                                              Moment(this.state.admission_no ? this.state.last_fees_date : "").format("YYYY")
+                                              : Moment(this.state.admission_no ? this.state.last_fees_date : "").format("M") == "12"
+                                                ? "Dec " +
+                                                Moment(this.state.admission_no ? this.state.last_fees_date : "").format("YYYY")
+                                                : null}
+                      </label>
+                    </div>
+                      {/* } */}
+                      <div className="col-2 ">
+                        {
+                          this.state.admission_no ?
+                            <label>
+                              Fee From :
+                              {this.state.fromtomonths[0] == "1"
+                                ? "Jan " +
+                                Moment(this.state.feemonths[0]).format("YYYY")
+                                : this.state.fromtomonths[0] == "2"
+                                  ? "Feb " +
+                                  Moment(this.state.feemonths[0]).format("YYYY")
+                                  : this.state.fromtomonths[0] == "3"
+                                    ? "Mar " +
+                                    Moment(this.state.feemonths[0]).format("YYYY")
+                                    : this.state.fromtomonths[0] == "4"
+                                      ? "Apr " +
+                                      Moment(this.state.feemonths[0]).format("YYYY")
+                                      : this.state.fromtomonths[0] == "5"
+                                        ? "May " +
+                                        Moment(this.state.feemonths[0]).format("YYYY")
+                                        : this.state.fromtomonths[0] == "6"
+                                          ? "Jun " +
+                                          Moment(this.state.feemonths[0]).format("YYYY")
+                                          : this.state.fromtomonths[0] == "7"
+                                            ? "July " +
+                                            Moment(this.state.feemonths[0]).format("YYYY")
+                                            : this.state.fromtomonths[0] == "8"
+                                              ? "Aug " +
+                                              Moment(this.state.feemonths[0]).format("YYYY")
+                                              : this.state.fromtomonths[0] == "9"
+                                                ? "Sept " +
+                                                Moment(this.state.feemonths[0]).format("YYYY")
+                                                : this.state.fromtomonths[0] == "10"
+                                                  ? "Oct " +
+                                                  Moment(this.state.feemonths[0]).format("YYYY")
+                                                  : this.state.fromtomonths[0] == "11"
+                                                    ? "Nov " +
+                                                    Moment(this.state.feemonths[0]).format("YYYY")
+                                                    : this.state.fromtomonths[
+                                                      this.state.fromtomonths.length - 1
+                                                    ] == "12"
+                                                      ? "Dec " +
+                                                      Moment(
+                                                        this.state.feemonths[
+                                                        this.state.fromtomonths.length - 1
+                                                        ]
+                                                      ).format("YYYY") : null}
+
+                            </label> :
+                            <label>
+                              Fee From :
+                            </label>
                         }
-                      })}
-                    </tbody>
-                  </table>
-                  <div className="col-3 ">
-                    <label
-                      style={{
-                        backgroundColor: "#000a80",
-                        color: "white",
-                        padding: "5px",
-                      }}
-                    >
-                      Paid Upto :{" "}
-                      {Moment(this.state.last_fees_date).format("M") == "1"
-                        ? "Jan " +
-                          Moment(this.state.last_fees_date).format("YYYY")
-                        : Moment(this.state.last_fees_date).format("M") == "2"
-                        ? "Feb " +
-                          Moment(this.state.last_fees_date).format("YYYY")
-                        : Moment(this.state.last_fees_date).format("M") == "3"
-                        ? "Mar " +
-                          Moment(this.state.last_fees_date).format("YYYY")
-                        : Moment(this.state.last_fees_date).format("M") == "4"
-                        ? "Apr " +
-                          Moment(this.state.last_fees_date).format("YYYY")
-                        : Moment(this.state.last_fees_date).format("M") == "5"
-                        ? "May " +
-                          Moment(this.state.last_fees_date).format("YYYY")
-                        : Moment(this.state.last_fees_date).format("M") == "6"
-                        ? "Jun " +
-                          Moment(this.state.last_fees_date).format("YYYY")
-                        : Moment(this.state.last_fees_date).format("M") == "7"
-                        ? "July " +
-                          Moment(this.state.last_fees_date).format("YYYY")
-                        : Moment(this.state.last_fees_date).format("M") == "8"
-                        ? "Aug " +
-                          Moment(this.state.last_fees_date).format("YYYY")
-                        : Moment(this.state.last_fees_date).format("M") == "9"
-                        ? "Sept " +
-                          Moment(this.state.last_fees_date).format("YYYY")
-                        : Moment(this.state.last_fees_date).format("M") == "10"
-                        ? "Oct " +
-                          Moment(this.state.last_fees_date).format("YYYY")
-                        : Moment(this.state.last_fees_date).format("M") == "11"
-                        ? "Nov " +
-                          Moment(this.state.last_fees_date).format("YYYY")
-                        : Moment(this.state.last_fees_date).format("M") == "12"
-                        ? "Dec " +
-                          Moment(this.state.last_fees_date).format("YYYY")
-                        : null}
-                    </label>
-                  </div>
-                  <div className="col-2 ">
-                    <label>
-                      Fee From :{" "}
-                      {this.state.fromtomonths[0] == "1"
-                        ? "Jan " +
-                          Moment(this.state.feemonths[0]).format("YYYY")
-                        : this.state.fromtomonths[0] == "2"
-                        ? "Feb " +
-                          Moment(this.state.feemonths[0]).format("YYYY")
-                        : this.state.fromtomonths[0] == "3"
-                        ? "Mar " +
-                          Moment(this.state.feemonths[0]).format("YYYY")
-                        : this.state.fromtomonths[0] == "4"
-                        ? "Apr " +
-                          Moment(this.state.feemonths[0]).format("YYYY")
-                        : this.state.fromtomonths[0] == "5"
-                        ? "May " +
-                          Moment(this.state.feemonths[0]).format("YYYY")
-                        : this.state.fromtomonths[0] == "6"
-                        ? "Jun " +
-                          Moment(this.state.feemonths[0]).format("YYYY")
-                        : this.state.fromtomonths[0] == "7"
-                        ? "July " +
-                          Moment(this.state.feemonths[0]).format("YYYY")
-                        : this.state.fromtomonths[0] == "8"
-                        ? "Aug " +
-                          Moment(this.state.feemonths[0]).format("YYYY")
-                        : this.state.fromtomonths[0] == "9"
-                        ? "Sept " +
-                          Moment(this.state.feemonths[0]).format("YYYY")
-                        : this.state.fromtomonths[0] == "10"
-                        ? "Oct " +
-                          Moment(this.state.feemonths[0]).format("YYYY")
-                        : this.state.fromtomonths[0] == "11"
-                        ? "Nov " +
-                          Moment(this.state.feemonths[0]).format("YYYY")
-                        : this.state.fromtomonths[
-                            this.state.fromtomonths.length - 1
-                          ] == "12"
-                        ? "Dec " +
-                          Moment(
-                            this.state.feemonths[
-                              this.state.fromtomonths.length - 1
-                            ]
-                          ).format("YYYY")
-                        : null}
-                    </label>
-                  </div>
-                  <div className="col-2 ">
-                    <label>
-                      Fee To :{" "}
-                      {this.state.fromtomonths[
-                        this.state.fromtomonths.length - 1
-                      ] == "1"
-                        ? "Jan " +
-                          Moment(
-                            this.state.feemonths[
-                              this.state.fromtomonths.length - 1
-                            ]
-                          ).format("YYYY")
-                        : this.state.fromtomonths[
-                            this.state.fromtomonths.length - 1
-                          ] == "2"
-                        ? "Feb " +
-                          Moment(
-                            this.state.feemonths[
-                              this.state.fromtomonths.length - 1
-                            ]
-                          ).format("YYYY")
-                        : this.state.fromtomonths[
-                            this.state.fromtomonths.length - 1
-                          ] == "3"
-                        ? "Mar " +
-                          Moment(
-                            this.state.feemonths[
-                              this.state.fromtomonths.length - 1
-                            ]
-                          ).format("YYYY")
-                        : this.state.fromtomonths[
-                            this.state.fromtomonths.length - 1
-                          ] == "4"
-                        ? "Apr " +
-                          Moment(
-                            this.state.feemonths[
-                              this.state.fromtomonths.length - 1
-                            ]
-                          ).format("YYYY")
-                        : this.state.fromtomonths[
-                            this.state.fromtomonths.length - 1
-                          ] == "5"
-                        ? "May " +
-                          Moment(
-                            this.state.feemonths[
-                              this.state.fromtomonths.length - 1
-                            ]
-                          ).format("YYYY")
-                        : this.state.fromtomonths[
-                            this.state.fromtomonths.length - 1
-                          ] == "6"
-                        ? "Jun " +
-                          Moment(
-                            this.state.feemonths[
-                              this.state.fromtomonths.length - 1
-                            ]
-                          ).format("YYYY")
-                        : this.state.fromtomonths[
-                            this.state.fromtomonths.length - 1
-                          ] == "7"
-                        ? "July " +
-                          Moment(
-                            this.state.feemonths[
-                              this.state.fromtomonths.length - 1
-                            ]
-                          ).format("YYYY")
-                        : this.state.fromtomonths[
-                            this.state.fromtomonths.length - 1
-                          ] == "8"
-                        ? "Aug " +
-                          Moment(
-                            this.state.feemonths[
-                              this.state.fromtomonths.length - 1
-                            ]
-                          ).format("YYYY")
-                        : this.state.fromtomonths[
-                            this.state.fromtomonths.length - 1
-                          ] == "9"
-                        ? "Sept " +
-                          Moment(
-                            this.state.feemonths[
-                              this.state.fromtomonths.length - 1
-                            ]
-                          ).format("YYYY")
-                        : this.state.fromtomonths[
-                            this.state.fromtomonths.length - 1
-                          ] == "10"
-                        ? "Oct " +
-                          Moment(
-                            this.state.feemonths[
-                              this.state.fromtomonths.length - 1
-                            ]
-                          ).format("YYYY")
-                        : this.state.fromtomonths[
-                            this.state.fromtomonths.length - 1
-                          ] == "11"
-                        ? "Nov " +
-                          Moment(
-                            this.state.feemonths[
-                              this.state.fromtomonths.length - 1
-                            ]
-                          ).format("YYYY")
-                        : this.state.fromtomonths[
-                            this.state.fromtomonths.length - 1
-                          ] == "12"
-                        ? "Dec " +
-                          Moment(
-                            this.state.feemonths[
-                              this.state.fromtomonths.length - 1
-                            ]
-                          ).format("YYYY")
-                        : null}
-                    </label>
-                  </div>
-                  <div className="col-2 ">
-                    <label>Surplus : {this.state.surplus}</label>
-                  </div>
-                  <div className="col-2 ">
-                    <label>Dues : {this.state.due}</label>
-                  </div>
-                  <div className="col-1 ">
-                    <label>% : {this.state.fee_concession}</label>
-                  </div>
 
-                  {/* next row */}
-                  <div className="col-2 ">
-                    <th>
-                      Month test :{" "}
-                      <input
-                        type="text"
-                        className="w-25"
-                        onFocus={(e) => {
-                          this.handleFocusInput(e);
-                        }}
-                        value={this.state.fromtomonths.length}
-                        onChange={(e) => {
-                          this.ChangeFeeDate(e);
-                        }}
-                      />
-                    </th>
-                  </div>
-                  <div className="col-2 ">
-                    <label>
-                      COMPUTER :{" "}
-                      {this.state.take_computer == "true" ? "YES" : "NO"}
-                    </label>
-                  </div>
-                  <div className="col-2 ">
-                    <label>
-                      TRANSPORT :{" "}
-                      {this.state.avail_transport == "true" ? "YES" : "NO"}
-                    </label>
-                  </div>
-                  <div className="col-2 ">
-                    <label>
-                      {" "}
-                      {this.state.tc_status == "0" ? (
-                        <span className="bg-success">TAKEN TC</span>
-                      ) : (
-                        <span className="bg-danger">TAKEN TC</span>
-                      )}{" "}
-                      : {this.state.tc_status == "0" ? "NO" : "YES"}
-                    </label>
-                  </div>
-                  <div className="col-2 ">
-                    <label>
-                      STRUCK OF :{" "}
-                      {this.state.tc_status == "true" ? "YES" : "NO"}
-                    </label>
-                  </div>
+                      </div>
+                      <div className="col-2 ">
+                        {
+                          this.state.admission_no ?
+                            <label>
+                              Fee To :
+                              {this.state.fromtomonths[
+                                this.state.fromtomonths.length - 1
+                              ] == "1"
+                                ? "Jan " +
+                                Moment(
+                                  this.state.feemonths[
+                                  this.state.fromtomonths.length - 1
+                                  ]
+                                ).format("YYYY")
+                                : this.state.fromtomonths[
+                                  this.state.fromtomonths.length - 1
+                                ] == "2"
+                                  ? "Feb " +
+                                  Moment(
+                                    this.state.feemonths[
+                                    this.state.fromtomonths.length - 1
+                                    ]
+                                  ).format("YYYY")
+                                  : this.state.fromtomonths[
+                                    this.state.fromtomonths.length - 1
+                                  ] == "3"
+                                    ? "Mar " +
+                                    Moment(
+                                      this.state.feemonths[
+                                      this.state.fromtomonths.length - 1
+                                      ]
+                                    ).format("YYYY")
+                                    : this.state.fromtomonths[
+                                      this.state.fromtomonths.length - 1
+                                    ] == "4"
+                                      ? "Apr " +
+                                      Moment(
+                                        this.state.feemonths[
+                                        this.state.fromtomonths.length - 1
+                                        ]
+                                      ).format("YYYY")
+                                      : this.state.fromtomonths[
+                                        this.state.fromtomonths.length - 1
+                                      ] == "5"
+                                        ? "May " +
+                                        Moment(
+                                          this.state.feemonths[
+                                          this.state.fromtomonths.length - 1
+                                          ]
+                                        ).format("YYYY")
+                                        : this.state.fromtomonths[
+                                          this.state.fromtomonths.length - 1
+                                        ] == "6"
+                                          ? "Jun " +
+                                          Moment(
+                                            this.state.feemonths[
+                                            this.state.fromtomonths.length - 1
+                                            ]
+                                          ).format("YYYY")
+                                          : this.state.fromtomonths[
+                                            this.state.fromtomonths.length - 1
+                                          ] == "7"
+                                            ? "July " +
+                                            Moment(
+                                              this.state.feemonths[
+                                              this.state.fromtomonths.length - 1
+                                              ]
+                                            ).format("YYYY")
+                                            : this.state.fromtomonths[
+                                              this.state.fromtomonths.length - 1
+                                            ] == "8"
+                                              ? "Aug " +
+                                              Moment(
+                                                this.state.feemonths[
+                                                this.state.fromtomonths.length - 1
+                                                ]
+                                              ).format("YYYY")
+                                              : this.state.fromtomonths[
+                                                this.state.fromtomonths.length - 1
+                                              ] == "9"
+                                                ? "Sept " +
+                                                Moment(
+                                                  this.state.feemonths[
+                                                  this.state.fromtomonths.length - 1
+                                                  ]
+                                                ).format("YYYY")
+                                                : this.state.fromtomonths[
+                                                  this.state.fromtomonths.length - 1
+                                                ] == "10"
+                                                  ? "Oct " +
+                                                  Moment(
+                                                    this.state.feemonths[
+                                                    this.state.fromtomonths.length - 1
+                                                    ]
+                                                  ).format("YYYY")
+                                                  : this.state.fromtomonths[
+                                                    this.state.fromtomonths.length - 1
+                                                  ] == "11"
+                                                    ? "Nov " +
+                                                    Moment(
+                                                      this.state.feemonths[
+                                                      this.state.fromtomonths.length - 1
+                                                      ]
+                                                    ).format("YYYY")
+                                                    : this.state.fromtomonths[
+                                                      this.state.fromtomonths.length - 1
+                                                    ] == "12"
+                                                      ? "Dec " +
+                                                      Moment(
+                                                        this.state.feemonths[
+                                                        this.state.fromtomonths.length - 1
+                                                        ]
+                                                      ).format("YYYY") : null}
+                            </label>
+                            :
+                            <label>
+                              Fee To :
+                            </label>
+                        }
 
-                  </>
-                        )}
+                      </div>
+                      <div className="col-2 ">
+                        <label>Surplus : {this.state.surplus}</label>
+                      </div>
+                      <div className="col-2 ">
+                        <label>Dues : {this.state.due}</label>
+                      </div>
+                      <div className="col-2 ">
+                        <label>Fee Concession : {this.state.fee_concession ? this.state.fee_concession: 0 }</label>
+                      </div>
+
+                      {/* next row */}
+                      <div className="col-2 ">
+                        <th>
+                          Month :{" "}
+                          <input
+                            type="text"
+                            className="w-25"
+                            onFocus={(e) => {
+                              this.handleFocusInput(e);
+                            }}
+                            value={this.state.fromtomonths.length}
+                            onChange={(e) => {
+                              this.ChangeFeeDate(e);
+                            }}
+                            // disabled
+                          />
+                        </th>
+                      </div>
+                      <div className="col-2 ">
+                        <label>
+                          COMPUTER :{" "}
+                          {this.state.take_computer == "true" ? "YES" : "NO"}
+                        </label>
+                      </div>
+                      <div className="col-2 ">
+                        <label>
+                          TRANSPORT :{" "}
+                          {this.state.avail_transport == "true" ? "YES" : "NO"}
+                        </label>
+                      </div>
+                      <div className="col-2 ">
+                        <label>
+                          {" "}
+                          {this.state.tc_status == "0" ? (
+                            <span className="bg-success">TAKEN TC</span>
+                          ) : (
+                            <span className="bg-danger">TAKEN TC</span>
+                          )}{" "}
+                          : {this.state.tc_status == "0" ? "NO" : "YES"}
+                        </label>
+                      </div>
+                      <div className="col-2 ">
+                        <label>
+                          STRUCK OF :{" "}
+                          {this.state.tc_status == "true" ? "YES" : "NO"}
+                        </label>
+                      </div>
+
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -3834,6 +4105,7 @@ class FeeReceipt extends React.Component {
                         <button
                           className="btn btn-danger btn-sm mb-2"
                           id="HideAnnual"
+                          onClick={() => this.closeAnnualFeeModal()}
                         >
                           - Annual Fee
                         </button>
@@ -3842,17 +4114,32 @@ class FeeReceipt extends React.Component {
                   </div>
                   {this.state.is_full_free_ship != "true"
                     ? this.state.Allfees.map((item, index) => {
-                        if (item.fee_category == "ANNUAL") {
-                          if (
-                            item.fee_sub_category.includes("COMPUTER") != true
-                          ) {
+                      if (item.fee_category == "ANNUAL") {
+                        if (
+                          item.fee_sub_category.includes("COMPUTER") != true
+                        ) {
+                          return (
+                            <div className="col-4 form-group">
+                              <label>{item.fee_sub_category}  </label>
+                              <input
+                                type="text"
+                                className=""
+                                defaultValue="0"
+                                value={item.amount}
+                                onChange={(e) => {
+                                  this.setState(this.SetFee(index, e));
+                                }}
+                              />
+                            </div>
+                          );
+                        } else {
+                          if (this.state.take_computer == "true") {
                             return (
                               <div className="col-4 form-group">
                                 <label>{item.fee_sub_category}  </label>
                                 <input
                                   type="text"
                                   className=""
-                                  defaultValue="0"
                                   value={item.amount}
                                   onChange={(e) => {
                                     this.setState(this.SetFee(index, e));
@@ -3860,30 +4147,30 @@ class FeeReceipt extends React.Component {
                                 />
                               </div>
                             );
-                          } else {
-                            if (this.state.take_computer == "true") {
-                              return (
-                                <div className="col-4 form-group">
-                                  <label>{item.fee_sub_category}  </label>
-                                  <input
-                                    type="text"
-                                    className=""
-                                    value={item.amount}
-                                    onChange={(e) => {
-                                      this.setState(this.SetFee(index, e));
-                                    }}
-                                  />
-                                </div>
-                              );
-                            }
                           }
                         }
-                      })
+                      }
+                    })
                     : this.state.Allfees.map((item, index) => {
-                        if (item.fee_category == "ANNUAL") {
-                          if (
-                            item.fee_sub_category.includes("COMPUTER") != true
-                          ) {
+                      if (item.fee_category == "ANNUAL") {
+                        if (
+                          item.fee_sub_category.includes("COMPUTER") != true
+                        ) {
+                          return (
+                            <div className="col-4 form-group">
+                              <label>{item.fee_sub_category}  </label>
+                              <input
+                                type="text"
+                                className=""
+                                value="0"
+                                onChange={(e) => {
+                                  this.setState(this.SetFee(index, e));
+                                }}
+                              />
+                            </div>
+                          );
+                        } else {
+                          if (this.state.take_computer == "true") {
                             return (
                               <div className="col-4 form-group">
                                 <label>{item.fee_sub_category}  </label>
@@ -3897,25 +4184,10 @@ class FeeReceipt extends React.Component {
                                 />
                               </div>
                             );
-                          } else {
-                            if (this.state.take_computer == "true") {
-                              return (
-                                <div className="col-4 form-group">
-                                  <label>{item.fee_sub_category}  </label>
-                                  <input
-                                    type="text"
-                                    className=""
-                                    value="0"
-                                    onChange={(e) => {
-                                      this.setState(this.SetFee(index, e));
-                                    }}
-                                  />
-                                </div>
-                              );
-                            }
                           }
                         }
-                      })}
+                      }
+                    })}
                 </div>
 
                 {/* <table class="table">
@@ -3943,41 +4215,57 @@ class FeeReceipt extends React.Component {
                     <h3 className="receipt_h3 pb-5 ">
                       <u>Monthly Fee Class wise</u>
                       <span style={{ float: "right" }}>
+
                         <button
-                          className="btn btn-success btn-sm "
+                          className={`btn btn-success btn-sm ${this.state.annual ? '' : 'd-none'}`}
                           id="ShowAnnual"
+                          onClick={() => this.getAnnualFeeAmount()}
                         >
                           + Annual Fee
                         </button>
+
+
                       </span>
                     </h3>
                   </div>
                   {this.state.Allfees.map((item, index) => {
                     if (item.fee_category === "MONTHLY" && item.fee_sub_category === 'TUITION FEE') {
                       // if(this.state.is_teacher_ward == "false"){
-                        console.log(item,"inside map",this.state.feemonths.length , "and ", this.state.StudentTutionFee )
                       return (
-                        <div className="col-3 form-group">
+                        <div className="col-4 form-group">
                           <label>
                             {item.fee_sub_category}{" "}
                             {item.fee_sub_category == "TUITION FEE"
-                              ? "(" + this.state.StudentTutionFee + ")"
+                              ? "(" + this.state.admission_no ? this.state.StudentTutionFee : "" + ")"
                               : null}
-                             
+
                           </label>
+                      {/* <input
+                      className="checkbox-for-tuition-fee"
+                      style={{width:"22px"}}
+                        type="checkbox"
+                        onChange={(e) => {
+                          this.ChangemanualTutionFeeState(e);
+                        }}
+                      /> */}
                           <input
                             type="text"
                             className=""
-                            value={                             
-                              item.fee_sub_category == "TUITION FEE"
-                                ? parseInt(this.state.StudentTutionFee) * 1
-                                  // parseInt(this.state.feemonths.length)
-                                : this.state.StudentTutionFee
-                            }         
-                                               
+                            value={
+                              item.fee_sub_category === "TUITION FEE"
+                                ? parseInt(this.state.admission_no ? this.state.StudentTutionFee : 0) *
+                                  (this.state.totalNewPaybleMonth > 0
+                                    ? this.state.totalNewPaybleMonth
+                                    : parseInt(this.state.feemonths.length))
+                                : this.state.admission_no
+                                ? this.state.StudentTutionFee
+                                : 0
+                            }
+
                             onChange={(e) => {
                               this.setState(this.SetFee(index, e));
                             }}
+                            disabled
                           />
                         </div>
                       );
@@ -3986,30 +4274,22 @@ class FeeReceipt extends React.Component {
                   })}
                   <div className="col-2 form-group">
                     <label>
-                      Fine  
-                      <input
-                        type="checkbox"
-                        onChange={(e) => {
-                          this.ChangemanualFineState(e);
-                        }}
-                      />
+                      Fine
                     </label>
-
-                    <input
+                     <input
                       type="text"
                       className="defaultFine"
-                      value={this.state.fine}
-                      onChange={(e) => {
-                        this.setState({
-                          defaultFine: e.target.value.toUpperCase(),
-                        });
-                        this.setBalance();
-                      }}
-                    />
-                    <input
+                      value={this.state.delayFineFee}
+                    /> 
+                  </div>
+                  <div className="col-3 form-group">
+                    <label>
+                      Paid_Fine
+                    </label>
+                      <input
                       type="text"
                       className="manualFine"
-                      style={{ display: "none" }}
+                      // style={{ display: "none" }}
                       value={this.state.manualFine}
                       onChange={(e) => {
                         this.setState({
@@ -4017,7 +4297,7 @@ class FeeReceipt extends React.Component {
                         });
                         this.setBalance();
                       }}
-                    />
+                    /> 
                   </div>
                   <div className="col-2 form-group">
                     <label>Total_Dues  </label>
@@ -4025,14 +4305,21 @@ class FeeReceipt extends React.Component {
                       type="text"
                       style={{ backgroundColor: "blue", color: "white" }}
                       value={
-                        parseInt(this.state.remaning_balance) < 0
-                          ? parseInt(this.state.remaning_balance) * -1
-                          : "0"
+                        // parseInt(this.state.remaning_balance) < 0
+                        //   ? parseInt(this.state.remaning_balance) * -1
+                        //   : "0"
+                        this.getGrandTotal()-Number(this.state.paid_amount)
+                        
                       }
+                      onChange={()=>{
+                        this.setState({
+                         remaning_balance:(this.getGrandTotal()-Number(this.state.paid_amount))
+                        })
+                     }}
                     />
                   </div>
-                  <div className="col-2 form-group">
-                    <label>Paid_Amount  </label>
+                  <div className="col-3 form-group">
+                    <label>Paid_FEE  </label>
                     <input
                       type="text"
                       id="lastInput"
@@ -4089,7 +4376,7 @@ class FeeReceipt extends React.Component {
                       type="text"
                       style={{ backgroundColor: "orange" }}
                       className=""
-                      Value={this.state.one_time_fees}
+                      Value={this.state.TakeOneTimeFee ? this.state.one_time_fees : 0}
                     />
                   </div>
 
@@ -4099,7 +4386,7 @@ class FeeReceipt extends React.Component {
                       type="text"
                       style={{ backgroundColor: "orange" }}
                       className=""
-                      value={this.state.annual_fee}
+                      value={this.state.showTotalAnnualFee && this.state.admission_no ? this.state.annual_fee : 0}
                     />
                   </div>
                   <div className="col-3 form-group">
@@ -4108,7 +4395,7 @@ class FeeReceipt extends React.Component {
                       type="text"
                       style={{ backgroundColor: "orange" }}
                       className=""
-                      value={this.state.total_monthly_fee}
+                      value={this.state.admission_no ? this.state.total_monthly_fee : 0}
                       onChange={(e) => {
                         this.setState({
                           total_monthly_fee: e.target.value.toUpperCase(),
@@ -4122,7 +4409,8 @@ class FeeReceipt extends React.Component {
                       type="text"
                       style={{ backgroundColor: "orange" }}
                       className=""
-                      value={this.state.grand_total}
+
+                      value={this.getGrandTotal()}
                     />
                   </div>
                   <div className="col-3 form-group">
@@ -4132,9 +4420,9 @@ class FeeReceipt extends React.Component {
                       style={{ backgroundColor: "red" }}
                       className="bg-danger"
                       value={
-                        parseInt(this.state.remaning_balance) < 0
-                          ? this.state.remaning_balance
-                          : "0"
+                        
+                        Number(this.state.AllDueFees)
+                        // this.getGrandTotal()-Number(this.state.paid_amount)
                       }
                     />
                   </div>
@@ -4157,10 +4445,8 @@ class FeeReceipt extends React.Component {
                   <div className="col-6 form-group">
                     <button
                       className="btn btn-success  btn-md w-50"
-                      id="focusguard-2"
-                      onClick={() => {
-                        this.submitReceiptData();
-                      }}
+                      // id="focusguard-2"
+                      onClick={() => this.submitReceiptData()}
                       tabindex="5"
                     >
                       Save

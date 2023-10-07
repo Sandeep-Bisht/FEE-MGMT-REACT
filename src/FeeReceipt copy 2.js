@@ -1400,7 +1400,7 @@
 //                         <div class="modal-body printReciept">
 //                             <div className="row">
 //                                 <div className="col-12 text-center pb-3">
-//                                 <h3 className="m-0">ST. JUDES'S SCHOOL ( <select value={this.state.session} className="receiptSession" onChange={(e)=>{{this.setState({session:e.target.value.toUpperCase()})}}}> 
+//                                 <h3 className="m-0">CONSTANCIA SCHOOL ( <select value={this.state.session} className="receiptSession" onChange={(e)=>{{this.setState({session:e.target.value.toUpperCase()})}}}> 
 //                              <option value="">All Session</option>
 //                               {this.state.AllSession.map((item,index)=>{
 //                                   return(

@@ -56,7 +56,7 @@ class FullFreeShipReport extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100",
+            school_id: "UT015",
             session:this.state.session,
           })
           })
@@ -76,7 +76,7 @@ class FullFreeShipReport extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
           .then(res => res.json())

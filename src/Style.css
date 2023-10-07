@@ -72,6 +72,13 @@
 .transfer-certificate-dotted{
   height: 35px;
   border-bottom: 1px dotted;
+  padding-top: 7px;
+}
+.transfer-certificate-dotted-tc{
+  height: 35px;
+  border-bottom: 1px dotted;
+  /* padding-top: 7px; */
+  padding-left: 11px;
 }
 .transfer-certificate-head-sign{
   margin-top: 60px;
@@ -90,7 +97,7 @@ border-radius: 0%!important;
   font-weight: 600;
   border-bottom: 1px solid #000;
 }
-.sjs-form-group{
+.constancia-form-group{
   display: flex;
   flex-direction: column;
   justify-content: end;
@@ -363,6 +370,17 @@ font-size: 12px ;
     top: 0;
   } 
 
+  .transfer-certificat{
+    font-size: 20px !important;
+    width: 100%;
+    /* height: 100% !important; */
+    position: relative;
+    left: 0;
+    top: 0;
+  }
+  .transfer-certificat, .transfer-certificatm * {
+    visibility: visible;
+  }
   .CharactertCertificate, .CharactertCertificate * {
     /* margin: 0mm 0mm 0mm  15mm; */
     visibility: visible;

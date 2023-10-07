@@ -30,7 +30,7 @@ class SectionCreation extends React.Component{
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              school_id: "100"
+              school_id: "UT015"
             })
           })
             .then(res => res.json())
@@ -49,7 +49,7 @@ class SectionCreation extends React.Component{
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              school_id: "100",
+              school_id: "UT015",
               session:this.state.session,
             })
             })
@@ -70,7 +70,7 @@ class SectionCreation extends React.Component{
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          school_id: "100",
+          school_id: "UT015",
           session: this.state.session,
         })
       })
@@ -99,7 +99,7 @@ class SectionCreation extends React.Component{
         data.append('section', this.state.section)
         data.append('description',this.state.description)
         // data.append('session', this.state.session)
-        data.append('school_id', "100")
+        data.append('school_id', "UT015")
         const url="http://144.91.110.221:4800/updateSection"
                 fetch(url,
                     {
@@ -151,7 +151,7 @@ class SectionCreation extends React.Component{
         data.append('section', this.state.section)
         data.append('description', this.state.description)
         // data.append('session', this.state.session)
-        data.append('school_id', "100")
+        data.append('school_id', "UT015")
         const url = "http://144.91.110.221:4800/StoreSection"
         fetch(url, {
                 method: 'post',
@@ -237,7 +237,7 @@ class SectionCreation extends React.Component{
                             <span className="text-danger" style={{fontSize:'14px',fontWeight:600}}>{this.state.DuplicateSectionErrorMessage}</span>
                             <span className="errorMessage" style={{fontSize:'14px',fontWeight:600}}>{this.state.sectionErrorMessage}</span>
                         </div>
-                        <div className="col-6 form-group sjs-form-group">
+                        <div className="col-6 form-group constancia-form-group">
                             <label>Satus </label>
                             <select className="form-control" value={this.state.description} onChange={(e)=>{{this.setState({description:e.target.value.toUpperCase(),class_nameErrorMessage:undefined})}}}>
                            <option value="">ACTIVE</option>

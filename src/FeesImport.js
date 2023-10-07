@@ -230,7 +230,7 @@ class FeesImport extends Component {
             },
           ]
           const newUser = {
-            "school_id": "100",
+            "school_id": "UT015",
             "receipt_no": receipt_no,
             "session": session,
             'class_name': class_name,
@@ -281,6 +281,7 @@ class FeesImport extends Component {
           })
           .then(res => res.json())
           .then(dataa => {
+            console.log(dataa,"insdie the feesIMport")
             // alert("Promote Successfully")
             // this.setState({session:this.state.to_session})           
           }).catch(err => {});

@@ -60,7 +60,7 @@ class NonTransferCertificate extends React.Component{
           body: JSON.stringify({
             admission_no: this.state.admission_no,
             session: this.state.session,
-            school_id:"100",
+            school_id:"UT015",
           })
         })
               .then(res => res.json())

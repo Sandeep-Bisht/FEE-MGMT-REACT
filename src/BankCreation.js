@@ -27,7 +27,7 @@ class BankCreation extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
 
@@ -50,7 +50,7 @@ class BankCreation extends React.Component{
         const data = new FormData()
         data.append('_id',this.state._id)
         data.append('bank',this.state.bank)
-        data.append('school_id','100')
+        data.append('school_id','UT015')
         const url="http://144.91.110.221:4800/UpdateBankData"
                 fetch(url,
                     {
@@ -95,7 +95,7 @@ class BankCreation extends React.Component{
         if (this.checkValidation()) {
         const data = new FormData()
         data.append('bank', this.state.bank)
-        data.append('school_id', "100")
+        data.append('school_id', "UT015")
         const url = "http://144.91.110.221:4800/StoreBankData"
         fetch(url, {
                 method: 'post',

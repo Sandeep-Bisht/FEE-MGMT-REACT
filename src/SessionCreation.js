@@ -24,7 +24,7 @@ getSession = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          school_id: "100"
+          school_id: "UT015"
         })
       })
         .then(res => res.json())
@@ -68,7 +68,7 @@ submitSessionData = () => {
     data.append('from', Moment(this.state.from).format('DD-MM-YYYY'))
     data.append('to', Moment(this.state.to).format('DD-MM-YYYY'))
     data.append('session_code',this.state.session_code)
-    data.append('school_id',"100")
+    data.append('school_id',"UT015")
     const url = "http://144.91.110.221:4800/StoreSession"
     fetch(url, {
             method: 'post',
@@ -117,7 +117,7 @@ setsession_code =async()=>{
                             <input type="date" className="form-control" onChange={(e)=>{{this.setState({to:e.target.value.toUpperCase(),toErrorMessage:undefined});this.setsession_code()}}}/>
                             <span className="errorMessage" style={{fontSize:'14px',fontWeight:600}}>{this.state.toErrorMessage}</span>
                         </div>
-                        <div className="col-6 form-group sjs-form-group"> 
+                        <div className="col-6 form-group constancia-form-group"> 
                             <label>Session code</label>
                             <input type="text" className="form-control" value={this.state.session_code}/>
                             <span className="errorMessage" style={{fontSize:'14px',fontWeight:600}}>{this.state.toErrorMessage}</span>

@@ -54,9 +54,7 @@ class Dashboard extends React.Component{
         console.log("data ki length "+data.lenght)
         console.log("data "+data)
         this.setState({ voucher_by_date: data })
-       
-
-      })
+      }).catch((error)=>console.log(error))
   }
   VoucherByDate_pnb = async () => {
     paidamountbydate_pnb=0
@@ -78,9 +76,8 @@ class Dashboard extends React.Component{
       .then((data) => data.json())
       .then(async (data) => {
         this.setState({ voucher_by_date_pnb: data})
-       
-
       })
+      .catch((error)=>console.log(error))
   }
   VoucherByDate_sbi = async () => {
     paidamountbydate_sbi=0
@@ -102,7 +99,7 @@ class Dashboard extends React.Component{
       .then((data) => data.json())
       .then(async (data) => {
         this.setState({ voucher_by_date_sbi: data })
-      })
+      }).catch((error)=>console.log(error))
   }
   SuspiciousVoucherByDate = async () => {
 
@@ -125,7 +122,7 @@ class Dashboard extends React.Component{
       .then(async (data) => {
         this.setState({ SuspiciousVoucherByDate: data.length })
        
-      })
+      }).catch((error)=>console.log(error))
   }
   getClass = () => {
     fetch("http://144.91.110.221:4800/getClass")
@@ -146,7 +143,7 @@ class Dashboard extends React.Component{
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          school_id: "100",
+          school_id: "UT015",
           session:this.state.session,
         })
         })
@@ -160,7 +157,7 @@ class Dashboard extends React.Component{
             })
             this.setState({AllSection:ActiveSection})
         })
-        .then(err => console.log(err))
+        .catch(err => console.log(err))
 }
   getStudent = () => {
     fetch("http://144.91.110.221:4800/getStudentCount"
@@ -172,7 +169,7 @@ class Dashboard extends React.Component{
           },
             body: JSON.stringify({
             session: this.state.session,
-            school_id: "100"
+            school_id: "UT015"
           })
         })
         .then(res => res.json())
@@ -180,7 +177,7 @@ class Dashboard extends React.Component{
             this.setState({AllStudentcount: data.count})
             
         })
-        .then(err => console.log(err))
+        .catch(err => console.log(err))
   }
     render(){
  paidamountbydate=0

@@ -34,7 +34,7 @@ class StudentPromotionAll extends React.Component{
           },
           body: JSON.stringify({
             session: this.state.from_session,
-            school_id: "100"
+            school_id: "UT015"
             // section: this.state.from_section
           })
         })
@@ -62,7 +62,7 @@ class StudentPromotionAll extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
           .then(res => res.json())
@@ -80,55 +80,55 @@ class StudentPromotionAll extends React.Component{
   {this.state.AllStudent.map((item,index)=>{
     
     if(item.class_name=="PRE-NUR"){
-    StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"100","student":item.student._id,"session":this.state.to_session,"class_name":'NUR',"section":item.section})
+    StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"UT015","student":item.student._id,"session":this.state.to_session,"class_name":'NUR',"section":item.section})
     }
     else if(item.class_name=="NUR"){
-      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"100","student":item.student._id,"session":this.state.to_session,"class_name":'KG',"section":item.section})
+      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"UT015","student":item.student._id,"session":this.state.to_session,"class_name":'KG',"section":item.section})
     }
     else if(item.class_name=="KG"){
-      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"100","student":item.student._id,"session":this.state.to_session,"class_name":'1',"section":item.section})
+      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"UT015","student":item.student._id,"session":this.state.to_session,"class_name":'1',"section":item.section})
     }
     else if(item.class_name=="1"){
-      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"100","student":item.student._id,"session":this.state.to_session,"class_name":'2',"section":item.section})
+      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"UT015","student":item.student._id,"session":this.state.to_session,"class_name":'2',"section":item.section})
     }
     else if(item.class_name=="2"){
-      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"100","student":item.student._id,"session":this.state.to_session,"class_name":'3',"section":item.section})
+      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"UT015","student":item.student._id,"session":this.state.to_session,"class_name":'3',"section":item.section})
     }
     else if(item.class_name=="3"){
-      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"100","student":item.student._id,"session":this.state.to_session,"class_name":'4',"section":item.section})
+      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"UT015","student":item.student._id,"session":this.state.to_session,"class_name":'4',"section":item.section})
     }
     else if(item.class_name=="4"){
-      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"100","student":item.student._id,"session":this.state.to_session,"class_name":'5',"section":item.section})
+      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"UT015","student":item.student._id,"session":this.state.to_session,"class_name":'5',"section":item.section})
     }
     else if(item.class_name=="5"){
-      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"100","student":item.student._id,"session":this.state.to_session,"class_name":'6',"section":item.section})
+      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"UT015","student":item.student._id,"session":this.state.to_session,"class_name":'6',"section":item.section})
     }
     else if(item.class_name=="6"){
-      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"100","student":item.student._id,"session":this.state.to_session,"class_name":'7',"section":item.section})
+      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"UT015","student":item.student._id,"session":this.state.to_session,"class_name":'7',"section":item.section})
     }
     else if(item.class_name=="7"){
-      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"100","student":item.student._id,"session":this.state.to_session,"class_name":'8',"section":item.section})
+      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"UT015","student":item.student._id,"session":this.state.to_session,"class_name":'8',"section":item.section})
     }
     else if(item.class_name=="8"){
-      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"100","student":item.student._id,"session":this.state.to_session,"class_name":'9SCI',"section":item.section})
+      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"UT015","student":item.student._id,"session":this.state.to_session,"class_name":'9SCI',"section":item.section})
     }
     else if(item.class_name=="9COM"){
-      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"100","student":item.student._id,"session":this.state.to_session,"class_name":'10COM',"section":item.section})
+      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"UT015","student":item.student._id,"session":this.state.to_session,"class_name":'10COM',"section":item.section})
     }
     else if(item.class_name=="9SCI"){
-      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"100","student":item.student._id,"session":this.state.to_session,"class_name":'10SCI',"section":item.section})
+      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"UT015","student":item.student._id,"session":this.state.to_session,"class_name":'10SCI',"section":item.section})
     }
     else if(item.class_name=="10SCI"){
-      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"100","student":item.student._id,"session":this.state.to_session,"class_name":'11SCI',"section":item.section})
+      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"UT015","student":item.student._id,"session":this.state.to_session,"class_name":'11SCI',"section":item.section})
     }
     else if(item.class_name=="10COM"){
-      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"100","student":item.student._id,"session":this.state.to_session,"class_name":'11COM',"section":item.section})
+      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"UT015","student":item.student._id,"session":this.state.to_session,"class_name":'11COM',"section":item.section})
     }
     else if(item.class_name=="11COM"){
-      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"100","student":item.student._id,"session":this.state.to_session,"class_name":'12COM',"section":item.section})
+      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"UT015","student":item.student._id,"session":this.state.to_session,"class_name":'12COM',"section":item.section})
     }
     else if(item.class_name=="11SCI"){
-      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"100","student":item.student._id,"session":this.state.to_session,"class_name":'12SCI',"section":item.section})
+      StudentData.push({"unique_id":this.state.to_session+item.admission_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"UT015","student":item.student._id,"session":this.state.to_session,"class_name":'12SCI',"section":item.section})
     }
   })
   await console.log("wait")

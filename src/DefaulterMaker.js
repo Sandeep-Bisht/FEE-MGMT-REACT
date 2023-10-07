@@ -337,7 +337,7 @@ paidFees.push({"session":this.state.session,"class_name":item.class_name,"sectio
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
           .then(res => res.json())
@@ -365,7 +365,7 @@ paidFees.push({"session":this.state.session,"class_name":item.class_name,"sectio
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100",
+            school_id: "UT015",
             session:this.state.session,
           })
           })

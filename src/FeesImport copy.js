@@ -3465,7 +3465,7 @@ class FeesImport extends Component {
             },
           ]
           const newUser = {
-            "school_id": "100",
+            "school_id": "UT015",
             "receipt_no": receipt_no,
             "session": "2020-2021",
             'class_name': class_name,

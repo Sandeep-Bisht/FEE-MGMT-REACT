@@ -32,7 +32,7 @@ getSession = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          school_id: "100"
+          school_id: "UT015"
         })
       })
         .then(res => res.json())
@@ -51,7 +51,7 @@ getSection = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          school_id: "100",
+          school_id: "UT015",
           session:this.state.session,
         })
         })
@@ -73,7 +73,7 @@ getClass = async() => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      school_id: "100",
+      school_id: "UT015",
       session: this.state.session,
     })
   })
@@ -117,7 +117,7 @@ updateSubjectData =()=>{
     data.append('order_no', this.state.order_no)
     data.append('description', this.state.description)
     data.append('session', this.state.session)
-    data.append('school_id', "100")
+    data.append('school_id', "UT015")
     const url="http://144.91.110.221:4800/updateSubject"
             fetch(url,
                 {
@@ -174,7 +174,7 @@ submitSubjectData = () => {
     data.append('order_no', this.state.order_no)
     data.append('description', this.state.description)
     data.append('session', this.state.session)
-    data.append('school_id', "100")
+    data.append('school_id', "UT015")
     const url = "http://144.91.110.221:4800/StoreSubject"
     fetch(url, {
             method: 'post',

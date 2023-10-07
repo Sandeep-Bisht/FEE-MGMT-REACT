@@ -135,7 +135,7 @@ class StudentEdit extends React.Component{
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              school_id: "100"
+              school_id: "UT015"
             })
           })
             .then(res => res.json())
@@ -154,7 +154,7 @@ class StudentEdit extends React.Component{
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              school_id: "100",
+              school_id: "UT015",
               session:this.state.session,
             })
             })
@@ -176,7 +176,7 @@ class StudentEdit extends React.Component{
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          school_id: "100",
+          school_id: "UT015",
           session: this.state.session,
         })
       })
@@ -226,7 +226,7 @@ class StudentEdit extends React.Component{
               },
               body: JSON.stringify({
                 session: this.state.session,
-                school_id:"100"
+                school_id:"UT015"
               })
             })
             .then(res => res.json())
@@ -569,7 +569,7 @@ class StudentEdit extends React.Component{
         data.append('gaurdian_per_country', this.state.gaurdian_per_country)
         data.append('gaurdian_phone', this.state.gaurdian_phone)
         data.append('gaurdian_mobile', this.state.gaurdian_mobile)
-        data.append('school_id', "100")
+        data.append('school_id', "UT015")
         data.append('unique_id', this.state.session+this.state.admission_no)
         data.append('image', this.state.image)
         data.append('image2', this.state.image2)
@@ -670,7 +670,7 @@ class StudentEdit extends React.Component{
               body: JSON.stringify({
                 session: this.state.session,
                 admission_no: admission_no,
-                school_id:"100",
+                school_id:"UT015",
               })
             })
         .then((data) => data.json())
@@ -683,7 +683,7 @@ class StudentEdit extends React.Component{
     render(){
         const data =[];
         {this.state.AllStudent.map((item,index)=>{
-        data.push( {"sr_no":index+1,"name":item.student.name,"admission_no":parseInt(item.admission_no),"account_no":parseInt(item.account_no),"session":item.session,"class":item.class_name,"section":item.section,"action":<td><button className="btn btn-secondary mr-2"  data-dismiss="modal" onClick={() => this.editStudentObject(item)}><i class="fas fa-pencil-alt"></i></button><button onClick = { () => this.deleteFeeStructure(item._id)} className="btn btn-danger"><i className="fa fa-trash" aria-hidden="true"></i></button></td>})
+        data.push( {"sr_no":index+1,"name":item?.student?.name,"admission_no":parseInt(item?.admission_no),"account_no":parseInt(item?.account_no),"session":item?.session,"class":item?.class_name,"section":item?.section,"action":<td><button className="btn btn-secondary mr-2"  data-dismiss="modal" onClick={() => this.editStudentObject(item)}><i class="fas fa-pencil-alt"></i></button><button onClick = { () => this.deleteFeeStructure(item._id)} className="btn btn-danger"><i className="fa fa-trash" aria-hidden="true"></i></button></td>})
         })}
           const columns = [
             { title: "SR NO", data: "sr_no" },
@@ -864,7 +864,7 @@ class StudentEdit extends React.Component{
                                <option value="">Select House</option>
                                {this.state.AllHouse.map((item,index)=>{
                                   return(
-                                    <option value={item.house_name}>{item.house_name}</option>
+                                    <option value={item?.house_name}>{item?.house_name}</option>
                                   )
                               })}
                            </select>

@@ -86,7 +86,7 @@ class FeeStructure extends React.Component{
                   'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                  school_id: "100",
+                  school_id: "UT015",
                   session:this.state.ImportSession
                 })
               })
@@ -128,7 +128,7 @@ class FeeStructure extends React.Component{
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              school_id: "100"
+              school_id: "UT015"
             })
           })
             .then(res => res.json())
@@ -149,7 +149,7 @@ class FeeStructure extends React.Component{
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          school_id: "100",
+          school_id: "UT015",
           session: this.state.session,
         })
       })
@@ -196,7 +196,7 @@ class FeeStructure extends React.Component{
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              school_id: "100",
+              school_id: "UT015",
               session:this.state.session
             })
           })
@@ -253,7 +253,7 @@ class FeeStructure extends React.Component{
         data.append('session', this.state.session)
         data.append('class_name', this.state.class_name)
         data.append('section', this.state.section)
-        data.append('school_id', "100")
+        data.append('school_id', "UT015")
         data.append('fees', JSON.stringify(this.state.AllSubCategory))
         data.append('total_one_time_fee', this.state.total_one_time_fee)
         data.append('total_annual_fee', this.state.total_annual_fee)
@@ -315,7 +315,7 @@ class FeeStructure extends React.Component{
         data.append('session', this.state.session)
         data.append('class_name', this.state.class_name)
         data.append('section', this.state.section)
-        data.append('school_id', "100")
+        data.append('school_id', "UT015")
         data.append('fees', JSON.stringify(this.state.AllSubCategory))
         data.append('total_one_time_fee', this.state.total_one_time_fee)
         data.append('total_annual_fee', this.state.total_annual_fee)
@@ -463,7 +463,7 @@ class FeeStructure extends React.Component{
              <div className= "row printCard printAllStructure" style={{display:"none"}}  >
                 <div className="col-12 ">
                     {/* <div className="col-12 text-center pb-5">
-                        <h3>ST. JUDES'S SCHOOL</h3>
+                        <h3>CONSTANCIA SCHOOL</h3>
                         <p>WEST CANAL ROAD P.O MAJRA, DEHRADUN</p>
                         <p>0135-2640930,0135-2642828,FAX:0135-2644353</p>
                     </div> */}
@@ -710,11 +710,11 @@ class FeeStructure extends React.Component{
                             <label>Total Annual Fee</label>
                             <input type="text" value={this.state.total_annual_fee} className="form-control"/>
                         </div>
-                        <div className="col-3 form-group sjs-form-group">
+                        <div className="col-3 form-group constancia-form-group">
                             <label>Total Monthly Fee</label>
                             <input type="text" value={this.state.total_monthly_fee} className="form-control" />
                         </div>
-                        <div className="col-3 form-group sjs-form-group">
+                        <div className="col-3 form-group constancia-form-group">
                             <label>Grand Total</label>
                             <input type="text" value={this.state.grand_total} className="form-control" />
                         </div>

@@ -62,7 +62,7 @@ class StudentSpecificPromotion extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100",
+            school_id: "UT015",
           })
           })
           .then(res => res.json())
@@ -90,7 +90,7 @@ class StudentSpecificPromotion extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
           .then(res => res.json())
@@ -109,7 +109,7 @@ class StudentSpecificPromotion extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
           .then(res => res.json())
@@ -131,7 +131,7 @@ class StudentSpecificPromotion extends React.Component{
           },
           body: JSON.stringify({
             session: this.state.to_session,
-            school_id:"100"
+            school_id:"UT015"
           })
         })
         .then(res => res.json()
@@ -152,7 +152,7 @@ class StudentSpecificPromotion extends React.Component{
         },
         body: JSON.stringify({
           session: this.state.from_session,
-          school_id:"100"
+          school_id:"UT015"
         })
       })
       .then(res => res.json()
@@ -196,7 +196,7 @@ class StudentSpecificPromotion extends React.Component{
   setStudent=(item,e)=>{
     if(this.checkValidation()){
     if(e.target.checked ==true){
-    StudentData.push({"unique_id":this.state.to_session+item.admission_no+item.account_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"100","student":item.student._id,"session":this.state.to_session,"class_name":this.state.to_class,"section":this.state.to_section})
+    StudentData.push({"unique_id":this.state.to_session+item.admission_no+item.account_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"UT015","student":item.student._id,"session":this.state.to_session,"class_name":this.state.to_class,"section":this.state.to_section})
     IdArray.push(item._id)
   }
     if (!e.target.checked) {

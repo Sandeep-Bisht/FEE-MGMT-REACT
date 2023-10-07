@@ -33,7 +33,7 @@ class AdminLayout extends React.Component{
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              school_id: "100"
+              school_id: "UT015"
             })
           })
             .then(res => res.json())
@@ -41,7 +41,7 @@ class AdminLayout extends React.Component{
                 console.log(data)
                 this.setState({AllSession: data})
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
     }
     setSession=async(e)=>{
         await console.log("wait")

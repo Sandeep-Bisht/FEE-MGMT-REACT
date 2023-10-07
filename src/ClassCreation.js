@@ -28,7 +28,7 @@ class ClassCreation extends React.Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        school_id: "100",
+        school_id: "UT015",
         // session: this.state.session,
       }),
     })
@@ -67,7 +67,7 @@ class ClassCreation extends React.Component {
       data.append("actual_class", this.state.actual_class);
       data.append("description", this.state.description);
       data.append("session", this.state.session);
-      data.append("school_id", "100");
+      data.append("school_id", "UT015");
       const url = "http://144.91.110.221:4800/updateClass";
       fetch(url, {
         method: "put",
@@ -105,7 +105,7 @@ class ClassCreation extends React.Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        school_id: "100",
+        school_id: "UT015",
       }),
     })
       .then((res) => res.json())
@@ -123,7 +123,7 @@ class ClassCreation extends React.Component {
       data.append("actual_class", this.state.actual_class);
       data.append("description", this.state.description);
       // data.append('session', this.state.session)
-      data.append("school_id", "100");
+      data.append("school_id", "UT015");
       const url = "http://144.91.110.221:4800/StoreClass";
       fetch(url, {
         method: "post",

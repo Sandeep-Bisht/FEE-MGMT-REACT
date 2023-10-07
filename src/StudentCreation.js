@@ -138,7 +138,7 @@ class StudentCreation extends React.Component{
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              school_id: "100"
+              school_id: "UT015"
             })
           })
             .then(res => res.json())
@@ -166,7 +166,7 @@ class StudentCreation extends React.Component{
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              school_id: "100",
+              school_id: "UT015",
               session:this.state.session,
             })
             })
@@ -188,7 +188,7 @@ class StudentCreation extends React.Component{
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          school_id: "100",
+          school_id: "UT015",
           session: this.state.session,
         })
       })
@@ -229,7 +229,7 @@ class StudentCreation extends React.Component{
               },
               body: JSON.stringify({
                 session: this.state.session,
-                school_id:"100"
+                school_id:"UT015"
               })
             })
             .then(res => res.json())
@@ -249,7 +249,7 @@ class StudentCreation extends React.Component{
                 'Content-Type': 'application/json'
               },
               body: JSON.stringify({
-                school_id:"100"
+                school_id:"UT015"
               })
             })
             .then(res => res.json())
@@ -270,7 +270,7 @@ class StudentCreation extends React.Component{
               },
               body: JSON.stringify({
                 session: this.state.session,
-                school_id:"100"
+                school_id:"UT015"
               })
             })
             .then(res => res.json())
@@ -498,7 +498,7 @@ class StudentCreation extends React.Component{
     render(){
         const data =[];
         {this.state.AllStudent.map((item,index)=>{
-        data.push( {"sr_no":index+1,"name":item.student.name,"admission_no":parseInt(item.student.admission_no),"account_no":parseInt(item.student.account_no),"session":item.session,"class":item.class_name,"section":item.section})
+        data.push( {"sr_no":index+1,"name":item?.student?.name,"admission_no":parseInt(item?.student?.admission_no),"account_no":parseInt(item?.student?.account_no),"session":item?.session,"class":item?.class_name,"section":item?.section})
         })}
           const columns = [
             { title: "SR NO", data: "sr_no" },
@@ -750,7 +750,7 @@ class StudentCreation extends React.Component{
                             <input type="text" className="form-control" value={this.state.balance} onChange={(e)=>{this.setState({balance:e.target.value.toUpperCase()})}}/>
                         </div> */}
                         <div className="col-3 form-group">
-                            <label>Fee Concession % </label>
+                            <label>Fee Concession </label>
                             <input type="text" className="form-control" onChange={(e)=>{this.setState({fee_concession:e.target.value.toUpperCase()})}}/>
                         </div>
                         <div className="col-3 form-group">
@@ -868,7 +868,7 @@ class StudentCreation extends React.Component{
                              <option value="0">Select Account no.</option>
                              {this.state.AllStudentAccount_no.map((item,index)=>{
                                  return(
-                                    <option value={item.student.account_no}>{item.student.account_no}</option>
+                                    <option value={item?.student?.account_no}>{item?.student?.account_no}</option>
                                  )
                              })}
                            </select>

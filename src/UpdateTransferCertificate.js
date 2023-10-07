@@ -136,7 +136,7 @@ class UpdateTransferCertificate extends React.Component{
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              school_id: "100",
+              school_id: "UT015",
               session:this.state.session,
             })
             })
@@ -157,7 +157,7 @@ class UpdateTransferCertificate extends React.Component{
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          school_id: "100",
+          school_id: "UT015",
           session: this.state.session,
         })
       })
@@ -197,7 +197,7 @@ class UpdateTransferCertificate extends React.Component{
           },
           body: JSON.stringify({
             session: this.state.session,
-            school_id: "100"
+            school_id: "UT015"
           })
         })
 

@@ -61,7 +61,7 @@ class CharacterCertificate extends React.Component{
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        school_id: "100",
+        school_id: "UT015",
         session: this.state.session,
       })
     })
@@ -84,7 +84,7 @@ class CharacterCertificate extends React.Component{
           body: JSON.stringify({
             admission_no: this.state.admission_no,
             session: this.state.session,
-            school_id:"100",
+            school_id:"UT015",
           })
         })
               .then(res => res.json())

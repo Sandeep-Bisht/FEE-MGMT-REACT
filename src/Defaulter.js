@@ -86,7 +86,7 @@ class Defaulter extends React.Component{
 //         body: JSON.stringify({
 //           session: previousSession,
 //           admission_no: item.admission_no,
-//           school_id:"100",
+//           school_id:"UT015",
 //         })
 //       })
 //   .then((data) => data.json())
@@ -685,7 +685,7 @@ paidFees.push({"fee_concession":fee_concession,"is_full_free_ship":item.is_full_
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
           .then(res => res.json())
@@ -713,7 +713,7 @@ paidFees.push({"fee_concession":fee_concession,"is_full_free_ship":item.is_full_
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100",
+            school_id: "UT015",
             session:this.state.session,
           })
           })

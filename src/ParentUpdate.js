@@ -78,7 +78,7 @@ class ParentUpdate extends React.Component{
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              school_id: "100"
+              school_id: "UT015"
             })
           })
             .then(res => res.json())
@@ -97,7 +97,7 @@ class ParentUpdate extends React.Component{
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              school_id: "100",
+              school_id: "UT015",
               session:this.state.session,
             })
             })
@@ -119,7 +119,7 @@ class ParentUpdate extends React.Component{
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          school_id: "100",
+          school_id: "UT015",
           session: this.state.session,
         })
       })
@@ -169,7 +169,7 @@ class ParentUpdate extends React.Component{
               },
               body: JSON.stringify({
                 session: this.state.session,
-                school_id:"100"
+                school_id:"UT015"
               })
             })
             .then(res => res.json())
@@ -419,7 +419,7 @@ class ParentUpdate extends React.Component{
         data.append('gaurdian_per_country', this.state.gaurdian_per_country)
         data.append('gaurdian_phone', this.state.gaurdian_phone)
         data.append('gaurdian_mobile', this.state.gaurdian_mobile)
-        const url="http://localhost:4800/updateAllParents"
+        const url="http://144.91.110.221:4800/updateAllParents"
                 fetch(url,
                     {
                     method:'PATCH',
@@ -514,7 +514,7 @@ class ParentUpdate extends React.Component{
               body: JSON.stringify({
                 session: this.state.session,
                 admission_no: admission_no,
-                school_id:"100",
+                school_id:"UT015",
               })
             })
         .then((data) => data.json())
