@@ -64,6 +64,7 @@ class FeeReceipt extends React.Component {
       no_exempt_security_deposit: false,
       ncc: false,
       no_exempt_registration: false,
+      getStudentData:false,
       no_exempt_admission: false,
       is_repeater: false,
       other_details: "",
@@ -327,7 +328,7 @@ class FeeReceipt extends React.Component {
           defaultFine: data[0]?.amount,
         });
       })
-      .then((err) => console.log(err));
+      .catch((err) => console.log(err));
   };
   getStudent = async () => {
     fetch("http://144.91.110.221:4800/getStudent", {
@@ -349,7 +350,7 @@ class FeeReceipt extends React.Component {
         this.getStudentCount();
         this.PaginationCall();
       })
-      .then((err) => console.log(err));
+      .catch((err) => console.log(err));
   };
   GetDefaulterMoneySingleStudent = async () => {
     var a = this.state.session.split("-")[0];
@@ -543,6 +544,7 @@ class FeeReceipt extends React.Component {
             parent_mobile: data[0].student.parent_mobile,
             parent_phone: data[0].student.parent_phone,
             studentSession: data[0].session,
+            getStudentData:true,
           });
           if (data[0].student.tc_status == 1) {
             this.getCertificateDetails();
@@ -566,10 +568,14 @@ class FeeReceipt extends React.Component {
           }
         }
         else{
-            this.setState({AllStudent:[],fees:[],report_card_and_diary:'0',annual_prize_day:'0',development_fund:'0',school_magazin:'0',annual_sports_day:'0',examination_fee:'0',med_board_reg:'0',library_fee:'0', tution_fee:'0',computer_fee:'0',science_fee:'0',bus_fare:'0'})
+            this.setState({AllStudent:[],fees:[],report_card_and_diary:'0',annual_prize_day:'0',development_fund:'0',school_magazin:'0',annual_sports_day:'0',examination_fee:'0',med_board_reg:'0',library_fee:'0', tution_fee:'0',computer_fee:'0',science_fee:'0',bus_fare:'0',getStudentData:false})
         }
       }).catch((error) => {
-        console.log(error)
+        if(error){
+          this.setState({
+            getStudentData:false,
+          })
+        }
       })
   };
 
@@ -578,21 +584,13 @@ class FeeReceipt extends React.Component {
     let paidFeeLastMonths=Moment(this.state.paid_upto_month).format("M");
     const newFormMonths=Moment(currentDate).format("M");
     let duesMonthForPay = ""
-    // if(this.state.fromtomonths.length>0)
-    // {
-    //   this.setState({
-    //     delayFineFee: parseInt(newFormMonths-paidFeeLastMonths )* 30
-    //   })
-    // }
-    // else{
-      console.log(this.state.manualFineState,"check manual fine fee")
-      if(this.state.manualFineState)
-      {
-        this.setState({
-          delayFineFee:this.state.manualFine,
-        })
-      }
-      else{
+      // if(this.state.manualFineState)
+      // {
+      //   this.setState({
+      //     delayFineFee:this.state.manualFine,
+      //   })
+      // }
+      // else{
         const priviousPaidDate = this.state.paid_upto_month
         const PriviousDateParts = priviousPaidDate.split("-");
         const PriviousMonth = PriviousDateParts[1];
@@ -604,7 +602,6 @@ class FeeReceipt extends React.Component {
         let totalFineFinaly=0;
         if (year == PriviousYear && month > PriviousMonth) {
           if (day > 15) {
-            console.log("check insede get Fine Fee")
             duesMonthForPay = (month - PriviousMonth)
             for(let i=1; i<=duesMonthForPay; i++)
             {
@@ -612,7 +609,6 @@ class FeeReceipt extends React.Component {
             }
           }
           else {
-            console.log("check insede else part get Fine Fee")
             duesMonthForPay = (month - PriviousMonth) - 1
             for(let i=1; i<=duesMonthForPay; i++)
             {
@@ -623,7 +619,7 @@ class FeeReceipt extends React.Component {
         this.setState({
           delayFineFee: totalFineFinaly
         })
-      }
+      // }
     // }
   }
   // getFeeReceipt = () => {
@@ -639,12 +635,10 @@ class FeeReceipt extends React.Component {
       let currentDate=Moment(this.state.receipt_date).format("MM-YYYY");
       let lastDateMonth=Moment(lastDate).format("MM-YYYY");
       let monthsDifference = Moment(currentDate, "MM-YYYY").diff(Moment(lastDateMonth, "MM-YYYY"), 'months');
-                  console.log(monthsDifference,"montheeeeeeeeeee")
       if(monthsDifference>0) 
       {
       let tutionFee=this.state.StudentTutionFee
-      console.log(Number(this.state.total_monthly_fee)*Number(monthsDifference),"insideeeeeeeee",monthsDifference)
-      return ((tutionFee*Number(monthsDifference)) + (this.state.showTotalAnnualFee && this.state.admission_no ? this.state.annual_fee : 0) + (this.state.TakeOneTimeFee ? this.state.one_time_fees : 0) + (this.state.AllDueFees ? this.state.AllDueFees : 0))
+      return ((tutionFee*Number(monthsDifference)) +  (this.state.AllDueFees ? Number(this.state.AllDueFees) : 0))
   }
     else{ 
       let currentDate=new Date();
@@ -654,7 +648,7 @@ class FeeReceipt extends React.Component {
         parseInt(Number(newFormMonths)-Number(paidFeeLastMonths))
         : (this.state.admission_no ? this.state.StudentTutionFee : 0)
         :
-        0) + (this.state.showTotalAnnualFee && this.state.admission_no ? this.state.annual_fee : 0) + (this.state.TakeOneTimeFee ? this.state.one_time_fees : 0) + (this.state.AllDueFees ? this.state.AllDueFees : 0)
+        0) + (this.state.TakeOneTimeFee ? Number(this.state.one_time_fees) : 0) + (this.state.AllDueFees ? Number(this.state.AllDueFees) : 0)
     }
   };
   getCertificateDetails = async () => {
@@ -739,6 +733,7 @@ class FeeReceipt extends React.Component {
     })
       .then((data) => data.json())
       .then(async (data) => {
+        console.log("check the data inside the search old data",data)
         if (data[0] != undefined) {
           var A = Moment(data[data.length - 1].last_fee_date);
           var aa = this.state.session.split("-")[0];
@@ -760,7 +755,8 @@ class FeeReceipt extends React.Component {
               last_session: data[data.length - 1].session,
               last_fee_date: data.last_fee_date,
               previousPaidFine : data[data.length - 1].paid_fine,
-              AllDueFees:data[data.length - 1].grand_total-data[data.length - 1].paid_amount
+              AllDueFees:data[data.length - 1].grand_total-data[data.length - 1].paid_amount,
+              receipt_no:data[data.length - 1].receipt_no
             });
 
           } else {
@@ -770,7 +766,8 @@ class FeeReceipt extends React.Component {
               last_session: data[data.length - 1].session,
               last_fee_date: data.last_fee_date,
               balance: data[data.length - 1].balance,
-              AllDueFees:data[data.length - 1].grand_total-data[data.length - 1].paid_amount
+              AllDueFees:data[data.length - 1].grand_total-data[data.length - 1].paid_amount,
+              receipt_no:data[data.length - 1].receipt_no
             });
 
             if (parseInt(data[data.length - 1].balance) > 0) {
@@ -781,11 +778,17 @@ class FeeReceipt extends React.Component {
           }
         } else {
           if (this.state.AllStudent[0] != undefined) {
+            console.log("check the data inside else part of the search old data")
             this.setState({
               last_fee_date: this.state.last_fee_date,
               last_session: this.state.studentSession,
               date_of_admission: this.state.date_of_admission,
               last_fee_status: false,
+              AllDueFees:0,
+              receipt_no:""
+            },
+            ()=>{
+              this.getFineFee();
             });
             //  await this.setBalance()
           }
@@ -837,7 +840,6 @@ class FeeReceipt extends React.Component {
     })
       .then((data) => data.json())
       .then(async (data) => {
-        console.log("inside the fees class wise ",data)
         if (data[0] != undefined) {
           this.setState({
             Allfees: JSON.parse(data[0].fees),
@@ -1907,7 +1909,7 @@ class FeeReceipt extends React.Component {
         .then((res) => res.json())
         .then((res) => {
         })
-        .then((err) => console.log(err));
+        .catch((err) => console.log(err));
     }
   };
 
@@ -2111,7 +2113,7 @@ class FeeReceipt extends React.Component {
         this.setState({ AllStudentcount: data.count });
         localStorage.setItem("AllStudentcount", this.state.AllStudentcount);
       })
-      .then((err) => console.log(err));
+      .catch((err) => console.log(err));
   };
 
   getAnnualFeeAmount = () => {
@@ -2748,7 +2750,6 @@ class FeeReceipt extends React.Component {
                   </thead>
                   <tbody>
                     {this.state.AllOldFees.map((item, index) => {
-                      console.log(item,"check itemmmmmmmmmmmmm")
                       // {JSON.parse(item.paid_fees).map((e,i)=>{
                       //         if(e.fee_sub_category =="TUITION FEE"){
                       //             SubtractTuitionFee = e.amount
@@ -4236,7 +4237,7 @@ class FeeReceipt extends React.Component {
                     if (item.fee_category === "MONTHLY" && item.fee_sub_category === 'TUITION FEE') {
                       // if(this.state.is_teacher_ward == "false"){
                       return (
-                        <div className="col-4 form-group">
+                        <div className="col-3 form-group">
                           <label>
                             {item.fee_sub_category}{" "}
                             {item.fee_sub_category == "TUITION FEE"
@@ -4254,7 +4255,7 @@ class FeeReceipt extends React.Component {
                       /> */}
                           <input
                             type="text"
-                            className=""
+                            className="ml-2"
                             value={
                               item.fee_sub_category === "TUITION FEE"
                                 ? parseInt(this.state.admission_no ? this.state.StudentTutionFee : 0) *
@@ -4282,17 +4283,17 @@ class FeeReceipt extends React.Component {
                     </label>
                      <input
                       type="text"
-                      className="defaultFine"
-                      value={this.state.delayFineFee}
+                      className="defaultFine ml-2"
+                      value={this.state.getStudentData && this.state.admission_no ? this.state.delayFineFee : 0}
                     /> 
                   </div>
-                  <div className="col-3 form-group">
+                  <div className="col-2 form-group">
                     <label>
                       Paid_Fine
                     </label>
                       <input
                       type="text"
-                      className="manualFine"
+                      className="manualFine ml-2"
                       // style={{ display: "none" }}
                       value={this.state.manualFine}
                       onChange={(e) => {
@@ -4312,7 +4313,7 @@ class FeeReceipt extends React.Component {
                         // parseInt(this.state.remaning_balance) < 0
                         //   ? parseInt(this.state.remaning_balance) * -1
                         //   : "0"
-                        this.getGrandTotal()-Number(this.state.paid_amount)
+                        this.state.getStudentData && this.state.admission_no ? this.getGrandTotal()-Number(this.state.paid_amount) : 0
                         
                       }
                       onChange={()=>{
@@ -4391,6 +4392,11 @@ class FeeReceipt extends React.Component {
                       style={{ backgroundColor: "orange" }}
                       className=""
                       value={this.state.showTotalAnnualFee && this.state.admission_no ? this.state.annual_fee : 0}
+                      onChange={(e) => {
+                        this.setState({
+                          annual_fee: e.target.value.toUpperCase(),
+                        });
+                      }}
                     />
                   </div>
                   <div className="col-3 form-group">
@@ -4414,7 +4420,7 @@ class FeeReceipt extends React.Component {
                       style={{ backgroundColor: "orange" }}
                       className=""
 
-                      value={this.getGrandTotal()}
+                      value={this.state.getStudentData && this.state.admission_no ? this.getGrandTotal() : 0}
                     />
                   </div>
                   <div className="col-3 form-group">
@@ -4425,7 +4431,7 @@ class FeeReceipt extends React.Component {
                       className="bg-danger"
                       value={
                         
-                        Number(this.state.AllDueFees)
+                        this.state.getStudentData && this.state.admission_no ? Number(this.state.AllDueFees) : 0
                         // this.getGrandTotal()-Number(this.state.paid_amount)
                       }
                     />

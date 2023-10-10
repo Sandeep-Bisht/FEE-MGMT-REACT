@@ -397,7 +397,7 @@ class StudentCreation extends React.Component{
         data.append('gaurdian_per_country', this.state.gaurdian_per_country)
         data.append('gaurdian_phone', this.state.gaurdian_phone)
         data.append('gaurdian_mobile', this.state.gaurdian_mobile)
-        data.append('school_id', "100")
+        data.append('school_id', "UT015")
         data.append('unique_id', this.state.session+this.state.admission_no)
         data.append('image', this.state.image)
         data.append('image2', this.state.image2)
