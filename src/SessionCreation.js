@@ -65,6 +65,7 @@ checkValidation = () => {
 submitSessionData = () => {
     if(this.checkValidation()){
     const data = new FormData()
+    console.log(this.state.from,"from",this.state.to,"to",this.state.session_code)
     data.append('from', Moment(this.state.from).format('DD-MM-YYYY'))
     data.append('to', Moment(this.state.to).format('DD-MM-YYYY'))
     data.append('session_code',this.state.session_code)
@@ -79,7 +80,9 @@ submitSessionData = () => {
             alert("Session Created Successfully")     
             this.getSession()           
         })
-        .then(err => {})
+        .catch(err => {
+            console.log(err,"check errrrrrrrr")
+        })
     }
 }
 setsession_code =async()=>{
@@ -89,6 +92,7 @@ setsession_code =async()=>{
     render(){
         const data =[];
         {this.state.AllSession.map((item,index)=>{
+            console.log(item,"chek itemmmmmmmmmm inside the all session")
         data.push( {"sr_no":index+1,"session":item.session_code,"from":item.from,"to":item.to,"action":<button onClick={() => {if(window.confirm('Are You Sure?')){this.deleteSession(item._id)};}} className="btn btn-danger"><i className="fa fa-trash" aria-hidden="true"></i></button>})
         })}
           const columns = [
