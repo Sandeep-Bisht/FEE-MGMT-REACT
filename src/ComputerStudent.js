@@ -31,7 +31,7 @@ class ComputerStudent extends React.Component{
       // this.StudentStrenght()
     }
     getCategory = () => {
-      fetch("http://144.91.110.221:4800/getCastCategory")
+      fetch("http://144.91.210.221:4800/getCastCategory")
           .then(res => res.json())
           .then(data => {
               console.log(data)
@@ -40,7 +40,7 @@ class ComputerStudent extends React.Component{
           .then(err => console.log(err))
   }
     getSection = () => {
-      fetch("http://144.91.110.221:4800/getSection"
+      fetch("http://144.91.210.221:4800/getSection"
           ,{
           method: 'POST',
           headers: {
@@ -48,7 +48,7 @@ class ComputerStudent extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100",
+            school_id: "UT015",
             session:this.state.session,
           })
           })
@@ -60,7 +60,7 @@ class ComputerStudent extends React.Component{
           .then(err => console.log(err))
   }
     getSession = () => {
-      fetch("http://144.91.110.221:4800/getSession"
+      fetch("http://144.91.210.221:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -68,7 +68,7 @@ class ComputerStudent extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
           .then(res => res.json())
@@ -82,7 +82,7 @@ class ComputerStudent extends React.Component{
       srNo=0
     $("#getBtn").text("Please Wait...")
      this.setState({AllStudent:[]})
-       fetch("http://144.91.110.221:4800/StudentStrenght"
+       fetch("http://144.91.210.221:4800/StudentStrenght"
        ,{
            method: 'POST',
            headers: {
@@ -109,7 +109,7 @@ class ComputerStudent extends React.Component{
        })
     }
     getClass = () => {
-      fetch("http://144.91.110.221:4800/getClass")
+      fetch("http://144.91.210.221:4800/getClass")
           .then(res => res.json())
           .then(data => {
               console.log(data)
@@ -161,7 +161,7 @@ class ComputerStudent extends React.Component{
                              })}
                   </select>
                 </div>
-                <div className="col-4 form-group">
+                <div className="col-4 form-group d-flex align-items-end">
                   <br/>
                   {/* <button className="btn btn-primary mr-1"><CSVLink filename={"StudentData.csv"} data={csvData}>CSV</CSVLink></button> */}
                   <button className="btn btn-success" id="getBtn" onClick={()=>{this.StudentStrenght()}}>Get Data</button>

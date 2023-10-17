@@ -23,7 +23,7 @@ const Eform = () => {
     const [AllDesignation,setAllDesignation]=useState([])
 
     const getDesignation = () => {
-      fetch("http://144.91.110.221:4800/getDesignation"
+      fetch("http://144.91.210.221:4800/getDesignation"
       , {
         method: 'POST',
         headers: {
@@ -31,7 +31,7 @@ const Eform = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          school_id: "100"
+          school_id: "UT015"
         })
       })
 
@@ -44,7 +44,7 @@ const Eform = () => {
           .then(err => console.log(err))
   }
    const getEmployees = () => {
-        fetch("http://144.91.110.221:4800/getEmployees"
+        fetch("http://144.91.210.221:4800/getEmployees"
         , {
           method: 'POST',
           headers: {
@@ -52,7 +52,7 @@ const Eform = () => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
 
@@ -73,7 +73,7 @@ const Eform = () => {
         data.append('sex', sex)
         data.append('designation', designation)
         data.append('pay_level', pay_level)
-        const url = "http://144.91.110.221:4800/StoreEmployee"
+        const url = "http://144.91.210.221:4800/StoreEmployee"
         fetch(url, {
                 method: 'post',
                 body: data
@@ -88,7 +88,7 @@ const Eform = () => {
     }
 
     const getPayType = () => {
-        fetch("http://144.91.110.221:4800/getPayType"
+        fetch("http://144.91.210.221:4800/getPayType"
         , {
           method: 'POST',
           headers: {
@@ -96,7 +96,7 @@ const Eform = () => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
 
@@ -174,7 +174,7 @@ const Eform = () => {
                     })}
                 </select>
                 </div> */}
-                <div className="col-4 form-group">
+                <div className="col-4 form-group d-flex align-items-end">
                     <br/>
                     <button className="btn btn-success btn-block" onClick={()=>{StoreEmployee()}}>Save</button>
                 </div>

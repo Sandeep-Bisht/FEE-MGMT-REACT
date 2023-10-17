@@ -65,7 +65,7 @@ class FeeCertificate extends React.Component{
       
     }
     getSession = () => {
-      fetch("http://144.91.110.221:4800/getSession"
+      fetch("http://144.91.210.221:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -73,7 +73,7 @@ class FeeCertificate extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
           .then(res => res.json())
@@ -94,7 +94,7 @@ class FeeCertificate extends React.Component{
       previousmonthlyamountText=''
       this.setState({name:'',account_no:'',class_name:'',section:'',parents:'',fee_concession:'',last_fees_date:''})
         await console.log("wait wait")
-        fetch("http://144.91.110.221:4800/singlestudentdata_with_session"
+        fetch("http://144.91.210.221:4800/singlestudentdata_with_session"
         ,{
         method: 'POST',
         headers: {
@@ -104,7 +104,7 @@ class FeeCertificate extends React.Component{
         body: JSON.stringify({
           admission_no: this.state.admission_no,
           session: this.state.session,
-          school_id:"100",
+          school_id:"UT015",
         })
       })
             .then(res => res.json())
@@ -122,7 +122,7 @@ class FeeCertificate extends React.Component{
       console.log("checking response SearchOldfee")
       await  console.log("wait wait")
       const admission_no = this.state.admission_no.toUpperCase()
-      fetch("http://144.91.110.221:4800/SearchOldfee"
+      fetch("http://144.91.210.221:4800/SearchOldfee"
       ,{
           method: 'POST',
           headers: {
@@ -153,7 +153,7 @@ class FeeCertificate extends React.Component{
   //   FeesClasswise=(class_names,sections)=>{    
   //     console.log("checking response FeesClasswise")
   //     const currentMonth =  Moment().format('MM')       
-  //      fetch("http://144.91.110.221:4800/FeesClasswise"
+  //      fetch("http://144.91.210.221:4800/FeesClasswise"
   //      ,{
   //          method: 'POST',
   //          headers: {
@@ -251,7 +251,7 @@ class FeeCertificate extends React.Component{
                             <label>Admission No</label>
                             <input type="text" placeholder="Enter Admission No" className="form-control" value={this.state.admission_no} onChange={(e)=>{{this.setState({admission_no:e.target.value.toUpperCase()});this.searchByAdmission_no_with_session()}}}/>
                         </div>
-                        <div className="col-2 form-group">
+                        <div className="col-2 form-group d-flex align-items-end">
                             <br/>
                             <button className="btn btn-info" onClick={()=>{this.PrintTc()}}>PRINT</button>
                         </div>
@@ -266,7 +266,7 @@ class FeeCertificate extends React.Component{
             <div className= "row printFeeCertificate bg-white">
             <div className="text-center w-100"><img src={require("./images/logo.png").default} className="certificate-logo" /></div>
                 <div className="col-12 text-center">
-                <h3>ST. JUDE'S SCHOOL (UT056)</h3>
+                <h3>CONSTANCIA SCHOOL (UT056)</h3>
                 <h4 className="pt-2"><strong><i>[Affilated to Council for the Indian School Certificate Examinations(CISCE), New Delhi<br/>
                 vide letter No. UP-212/2000 dated 13 oct 2000]</i></strong>
                 </h4>

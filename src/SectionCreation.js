@@ -22,7 +22,7 @@ class SectionCreation extends React.Component{
         this.getSession()
     }
     getSession = () => {
-        fetch("http://144.91.110.221:4800/getSession"
+        fetch("http://144.91.210.221:4800/getSession"
         ,{
             method: 'POST',
             headers: {
@@ -30,7 +30,7 @@ class SectionCreation extends React.Component{
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              school_id: "100"
+              school_id: "UT015"
             })
           })
             .then(res => res.json())
@@ -41,7 +41,7 @@ class SectionCreation extends React.Component{
             .then(err => console.log(err))
     }
     getSection = () => {
-        fetch("http://144.91.110.221:4800/getSection"
+        fetch("http://144.91.210.221:4800/getSection"
             ,{
             method: 'POST',
             headers: {
@@ -49,7 +49,7 @@ class SectionCreation extends React.Component{
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              school_id: "100",
+              school_id: "UT015",
               session:this.state.session,
             })
             })
@@ -62,7 +62,7 @@ class SectionCreation extends React.Component{
     }
     getClass = async() => {
         await console.log("wait wait")
-        fetch("http://144.91.110.221:4800/getClass"
+        fetch("http://144.91.210.221:4800/getClass"
         ,{
         method: 'POST',
         headers: {
@@ -70,7 +70,7 @@ class SectionCreation extends React.Component{
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          school_id: "100",
+          school_id: "UT015",
           session: this.state.session,
         })
       })
@@ -99,8 +99,8 @@ class SectionCreation extends React.Component{
         data.append('section', this.state.section)
         data.append('description',this.state.description)
         // data.append('session', this.state.session)
-        data.append('school_id', "100")
-        const url="http://144.91.110.221:4800/updateSection"
+        data.append('school_id', "UT015")
+        const url="http://144.91.210.221:4800/updateSection"
                 fetch(url,
                     {
                     method:'put',
@@ -115,7 +115,7 @@ class SectionCreation extends React.Component{
               }
       }
       deleteSe = (id) => {
-        const apiUrl = 'http://144.91.110.221:4800/deleteSection';
+        const apiUrl = 'http://144.91.210.221:4800/deleteSection';
         fetch(apiUrl, {
           headers : { 
             'Content-Type': 'application/json',
@@ -151,8 +151,8 @@ class SectionCreation extends React.Component{
         data.append('section', this.state.section)
         data.append('description', this.state.description)
         // data.append('session', this.state.session)
-        data.append('school_id', "100")
-        const url = "http://144.91.110.221:4800/StoreSection"
+        data.append('school_id', "UT015")
+        const url = "http://144.91.210.221:4800/StoreSection"
         fetch(url, {
                 method: 'post',
                 body: data
@@ -237,7 +237,7 @@ class SectionCreation extends React.Component{
                             <span className="text-danger" style={{fontSize:'14px',fontWeight:600}}>{this.state.DuplicateSectionErrorMessage}</span>
                             <span className="errorMessage" style={{fontSize:'14px',fontWeight:600}}>{this.state.sectionErrorMessage}</span>
                         </div>
-                        <div className="col-6 form-group">
+                        <div className="col-6 form-group constancia-form-group">
                             <label>Satus </label>
                             <select className="form-control" value={this.state.description} onChange={(e)=>{{this.setState({description:e.target.value.toUpperCase(),class_nameErrorMessage:undefined})}}}>
                            <option value="">ACTIVE</option>

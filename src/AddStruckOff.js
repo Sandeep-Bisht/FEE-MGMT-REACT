@@ -35,7 +35,7 @@ class AddStruckOff extends React.Component{
       this.StudentStrenght()
     }
     getSection = () => {
-      fetch("http://144.91.110.221:4800/getSection"
+      fetch("http://144.91.210.221:4800/getSection"
           ,{
           method: 'POST',
           headers: {
@@ -43,7 +43,7 @@ class AddStruckOff extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100",
+            school_id: "UT015",
             session:this.state.session,
           })
           })
@@ -55,7 +55,7 @@ class AddStruckOff extends React.Component{
           .then(err => console.log(err))
   }
     getSession = () => {
-      fetch("http://144.91.110.221:4800/getSession"
+      fetch("http://144.91.210.221:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -63,7 +63,7 @@ class AddStruckOff extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
           .then(res => res.json())
@@ -74,7 +74,7 @@ class AddStruckOff extends React.Component{
           .then(err => console.log(err))
   }
     // getFine = () => {
-    //     fetch("http://144.91.110.221:4800/getFine")
+    //     fetch("http://144.91.210.221:4800/getFine")
     //         .then(res => res.json())
     //         .then(data => {
     //             console.log(data)
@@ -84,7 +84,7 @@ class AddStruckOff extends React.Component{
     // }
     StudentStrenght=async()=>{
      this.setState({AllStudent:[]})
-       fetch("http://144.91.110.221:4800/StudentStrenghtForSos"
+       fetch("http://144.91.210.221:4800/StudentStrenghtForSos"
        ,{
            method: 'POST',
            headers: {
@@ -112,7 +112,7 @@ class AddStruckOff extends React.Component{
           data.append('student_id',item.student._id) 
           data.append('academic_id',item._id)   
           data.append('tc_status','sos')          
-          const url="http://144.91.110.221:4800/updateStruckOff"
+          const url="http://144.91.210.221:4800/updateStruckOff"
                   fetch(url,
                       {
                       method:'PATCH',
@@ -129,7 +129,7 @@ class AddStruckOff extends React.Component{
         data.append('student_id',item.student._id) 
         data.append('academic_id',item._id)   
         data.append('tc_status','0')          
-        const url="http://144.91.110.221:4800/updateStruckOff"
+        const url="http://144.91.210.221:4800/updateStruckOff"
                 fetch(url,
                     {
                     method:'PATCH',
@@ -144,7 +144,7 @@ class AddStruckOff extends React.Component{
       }
     }
     getClass = () => {
-      fetch("http://144.91.110.221:4800/getClass")
+      fetch("http://144.91.210.221:4800/getClass")
           .then(res => res.json())
           .then(data => {
               console.log(data)
@@ -156,7 +156,7 @@ class AddStruckOff extends React.Component{
     global_class_name =  class_name
     console.log("checking response FeesClasswise")
     const currentMonth =  Moment().format('MM')       
-     fetch("http://144.91.110.221:4800/FeesClasswise"
+     fetch("http://144.91.210.221:4800/FeesClasswise"
      ,{
          method: 'POST',
          headers: {

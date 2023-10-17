@@ -22,7 +22,7 @@ class FeeCategory extends React.Component{
         this.getFeeSubCategory()
     }
     getFeeCategory = () => {
-        fetch("http://144.91.110.221:4800/getCategory")
+        fetch("http://144.91.210.221:4800/getCategory")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -49,7 +49,7 @@ class FeeCategory extends React.Component{
         data.append('amount', this.state.amount)
         data.append('month', this.state.month)
         data.append('status', this.state.status)
-        const url="http://144.91.110.221:4800/updateFeeSubCategory"
+        const url="http://144.91.210.221:4800/updateFeeSubCategory"
                 fetch(url,
                     {
                     method:'put',
@@ -64,7 +64,7 @@ class FeeCategory extends React.Component{
             //   }
       }
       deleteFeeSubCategory = (id) => {
-        const apiUrl = 'http://144.91.110.221:4800/deleteFeeSubCategory';
+        const apiUrl = 'http://144.91.210.221:4800/deleteFeeSubCategory';
         fetch(apiUrl, {
           headers : { 
             'Content-Type': 'application/json',
@@ -108,7 +108,7 @@ class FeeCategory extends React.Component{
         data.append('amount', this.state.amount)
         data.append('month', this.state.month)
         data.append('status', this.state.status)
-        const url = "http://144.91.110.221:4800/StoreFeeSubCatogory"
+        const url = "http://144.91.210.221:4800/StoreFeeSubCatogory"
         fetch(url, {
                 method: 'post',
                 body: data
@@ -122,7 +122,7 @@ class FeeCategory extends React.Component{
         }
     }
     getFeeSubCategory = () => {
-        fetch("http://144.91.110.221:4800/getSubCategory")
+        fetch("http://144.91.210.221:4800/getSubCategory")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -189,7 +189,7 @@ class FeeCategory extends React.Component{
                             <input type="text" value={this.state.amount} className="form-control" onChange={(e)=>{{this.setState({amount:e.target.value.toUpperCase(),amountErrorMessage:undefined})}}} />
                             <span className="errorMessage" style={{fontSize:'14px',fontWeight:600}}>{this.state.amountErrorMessage}</span>
                         </div>
-                        <div className="col-4 form-group">
+                        <div className="col-4 form-group constancia-form-group">
                            <label>Month </label>
                            <select className="form-control" value={this.state.month} onChange={(e)=>{{this.setState({month:e.target.value.toUpperCase(),monthErrorMessage:undefined})}}}>
                            <option value="">Select...</option>

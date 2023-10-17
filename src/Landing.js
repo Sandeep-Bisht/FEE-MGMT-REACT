@@ -8,7 +8,7 @@ class Landing extends React.Component{
         }
     }
     login = () => {
-        const url = "http://144.91.110.221:4800/signin"
+        const url = "http://144.91.210.221:4800/signin"
         fetch(url
           , {
             method: 'POST',
@@ -29,21 +29,21 @@ class Landing extends React.Component{
             if (res.user.role === "Admin"  ) {
               localStorage.setItem('access', res.user.role);
               localStorage.setItem('user_id', res.user._id);
-              localStorage.setItem('SessionAccess','2021-2022')
+              localStorage.setItem('SessionAccess','2023-2024')
               localStorage.setItem('username',res.user.username)
               window.location.href = "/";
             }
             else if (res.user.role ==="Cashier"  ) {
               localStorage.setItem('access', res.user.role);
               localStorage.setItem('user_id', res.user._id);
-              localStorage.setItem('SessionAccess','2021-2022')
+              localStorage.setItem('SessionAccess','2023-2024')
               localStorage.setItem('username',res.user.username)
               window.location.href = "/";
             }
             else if (res.user.role === "AdmissionCell"  ) {
               localStorage.setItem('access', res.user.role);
               localStorage.setItem('user_id', res.user._id);
-              localStorage.setItem('SessionAccess','2021-2022')
+              localStorage.setItem('SessionAccess','2023-2024')
               localStorage.setItem('username',res.user.username)
               window.location.href = "/";
             }
@@ -89,7 +89,7 @@ class Landing extends React.Component{
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 				<span class="company__logo"><h2><span ><img src={require('./images/logo.png').default} style={{height:"100px"}} /></span></h2></span>
-				<h4 class="company_title">SJS FEES SYSTEM</h4>
+				<h4 class="company_title">CONSTANCIA SCHOOL FEES SYSTEM</h4>
 			</div>
 			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
 				<div class="container-fluid">

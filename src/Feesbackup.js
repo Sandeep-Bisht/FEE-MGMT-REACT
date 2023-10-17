@@ -36,7 +36,7 @@ class FeesBackup extends React.Component{
       // this.StudentStrenghtt()
     }
     getSection = () => {
-      fetch("http://144.91.110.221:4800/getSection"
+      fetch("http://144.91.210.221:4800/getSection"
           ,{
           method: 'POST',
           headers: {
@@ -44,7 +44,7 @@ class FeesBackup extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100",
+            school_id: "UT015",
             session:this.state.session,
           })
           })
@@ -56,7 +56,7 @@ class FeesBackup extends React.Component{
           .then(err => console.log(err))
   }
     getSession = () => {
-      fetch("http://144.91.110.221:4800/getSession"
+      fetch("http://144.91.210.221:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -64,7 +64,7 @@ class FeesBackup extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
           .then(res => res.json())
@@ -82,7 +82,7 @@ class FeesBackup extends React.Component{
     if(admission_no =='0'){
          return false;
     }
-    fetch("http://144.91.110.221:4800/getTransferCertificate"
+    fetch("http://144.91.210.221:4800/getTransferCertificate"
     ,{
     method: 'POST',
     headers: {
@@ -115,7 +115,7 @@ class FeesBackup extends React.Component{
     $('#getBtn').text("Please Wait...")
      this.setState({StudentWithFees:[]})
      StudentWithFees=[]
-       fetch("http://144.91.110.221:4800/StudentStrenght"
+       fetch("http://144.91.210.221:4800/StudentStrenght"
        ,{
            method: 'POST',
            headers: {
@@ -148,7 +148,7 @@ class FeesBackup extends React.Component{
      console.log("checking response SearchOldfee")
      await  console.log("wait wait")
      const admission_no = item.admission_no
-     fetch("http://144.91.110.221:4800/SearchOldfee"
+     fetch("http://144.91.210.221:4800/SearchOldfee"
      ,{
          method: 'POST',
          headers: {
@@ -192,7 +192,7 @@ class FeesBackup extends React.Component{
      })
  }
     getClass = () => {
-      fetch("http://144.91.110.221:4800/getClass")
+      fetch("http://144.91.210.221:4800/getClass")
           .then(res => res.json())
           .then(data => {
               console.log(data)
@@ -204,7 +204,7 @@ class FeesBackup extends React.Component{
     global_class_name =  class_name
     console.log("checking response FeesClasswise")
     const currentMonth =  Moment().format('MM')       
-     fetch("http://144.91.110.221:4800/FeesClasswise"
+     fetch("http://144.91.210.221:4800/FeesClasswise"
      ,{
          method: 'POST',
          headers: {
@@ -295,7 +295,7 @@ printDefaulter() {
                              })}
                   </select>
                 </div>
-                <div className="col-4 form-group">
+                <div className="col-4 form-group d-flex align-items-end">
                   <br/>
                   {/* <button className="btn btn-primary mr-1"><CSVLink filename={"StudentData.csv"} data={csvData}>CSV</CSVLink></button> */}
                   <button className="btn btn-success" id="getBtn" onClick={()=>{this.StudentStrenght()}}>Get Data</button>
@@ -316,7 +316,7 @@ printDefaulter() {
                                 <div class="col-12">
                               <div className="row">
                                   <div className="col-12 text-center pb-3">
-                                  <h3 className="m-0">ST. JUDES'S SCHOOL ( <select value={this.state.session} className="receiptSession" onChange={(e)=>{{this.setState({session:e.target.value.toUpperCase()})}}}> 
+                                  <h3 className="m-0">CONSTANCIA SCHOOL ( <select value={this.state.session} className="receiptSession" onChange={(e)=>{{this.setState({session:e.target.value.toUpperCase()})}}}> 
                                <option value="">All Session</option>
                                 {this.state.AllSession.map((item,index)=>{
                                     return(

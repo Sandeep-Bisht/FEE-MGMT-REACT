@@ -3465,7 +3465,7 @@ class FeesImport extends Component {
             },
           ]
           const newUser = {
-            "school_id": "100",
+            "school_id": "UT015",
             "receipt_no": receipt_no,
             "session": "2020-2021",
             'class_name': class_name,
@@ -3505,7 +3505,7 @@ class FeesImport extends Component {
         console.log(userList.length)
         dataa.append('AllFeeData', JSON.stringify(userList))
         // dataa.append('StudentAcademicData', JSON.stringify(AcademicuserList))
-        const url = "http://144.91.110.221:4800/Importallfees"
+        const url = "http://144.91.210.221:4800/Importallfees"
         fetch(url, {
             // headers : { 
             //   'Content-Type':'application/json',

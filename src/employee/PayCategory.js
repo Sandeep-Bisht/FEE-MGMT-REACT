@@ -12,7 +12,7 @@ const PayCategory = () => {
     const [AllPayCaregory,setAllPayCategory]=useState([])
     
     const getPayCategoty = () => {
-        fetch("http://144.91.110.221:4800/getPayCategoty"
+        fetch("http://144.91.210.221:4800/getPayCategoty"
         , {
           method: 'POST',
           headers: {
@@ -20,7 +20,7 @@ const PayCategory = () => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
 
@@ -38,7 +38,7 @@ const PayCategory = () => {
         const data = new FormData()
         data.append('name', name)
         data.append('description', description)
-        const url = "http://144.91.110.221:4800/StorePayCategory"
+        const url = "http://144.91.210.221:4800/StorePayCategory"
         fetch(url, {
                 method: 'post',
                 body: data
@@ -128,7 +128,7 @@ const PayCategory = () => {
                 <label>Description</label>
                 <input className="form-control" value={description} onChange={(e)=>{setDescription(e.target.value.toUpperCase())}}  />
                 </div>
-                <div className="col-4 form-group">
+                <div className="col-4 form-group d-flex align-items-end">
                     <br/>
                     <button className="btn btn-success" onClick={()=>{StorePayCategory()}}>Save</button>
                     {updateBtn==true?  <button className="btn btn-secondary mr-2" style={{float:"right"}} onClick={()=>{UpdatePayCategory()}}> Update Details</button>:null}

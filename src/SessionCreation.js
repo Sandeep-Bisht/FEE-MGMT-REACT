@@ -16,7 +16,7 @@ componentDidMount(){
     this.getSession()
 }
 getSession = () => {
-    fetch("http://144.91.110.221:4800/getSession"
+    fetch("http://144.91.210.221:4800/getSession"
     ,{
         method: 'POST',
         headers: {
@@ -24,7 +24,7 @@ getSession = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          school_id: "100"
+          school_id: "UT015"
         })
       })
         .then(res => res.json())
@@ -46,7 +46,7 @@ checkValidation = () => {
     }
   }
   deleteSession = (id) => {
-    const apiUrl = 'http://144.91.110.221:4800/deleteSession';
+    const apiUrl = 'http://144.91.210.221:4800/deleteSession';
     fetch(apiUrl, {
       headers : { 
         'Content-Type': 'application/json',
@@ -65,11 +65,12 @@ checkValidation = () => {
 submitSessionData = () => {
     if(this.checkValidation()){
     const data = new FormData()
+    console.log(this.state.from,"from",this.state.to,"to",this.state.session_code)
     data.append('from', Moment(this.state.from).format('DD-MM-YYYY'))
     data.append('to', Moment(this.state.to).format('DD-MM-YYYY'))
     data.append('session_code',this.state.session_code)
-    data.append('school_id',"100")
-    const url = "http://144.91.110.221:4800/StoreSession"
+    data.append('school_id',"UT015")
+    const url = "http://144.91.210.221:4800/StoreSession"
     fetch(url, {
             method: 'post',
             body: data
@@ -79,7 +80,9 @@ submitSessionData = () => {
             alert("Session Created Successfully")     
             this.getSession()           
         })
-        .then(err => {})
+        .catch(err => {
+            console.log(err,"check errrrrrrrr")
+        })
     }
 }
 setsession_code =async()=>{
@@ -89,6 +92,7 @@ setsession_code =async()=>{
     render(){
         const data =[];
         {this.state.AllSession.map((item,index)=>{
+            console.log(item,"chek itemmmmmmmmmm inside the all session")
         data.push( {"sr_no":index+1,"session":item.session_code,"from":item.from,"to":item.to,"action":<button onClick={() => {if(window.confirm('Are You Sure?')){this.deleteSession(item._id)};}} className="btn btn-danger"><i className="fa fa-trash" aria-hidden="true"></i></button>})
         })}
           const columns = [
@@ -117,7 +121,7 @@ setsession_code =async()=>{
                             <input type="date" className="form-control" onChange={(e)=>{{this.setState({to:e.target.value.toUpperCase(),toErrorMessage:undefined});this.setsession_code()}}}/>
                             <span className="errorMessage" style={{fontSize:'14px',fontWeight:600}}>{this.state.toErrorMessage}</span>
                         </div>
-                        <div className="col-6 form-group"> 
+                        <div className="col-6 form-group constancia-form-group"> 
                             <label>Session code</label>
                             <input type="text" className="form-control" value={this.state.session_code}/>
                             <span className="errorMessage" style={{fontSize:'14px',fontWeight:600}}>{this.state.toErrorMessage}</span>

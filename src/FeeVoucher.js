@@ -119,7 +119,7 @@ class FeeVoucher extends React.Component {
     this.SuspiciousVoucherByDate()
   }
   getBankData = () => {
-    fetch("http://144.91.110.221:4800/getBankData"
+    fetch("http://144.91.210.221:4800/getBankData"
       , {
         method: 'POST',
         headers: {
@@ -128,7 +128,7 @@ class FeeVoucher extends React.Component {
         },
         body: JSON.stringify({
           session: this.state.session,
-          school_id: "100"
+          school_id: "UT015"
         })
       })
       .then(res => res.json())
@@ -140,7 +140,7 @@ class FeeVoucher extends React.Component {
       .then(err => console.log(err))
   }
   getFeeReceipt = () => {
-    fetch("http://144.91.110.221:4800/getFeeReceipt")
+    fetch("http://144.91.210.221:4800/getFeeReceipt")
       .then(res => res.json())
       .then(data => {
         console.log(data)
@@ -179,7 +179,7 @@ class FeeVoucher extends React.Component {
     
 
     await console.log("wait")
-    fetch("http://144.91.110.221:4800/getFeeSummary"
+    fetch("http://144.91.210.221:4800/getFeeSummary"
       , {
         method: 'POST',
         headers: {
@@ -1070,7 +1070,7 @@ class FeeVoucher extends React.Component {
   //   this.setState({ voucher_by_date:[],voucher_in_detail:[],voucher_by_class:[],SummaryData:[]})
   //   paidamountbydate=0
   //   paidamountbyclass=0
-  //   fetch("http://144.91.110.221:4800/getFeeSummary")
+  //   fetch("http://144.91.210.221:4800/getFeeSummary")
   //   .then(res => res.json())
   //   .then(data => {
   //       console.log(data)
@@ -1104,7 +1104,7 @@ class FeeVoucher extends React.Component {
     paidamountbydate = 0
     paidamountbyclass = 0
     await console.log("wait")
-    fetch("http://144.91.110.221:4800/VoucherByDate"
+    fetch("http://144.91.210.221:4800/VoucherByDate"
       , {
         method: 'POST',
         headers: {
@@ -1141,7 +1141,7 @@ class FeeVoucher extends React.Component {
     this.setState({ voucher_by_date: [], voucher_in_detail: [], voucher_by_class: [], SummaryData: [],SummaryDataPNB:[],SummaryDataCSV:[] })
     paidamountbydate = 0
     paidamountbyclass = 0
-    fetch("http://144.91.110.221:4800/printvoucherbydate"
+    fetch("http://144.91.210.221:4800/printvoucherbydate"
       , {
         method: 'POST',
         headers: {
@@ -1456,7 +1456,7 @@ class FeeVoucher extends React.Component {
 
     await console.log("wait")
     this.setState({ SuspiciousVoucherByDate: [] })
-    fetch("http://144.91.110.221:4800/SuspiciousVoucherByDate"
+    fetch("http://144.91.210.221:4800/SuspiciousVoucherByDate"
       , {
         method: 'POST',
         headers: {
@@ -1501,7 +1501,7 @@ class FeeVoucher extends React.Component {
     paidamountbydate = 0
     paidamountbyclass = 0
     await console.log("wait")
-    fetch("http://144.91.110.221:4800/VoucherInDetail"
+    fetch("http://144.91.210.221:4800/VoucherInDetail"
       , {
         method: 'POST',
         headers: {
@@ -1820,7 +1820,7 @@ class FeeVoucher extends React.Component {
     paidamountbydate = 0
     paidamountbyclass = 0
     await console.log("wait")
-    fetch("http://144.91.110.221:4800/VoucherByClass"
+    fetch("http://144.91.210.221:4800/VoucherByClass"
       , {
         method: 'POST',
         headers: {
@@ -1844,7 +1844,7 @@ class FeeVoucher extends React.Component {
 
   }
   getClass = () => {
-    fetch("http://144.91.110.221:4800/getClass")
+    fetch("http://144.91.210.221:4800/getClass")
       .then(res => res.json())
       .then(data => {
         console.log(data)
@@ -2055,13 +2055,14 @@ print_pnb_sr_no=0
               })}
             </select>
           </div>
-          <div className="col-5 form-group">
+          <div className="col-5 form-group d-flex align-items-end">
             <br />
             <button onClick={() => { this.VoucherByDate() }} className="btn btn-primary mr-1 get_data_by_date">By Date</button>
             <button onClick={() => { this.VoucherInDetail() }} className="btn btn-primary mr-1 get_data_in_detail">Fee Report</button>
             <button onClick={() => { this.VoucherByClass() }} className="btn btn-primary mr-1 get_data_by_class">Classwise</button>
             <button onClick={() => { this.printVoucher() }} className="btn btn-info mr-1">Print</button>
-            <CSVLink filename={"DayBook.csv"} data={csvData}>CSV</CSVLink>
+            <button className="btn btn-primary">
+            <CSVLink filename={"DayBook.csv"} data={csvDataa}>CSV</CSVLink></button>
           </div>
           {/* <div className="col-4">
                 <div className="form-group">
@@ -2103,7 +2104,7 @@ print_pnb_sr_no=0
               })}
             </select>
           </div>
-          <div className="col-4">
+          <div className="col-4 form-group d-flex align-items-end">
             <br />
             <button className="btn btn-primary get_data_btn mr-1" onClick={() => { this.getFeeSummary() }}>Get Data</button>
             <button onClick={() => { this.printsummary() }} className="btn btn-info mr-1">Print</button>
@@ -2269,7 +2270,7 @@ print_pnb_sr_no=0
                   
                 </tr>
               </thead>
-              <tbody>
+              <tbody className='dashboard-table'>
                 {this.state.Bank == '' || this.state.Bank == "SBI" ?
                   <tr><td colspan="20"><h4 className="text-center">SBI</h4></td></tr>
                   : null}
@@ -2622,7 +2623,7 @@ print_pnb_sr_no=0
 
         <div className="row bg-white printvoucherbydate" style={{display:'none'}}>
         <div className="col-12 text-center pb-5">
-                <h3>ST. JUDE'S SCHOOL (UT056)</h3>
+                <h3>CONSTANCIA SCHOOL (UT056)</h3>
                 <h4 className="pt-2" style={{fontWeight:"unset"}}>WEST CANAL ROAD, P.O MAJRA, DEHRADUN<br/>
                 0135-2640930,0135-262828,FAX:0135-2644353</h4>
         </div>

@@ -7,18 +7,25 @@ class AdminLayout extends React.Component{
         this.state={
             NavHeading:'Dashboard',
             AllSession:[],
-            session: localStorage.getItem('SessionAccess')
+            session: localStorage.getItem('SessionAccess'),
+            currentYear: null,
         }
     }
     componentDidMount=()=>{
-       this.getSession()
+       this.getSession();
+       this.getCurrentDate();
     }
     logout =()=>{
         localStorage.setItem('access','')
         window.location.href='/landing'
     }
+    getCurrentDate=()=>{
+        const currentDate = new Date();
+        const currentYear = currentDate.getFullYear();
+        this.setState({ currentYear });
+    }
     getSession = () => {
-        fetch("http://144.91.110.221:4800/getSession"
+        fetch("http://144.91.210.221:4800/getSession"
         ,{
             method: 'POST',
             headers: {
@@ -26,7 +33,7 @@ class AdminLayout extends React.Component{
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              school_id: "100"
+              school_id: "UT015"
             })
           })
             .then(res => res.json())
@@ -34,7 +41,7 @@ class AdminLayout extends React.Component{
                 console.log(data)
                 this.setState({AllSession: data})
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
     }
     setSession=async(e)=>{
         await console.log("wait")
@@ -50,19 +57,24 @@ class AdminLayout extends React.Component{
     }
   render(){
   const { history } = this.props;
+  const { currentYear } = this.state;
   return (
   <>
   <div className="row pt-0">
      <div className="col-12">
      <div className="wrapper">
         <nav id="sidebar">
-            <div className="sidebar-header text-center">
+            <div className="sidebar-header text-center constencia-sidebar">
+                <div>
             <Link to="/">
-            <img src={require('./images/logo.png').default} style={{height:"100px"}}/>
+            <img src={require('./images/logo.png').default} className='constencia-image' style={{height:"50px"}}/>
             </Link>
             </div>
+            <div className='w-100'>
+            <p className="text-center border-text constencia-sidebar-text">Constancia School <br/> Fees Management System</p>
+            </div>
+            </div>
             <ul className="list-unstyled components">
-                <p className="text-center border-text ">SJS Fees Management System</p>
                 <p className="text-center border-text ">Session - 
                             <select className="text-dark" value= { localStorage.getItem('SessionAccess') == "" ? this.state.session :localStorage.getItem('SessionAccess')}  onChange={(e)=>{this.setState({session:e.target.value.toUpperCase()});this.setSession()}}>
                                <option value="" className="text-dark">Select Session</option>
@@ -84,7 +96,7 @@ class AdminLayout extends React.Component{
                     <a href="#orders" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle" onClick={()=>{this.setState({NavHeading:'Fees'})}}><i class="fas fa-money-check-alt"></i>Fees</a>
                     <ul className="collapse list-unstyled" id="orders">
                         <li>
-                        <Link to="/FeeReceipt"  onClick={()=>{this.setState({NavHeading:'Fees/Fee transaction'})}}>Fee transaction</Link>
+                        <Link to="/FeeReceipt"  onClick={()=>{this.setState({NavHeading:'Fees/Fee transaction'})}}>Fee Transaction</Link>
                         </li>
                         <li>
                         <Link to="/VoucherEntry"  onClick={()=>{this.setState({NavHeading:'Fees/Voucher Entry'})}}>Voucher Entry</Link>
@@ -137,7 +149,7 @@ class AdminLayout extends React.Component{
                 :null}
                 {localStorage.getItem('access') == "Admin" ? 
                 <li className="">
-                    <a href="#Configuration" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle" onClick={()=>{this.setState({NavHeading:'Fees'})}}><i class="fas fa-school"></i>Configuration</a>
+                    <a href="#Configuration" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle" onClick={()=>{this.setState({NavHeading:'Fees'})}}><i class="fa fa-cogs"></i>Configuration</a>
                     <ul className="collapse list-unstyled" id="Configuration">
                         <li>
                         <Link to="/SessionCreation"  onClick={()=>{this.setState({NavHeading:'Configuration/Session Creation'})}}>Session Creation</Link>
@@ -152,13 +164,13 @@ class AdminLayout extends React.Component{
                         <Link to="/CategoryCreation" onClick={()=>{this.setState({NavHeading:'Configuration/Category Creation'})}}>Category Creation</Link>
                         </li>
                         <li>
+                        <Link to="/SubjectCreation" onClick={()=>{this.setState({NavHeading:'Configuration/Subject Creation'})}}>Subject Creation</Link>
+                        </li>
+                        <li>
                         <Link to="/VehicleTypeCreation" onClick={()=>{this.setState({NavHeading:'Configuration/Vehicle Type Creation'})}}>Vehicle Type Creation</Link>
                         </li>
                         <li>
                         <Link to="/VehicleCreation" onClick={()=>{this.setState({NavHeading:'Configuration/Vehicle Creation '})}}>Vehicle Creation</Link>
-                        </li>
-                        <li>
-                        <Link to="/SubjectCreation" onClick={()=>{this.setState({NavHeading:'Configuration/Subject Creation'})}}>Subject Creation</Link>
                         </li>
                         <li>
                         <Link to="/HouseCreation" onClick={()=>{this.setState({NavHeading:'Configuration/House Creation'})}}>House Creation</Link>
@@ -172,7 +184,7 @@ class AdminLayout extends React.Component{
                 : null}
                   {localStorage.getItem('access') == "Admin" || localStorage.getItem('access') == "AdmissionCell"? 
                 <li className="">
-                    <a href="#Student" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle"><i class="fas fa-money-check-alt"></i>Student</a>
+                    <a href="#Student" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle"><i class="fa fa-user"></i>Student</a>
                     <ul className="collapse list-unstyled" id="Student">
                         <li>
                         <Link to="/StudentCreation" onClick={()=>{this.setState({NavHeading:'Student/Student Creation'})}}>Student Creation</Link>
@@ -250,7 +262,7 @@ class AdminLayout extends React.Component{
                 }
                 {localStorage.getItem('access') == "Admin" || localStorage.getItem('access') == "AdmissionCell"? 
                 <li className="">
-                    <a href="#TransferCertificate" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle"><i class="fas fa-money-check-alt"></i>Certificates</a>
+                    <a href="#TransferCertificate" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle"><i class="fa fa-book"></i>Certificates</a>
                     <ul className="collapse list-unstyled" id="TransferCertificate">
                         <li>
                         <Link to="/TransferCertificate" onClick={()=>{this.setState({NavHeading:'Certificates/Given TC'})}}>Given TC</Link>
@@ -284,7 +296,7 @@ class AdminLayout extends React.Component{
                 :null}
                 {localStorage.getItem('access') == "Admin" || localStorage.getItem('access') == "AdmissionCell"? 
                 <li className="">
-                <a href="#StudentpromotionDemotion" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle"><i class="fas fa-money-check-alt"></i>Student Promotion</a>
+                <a href="#StudentpromotionDemotion" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle"><i class="fa fa-graduation-cap"></i>Student Promotion</a>
                     <ul className="collapse list-unstyled" id="StudentpromotionDemotion">
                         <li>
                         <Link to="/StudentPromotionAll" onClick={()=>{this.setState({NavHeading:'Student/Student Promotion (Classwise)'})}}>Student Promotion (All)</Link>
@@ -305,7 +317,7 @@ class AdminLayout extends React.Component{
                 :null}
                  {localStorage.getItem('access') == "Admin" ? 
                 <li className="">
-                <a href="#employees" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle"><i class="fas fa-money-check-alt"></i>Employees</a>
+                <a href="#employees" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle"><i class="fas fa-users"></i>Employees</a>
                     <ul className="collapse list-unstyled" id="employees">
                         <li>
                         <Link to="/Employee" >Employee</Link>
@@ -351,9 +363,9 @@ class AdminLayout extends React.Component{
                     <Link to="" onClick={()=>{this.logout()}}> <i class="fas fa-sign-out-alt"></i>Logout</Link>
                 </li>
             </ul>
-            <ul className="list-unstyled CTAs text-center">
+            <ul className="list-unstyled CTAs text-center constancia-list-CTAs">
                 <li>
-                <h6><span>  <img src={require('./images/giks_logo.png').default} style={{height:"50px"}}/></span> Powered By GIKS @ 2020</h6>
+                <h6><span>  <img src={require('./images/giks_logo.png').default} style={{height:"32px"}}/></span> Powered By GIKS @ {currentYear}</h6>
                 </li>
                 
             </ul>

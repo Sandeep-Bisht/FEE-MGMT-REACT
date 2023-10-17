@@ -77,7 +77,7 @@ class StruckOff extends React.Component{
         if(admission_no =='0'){
              return false;
         }
-        fetch("http://144.91.110.221:4800/searchByAdmission_noForTc"
+        fetch("http://144.91.210.221:4800/searchByAdmission_noForTc"
             ,{
               method: 'POST',
               headers: {
@@ -87,7 +87,7 @@ class StruckOff extends React.Component{
               body: JSON.stringify({
                 session: this.state.session,
                 admission_no: admission_no,
-                school_id:"100",
+                school_id:"UT015",
               })
             })
         .then((data) => data.json())
@@ -150,7 +150,7 @@ class StruckOff extends React.Component{
     }
     SearchOldfee= async()=>{
        await  console.log("wait wait")
-       fetch("http://144.91.110.221:4800/SearchOldfee"
+       fetch("http://144.91.210.221:4800/SearchOldfee"
        ,{
            method: 'POST',
            headers: {
@@ -175,7 +175,7 @@ class StruckOff extends React.Component{
        })
    }
     getSection = () => {
-        fetch("http://144.91.110.221:4800/getSection"
+        fetch("http://144.91.210.221:4800/getSection"
             ,{
             method: 'POST',
             headers: {
@@ -183,7 +183,7 @@ class StruckOff extends React.Component{
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              school_id: "100",
+              school_id: "UT015",
               session:this.state.session,
             })
             })
@@ -196,7 +196,7 @@ class StruckOff extends React.Component{
     }
     getClass = async() => {
         await console.log("wait wait")
-        fetch("http://144.91.110.221:4800/getClass"
+        fetch("http://144.91.210.221:4800/getClass"
         ,{
         method: 'POST',
         headers: {
@@ -204,7 +204,7 @@ class StruckOff extends React.Component{
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          school_id: "100",
+          school_id: "UT015",
           session: this.state.session,
         })
       })
@@ -217,7 +217,7 @@ class StruckOff extends React.Component{
             .then(err => console.log(err))
     }
     getCategory = () => {
-        fetch("http://144.91.110.221:4800/getCastCategory")
+        fetch("http://144.91.210.221:4800/getCastCategory")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -226,7 +226,7 @@ class StruckOff extends React.Component{
             .then(err => console.log(err))
     }
     getHouse = () => {
-        fetch("http://144.91.110.221:4800/getHouse")
+        fetch("http://144.91.210.221:4800/getHouse")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -235,7 +235,7 @@ class StruckOff extends React.Component{
             .then(err => console.log(err))
     }
     getBankData = () => {
-        fetch("http://144.91.110.221:4800/getBankData"
+        fetch("http://144.91.210.221:4800/getBankData"
         , {
           method: 'POST',
           headers: {
@@ -244,7 +244,7 @@ class StruckOff extends React.Component{
           },
           body: JSON.stringify({
             session: this.state.session,
-            school_id: "100"
+            school_id: "UT015"
           })
         })
 
@@ -312,7 +312,7 @@ class StruckOff extends React.Component{
         data.append('conduct', this.state.conduct)
        
 
-        const url = "http://144.91.110.221:4800/StoreTcDetails"
+        const url = "http://144.91.210.221:4800/StoreTcDetails"
         fetch(url, {
                 method: 'post',
                 body: data

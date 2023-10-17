@@ -53,7 +53,7 @@ class CharacterCertificate extends React.Component{
   }
     getClass = async() => {
       await console.log("wait wait")
-      fetch("http://144.91.110.221:4800/getClass"
+      fetch("http://144.91.210.221:4800/getClass"
       ,{
       method: 'POST',
       headers: {
@@ -61,7 +61,7 @@ class CharacterCertificate extends React.Component{
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        school_id: "100",
+        school_id: "UT015",
         session: this.state.session,
       })
     })
@@ -74,7 +74,7 @@ class CharacterCertificate extends React.Component{
     searchByAdmission_no_with_session = async() => {
         this.setState({name:'',account_no:'',class_name:'',section:'',parents:'',fee_concession:'',left_on:'',dob:'',date_of_admission:'',father_name:'',mother_name:'',sex:''})
           await console.log("wait wait")
-          fetch("http://144.91.110.221:4800/singlestudentdata"
+          fetch("http://144.91.210.221:4800/singlestudentdata"
           ,{
           method: 'POST',
           headers: {
@@ -84,7 +84,7 @@ class CharacterCertificate extends React.Component{
           body: JSON.stringify({
             admission_no: this.state.admission_no,
             session: this.state.session,
-            school_id:"100",
+            school_id:"UT015",
           })
         })
               .then(res => res.json())
@@ -149,7 +149,7 @@ class CharacterCertificate extends React.Component{
       FeesClasswise=(class_names,sections)=>{    
         console.log("checking response FeesClasswise")
         const currentMonth =  Moment().format('MM')       
-         fetch("http://144.91.110.221:4800/FeesClasswise"
+         fetch("http://144.91.210.221:4800/FeesClasswise"
          ,{
              method: 'POST',
              headers: {
@@ -208,7 +208,7 @@ class CharacterCertificate extends React.Component{
                            <option value="Sports' Captain">School Sports' Captain</option>
                            </select>
                         </div>
-                        <div className="col-2 form-group">
+                        <div className="col-2 form-group d-flex align-items-end">
                             <br/>
                             <button className="btn btn-info" onClick={()=>{this.PrintTc()}}>PRINT</button>
                         </div>

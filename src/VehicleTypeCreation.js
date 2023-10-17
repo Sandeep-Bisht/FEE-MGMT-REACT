@@ -14,7 +14,7 @@ class VehicleTypeCreation extends React.Component{
         this.getVehicleType()
     }
     getVehicleType = () => {
-        fetch("http://144.91.110.221:4800/getVehicleType")
+        fetch("http://144.91.210.221:4800/getVehicleType")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -33,7 +33,7 @@ class VehicleTypeCreation extends React.Component{
         const data = new FormData()
         data.append('_id',this.state._id)
         data.append('vehicle_type',this.state.vehicle_type)
-        const url="http://144.91.110.221:4800/updateVehicleType"
+        const url="http://144.91.210.221:4800/updateVehicleType"
                 fetch(url,
                     {
                     method:'put',
@@ -48,7 +48,7 @@ class VehicleTypeCreation extends React.Component{
               }
       }
       deleteVehicleType = (id) => {
-        const apiUrl = 'http://144.91.110.221:4800/deleteVehicleType';
+        const apiUrl = 'http://144.91.210.221:4800/deleteVehicleType';
         fetch(apiUrl, {
           headers : { 
             'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ class VehicleTypeCreation extends React.Component{
         if (this.checkValidation()) {
         const data = new FormData()
         data.append('vehicle_type', this.state.vehicle_type)
-        const url = "http://144.91.110.221:4800/StoreVehicleType"
+        const url = "http://144.91.210.221:4800/StoreVehicleType"
         fetch(url, {
                 method: 'post',
                 body: data
@@ -113,11 +113,11 @@ class VehicleTypeCreation extends React.Component{
                             <input type="text" className="form-control" value={this.state.vehicle_type} onChange={(e)=>{{this.setState({vehicle_type:e.target.value.toUpperCase(),Vehicle_typeErrorMessage:undefined})}}}/>
                             <span className="errorMessage" style={{fontSize:'14px',fontWeight:600}}>{this.state.Vehicle_typeErrorMessage}</span>
                         </div>
-                        <div className="col-6 form-group">
+                        <div className="col-6 form-group d-flex align-items-end">
                          <label> </label>
-                         <button className="btn btn-info mt-5" onClick={()=>{this.submitVehicleTypeData()}}>Save</button>
+                         <button className="btn btn-info" onClick={()=>{this.submitVehicleTypeData()}}>Save</button>
                         {this.state.updateBtn ?
-                        <button className="btn btn-secondary ml-3 mt-5" type="submit" onClick={(e) => this.updateVehicleTypeData(e)}>Update</button>
+                        <button className="btn btn-secondary ml-3" type="submit" onClick={(e) => this.updateVehicleTypeData(e)}>Update</button>
                         :null
                         }
                         </div>

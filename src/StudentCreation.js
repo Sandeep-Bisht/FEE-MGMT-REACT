@@ -121,7 +121,7 @@ class StudentCreation extends React.Component{
     getSubjects = async(e) => {
         await console.log("wait")
         this.getStudent()
-        fetch("http://144.91.110.221:4800/getSubjects")
+        fetch("http://144.91.210.221:4800/getSubjects")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -130,7 +130,7 @@ class StudentCreation extends React.Component{
             .then(err => console.log(err))
     }
     getSession = () => {
-        fetch("http://144.91.110.221:4800/getSession"
+        fetch("http://144.91.210.221:4800/getSession"
         ,{
             method: 'POST',
             headers: {
@@ -138,7 +138,7 @@ class StudentCreation extends React.Component{
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              school_id: "100"
+              school_id: "UT015"
             })
           })
             .then(res => res.json())
@@ -149,7 +149,7 @@ class StudentCreation extends React.Component{
             .then(err => console.log(err))
     }
     getParent = () => {
-        fetch("http://144.91.110.221:4800/getParent")
+        fetch("http://144.91.210.221:4800/getParent")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -158,7 +158,7 @@ class StudentCreation extends React.Component{
             .then(err => console.log(err))
     }
     getSection = () => {
-        fetch("http://144.91.110.221:4800/getSection"
+        fetch("http://144.91.210.221:4800/getSection"
             ,{
             method: 'POST',
             headers: {
@@ -166,7 +166,7 @@ class StudentCreation extends React.Component{
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              school_id: "100",
+              school_id: "UT015",
               session:this.state.session,
             })
             })
@@ -180,7 +180,7 @@ class StudentCreation extends React.Component{
     getClass = async() => {
         await console.log("wait wait")
         this.getSubjects()
-        fetch("http://144.91.110.221:4800/getClass"
+        fetch("http://144.91.210.221:4800/getClass"
         ,{
         method: 'POST',
         headers: {
@@ -188,7 +188,7 @@ class StudentCreation extends React.Component{
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          school_id: "100",
+          school_id: "UT015",
           session: this.state.session,
         })
       })
@@ -201,7 +201,7 @@ class StudentCreation extends React.Component{
             .then(err => console.log(err))
     }
     getCategory = () => {
-        fetch("http://144.91.110.221:4800/getCastCategory")
+        fetch("http://144.91.210.221:4800/getCastCategory")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -210,7 +210,7 @@ class StudentCreation extends React.Component{
             .then(err => console.log(err))
     }
     getHouse = () => {
-        fetch("http://144.91.110.221:4800/getHouse")
+        fetch("http://144.91.210.221:4800/getHouse")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -220,7 +220,7 @@ class StudentCreation extends React.Component{
     }
     getStudent = async() => {
         await console.log("wait wait")
-        fetch("http://144.91.110.221:4800/getStudent"
+        fetch("http://144.91.210.221:4800/getStudent"
             , {
               method: 'POST',
               headers: {
@@ -229,7 +229,7 @@ class StudentCreation extends React.Component{
               },
               body: JSON.stringify({
                 session: this.state.session,
-                school_id:"100"
+                school_id:"UT015"
               })
             })
             .then(res => res.json())
@@ -241,7 +241,7 @@ class StudentCreation extends React.Component{
       getStudentAccount_no = async() => {
         await console.log("wait wait")
 
-        fetch("http://144.91.110.221:4800/getStudentAccount_no"
+        fetch("http://144.91.210.221:4800/getStudentAccount_no"
             , {
               method: 'POST',
               headers: {
@@ -249,7 +249,7 @@ class StudentCreation extends React.Component{
                 'Content-Type': 'application/json'
               },
               body: JSON.stringify({
-                school_id:"100"
+                school_id:"UT015"
               })
             })
             .then(res => res.json())
@@ -261,7 +261,7 @@ class StudentCreation extends React.Component{
       
     getadmission_no = async() => {
         await console.log("wait wait")
-        fetch("http://144.91.110.221:4800/getadmission_no"
+        fetch("http://144.91.210.221:4800/getadmission_no"
             , {
               method: 'POST',
               headers: {
@@ -270,7 +270,7 @@ class StudentCreation extends React.Component{
               },
               body: JSON.stringify({
                 session: this.state.session,
-                school_id:"100"
+                school_id:"UT015"
               })
             })
             .then(res => res.json())
@@ -397,13 +397,13 @@ class StudentCreation extends React.Component{
         data.append('gaurdian_per_country', this.state.gaurdian_per_country)
         data.append('gaurdian_phone', this.state.gaurdian_phone)
         data.append('gaurdian_mobile', this.state.gaurdian_mobile)
-        data.append('school_id', "100")
+        data.append('school_id', "UT015")
         data.append('unique_id', this.state.session+this.state.admission_no)
         data.append('image', this.state.image)
         data.append('image2', this.state.image2)
         data.append('image3', this.state.image3)
         data.append('image4', this.state.image4)
-        const url = "http://144.91.110.221:4800/StoreStudent"
+        const url = "http://144.91.210.221:4800/StoreStudent"
         var res =fetch(url, {
                 method: 'post',
                 body: data
@@ -433,7 +433,7 @@ class StudentCreation extends React.Component{
         if(account_no =='0'){
              return false;
         }
-        fetch("http://144.91.110.221:4800/singleparentdata"
+        fetch("http://144.91.210.221:4800/singleparentdata"
         , {
             method: 'POST',
             headers: {
@@ -453,7 +453,7 @@ class StudentCreation extends React.Component{
      }
      FeeAmount= async()=>{
       await console.log(this.state.class_name)
-        fetch("http://144.91.110.221:4800/FeeAmount"
+        fetch("http://144.91.210.221:4800/FeeAmount"
         , {
             method: 'POST',
             headers: {
@@ -498,7 +498,7 @@ class StudentCreation extends React.Component{
     render(){
         const data =[];
         {this.state.AllStudent.map((item,index)=>{
-        data.push( {"sr_no":index+1,"name":item.student.name,"admission_no":parseInt(item.student.admission_no),"account_no":parseInt(item.student.account_no),"session":item.session,"class":item.class_name,"section":item.section})
+        data.push( {"sr_no":index+1,"name":item?.student?.name,"admission_no":parseInt(item?.student?.admission_no),"account_no":parseInt(item?.student?.account_no),"session":item?.session,"class":item?.class_name,"section":item?.section})
         })}
           const columns = [
             { title: "SR NO", data: "sr_no" },
@@ -750,7 +750,7 @@ class StudentCreation extends React.Component{
                             <input type="text" className="form-control" value={this.state.balance} onChange={(e)=>{this.setState({balance:e.target.value.toUpperCase()})}}/>
                         </div> */}
                         <div className="col-3 form-group">
-                            <label>Fee Concession % </label>
+                            <label>Fee Concession </label>
                             <input type="text" className="form-control" onChange={(e)=>{this.setState({fee_concession:e.target.value.toUpperCase()})}}/>
                         </div>
                         <div className="col-3 form-group">
@@ -868,7 +868,7 @@ class StudentCreation extends React.Component{
                              <option value="0">Select Account no.</option>
                              {this.state.AllStudentAccount_no.map((item,index)=>{
                                  return(
-                                    <option value={item.student.account_no}>{item.student.account_no}</option>
+                                    <option value={item?.student?.account_no}>{item?.student?.account_no}</option>
                                  )
                              })}
                            </select>

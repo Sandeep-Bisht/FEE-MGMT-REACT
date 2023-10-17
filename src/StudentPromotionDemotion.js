@@ -33,7 +33,7 @@ class StudentPromotionDemotion extends React.Component{
     }
     getStudentForUpgradeSingle = async() => {
     await console.log("wait wait")
-      const url = "http://144.91.110.221:4800/getStudentForUpgradeSingle"
+      const url = "http://144.91.210.221:4800/getStudentForUpgradeSingle"
       fetch(url
         , {
           method: 'POST',
@@ -54,7 +54,7 @@ class StudentPromotionDemotion extends React.Component{
       })
     }
     getSection = () => {
-      fetch("http://144.91.110.221:4800/getSection"
+      fetch("http://144.91.210.221:4800/getSection"
           ,{
           method: 'POST',
           headers: {
@@ -62,7 +62,7 @@ class StudentPromotionDemotion extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100",
+            school_id: "UT015",
           })
           })
           .then(res => res.json())
@@ -73,7 +73,7 @@ class StudentPromotionDemotion extends React.Component{
           .then(err => console.log(err))
   }
     // getStudent = () => {
-    //     fetch("http://144.91.110.221:4800/getStudent")
+    //     fetch("http://144.91.210.221:4800/getStudent")
     //         .then(res => res.json())
     //         .then(data => {
     //             console.log(data)
@@ -82,7 +82,7 @@ class StudentPromotionDemotion extends React.Component{
     //         .then(err => console.log(err))
     // }
     getSession = () => {
-      fetch("http://144.91.110.221:4800/getSession"
+      fetch("http://144.91.210.221:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -90,7 +90,7 @@ class StudentPromotionDemotion extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
           .then(res => res.json())
@@ -101,7 +101,7 @@ class StudentPromotionDemotion extends React.Component{
           .then(err => console.log(err))
   }
     getToSession = () => {
-      fetch("http://144.91.110.221:4800/getSession"
+      fetch("http://144.91.210.221:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -109,7 +109,7 @@ class StudentPromotionDemotion extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
           .then(res => res.json())
@@ -121,7 +121,7 @@ class StudentPromotionDemotion extends React.Component{
     }
     getToClass = async() => {
       await console.log("wait wait")
-      const url = "http://144.91.110.221:4800/getClass"
+      const url = "http://144.91.210.221:4800/getClass"
       fetch(url
         , {
           method: 'POST',
@@ -131,7 +131,7 @@ class StudentPromotionDemotion extends React.Component{
           },
           body: JSON.stringify({
             session: this.state.to_session,
-            school_id:"100"
+            school_id:"UT015"
           })
         })
         .then(res => res.json()
@@ -142,7 +142,7 @@ class StudentPromotionDemotion extends React.Component{
     }
     getClass = async() => {
     await console.log("wait wait")
-    const url = "http://144.91.110.221:4800/getClass"
+    const url = "http://144.91.210.221:4800/getClass"
     fetch(url
       , {
         method: 'POST',
@@ -152,7 +152,7 @@ class StudentPromotionDemotion extends React.Component{
         },
         body: JSON.stringify({
           session: this.state.from_session,
-          school_id:"100"
+          school_id:"UT015"
         })
       })
       .then(res => res.json()
@@ -168,7 +168,7 @@ class StudentPromotionDemotion extends React.Component{
   const data = new FormData()
   data.append('StudentData', JSON.stringify(StudentData))
   data.append('IdArray', JSON.stringify(IdArray))
-  const url = "http://144.91.110.221:4800/StoreUpgradeStudent"
+  const url = "http://144.91.210.221:4800/StoreUpgradeStudent"
   fetch(url, {
           method: 'post',
           body: data
@@ -197,7 +197,7 @@ class StudentPromotionDemotion extends React.Component{
     await console.log("wait")
     const data = new FormData()
     data.append('IdArray', JSON.stringify(IdArray))
-    const url = "http://144.91.110.221:4800/DeleteUpgradeStudent"
+    const url = "http://144.91.210.221:4800/DeleteUpgradeStudent"
     fetch(url, {
             method: 'post',
             body: data
@@ -213,7 +213,7 @@ class StudentPromotionDemotion extends React.Component{
   setStudent=(item,e)=>{
     if(this.checkValidation()){
     if(e.target.checked ==true){
-    StudentData.push({"unique_id":this.state.to_session+item.admission_no+item.account_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"100","student":item.student._id,"session":this.state.to_session,"class_name":this.state.to_class,"section":this.state.to_section})
+    StudentData.push({"unique_id":this.state.to_session+item.admission_no+item.account_no,"tc_status":"0","admission_no":item.admission_no,"account_no":item.account_no,"school_id":"UT015","student":item.student._id,"session":this.state.to_session,"class_name":this.state.to_class,"section":this.state.to_section})
     IdArray.push(item._id)
   }
     if (!e.target.checked) {
@@ -365,7 +365,7 @@ class StudentPromotionDemotion extends React.Component{
                            </select>
                            <span className="errorMessage" style={{fontSize:'14px',fontWeight:600}}>{this.state.to_sectionErrorMessage}</span>
                         </div>
-                        <div className="col-2 form-group">
+                        <div className="col-2 form-group d-flex align-items-end">
                           <br/>
                           {this.state.show_btn ==true ?
                           <button onClick={()=>{this.upgradedata()}} className="btn btn-primary">Save</button>

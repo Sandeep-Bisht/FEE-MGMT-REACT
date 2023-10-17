@@ -30,7 +30,7 @@ class StudentUpgrade extends React.Component{
     }
     getStudentForUpgrade = async() => {
     await console.log("wait wait")
-      const url = "http://144.91.110.221:4800/getStudentForUpgrade"
+      const url = "http://144.91.210.221:4800/getStudentForUpgrade"
       fetch(url
         , {
           method: 'POST',
@@ -51,7 +51,7 @@ class StudentUpgrade extends React.Component{
       })
     }
     getSection = () => {
-      fetch("http://144.91.110.221:4800/getSection")
+      fetch("http://144.91.210.221:4800/getSection")
           .then(res => res.json())
           .then(data => {
               console.log(data)
@@ -60,7 +60,7 @@ class StudentUpgrade extends React.Component{
           .then(err => console.log(err))
     }
     // getStudent = () => {
-    //     fetch("http://144.91.110.221:4800/getStudent")
+    //     fetch("http://144.91.210.221:4800/getStudent")
     //         .then(res => res.json())
     //         .then(data => {
     //             console.log(data)
@@ -69,7 +69,7 @@ class StudentUpgrade extends React.Component{
     //         .then(err => console.log(err))
     // }
     getSession = () => {
-      fetch("http://144.91.110.221:4800/getSession"
+      fetch("http://144.91.210.221:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -77,7 +77,7 @@ class StudentUpgrade extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
           .then(res => res.json())
@@ -88,7 +88,7 @@ class StudentUpgrade extends React.Component{
           .then(err => console.log(err))
     }
     getToSession = () => {
-      fetch("http://144.91.110.221:4800/getSession"
+      fetch("http://144.91.210.221:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -96,7 +96,7 @@ class StudentUpgrade extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
           .then(res => res.json())
@@ -108,7 +108,7 @@ class StudentUpgrade extends React.Component{
     }
     getToClass = async() => {
       await console.log("wait wait")
-      const url = "http://144.91.110.221:4800/getClass"
+      const url = "http://144.91.210.221:4800/getClass"
       fetch(url
         , {
           method: 'POST',
@@ -118,7 +118,7 @@ class StudentUpgrade extends React.Component{
           },
           body: JSON.stringify({
             session: this.state.to_session,
-            school_id:"100"
+            school_id:"UT015"
           })
         })
         .then(res => res.json()
@@ -129,7 +129,7 @@ class StudentUpgrade extends React.Component{
     }
     getClass = async() => {
     await console.log("wait wait")
-    const url = "http://144.91.110.221:4800/getClass"
+    const url = "http://144.91.210.221:4800/getClass"
     fetch(url
       , {
         method: 'POST',
@@ -139,7 +139,7 @@ class StudentUpgrade extends React.Component{
         },
         body: JSON.stringify({
           session: this.state.from_session,
-          school_id:"100"
+          school_id:"UT015"
         })
       })
       .then(res => res.json()
@@ -152,12 +152,12 @@ class StudentUpgrade extends React.Component{
     var StudentData = [];
   await console.log("wait wait")
   {this.state.AllStudent.map((item,index)=>{
-    StudentData.push({"unique_id":this.state.to_session+item.admission_no,"admission_no":parseInt(item.admission_no),"account_no":parseInt(item.account_no),"school_id":"100","student":item.student._id,"session":this.state.to_session,"class_name":this.state.to_class,"section":item.section,"tc_status":"0"})
+    StudentData.push({"unique_id":this.state.to_session+item.admission_no,"admission_no":parseInt(item.admission_no),"account_no":parseInt(item.account_no),"school_id":"UT015","student":item.student._id,"session":this.state.to_session,"class_name":this.state.to_class,"section":item.section,"tc_status":"0"})
   })
   await console.log("wait")
   const data = new FormData()
   data.append('StudentData', JSON.stringify(StudentData))
-  const url = "http://144.91.110.221:4800/StoreUpgradeStudent"
+  const url = "http://144.91.210.221:4800/StoreUpgradeStudent"
   fetch(url, {
           method: 'post',
           body: data
@@ -242,7 +242,7 @@ class StudentUpgrade extends React.Component{
                            </select>
                            <span className="errorMessage" style={{fontSize:'14px',fontWeight:600}}>{this.state.class_nameErrorMessage}</span>
               </div>
-              <div className="col-2 form-group">
+              <div className="col-2 form-group d-flex align-items-end">
                           <br/>
                           <button onClick={()=>{this.upgradedata()}} className="btn btn-primary">Upgrade</button>
                         </div>

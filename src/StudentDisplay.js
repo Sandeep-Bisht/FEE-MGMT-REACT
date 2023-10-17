@@ -160,7 +160,7 @@ class StudentDisplay extends React.Component{
 
   // GetAllStudentCount Api
   getStudentCount = () => {
-    fetch("http://144.91.110.221:4800/getStudentCount"
+    fetch("http://144.91.210.221:4800/getStudentCount"
         , {
           method: 'POST',
           headers: {
@@ -169,7 +169,7 @@ class StudentDisplay extends React.Component{
           },
             body: JSON.stringify({
             session: this.state.session,
-            school_id: "100"
+            school_id: "UT015"
           })
         })
         .then(res => res.json())
@@ -182,7 +182,7 @@ class StudentDisplay extends React.Component{
   // End GetAllStudentCount Api
 
     getSession = () => {
-      fetch("http://144.91.110.221:4800/getSession"
+      fetch("http://144.91.210.221:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -190,7 +190,7 @@ class StudentDisplay extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
           .then(res => res.json())
@@ -201,7 +201,7 @@ class StudentDisplay extends React.Component{
           .then(err => console.log(err))
   }
     getStudent = () => {
-      fetch("http://144.91.110.221:4800/getStudent"
+      fetch("http://144.91.210.221:4800/getStudent"
           , {
             method: 'POST',
             headers: {
@@ -210,7 +210,7 @@ class StudentDisplay extends React.Component{
             },
               body: JSON.stringify({
               session: this.state.session,
-              school_id: "100",
+              school_id: "UT015",
               page_no:this.state.serverpagi,
               page_content_size:this.state.servercontentsize
             })
@@ -225,7 +225,7 @@ class StudentDisplay extends React.Component{
     }
     getCertificateDetails = async() => {
       await console.log("wait wait")
-      fetch("http://144.91.110.221:4800/getTransferCertificate"
+      fetch("http://144.91.210.221:4800/getTransferCertificate"
       ,{
       method: 'POST',
       headers: {
@@ -326,7 +326,7 @@ class StudentDisplay extends React.Component{
       if(admission_no =='0'){
            return false;
       }
-      fetch("http://144.91.110.221:4800/singlestudentdata"
+      fetch("http://144.91.210.221:4800/singlestudentdata"
       ,{
         method: 'POST',
         headers: {
@@ -336,7 +336,7 @@ class StudentDisplay extends React.Component{
         body: JSON.stringify({
           session: this.state.session,
           admission_no: admission_no,
-          school_id:"100",
+          school_id:"UT015",
         })
       })
       .then((data) => data.json())
@@ -383,7 +383,7 @@ class StudentDisplay extends React.Component{
     if(admission_no =='0'){
          return false;
     }
-    fetch("http://144.91.110.221:4800/SearchOldfee"
+    fetch("http://144.91.210.221:4800/SearchOldfee"
     ,{
         method: 'POST',
         headers: {
@@ -426,7 +426,7 @@ viewParent= async(e)=>{
     if(account_no =='0'){
          return false;
     }
-  fetch("http://144.91.110.221:4800/singleparentdata"
+  fetch("http://144.91.210.221:4800/singleparentdata"
   , {
       method: 'POST',
       headers: {
@@ -811,33 +811,33 @@ viewParent= async(e)=>{
           <div class="row">
             <div class="col-lg-3">
             <ModalImage
-            small={this.state.image !=undefined ?"http://144.91.110.221:4800/" + this.state.image:"http://144.91.110.221:4800/public/admission/" + this.state.admission_no+".jpg"}
-            medium={this.state.image !=undefined ?"http://144.91.110.221:4800/" + this.state.image:"http://144.91.110.221:4800/public/admission/" + this.state.admission_no+".jpg"}
-            large={this.state.image !=undefined ?"http://144.91.110.221:4800/" + this.state.image:"http://144.91.110.221:4800/public/admission/" + this.state.admission_no+".jpg"}
+            small={this.state.image !=undefined ?"http://144.91.210.221:4800/" + this.state.image:"http://144.91.210.221:4800/public/admission/" + this.state.admission_no+".jpg"}
+            medium={this.state.image !=undefined ?"http://144.91.210.221:4800/" + this.state.image:"http://144.91.210.221:4800/public/admission/" + this.state.admission_no+".jpg"}
+            large={this.state.image !=undefined ?"http://144.91.210.221:4800/" + this.state.image:"http://144.91.210.221:4800/public/admission/" + this.state.admission_no+".jpg"}
             alt={this.state.image}
             />;
             </div>
             <div class="col-lg-3">
             <ModalImage
-            small={"http://144.91.110.221:4800/" + this.state.image2}
-            medium={"http://144.91.110.221:4800/" + this.state.image2}
-            large={"http://144.91.110.221:4800/" + this.state.image2}
+            small={"http://144.91.210.221:4800/" + this.state.image2}
+            medium={"http://144.91.210.221:4800/" + this.state.image2}
+            large={"http://144.91.210.221:4800/" + this.state.image2}
             alt={this.state.image2}
            />;
             </div>
             <div class="col-lg-3">
             <ModalImage
-            small={"http://144.91.110.221:4800/" + this.state.image3}
-            medium={"http://144.91.110.221:4800/" + this.state.image3}
-            large={"http://144.91.110.221:4800/" + this.state.image3}
+            small={"http://144.91.210.221:4800/" + this.state.image3}
+            medium={"http://144.91.210.221:4800/" + this.state.image3}
+            large={"http://144.91.210.221:4800/" + this.state.image3}
             alt={this.state.image3}
            />;
             </div>
             <div class="col-lg-3">
             <ModalImage
-            small={"http://144.91.110.221:4800/" + this.state.image4}
-            medium={"http://144.91.110.221:4800/" + this.state.image4}
-            large={"http://144.91.110.221:4800/" + this.state.image4}
+            small={"http://144.91.210.221:4800/" + this.state.image4}
+            medium={"http://144.91.210.221:4800/" + this.state.image4}
+            large={"http://144.91.210.221:4800/" + this.state.image4}
             alt={this.state.image4}
            />;
             </div>
@@ -849,7 +849,7 @@ viewParent= async(e)=>{
 </div>
 <div className= "row bg-white printStudentSlip p-5">
                 <div className="col-12 text-center">
-                  <h3>  ST. JUDE'S SCHOOL</h3>
+                  <h3>  CONSTANCIA SCHOOL</h3>
                   <h6>WEST CANAL ROAD, P.O MAJRA DEHRADUN<br/>
                   0135-2640930,0135-2642828,FAX:0135-2644353
                   </h6>

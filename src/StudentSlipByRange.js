@@ -109,7 +109,7 @@ class StudentSlipByRange extends React.Component{
        this.getStudent()
     }
     getSession = () => {
-      fetch("http://144.91.110.221:4800/getSession"
+      fetch("http://144.91.210.221:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -117,7 +117,7 @@ class StudentSlipByRange extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
           .then(res => res.json())
@@ -128,7 +128,7 @@ class StudentSlipByRange extends React.Component{
           .then(err => console.log(err))
   }
     getStudent = () => {      
-      fetch("http://144.91.110.221:4800/getStudent"
+      fetch("http://144.91.210.221:4800/getStudent"
           , {
             method: 'POST',
             headers: {
@@ -137,7 +137,7 @@ class StudentSlipByRange extends React.Component{
             },
               body: JSON.stringify({
               session: this.state.session,
-              school_id: "100"
+              school_id: "UT015"
             })
           })
           .then(res => res.json())
@@ -329,12 +329,12 @@ class StudentSlipByRange extends React.Component{
                     <label>To</label>
                     <input type="text" className="form-control"  onBlur={(e)=>{this.setState({ToAdmissionNo:e.target.value})}} />
                   </div>
-                  <div className="col-3 form-group">
+                  <div className="col-3 form-group d-flex align-items-end">
                   <br/>
                     <button className="btn btn-success" onClick={(e)=>{this.setRange()}}>Get Data</button>
                     
                   </div>
-                  <div className="col-3 form-group">
+                  <div className="col-3 form-group d-flex align-items-end">
                     <button className="btn btn-info" onClick={(e)=>{this.printStudentSlip()}}>Print</button>
                     
                   </div>
@@ -349,7 +349,7 @@ class StudentSlipByRange extends React.Component{
                   // {index%4==0 ? :null}
               <div className= "row bg-white  mb-3 pt-5 pb-5" style={{borderBottom:"2px dashed black"}}>
                 <div className="col-12 text-center">
-                  <h3>  ST. JUDE'S SCHOOL</h3>
+                  <h3>  CONSTANCIA SCHOOL</h3>
                   <h6>WEST CANAL ROAD, P.O MAJRA DEHRADUN<br/>
                   0135-2640930,0135-2642828,FAX:0135-2644353
                   </h6>

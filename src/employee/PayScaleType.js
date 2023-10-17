@@ -12,7 +12,7 @@ const PayScaleType = () => {
     const [AllPayScaleType,setAllPayScaleType]=useState([])
     
     const getPayScaleType = () => {
-        fetch("http://144.91.110.221:4800/getPayScaleType"
+        fetch("http://144.91.210.221:4800/getPayScaleType"
         , {
           method: 'POST',
           headers: {
@@ -20,7 +20,7 @@ const PayScaleType = () => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
 
@@ -38,7 +38,7 @@ const PayScaleType = () => {
         const data = new FormData()
         data.append('name', name)
         data.append('description', description)
-        const url = "http://144.91.110.221:4800/StorePayScaleType"
+        const url = "http://144.91.210.221:4800/StorePayScaleType"
         fetch(url, {
                 method: 'post',
                 body: data
@@ -131,7 +131,7 @@ const PayScaleType = () => {
                 <label>Description</label>
                 <input className="form-control" value={description} onChange={(e)=>{setDescription(e.target.value.toUpperCase())}}  />
                 </div>
-                <div className="col-4 form-group">
+                 <div className="col-4 form-group d-flex align-items-end">
                     <br/>
                     <button className="btn btn-success" onClick={()=>{StorePayScaleType()}}>Save</button>
                     {updateBtn==true?  <button className="btn btn-secondary mr-2" style={{float:"right"}} onClick={()=>{UpdatePayScaleType()}}> Update Details</button>:null}

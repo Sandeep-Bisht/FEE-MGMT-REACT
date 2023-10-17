@@ -46,7 +46,7 @@ class UpdateReceiptByRange extends React.Component{
       // this.StudentStrenght()
     }
     getBankData = () => {
-      fetch("http://144.91.110.221:4800/getBankData"
+      fetch("http://144.91.210.221:4800/getBankData"
       , {
         method: 'POST',
         headers: {
@@ -55,7 +55,7 @@ class UpdateReceiptByRange extends React.Component{
         },
         body: JSON.stringify({
           session: this.state.session,
-          school_id: "100"
+          school_id: "UT015"
         })
       })
 
@@ -68,7 +68,7 @@ class UpdateReceiptByRange extends React.Component{
           .then(err => console.log(err))
   }
     getSection = () => {
-      fetch("http://144.91.110.221:4800/getSection"
+      fetch("http://144.91.210.221:4800/getSection"
           ,{
           method: 'POST',
           headers: {
@@ -76,7 +76,7 @@ class UpdateReceiptByRange extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100",
+            school_id: "UT015",
             session:this.state.session,
           })
           })
@@ -88,7 +88,7 @@ class UpdateReceiptByRange extends React.Component{
           .then(err => console.log(err))
   }
     getSession = () => {
-      fetch("http://144.91.110.221:4800/getSession"
+      fetch("http://144.91.210.221:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -96,7 +96,7 @@ class UpdateReceiptByRange extends React.Component{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            school_id: "100"
+            school_id: "UT015"
           })
         })
           .then(res => res.json())
@@ -107,7 +107,7 @@ class UpdateReceiptByRange extends React.Component{
           .then(err => console.log(err))
   }
     // getFine = () => {
-    //     fetch("http://144.91.110.221:4800/getFine")
+    //     fetch("http://144.91.210.221:4800/getFine")
     //         .then(res => res.json())
     //         .then(data => {
     //             console.log(data)
@@ -122,7 +122,7 @@ class UpdateReceiptByRange extends React.Component{
     }
 
     getSubjects = () => {
-      fetch("http://144.91.110.221:4800/getSubjects")
+      fetch("http://144.91.210.221:4800/getSubjects")
           .then(res => res.json())
           .then(data => {
               console.log(data)
@@ -134,7 +134,7 @@ class UpdateReceiptByRange extends React.Component{
       // this.getSubjects()
     $("#getBtn").text("Please Wait...")
      this.setState({AllStudent:[]})
-       fetch("http://144.91.110.221:4800/GetFeeReceiptByRange"
+       fetch("http://144.91.210.221:4800/GetFeeReceiptByRange"
        ,{
            method: 'POST',
            headers: {
@@ -161,7 +161,7 @@ class UpdateReceiptByRange extends React.Component{
        })
     }
     getClass = () => {
-      fetch("http://144.91.110.221:4800/getClass")
+      fetch("http://144.91.210.221:4800/getClass")
           .then(res => res.json())
           .then(data => {
               console.log(data)
@@ -173,7 +173,7 @@ class UpdateReceiptByRange extends React.Component{
     global_class_name =  class_name
     console.log("checking response FeesClasswise")
     const currentMonth =  Moment().format('MM')       
-     fetch("http://144.91.110.221:4800/FeesClasswise"
+     fetch("http://144.91.210.221:4800/FeesClasswise"
      ,{
          method: 'POST',
          headers: {
@@ -254,7 +254,7 @@ UpdateFeeReceiptByRange(item) {
   data.append('IdArray', JSON.stringify(IdArray))
   data.append('bank',this.state.bank)
   data.append('receipt_date',this.state.receipt_date)
-  const url = "http://144.91.110.221:4800/UpdateFeeReceiptByRange"
+  const url = "http://144.91.210.221:4800/UpdateFeeReceiptByRange"
   fetch(url,
       {
           method: 'PATCH',
@@ -319,7 +319,7 @@ printDefaulter() {
                         <label>To *</label>
                         <input type="text" className="form-control"  onChange={(e)=>{this.setState({ToReceiptNo:e.target.value})}}/>
                 </div>
-                <div className="col-3 form-group">
+                <div className="col-3 form-group d-flex align-items-end">
                   <br/>
                   <button className="btn btn-success" id="getBtn" onClick={()=>{this.GetData()}}>Get Data</button>
                 </div>

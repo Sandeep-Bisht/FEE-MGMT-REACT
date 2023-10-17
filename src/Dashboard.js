@@ -37,7 +37,7 @@ class Dashboard extends React.Component{
     await console.log("wait")
     this.setState({ voucher_by_date: [] })
     await console.log("wait")
-    fetch("http://144.91.110.221:4800/VoucherByDate"
+    fetch("http://144.91.210.221:4800/VoucherByDate"
       , {
         method: 'POST',
         headers: {
@@ -54,16 +54,14 @@ class Dashboard extends React.Component{
         console.log("data ki length "+data.lenght)
         console.log("data "+data)
         this.setState({ voucher_by_date: data })
-       
-
-      })
+      }).catch((error)=>console.log(error))
   }
   VoucherByDate_pnb = async () => {
     paidamountbydate_pnb=0
     await console.log("wait")
     this.setState({ voucher_by_date_pnb: [] })
     await console.log("wait")
-    fetch("http://144.91.110.221:4800/VoucherByDate"
+    fetch("http://144.91.210.221:4800/VoucherByDate"
       , {
         method: 'POST',
         headers: {
@@ -78,16 +76,15 @@ class Dashboard extends React.Component{
       .then((data) => data.json())
       .then(async (data) => {
         this.setState({ voucher_by_date_pnb: data})
-       
-
       })
+      .catch((error)=>console.log(error))
   }
   VoucherByDate_sbi = async () => {
     paidamountbydate_sbi=0
     await console.log("wait")
     this.setState({ voucher_by_date_sbi: [] })
     await console.log("wait")
-    fetch("http://144.91.110.221:4800/VoucherByDate"
+    fetch("http://144.91.210.221:4800/VoucherByDate"
       , {
         method: 'POST',
         headers: {
@@ -102,13 +99,13 @@ class Dashboard extends React.Component{
       .then((data) => data.json())
       .then(async (data) => {
         this.setState({ voucher_by_date_sbi: data })
-      })
+      }).catch((error)=>console.log(error))
   }
   SuspiciousVoucherByDate = async () => {
 
     await console.log("wait")
     this.setState({ SuspiciousVoucherByDate: 0 })
-    fetch("http://144.91.110.221:4800/SuspiciousVoucherByDate"
+    fetch("http://144.91.210.221:4800/SuspiciousVoucherByDate"
       , {
         method: 'POST',
         headers: {
@@ -125,10 +122,10 @@ class Dashboard extends React.Component{
       .then(async (data) => {
         this.setState({ SuspiciousVoucherByDate: data.length })
        
-      })
+      }).catch((error)=>console.log(error))
   }
   getClass = () => {
-    fetch("http://144.91.110.221:4800/getClass")
+    fetch("http://144.91.210.221:4800/getClass")
         .then(res => res.json())
         .then(data => {
             console.log(data)
@@ -138,7 +135,7 @@ class Dashboard extends React.Component{
   }
   getSection = () => {
     ActiveSection=0
-    fetch("http://144.91.110.221:4800/getSection"
+    fetch("http://144.91.210.221:4800/getSection"
         ,{
         method: 'POST',
         headers: {
@@ -146,7 +143,7 @@ class Dashboard extends React.Component{
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          school_id: "100",
+          school_id: "UT015",
           session:this.state.session,
         })
         })
@@ -160,10 +157,10 @@ class Dashboard extends React.Component{
             })
             this.setState({AllSection:ActiveSection})
         })
-        .then(err => console.log(err))
+        .catch(err => console.log(err))
 }
   getStudent = () => {
-    fetch("http://144.91.110.221:4800/getStudentCount"
+    fetch("http://144.91.210.221:4800/getStudentCount"
         , {
           method: 'POST',
           headers: {
@@ -172,7 +169,7 @@ class Dashboard extends React.Component{
           },
             body: JSON.stringify({
             session: this.state.session,
-            school_id: "100"
+            school_id: "UT015"
           })
         })
         .then(res => res.json())
@@ -180,7 +177,7 @@ class Dashboard extends React.Component{
             this.setState({AllStudentcount: data.count})
             
         })
-        .then(err => console.log(err))
+        .catch(err => console.log(err))
   }
     render(){
  paidamountbydate=0
@@ -199,7 +196,7 @@ class Dashboard extends React.Component{
                     <div className="col-lg-3 col-md-12">
                         <div className="dashboard-card">
                             <h4> Total Employes <span><img src={require('./images/TotalEmployes.png').default} style={{height:"43px"}}/></span></h4>
-                            <h3>30</h3>
+                            <h3>0</h3>
                         </div>
                     </div>
                     <div className="col-lg-3 col-md-12">
@@ -289,67 +286,61 @@ class Dashboard extends React.Component{
                   </div>
                 </div>
                 <div className="row chartRow">
-                    <div className="col-lg-7 col-md-12">
-                    <div className={"my-pretty-chart-container"}>
-                    <Chart
-                      width={'100%'}
-                      height={'400px'}
-                      chartType="LineChart"
-                      loader={<div>Loading Chart</div>}
-                      data={[
-                        ['x', 'Students'],
-                        [0, 0],
-                        [1, 10],
-                        [2, 23],
-                        [3, 17],
-                        [4, 18],
-                        [5, 9],
-                        [6, 11],
-                        [7, 27],
-                        [8, 33],
-                        [9, 40],
-                        [10, 32],
-                        [11, 35],
-                      ]}
-                      options={{
-                        
-                        // backgroundColor:"#e8e8ae",
-                        hAxis: {
-                          title: 'Time',
-                        },
-                        vAxis: {
-                          title: 'Popularity',
-                        },
-                      }}
-                      rootProps={{ 'data-testid': '1' }}
-                    />
-      </div>
-                    </div>
-                    <div className="col-lg-5 col-md-12">
-                    <Chart
-  width={'100%'}
-  height={'300px'}
-  chartType="PieChart"
-  loader={<div>Loading Chart</div>}
-  data={[
-    ['Task', 'Hours per Day'],
-    // ['Total', paidamountbydate],
-    ['SBI', paidamountbydate_sbi],
-    ['PNB', paidamountbydate_pnb],
-    
-    // ['Watch TV', 2],
-    // ['Sleep', 7],
-  ]}
-  options={{
-    title: 'Today Transactiion By Bank',
-    // Just add this option
-    pieHole: 0.4,
-    // backgroundColor:"#e8e8ae"
-  }}
-  rootProps={{ 'data-testid': '3' }}
-/>
-                    </div>
-                </div>
+    <div className="col-lg-6 col-md-12">
+        <div className={"my-pretty-chart-container"}>
+            <Chart
+                width={'100%'}
+                height={'400px'}
+                chartType="LineChart"
+                loader={<div>Loading Chart</div>}
+                data={[
+                    ['x', 'Students'],
+                    [0, 0],
+                    [1, 10],
+                    [2, 23],
+                    [3, 17],
+                    [4, 18],
+                    [5, 9],
+                    [6, 11],
+                    [7, 27],
+                    [8, 33],
+                    [9, 40],
+                    [10, 32],
+                    [11, 35],
+                ]}
+                options={{
+                    hAxis: {
+                        title: 'Time',
+                    },
+                    vAxis: {
+                        title: 'Popularity',
+                    },
+                }}
+                rootProps={{ 'data-testid': '1' }}
+            />
+        </div>
+    </div>
+    <div className="col-lg-6 col-md-12">
+    <Chart
+        width={'100%'}
+        height={'300px'}
+        chartType="LineChart"
+        loader={<div>Loading Chart</div>}
+        data={[
+            ['Task', 'Hours per Day'],
+            ['SBI', paidamountbydate_sbi],
+            ['PNB', paidamountbydate_pnb],
+        ]}
+        options={{
+            title: 'Today Transaction By Bank',
+        }}
+        rootProps={{ 'data-testid': '3' }}
+    />
+</div>
+
+
+</div>
+
             </>
         )
     }

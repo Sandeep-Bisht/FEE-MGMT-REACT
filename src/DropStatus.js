@@ -24,7 +24,7 @@ $(document).ready(function(){
 const SubmitMsg = async () => {
     if(!Userdata==[]){
       if(message !=""){
-      await fetch("http://144.91.110.221:4800/DropStatus", {
+      await fetch("http://144.91.210.221:4800/DropStatus", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -56,7 +56,7 @@ const SubmitMsg = async () => {
    // allcategory api //
    const GetMessage=async()=>{ 
     
-    await fetch("http://144.91.110.221:4800/GetDropStatus")
+    await fetch("http://144.91.210.221:4800/GetDropStatus")
             .then(res =>res.json())
            
             .then(async (data) => {
@@ -75,7 +75,7 @@ const SubmitMsg = async () => {
         <div className="chat-bg">
                 <div className="container ">
                 <div className="col-11 drop-status-div text-center" style={{postion:'fixed'}}>
-                  <h4 style={{color:'darkgreen'}}>SJS Fees Management Status Group</h4>
+                  <h4 style={{color:'darkgreen'}}>CONTANCIA Fees Management Status Group</h4>
                 </div>
                     <div className="row">
                    
