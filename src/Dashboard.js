@@ -37,7 +37,7 @@ class Dashboard extends React.Component{
     await console.log("wait")
     this.setState({ voucher_by_date: [] })
     await console.log("wait")
-    fetch("http://144.91.110.221:4800/VoucherByDate"
+    fetch("http://144.91.210.221:4800/VoucherByDate"
       , {
         method: 'POST',
         headers: {
@@ -61,7 +61,7 @@ class Dashboard extends React.Component{
     await console.log("wait")
     this.setState({ voucher_by_date_pnb: [] })
     await console.log("wait")
-    fetch("http://144.91.110.221:4800/VoucherByDate"
+    fetch("http://144.91.210.221:4800/VoucherByDate"
       , {
         method: 'POST',
         headers: {
@@ -84,7 +84,7 @@ class Dashboard extends React.Component{
     await console.log("wait")
     this.setState({ voucher_by_date_sbi: [] })
     await console.log("wait")
-    fetch("http://144.91.110.221:4800/VoucherByDate"
+    fetch("http://144.91.210.221:4800/VoucherByDate"
       , {
         method: 'POST',
         headers: {
@@ -105,7 +105,7 @@ class Dashboard extends React.Component{
 
     await console.log("wait")
     this.setState({ SuspiciousVoucherByDate: 0 })
-    fetch("http://144.91.110.221:4800/SuspiciousVoucherByDate"
+    fetch("http://144.91.210.221:4800/SuspiciousVoucherByDate"
       , {
         method: 'POST',
         headers: {
@@ -125,7 +125,7 @@ class Dashboard extends React.Component{
       }).catch((error)=>console.log(error))
   }
   getClass = () => {
-    fetch("http://144.91.110.221:4800/getClass")
+    fetch("http://144.91.210.221:4800/getClass")
         .then(res => res.json())
         .then(data => {
             console.log(data)
@@ -135,7 +135,7 @@ class Dashboard extends React.Component{
   }
   getSection = () => {
     ActiveSection=0
-    fetch("http://144.91.110.221:4800/getSection"
+    fetch("http://144.91.210.221:4800/getSection"
         ,{
         method: 'POST',
         headers: {
@@ -160,7 +160,7 @@ class Dashboard extends React.Component{
         .catch(err => console.log(err))
 }
   getStudent = () => {
-    fetch("http://144.91.110.221:4800/getStudentCount"
+    fetch("http://144.91.210.221:4800/getStudentCount"
         , {
           method: 'POST',
           headers: {

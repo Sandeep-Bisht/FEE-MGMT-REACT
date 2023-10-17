@@ -24,7 +24,7 @@ componentDidMount(){
     this.getSubjects()
 }
 getSession = () => {
-    fetch("http://144.91.110.221:4800/getSession"
+    fetch("http://144.91.210.221:4800/getSession"
     ,{
         method: 'POST',
         headers: {
@@ -43,7 +43,7 @@ getSession = () => {
         .then(err => console.log(err))
 }
 getSection = () => {
-    fetch("http://144.91.110.221:4800/getSection"
+    fetch("http://144.91.210.221:4800/getSection"
         ,{
         method: 'POST',
         headers: {
@@ -65,7 +65,7 @@ getSection = () => {
 getClass = async() => {
     this.getSubjects()
     await console.log("wait wait")
-    fetch("http://144.91.110.221:4800/getClass"
+    fetch("http://144.91.210.221:4800/getClass"
     ,{
     method: 'POST',
     headers: {
@@ -87,7 +87,7 @@ getClass = async() => {
 }
 getSubjects = async(e) => {
   await console.log("wait")
-  fetch("http://144.91.110.221:4800/getSubjects")
+  fetch("http://144.91.210.221:4800/getSubjects")
       .then(res => res.json())
       .then(data => {
           console.log(data)
@@ -118,7 +118,7 @@ updateSubjectData =()=>{
     data.append('description', this.state.description)
     data.append('session', this.state.session)
     data.append('school_id', "UT015")
-    const url="http://144.91.110.221:4800/updateSubject"
+    const url="http://144.91.210.221:4800/updateSubject"
             fetch(url,
                 {
                 method:'put',
@@ -133,7 +133,7 @@ updateSubjectData =()=>{
           }
   }
   deleteSubject = (id) => {
-    const apiUrl = 'http://144.91.110.221:4800/deleteSubject';
+    const apiUrl = 'http://144.91.210.221:4800/deleteSubject';
     fetch(apiUrl, {
       headers : { 
         'Content-Type': 'application/json',
@@ -175,7 +175,7 @@ submitSubjectData = () => {
     data.append('description', this.state.description)
     data.append('session', this.state.session)
     data.append('school_id', "UT015")
-    const url = "http://144.91.110.221:4800/StoreSubject"
+    const url = "http://144.91.210.221:4800/StoreSubject"
     fetch(url, {
             method: 'post',
             body: data

@@ -24,8 +24,8 @@ class FeeStructure extends React.Component{
         development_fund_pim:'',
         school_magazin:'0',
         school_magazin_pim:'',
-        annual_sports_day:'0',
-        annual_sports_day_pim:'',
+        annual_terms_fee:'0',
+        annual_terms_fee_pim:'',
         examination_fee:'0',
         examination_fee_pim:'',
         med_board_reg:'0',
@@ -65,10 +65,9 @@ class FeeStructure extends React.Component{
         this.getFeeSubCategory()
     }
     getFeeSubCategory = () => {
-        fetch("http://144.91.110.221:4800/getSubCategory")
+        fetch("http://144.91.210.221:4800/getSubCategory")
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 const currentMonth =  Moment().format('MM')
                 this.setState({AllSubCategory:data,currentMonth:currentMonth})
                 data.map((item,index)=>{
@@ -78,8 +77,7 @@ class FeeStructure extends React.Component{
             .then(err => console.log(err))
     }
     ImportSession =async()=>{
-            await console.log("wait")
-            fetch("http://144.91.110.221:4800/getFeeStructure",{
+            fetch("http://144.91.210.221:4800/getFeeStructure",{
                 method: 'POST',
                 headers: {
                   Accept: 'application/json',
@@ -92,20 +90,17 @@ class FeeStructure extends React.Component{
               })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
                     this.setImportStructure(data)
                 })
                 .then(err => console.log(err))
     }
             setImportStructure =async(newdata)=>{
-                await console.log("wait")
                 newdata.map((item,index)=>{
                 AllImportFeeStructure.push({'unique_id':this.state.session+item.class_name,'session':this.state.session,'school_id':item.school_id,'class_name':item.class_name,'section':item.section,'total_one_time_fee':item.total_one_time_fee,'fees':item.fees,'total_monthly_fee':item.total_monthly_fee,'total_annual_fee':item.total_annual_fee,'grand_total':item.grand_total})
             })
-            await console.log("wait")
             const data = new FormData()
             data.append('AllImportFeeStructure', JSON.stringify(AllImportFeeStructure))
-            const url = "http://144.91.110.221:4800/storeImportStructure"
+            const url = "http://144.91.210.221:4800/storeImportStructure"
             fetch(url, {
                     method: 'post',
                     body: data
@@ -119,8 +114,7 @@ class FeeStructure extends React.Component{
             });
     }
     getSession = async() => {
-        await console.log("wait wait")
-        fetch("http://144.91.110.221:4800/getSession"
+        fetch("http://144.91.210.221:4800/getSession"
         ,{
             method: 'POST',
             headers: {
@@ -133,15 +127,13 @@ class FeeStructure extends React.Component{
           })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({AllSession: data})
             })
             .then(err => console.log(err))
     }
     getClass = async() => {
-        await console.log("wait wait")
         this.getFeeStructure()
-        fetch("http://144.91.110.221:4800/getClass"
+        fetch("http://144.91.210.221:4800/getClass"
         ,{
         method: 'POST',
         headers: {
@@ -155,41 +147,37 @@ class FeeStructure extends React.Component{
       })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({AllClass: data})
                 this.getSection()
             })
             .then(err => console.log(err))
     }
     getSection = () => {
-        fetch("http://144.91.110.221:4800/getSection")
+        fetch("http://144.91.210.221:4800/getSection")
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({AllSection: data})
             })
             .then(err => console.log(err))
     }
     getCategory = () => {
-        fetch("http://144.91.110.221:4800/getCategory")
+        fetch("http://144.91.210.221:4800/getCategory")
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({AllCategory: data})
             })
             .then(err => console.log(err))
     }
     getHouse = () => {
-        fetch("http://144.91.110.221:4800/getHouse")
+        fetch("http://144.91.210.221:4800/getHouse")
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({AllHouse: data})
             })
             .then(err => console.log(err))
     }
     getFeeStructure = () => {
-        fetch("http://144.91.110.221:4800/getFeeStructure",{
+        fetch("http://144.91.210.221:4800/getFeeStructure",{
             method: 'POST',
             headers: {
               Accept: 'application/json',
@@ -202,7 +190,6 @@ class FeeStructure extends React.Component{
           })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({AllFeeStructure: data})
             })
             .then(err => console.log(err))
@@ -217,9 +204,7 @@ class FeeStructure extends React.Component{
         let AllSubCategory = JSON.parse(obj.fees)
         if(AllSubCategory.length-1 != this.state.AllSubCategory.length-1){
           var result=  this.compare( this.state.AllSubCategory,AllSubCategory)
-           console.log("new res",result)
            var new_arr =AllSubCategory.push(result)
-           console.log("new new_arr",new_arr)
         }
         this.setState({_id,session,class_name,section,AllSubCategory})
         this.set_total()
@@ -259,7 +244,7 @@ class FeeStructure extends React.Component{
         data.append('total_annual_fee', this.state.total_annual_fee)
         data.append('total_monthly_fee', this.state.total_monthly_fee)
         data.append('grand_total', this.state.grand_total)
-        const url="http://144.91.110.221:4800/updateFeeStructure"
+        const url="http://144.91.210.221:4800/updateFeeStructure"
                 fetch(url,
                     {
                     method:'put',
@@ -275,7 +260,7 @@ class FeeStructure extends React.Component{
             }
       }
       deleteFeeStructure = (id) => {
-        const apiUrl = 'http://144.91.110.221:4800/deleteFeeStructure';
+        const apiUrl = 'http://144.91.210.221:4800/deleteFeeStructure';
         fetch(apiUrl, {
           headers : { 
             'Content-Type': 'application/json',
@@ -321,7 +306,11 @@ class FeeStructure extends React.Component{
         data.append('total_annual_fee', this.state.total_annual_fee)
         data.append('total_monthly_fee', this.state.total_monthly_fee)
         data.append('grand_total', this.state.grand_total)
-        const url = "http://144.91.110.221:4800/StoreFeeStructure"
+        data.append('annual_terms_fee',this.state.annual_terms_fee)
+        data.append('examination_fee',this.state.examination_fee)
+        data.append('admission_fee',this.state.admission_fee);
+        data.append('registration_fee',this.state.registration_fee)
+        const url = "http://144.91.210.221:4800/StoreFeeStructure"
         fetch(url, {
                 method: 'post',
                 body: data
@@ -350,7 +339,6 @@ class FeeStructure extends React.Component{
         // }
         
         set_total=async()=>{
-            await console.log("wait")
             let grand_total=0
             var total_monthly_fee=0
             var total_annual_fee=0       
@@ -359,7 +347,18 @@ class FeeStructure extends React.Component{
         this.state.AllSubCategory.map((item,index)=>{
             if(item.fee_category=="MONTHLY"){     
                     total_monthly_fee =total_monthly_fee+parseInt(item.amount)
-                    
+            }
+            if(item.fee_sub_category=="ADMISSION FEE")
+            {
+                    this.setState({
+                        admission_fee:item.amount ? item.amount : 0
+                    })
+            }
+            else if(item.fee_sub_category=="REGISTRATION FEE")
+            {
+                    this.setState({
+                        registration_fee:item.amount ? item.amount : 0
+                    })
             }
         
         })
@@ -369,6 +368,18 @@ class FeeStructure extends React.Component{
            this.state.AllSubCategory.map((item,index)=>{
             if(item.fee_category=="ANNUAL"){
                     total_annual_fee =total_annual_fee+ parseInt(item.amount)
+                    if(item.fee_sub_category=="ANNUAL / TERMS FEE")
+                    {
+                        this.setState({
+                            annual_terms_fee:item.amount ? item.amount : 0
+                        })
+                    }
+                    else if(item.fee_sub_category=="EXAMINATION FEE")
+                    {
+                        this.setState({
+                            examination_fee:item.amount ? item.amount : 0
+                        })
+                    }
             }
         })
     

@@ -22,7 +22,7 @@ class SectionCreation extends React.Component{
         this.getSession()
     }
     getSession = () => {
-        fetch("http://144.91.110.221:4800/getSession"
+        fetch("http://144.91.210.221:4800/getSession"
         ,{
             method: 'POST',
             headers: {
@@ -41,7 +41,7 @@ class SectionCreation extends React.Component{
             .then(err => console.log(err))
     }
     getSection = () => {
-        fetch("http://144.91.110.221:4800/getSection"
+        fetch("http://144.91.210.221:4800/getSection"
             ,{
             method: 'POST',
             headers: {
@@ -62,7 +62,7 @@ class SectionCreation extends React.Component{
     }
     getClass = async() => {
         await console.log("wait wait")
-        fetch("http://144.91.110.221:4800/getClass"
+        fetch("http://144.91.210.221:4800/getClass"
         ,{
         method: 'POST',
         headers: {
@@ -100,7 +100,7 @@ class SectionCreation extends React.Component{
         data.append('description',this.state.description)
         // data.append('session', this.state.session)
         data.append('school_id', "UT015")
-        const url="http://144.91.110.221:4800/updateSection"
+        const url="http://144.91.210.221:4800/updateSection"
                 fetch(url,
                     {
                     method:'put',
@@ -115,7 +115,7 @@ class SectionCreation extends React.Component{
               }
       }
       deleteSe = (id) => {
-        const apiUrl = 'http://144.91.110.221:4800/deleteSection';
+        const apiUrl = 'http://144.91.210.221:4800/deleteSection';
         fetch(apiUrl, {
           headers : { 
             'Content-Type': 'application/json',
@@ -152,7 +152,7 @@ class SectionCreation extends React.Component{
         data.append('description', this.state.description)
         // data.append('session', this.state.session)
         data.append('school_id', "UT015")
-        const url = "http://144.91.110.221:4800/StoreSection"
+        const url = "http://144.91.210.221:4800/StoreSection"
         fetch(url, {
                 method: 'post',
                 body: data

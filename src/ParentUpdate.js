@@ -61,7 +61,7 @@ class ParentUpdate extends React.Component{
         this.getSubjects()
     }
     getSubjects = () => {
-        fetch("http://144.91.110.221:4800/getSubjects")
+        fetch("http://144.91.210.221:4800/getSubjects")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -70,7 +70,7 @@ class ParentUpdate extends React.Component{
             .then(err => console.log(err))
     }
     getSession = () => {
-        fetch("http://144.91.110.221:4800/getSession"
+        fetch("http://144.91.210.221:4800/getSession"
         ,{
             method: 'POST',
             headers: {
@@ -89,7 +89,7 @@ class ParentUpdate extends React.Component{
             .then(err => console.log(err))
     }
     getSection = () => {
-        fetch("http://144.91.110.221:4800/getSection"
+        fetch("http://144.91.210.221:4800/getSection"
             ,{
             method: 'POST',
             headers: {
@@ -111,7 +111,7 @@ class ParentUpdate extends React.Component{
     getClass = async() => {
         await console.log("wait wait")
         this.getSubjects()
-        fetch("http://144.91.110.221:4800/getClass"
+        fetch("http://144.91.210.221:4800/getClass"
         ,{
         method: 'POST',
         headers: {
@@ -132,7 +132,7 @@ class ParentUpdate extends React.Component{
             .then(err => console.log(err))
     }
     getParent = () => {
-        fetch("http://144.91.110.221:4800/getParent")
+        fetch("http://144.91.210.221:4800/getParent")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -141,7 +141,7 @@ class ParentUpdate extends React.Component{
             .then(err => console.log(err))
     }
     getCategory = () => {
-        fetch("http://144.91.110.221:4800/getCastCategory")
+        fetch("http://144.91.210.221:4800/getCastCategory")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -150,7 +150,7 @@ class ParentUpdate extends React.Component{
             .then(err => console.log(err))
     }
     getHouse = () => {
-        fetch("http://144.91.110.221:4800/getHouse")
+        fetch("http://144.91.210.221:4800/getHouse")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -160,7 +160,7 @@ class ParentUpdate extends React.Component{
     }
     getStudent = async() => {
         await console.log("wait wait")
-        fetch("http://144.91.110.221:4800/getStudent"
+        fetch("http://144.91.210.221:4800/getStudent"
             , {
               method: 'POST',
               headers: {
@@ -218,7 +218,7 @@ class ParentUpdate extends React.Component{
         data.append('gaurdian_phone', this.state.gaurdian_phone)
         data.append('gaurdian_mobile', this.state.gaurdian_mobile)
 
-        const url = "http://144.91.110.221:4800/StoreStudent"
+        const url = "http://144.91.210.221:4800/StoreStudent"
         fetch(url, {
                 method: 'post',
                 body: data
@@ -242,7 +242,7 @@ class ParentUpdate extends React.Component{
         if(account_no =='0'){
              return false;
         }
-        fetch("http://144.91.110.221:4800/singleparentdata"
+        fetch("http://144.91.210.221:4800/singleparentdata"
         , {
             method: 'POST',
             headers: {
@@ -419,7 +419,7 @@ class ParentUpdate extends React.Component{
         data.append('gaurdian_per_country', this.state.gaurdian_per_country)
         data.append('gaurdian_phone', this.state.gaurdian_phone)
         data.append('gaurdian_mobile', this.state.gaurdian_mobile)
-        const url="http://144.91.110.221:4800/updateAllParents"
+        const url="http://144.91.210.221:4800/updateAllParents"
                 fetch(url,
                     {
                     method:'PATCH',
@@ -435,7 +435,7 @@ class ParentUpdate extends React.Component{
               }
       }
       deleteFeeStructure = (id) => {
-        const apiUrl = 'http://144.91.110.221:4800/deleteFeeStructure';
+        const apiUrl = 'http://144.91.210.221:4800/deleteFeeStructure';
         fetch(apiUrl, {
           headers : { 
             'Content-Type': 'application/json',
@@ -451,7 +451,7 @@ class ParentUpdate extends React.Component{
       }
      FeeAmount= async()=>{
       await console.log(this.state.class_name)
-        fetch("http://144.91.110.221:4800/FeeAmount"
+        fetch("http://144.91.210.221:4800/FeeAmount"
         , {
             method: 'POST',
             headers: {
@@ -503,8 +503,8 @@ class ParentUpdate extends React.Component{
         if(admission_no =='0'){
              return false;
         }
-        // fetch("http://144.91.110.221:4800/singlestudentdata_with_session"
-        fetch("http://144.91.110.221:4800/singlestudentdata"
+        // fetch("http://144.91.210.221:4800/singlestudentdata_with_session"
+        fetch("http://144.91.210.221:4800/singlestudentdata"
             ,{
               method: 'POST',
               headers: {

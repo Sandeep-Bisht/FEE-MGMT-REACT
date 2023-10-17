@@ -12,6 +12,11 @@ var previousmonthlyamount = 0;
 var previousannualamount = 0;
 var previousgrandTotal = 0;
 var previousfine = 0;
+var previousPaidFine=0;
+var previousDuesFine=0;
+var previousTotalPaidAmount=0;
+var previousTotalDuesFee=0;
+var previousDuesFee = 0;
 var submitonce = 0;
 var nothing = "";
 var defaultDate = localStorage.getItem("R_date");
@@ -73,6 +78,8 @@ class FeeReceipt extends React.Component {
       fine: "",
       previousPaidFine: "",
       previousDuesFine: "",
+      previousTotalPaidAmount :"",
+      previousTotalDuesFee: "",
       previousDuesFee: "",
       last_fee_status: true,
       last_fee_date: null,
@@ -85,7 +92,7 @@ class FeeReceipt extends React.Component {
       annual_prize_day: "0",
       development_fund: "0",
       school_magazin: "0",
-      annual_sports_day: "0",
+      annual_terms_fee: "0",
       examination_fee: "0",
       med_board_reg: "0",
       library_fee: "0",
@@ -94,6 +101,7 @@ class FeeReceipt extends React.Component {
       science_fee: "0",
       bus_fare: "0",
       total_monthly_fee: "0",
+      paid_total_amount: "0",
       payment_mode: "BANK",
       grand_total: "",
       bank: "",
@@ -101,6 +109,9 @@ class FeeReceipt extends React.Component {
       check_no: "",
       bank_date: "",
       showTotalAnnualFee: false,
+      showTotalAdmissionFee: false,
+      showTotalExaminationFee: false,
+      showTotalRegistrationFee: false,
       annual_fee: "0",
       one_time_fees: "0",
       fees: [],
@@ -115,7 +126,7 @@ class FeeReceipt extends React.Component {
       fromtomonths: "",
       months: "",
       balance: "",
-      paid_amount: "0",
+      paid_fees: "0",
       remaning_balance: "0",
       surplus: "0",
       due: "0",
@@ -227,7 +238,7 @@ class FeeReceipt extends React.Component {
     return false;
   };
   // getFeeSubCategory = () => {
-  //     fetch("http://144.91.110.221:4800/getSubCategory")
+  //     fetch("http://144.91.210.221:4800/getSubCategory")
   //         .then(res => res.json())
   //         .then(data => {
 
@@ -301,7 +312,7 @@ class FeeReceipt extends React.Component {
 
 
   getBankData = () => {
-    fetch("http://144.91.110.221:4800/getBankData", {
+    fetch("http://144.91.210.221:4800/getBankData", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -319,7 +330,7 @@ class FeeReceipt extends React.Component {
       .then((err) => console.log(err));
   };
   getFine = () => {
-    fetch("http://144.91.110.221:4800/getFine")
+    fetch("http://144.91.210.221:4800/getFine")
       .then((res) => res.json())
       .then((data) => {
         this.setState({
@@ -331,7 +342,7 @@ class FeeReceipt extends React.Component {
       .catch((err) => console.log(err));
   };
   getStudent = async () => {
-    fetch("http://144.91.110.221:4800/getStudent", {
+    fetch("http://144.91.210.221:4800/getStudent", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -358,7 +369,7 @@ class FeeReceipt extends React.Component {
     var b = this.state.session.split("-")[1];
     b = b - 1;
     var previousSession = a + "-" + b;
-    await fetch("http://144.91.110.221:4800/GetDefaulterMoneySingleStudent", {
+    await fetch("http://144.91.210.221:4800/GetDefaulterMoneySingleStudent", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -386,7 +397,7 @@ class FeeReceipt extends React.Component {
     const data = new FormData();
     data.append("category", this.state.category);
     data.append("description", this.state.description);
-    const url = "http://144.91.110.221:4800/StoreFeeCatogory";
+    const url = "http://144.91.210.221:4800/StoreFeeCatogory";
     fetch(url, {
       method: "post",
       body: data,
@@ -399,7 +410,7 @@ class FeeReceipt extends React.Component {
       .then((err) => { });
   };
   getFeeCategory = () => {
-    fetch("http://144.91.110.221:4800/getCategory")
+    fetch("http://144.91.210.221:4800/getCategory")
       .then((res) => res.json())
       .then((data) => {
         this.setState({ AllCategory: data });
@@ -407,7 +418,7 @@ class FeeReceipt extends React.Component {
       .then((err) => console.log(err));
   };
   getSession = () => {
-    fetch("http://144.91.110.221:4800/getSession", {
+    fetch("http://144.91.210.221:4800/getSession", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -428,7 +439,7 @@ class FeeReceipt extends React.Component {
     if (account_no == "0") {
       return false;
     }
-    fetch("http://144.91.110.221:4800/singleparentdataWithSession", {
+    fetch("http://144.91.210.221:4800/singleparentdataWithSession", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -451,10 +462,15 @@ class FeeReceipt extends React.Component {
     previousmonthlyamount = 0;
     previousgrandTotal = 0;
     previousfine = 0;
+    previousPaidFine=0;
+    previousDuesFine=0;
+    previousTotalPaidAmount=0;
+    previousTotalDuesFee=0;
+    previousDuesFee=0;
     this.setState({
       TotalPreviosSeissionBalance: "",
       last_fee_status: true,
-      paid_amount: "0",
+      paid_fees: "0",
       last_fee_date: "",
       fee_concession: "",
       tc_status: "",
@@ -499,7 +515,7 @@ class FeeReceipt extends React.Component {
     if (admission_no == "0") {
       return false;
     }
-    fetch("http://144.91.110.221:4800/singlestudentdata", {
+    fetch("http://144.91.210.221:4800/singlestudentdata", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -568,7 +584,7 @@ class FeeReceipt extends React.Component {
           }
         }
         else {
-          this.setState({ AllStudent: [], fees: [], report_card_and_diary: '0', annual_prize_day: '0', development_fund: '0', school_magazin: '0', annual_sports_day: '0', examination_fee: '0', med_board_reg: '0', library_fee: '0', tution_fee: '0', computer_fee: '0', science_fee: '0', bus_fare: '0', getStudentData: false })
+          this.setState({ AllStudent: [], fees: [], report_card_and_diary: '0', annual_prize_day: '0', development_fund: '0', school_magazin: '0', annual_terms_fee: '0', examination_fee: '0', med_board_reg: '0', library_fee: '0', tution_fee: '0', computer_fee: '0', science_fee: '0', bus_fare: '0', getStudentData: false })
         }
       }).catch((error) => {
         if (error) {
@@ -584,44 +600,43 @@ class FeeReceipt extends React.Component {
     let paidFeeLastMonths = Moment(this.state.paid_upto_month).format("M");
     const newFormMonths = Moment(currentDate).format("M");
     let duesMonthForPay = ""
-    // if(this.state.manualFineState)
-    // {
-    //   this.setState({
-    //     delayFineFee:this.state.manualFine,
-    //   })
-    // }
-    // else{
-    const priviousPaidDate = this.state.paid_upto_month
-    const PriviousDateParts = priviousPaidDate.split("-");
-    const PriviousMonth = PriviousDateParts[1];
-    const PriviousYear = PriviousDateParts[0];
-    const receiptDate = this.state.receipt_date;
-    const day = receiptDate.split("-")[2];
-    const month = receiptDate.split("-")[1];
-    const year = receiptDate.split("-")[0];
-    let totalFineFinaly = 0;
-    if (year == PriviousYear && month > PriviousMonth) {
-      if (day > 15) {
-        duesMonthForPay = (month - PriviousMonth)
-        for (let i = 1; i <= duesMonthForPay; i++) {
-          totalFineFinaly = (i * 30) + totalFineFinaly;
-        }
-      }
-      else {
-        duesMonthForPay = (month - PriviousMonth) - 1
-        for (let i = 1; i <= duesMonthForPay; i++) {
-          totalFineFinaly = (i * 30) + totalFineFinaly;
-        }
-      }
+    if (this.state.manualFineState) {
+      this.setState({
+        delayFineFee: 0,
+      })
     }
-    this.setState({
-      delayFineFee: totalFineFinaly
-    })
-    // }
+    else {
+      const priviousPaidDate = this.state.paid_upto_month
+      const PriviousDateParts = priviousPaidDate.split("-");
+      const PriviousMonth = PriviousDateParts[1];
+      const PriviousYear = PriviousDateParts[0];
+      const receiptDate = this.state.receipt_date;
+      const day = receiptDate.split("-")[2];
+      const month = receiptDate.split("-")[1];
+      const year = receiptDate.split("-")[0];
+      let totalFineFinaly = 0;
+      if (year == PriviousYear && month > PriviousMonth) {
+        if (day > 15) {
+          duesMonthForPay = (month - PriviousMonth)
+          for (let i = 1; i <= duesMonthForPay; i++) {
+            totalFineFinaly = (i * 30) + totalFineFinaly;
+          }
+        }
+        else {
+          duesMonthForPay = (month - PriviousMonth) - 1
+          for (let i = 1; i <= duesMonthForPay; i++) {
+            totalFineFinaly = (i * 30) + totalFineFinaly;
+          }
+        }
+      }
+      this.setState({
+        delayFineFee: totalFineFinaly
+      })
+    }
     // }
   }
   // getFeeReceipt = () => {
-  //     fetch("http://144.91.110.221:4800/getFeeReceipt")
+  //     fetch("http://144.91.210.221:4800/getFeeReceipt")
   //         .then(res => res.json())
   //         .then(data => {
   //             this.set_receipt_no(data)
@@ -635,21 +650,26 @@ class FeeReceipt extends React.Component {
     let monthsDifference = Moment(currentDate, "MM-YYYY").diff(Moment(lastDateMonth, "MM-YYYY"), 'months');
     if (monthsDifference > 0) {
       let tutionFee = this.state.StudentTutionFee
-      return ((tutionFee * Number(monthsDifference)) + (this.state.AllDueFees ? Number(this.state.AllDueFees) : 0))
+      return ((tutionFee * Number(monthsDifference)) + (this.state.AllDueFees ? Number(this.state.AllDueFees) : 0) + (this.state.showTotalAdmissionFee ? + Number(this.state.admission_fee) : 0)
+        + (this.state.showTotalAnnualFee ? Number(this.state.annual_terms_fee) : 0) + (this.state.showTotalExaminationFee ? Number(this.state.examination_fee) : 0) + (this.state.showTotalRegistrationFee ? Number(this.state.registration_fee) : 0) + Number(this.state.manualFine)>0 ? Number(this.state.manualFine) : 0)
     }
     else {
+      console.log("inside the else part")
       let currentDate = new Date();
       let paidFeeLastMonths = Moment(this.state.paid_upto_month).format("M");
       const newFormMonths = Moment(currentDate).format("M");
+      console.log(this.state.AllDueFees, "check thd what is that")
       return (this.state.Allfees && this.state.Allfees.length > 0 ? this.state.Allfees.find((item) => item.fee_category === "MONTHLY" && item.fee_sub_category === 'TUITION FEE') ? parseInt(this.state.admission_no && this.state.AllDueFees > 0 ? 0 : this.state.admission_no ? this.state.StudentTutionFee : 0) *
         parseInt(Number(newFormMonths) - Number(paidFeeLastMonths))
         : (this.state.admission_no ? this.state.StudentTutionFee : 0)
-        :
-        0) + (this.state.TakeOneTimeFee ? Number(this.state.one_time_fees) : 0) + (this.state.AllDueFees ? Number(this.state.AllDueFees) : 0)
+        : 0) + (this.state.AllDueFees ? Number(this.state.AllDueFees) : 0)
+        + (this.state.showTotalAdmissionFee ? + Number(this.state.admission_fee) : 0)
+        + (this.state.showTotalAnnualFee ? Number(this.state.annual_terms_fee) : 0) + (this.state.showTotalExaminationFee ? Number(this.state.examination_fee) : 0) + (this.state.showTotalRegistrationFee ? Number(this.state.registration_fee) : 0 )
+        + (Number(this.state.manualFine)>0 ? Number(this.state.manualFine) : 0)
     }
   };
   getCertificateDetails = async () => {
-    fetch("http://144.91.110.221:4800/getTransferCertificate", {
+    fetch("http://144.91.210.221:4800/getTransferCertificate", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -675,7 +695,7 @@ class FeeReceipt extends React.Component {
   getFeeReceipt = (class_names, sections) => {
     var fetchPromise = "";
     // const currentMonth =  Moment().format('MM')
-    fetchPromise = fetch("http://144.91.110.221:4800/getFeeReceipt", {
+    fetchPromise = fetch("http://144.91.210.221:4800/getFeeReceipt", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -718,7 +738,7 @@ class FeeReceipt extends React.Component {
   SearchOldfee = async () => {
     this.setState({ AllOldFees: [] });
     const admission_no = this.state.admission_no.toUpperCase();
-    fetch("http://144.91.110.221:4800/SearchOldfee", {
+    fetch("http://144.91.210.221:4800/SearchOldfee", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -730,7 +750,6 @@ class FeeReceipt extends React.Component {
     })
       .then((data) => data.json())
       .then(async (data) => {
-        console.log("check the data inside the search old data", data)
         if (data[0] != undefined) {
           var A = Moment(data[data.length - 1].last_fee_date);
           var aa = this.state.session.split("-")[0];
@@ -739,10 +758,16 @@ class FeeReceipt extends React.Component {
           var last_date;
           // alert(Moment(data[data.length-1].last_fee_date).format("YYYY-MM-DD"))
           data.map((item) => {
+            console.log(item, "chek the item which is persentend on data")
             previousmonthlyamount = parseInt(previousmonthlyamount) + parseInt(item.total_monthly_fee);
             previousannualamount = parseInt(previousannualamount) + (parseInt(item.total_annual_fee) > 0 ? parseInt(item.total_annual_fee) : 0);
             previousfine = parseInt(previousfine) + (parseInt(item.fine) > 0 ? parseInt(item.fine) : 0);
-            previouspaidamount = parseInt(previouspaidamount) + (parseInt(item.paid_amount) > 0 ? parseInt(item.paid_amount) : 0);
+            previousPaidFine = parseInt(previousPaidFine) + (parseInt(item.paid_fine) > 0 ? parseInt(item.paid_fine) : 0);
+            previousDuesFine = parseInt(previousDuesFine) + (parseInt(item.dues_fine) > 0 ? parseInt(item.dues_fine) : 0);
+            previousTotalPaidAmount = parseInt(previousTotalPaidAmount) + (parseInt(item.paid_amount) > 0 ? (parseInt(item.paid_amount)) : 0);
+            previousTotalDuesFee = parseInt(previousTotalDuesFee) + ((parseInt(item.dues_fee) + parseInt(item.dues_fine)) > 0 ? (parseInt(item.dues_fee) + parseInt(item.dues_fine)) : 0);
+            previousDuesFee = parseInt(previousDuesFee) + (parseInt(item.dues_fee) > 0 ? parseInt(item.dues_fee) : 0);
+            previouspaidamount = parseInt(previouspaidamount) + (parseInt(item.paid_fees) > 0 ? parseInt(item.paid_fees) : 0);
           })
           if (parseInt(A.diff(B, "days")) < 0) {
             last_date = aa + "-03-31";
@@ -752,7 +777,7 @@ class FeeReceipt extends React.Component {
               last_session: data[data.length - 1].session,
               last_fee_date: data.last_fee_date,
               previousPaidFine: data[data.length - 1].paid_fine,
-              AllDueFees: data[data.length - 1].grand_total - data[data.length - 1].paid_amount,
+              AllDueFees: data[data.length - 1].grand_total - data[data.length - 1].paid_fees,
               receipt_no: data[data.length - 1].receipt_no
             });
 
@@ -763,7 +788,7 @@ class FeeReceipt extends React.Component {
               last_session: data[data.length - 1].session,
               last_fee_date: data.last_fee_date,
               balance: data[data.length - 1].balance,
-              AllDueFees: data[data.length - 1].grand_total - data[data.length - 1].paid_amount,
+              AllDueFees: data[data.length - 1].dues_fee,
               receipt_no: data[data.length - 1].receipt_no
             });
 
@@ -775,7 +800,6 @@ class FeeReceipt extends React.Component {
           }
         } else {
           if (this.state.AllStudent[0] != undefined) {
-            console.log("check the data inside else part of the search old data")
             this.setState({
               last_fee_date: this.state.last_fee_date,
               last_session: this.state.studentSession,
@@ -822,8 +846,8 @@ class FeeReceipt extends React.Component {
   };
   FeesClasswise = (class_names, sections) => {
     const currentMonth = Moment().format("MM");
-    fetch("http://144.91.110.221:4800/FeesClasswise", {
-      // fetch("http://144.91.110.221:4800/FeesClasswise", {
+    fetch("http://144.91.210.221:4800/FeesClasswise", {
+      // fetch("http://144.91.210.221:4800/FeesClasswise", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -847,6 +871,10 @@ class FeeReceipt extends React.Component {
             orignalannualfee: data[0].total_annual_fee,
             orignalmonthlyfee: data[0].total_monthly_fee,
             orignalgrandtotal: data[0].grand_total,
+            admission_fee: data[0].admission_fee,
+            annual_terms_fee: data[0].annual_terms_fee,
+            examination_fee: data[0].examination_fee,
+            registration_fee: data[0].registration_fee,
           });
           await this.SearchOldfee();
         }
@@ -862,7 +890,7 @@ class FeeReceipt extends React.Component {
       if (this.state.last_fees_date == "") {
         this.searchByAdmission_no();
       }
-      // alert(this.state.paid_amount)
+      // alert(this.state.paid_fees)
       var calculateOneTimeFee = 0;
       var grand_total = 0;
       var monthlytotal = 0;
@@ -928,7 +956,7 @@ class FeeReceipt extends React.Component {
         }
       });
       var paidFees = [];
-      var paidAmount = parseInt(this.state.paid_amount);
+      var paidAmount = parseInt(this.state.paid_fees);
       paidAmount =
         paidAmount + parseInt(this.state.surplus) + parseInt(this.state.due);
       var setpaidAmount =
@@ -947,7 +975,7 @@ class FeeReceipt extends React.Component {
       var plus_one_time_fees = 0;
       var show_annual_fees = 0;
       var total_monthly_fee = 0;
-      if (this.state.paid_amount == "0") {
+      if (this.state.paid_fees == "0") {
         var dateStart = Moment(this.state.last_fees_date).add(1, "month");
         var dateEnd = Moment(this.state.receipt_date);
         if (
@@ -992,7 +1020,7 @@ class FeeReceipt extends React.Component {
             if (item.fee_category == "ANNUAL") {
               if (this.state.is_teacher_ward == "false") {
                 if (item.fee_sub_category == "MISC") {
-                  this.state.Allfees[index].amount = this.state.paid_amount;
+                  this.state.Allfees[index].amount = this.state.paid_fees;
                 }
               }
             }
@@ -1001,7 +1029,7 @@ class FeeReceipt extends React.Component {
             tuition_fee: 0,
             fee_month: 3,
             annual_fees:
-              parseInt(this.state.paid_amount) + parseInt(this.state.balance),
+              parseInt(this.state.paid_fees) + parseInt(this.state.balance),
             one_time: 0,
           });
           this.setState(
@@ -1009,12 +1037,12 @@ class FeeReceipt extends React.Component {
               fromtomonths: fromtomonths,
               fine: 0,
               remaning_balance:
-                parseInt(this.state.paid_amount) + parseInt(this.state.balance),
-              annual_fee: parseInt(this.state.paid_amount),
+                parseInt(this.state.paid_fees) + parseInt(this.state.balance),
+              annual_fee: parseInt(this.state.paid_fees),
               one_time_fees: 0,
               total_monthly_fee: 0,
               grand_total:
-                parseInt(this.state.paid_amount) + parseInt(this.state.balance),
+                parseInt(this.state.paid_fees) + parseInt(this.state.balance),
               last_fee_date: this.state.last_fees_date,
             }
           );
@@ -1083,7 +1111,7 @@ class FeeReceipt extends React.Component {
                 fromtomonths: fromtomonths,
                 last_fee_date: last_fee_date,
                 total_monthly_fee: monthlyfee,
-                grand_total: this.state.paid_amount,
+                grand_total: this.state.paid_fees,
               });
             }
             return false;
@@ -1365,7 +1393,7 @@ class FeeReceipt extends React.Component {
       //     grand_total = grand_total + monthlytotal + annual_fees;
       //   }
       //   remainbalance =
-      //     parseInt(this.state.paid_amount) +
+      //     parseInt(this.state.paid_fees) +
       //     parseInt(this.state.surplus) +
       //     parseInt(this.state.due) -
       //     grand_total;
@@ -1400,7 +1428,7 @@ class FeeReceipt extends React.Component {
       "0"
     ) {
       this.setState({
-        paid_amount: parseInt(this.state.remaning_balance) * -1,
+        paid_fees: parseInt(this.state.remaning_balance) * -1,
       });
       if (this.state.remaning_balance != 0) {
         this.setBalance();
@@ -1558,7 +1586,7 @@ class FeeReceipt extends React.Component {
   //  if(admission_no =='0'){
   //          return false;
   //     }
-  //     fetch("http://144.91.110.221:4800/singlestudentdata"
+  //     fetch("http://144.91.210.221:4800/singlestudentdata"
   //     ,{
   //         method: 'POST',
   //         headers: {
@@ -1585,7 +1613,7 @@ class FeeReceipt extends React.Component {
     // if(admission_no =='0'){
     //      return false;
     // }
-    // fetch("http://144.91.110.221:4800/singlestudentdata"
+    // fetch("http://144.91.210.221:4800/singlestudentdata"
     // ,{
     //     method: 'POST',
     //     headers: {
@@ -1669,19 +1697,21 @@ class FeeReceipt extends React.Component {
           data.append("account_no", this.state.account_no);
           data.append("name", this.state.name);
           data.append("prospectus_fee", this.state.prospectus_fee);
-          data.append("registration_fee", this.state.registration_fee);
-          data.append("admission_fee", this.state.admission_fee);
+          data.append("registration_fee", this.state.showTotalRegistrationFee ? this.state.registration_fee : 0);
+          data.append("admission_fee", this.state.showTotalAdmissionFee ? this.state.admission_fee : 0);
+          data.append("annual_terms_fee", this.state.showTotalAnnualFee ? this.state.annual_terms_fee : 0);
+          data.append("examination_fee", this.state.showTotalExaminationFee ? this.state.examination_fee : 0);
           data.append("security_fee", this.state.security_fee);
-          data.append("paid_fees", JSON.stringify(this.state.paidFees));
+          data.append("paid_amount", this.state.paid_total_amount);
           data.append("Allfees", JSON.stringify(this.state.Allfees));
           data.append("fees", JSON.stringify(this.state.Actualfees));
           data.append("paid_months", JSON.stringify(this.state.months));
-          data.append("paid_amount", this.state.paid_amount);
+          data.append("paid_fees", this.state.paid_fees);
           data.append("fine", this.state.delayFineFee);
           data.append("paid_fine", this.state.manualFine > 0 ? this.state.manualFine : 0)
           data.append("dues_fine", (this.state.delayFineFee - this.state.manualFine))
-          data.append("dues_fee", this.getGrandTotal() > 0 ? this.getGrandTotal() - this.state.paid_amount : 0)
-          data.append("balance", this.getGrandTotal() <= 0 ? this.state.paid_amount : 0);
+          data.append("dues_fee", this.getGrandTotal() > 0 && (this.getGrandTotal() - Number(this.state.paid_total_amount)) > 0 ? (this.getGrandTotal() - Number(this.state.paid_total_amount)) : 0)
+          data.append("balance", this.getGrandTotal() <= Number(this.state.paid_total_amount) ? Number(this.state.paid_total_amount) - this.getGrandTotal() : 0);
           data.append(
             "paid_month",
             this.state.fromtomonths[this.state.fromtomonths.length - 1]
@@ -1695,7 +1725,7 @@ class FeeReceipt extends React.Component {
           data.append("bank_v_no", this.state.bank_v_no);
           data.append("check_no", this.state.check_no);
           data.append("bank_date", this.state.bank_date);
-          const url = "http://144.91.110.221:4800/StoreReceipt";
+          const url = "http://144.91.210.221:4800/StoreReceipt";
           fetch(url, {
             method: "post",
             body: data,
@@ -1715,6 +1745,11 @@ class FeeReceipt extends React.Component {
               previousannualamount = 0;
               previousgrandTotal = 0;
               previousfine = 0;
+              previousPaidFine = 0;
+              previousDuesFine = 0;
+              previousTotalPaidAmount = 0;
+              previousTotalDuesFee=0;
+              previousDuesFee = 0;
               submitonce = 0;
               nothing = "";
               defaultDate = localStorage.getItem("R_date");
@@ -1761,7 +1796,7 @@ class FeeReceipt extends React.Component {
                 parent_address: "",
                 gaurdian_name: "",
                 gaurdian_address: "",
-
+                paid_total_amount: 0,
                 fee_concession: "",
                 bus_fare_concession: "",
                 vehicle_no: "",
@@ -1793,7 +1828,7 @@ class FeeReceipt extends React.Component {
                 annual_prize_day: "0",
                 development_fund: "0",
                 school_magazin: "0",
-                annual_sports_day: "0",
+                annual_terms_fee: "0",
                 examination_fee: "0",
                 med_board_reg: "0",
                 library_fee: "0",
@@ -1823,7 +1858,7 @@ class FeeReceipt extends React.Component {
                 fromtomonths: "",
                 months: "",
                 balance: "",
-                paid_amount: "0",
+                paid_fees: "0",
                 remaning_balance: "0",
                 surplus: "0",
                 due: "0",
@@ -1849,8 +1884,11 @@ class FeeReceipt extends React.Component {
                 defaultFine: "",
                 // AllBank:[],
                 manualFine: "",
-                manualFineState: "false",
-
+                manualFineState: false,
+                showTotalAdmissionFee: false,
+                showTotalAnnualFee: false,
+                showTotalExaminationFee: false,
+                showTotalRegistrationFee: false,
                 Rpaidmonth: "",
                 Rreceiptdate: "",
                 Rlastpaiddate: "",
@@ -1888,7 +1926,7 @@ class FeeReceipt extends React.Component {
   //   let newFormMonths=Moment(currentDate).format("MM");
   //   if(newFormMonths == lastDate)
   //   {
-  //     console.log(parseInt(((this.state.StudentTutionFee)*(newFormMonths-lastDate))-this.state.paid_amount))
+  //     console.log(parseInt(((this.state.StudentTutionFee)*(newFormMonths-lastDate))-this.state.paid_fees))
   //   }
   // }
 
@@ -1898,7 +1936,7 @@ class FeeReceipt extends React.Component {
       data.append("_id", this.state._id);
       data.append("balance", this.state.balance);
       data.append("paid_upto_month", this.state.last_fee_date);
-      const url = "http://144.91.110.221:4800/UpdateBalance";
+      const url = "http://144.91.210.221:4800/UpdateBalance";
       fetch(url, {
         method: "PATCH",
         body: data,
@@ -1947,7 +1985,7 @@ class FeeReceipt extends React.Component {
   }
 
   DeleteReceipt(id) {
-    const apiUrl = "http://144.91.110.221:4800/DeleteReceipt";
+    const apiUrl = "http://144.91.210.221:4800/DeleteReceipt";
     fetch(apiUrl, {
       headers: {
         "Content-Type": "application/json",
@@ -1965,7 +2003,7 @@ class FeeReceipt extends React.Component {
   }
   // DeleteReceipt(password){
   //     if("delete@1234"==password){
-  //         const apiUrl = 'http://144.91.110.221:4800/DeleteReceipt';
+  //         const apiUrl = 'http://144.91.210.221:4800/DeleteReceipt';
   //         fetch(apiUrl, {
   //           headers : {
   //             'Content-Type':'application/json',
@@ -2033,7 +2071,7 @@ class FeeReceipt extends React.Component {
     data.append("receipt_no", this.state.Rreceiptno);
     data.append("receipt_date", this.state.Rreceiptdate);
     data.append("balance", this.state.Rbalance);
-    const url = "http://144.91.110.221:4800/UpdateReceipt";
+    const url = "http://144.91.210.221:4800/UpdateReceipt";
     fetch(url, {
       method: "put",
       body: data,
@@ -2094,7 +2132,7 @@ class FeeReceipt extends React.Component {
   // StudentCount Api Start
   // GetAllStudentCount Api
   getStudentCount = () => {
-    fetch("http://144.91.110.221:4800/getStudentCount", {
+    fetch("http://144.91.210.221:4800/getStudentCount", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -2114,15 +2152,87 @@ class FeeReceipt extends React.Component {
   };
 
   getAnnualFeeAmount = () => {
-    this.setState({
-      showTotalAnnualFee: true,
-    })
+    if (this.state.showTotalAnnualFee) {
+      this.setState({
+        showTotalAnnualFee: false,
+      },()=>{
+        this.calculateTotalAmount();
+      })
+    }
+    else {
+      this.setState({
+        showTotalAnnualFee: true,
+      },()=>{
+        this.calculateTotalAmount();
+      })
+    }
   }
+  getAdmissionFeeAmount = () => {
+    if (this.state.showTotalAdmissionFee) {
+      this.setState({
+        showTotalAdmissionFee: false,
+      },()=>{
+        this.calculateTotalAmount();
+      })
+    }
+    else {
+      this.setState({
+        showTotalAdmissionFee: true,
+      },()=>{
+        this.calculateTotalAmount();
+      })
+    }
+  }
+  getExaminationFeeAmount = () => {
+    if (this.state.showTotalExaminationFee) {
+      this.setState({
+        showTotalExaminationFee: false,
+      },()=>{
+        this.calculateTotalAmount();
+      })
+    }
+    else {
+      this.setState({
+        showTotalExaminationFee: true,
+      },()=>{
+        this.calculateTotalAmount();
+      })
+    }
+  }
+  getRegistrationFeeAmount = () => {
+    if (this.state.showTotalRegistrationFee) {
+      this.setState({
+        showTotalRegistrationFee: false,
+      },()=>{
+        this.calculateTotalAmount();
+      })
+    }
+    else {
+      this.setState({
+        showTotalRegistrationFee: true,
+      },()=>{
+        this.calculateTotalAmount();
+      })
+    }
+  }
+
+  calculateTotalAmount = () => {
+    this.setState((prevState) => ({
+      paid_total_amount:
+        Number(this.state.showTotalAdmissionFee ? this.state.admission_fee : 0) +
+        Number(this.state.showTotalRegistrationFee ? this.state.registration_fee : 0) +
+        Number(this.state.showTotalAnnualFee ? this.state.annual_terms_fee : 0) +
+        Number(this.state.showTotalExaminationFee ? this.state.examination_fee : 0) +
+        Number(this.state.paid_fees > 0 ? this.state.paid_fees : 0) +
+        Number(this.state.manualFine > 0 ? this.state.manualFine : 0),
+    }));
+  };
+
+
   // End GetAllStudentCount Api
 
   // End StudentCount Api
   render() {
-    console.log(this.state.remaning_balance, "inside the render")
     //commented by sandeep on 4 sept
     // $("#recpddate").on("click", function () {
     //   localStorage.setItem("R_date", Moment().format("YYYY-MM-DD"));
@@ -2396,27 +2506,27 @@ class FeeReceipt extends React.Component {
           <div className="row">
             <div className="col-4">
               <ModalImage
-                small={"http://144.91.110.221:4800/" + this.state.image}
-                medium={"http://144.91.110.221:4800/" + this.state.image}
-                large={"http://144.91.110.221:4800/" + this.state.image}
+                small={"http://144.91.210.221:4800/" + this.state.image}
+                medium={"http://144.91.210.221:4800/" + this.state.image}
+                large={"http://144.91.210.221:4800/" + this.state.image}
                 alt={this.state.image}
               />
               ;
             </div>
             <div className="col-4">
               <ModalImage
-                small={"http://144.91.110.221:4800/" + this.state.image}
-                medium={"http://144.91.110.221:4800/" + this.state.image}
-                large={"http://144.91.110.221:4800/" + this.state.image}
+                small={"http://144.91.210.221:4800/" + this.state.image}
+                medium={"http://144.91.210.221:4800/" + this.state.image}
+                large={"http://144.91.210.221:4800/" + this.state.image}
                 alt={this.state.image}
               />
               ;
             </div>
             <div className="col-4">
               <ModalImage
-                small={"http://144.91.110.221:4800/" + this.state.image}
-                medium={"http://144.91.110.221:4800/" + this.state.image}
-                large={"http://144.91.110.221:4800/" + this.state.image}
+                small={"http://144.91.210.221:4800/" + this.state.image}
+                medium={"http://144.91.210.221:4800/" + this.state.image}
+                large={"http://144.91.210.221:4800/" + this.state.image}
                 alt={this.state.image}
               />
               ;
@@ -2578,9 +2688,9 @@ class FeeReceipt extends React.Component {
           </div>
         </div>
         {/* Old Fee Modal */}
-        <div id="OldFeeModal" class="modal fade" role="dialog">
-          <div class="modal-dialog modal-xl w-100">
-            <div class="modal-content  w-100">
+        <div id="OldFeeModal" class="modal fade w-100" role="dialog">
+          <div class="modal-dialog modal-xl w-100 ">
+            <div class="modal-content w-100">
               {/* <div class="modal-header p-3">
                             <h4 class="modal-title">Previous Fee Details </h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -2729,12 +2839,50 @@ class FeeReceipt extends React.Component {
                 <table class="table print_table">
                   <thead class="thead-light">
                     <tr>
+                      <th>Admission Fee: {this.state.AllOldFees.map((item) => {
+                        if (item.admission_fee > 0) {
+                          return (
+                            <span key={item.id}> Paid {item.admission_fee} ({Moment(item.receipt_date).format("DD-MM-YYYY")}) </span>
+                          );
+                        }
+                        return null;
+                      })}</th>
+                      <th>
+                        Registration Fee :{this.state.AllOldFees.map((item) => {
+                          if (item.registration_fee > 0) {
+                            return (
+                              <span key={item.id}>{item.registration_fee} ({Moment(item.receipt_date).format("DD-MM-YYYY")})</span>
+                            )
+                          }
+                          return null;
+                        })}
+                      </th>
+                      <th>Annual/Terms Fee : {this.state.AllOldFees.map((item) => {
+                        if (item.annual_terms_fee > 0) {
+                          return (
+                            <span key={item.id}>{item.annual_terms_fee} ({Moment(item.receipt_date).format("DD-MM-YYYY")})</span>
+                          )
+                        }
+                        return null;
+                      })}</th>
+                      <th>Examination Fee : {this.state.AllOldFees.map((item) => {
+                        if (item.examination_fee > 0) {
+                          return (
+                            <span key={item.id}>{item.examination_fee} ({Moment(item.receipt_date).format("DD-MM-YYYY")})</span>
+                          )
+                        }
+                        return null;
+                      })}</th>
+                    </tr>
+                  </thead>
+                </table>
+                <table class="table print_table">
+                  <thead class="thead-light">
+                    <tr>
                       <th scope="col">RECEIPT DATE</th>
                       <th scope="col">MONTH</th>
                       <th scope="col">BANK</th>
                       <th scope="col">R.NO</th>
-                      <th scope="col">ONETIME </th>
-                      <th scope="col">ANNUAL</th>
                       <th scope="col">MONTHLY</th>
                       <th scope="col">FINE</th>
                       <th scope="col">PAID FINE</th>
@@ -2742,12 +2890,14 @@ class FeeReceipt extends React.Component {
                       <th scope="col">DUES FINE</th>
                       <th scope="col">DUES FEE</th>
                       <th scope="col">TOTAL DUES</th>
+                      <th scope='col'>PAID AMOUNT</th>
                       <th scope="col">SURPLUS</th>
                       <th scope="col">ACTION</th>
                     </tr>
                   </thead>
                   <tbody>
                     {this.state.AllOldFees.map((item, index) => {
+                      console.log(item, "check the item")
                       // {JSON.parse(item.paid_fees).map((e,i)=>{
                       //         if(e.fee_sub_category =="TUITION FEE"){
                       //             SubtractTuitionFee = e.amount
@@ -2812,15 +2962,13 @@ class FeeReceipt extends React.Component {
                             </td>
                             <td>{item.bank}</td>
                             <td>{item.receipt_no}</td>
-                            <td>{item.total_one_time_fee}</td>
-                            <td>{item.total_annual_fee}</td>
                             <td>
-                              {/* {parseInt(item.paid_amount) -
+                              {/* {parseInt(item.paid_fees) -
                                 (parseInt(item.total_one_time_fee) +
                                   parseInt(item.total_annual_fee) +
                                   parseInt(item.balance)) >
                                 0
-                                ? parseInt(item.paid_amount) -
+                                ? parseInt(item.paid_fees) -
                                 (parseInt(item.total_one_time_fee) +
                                   parseInt(item.total_annual_fee) +
                                   parseInt(item.balance))
@@ -2830,7 +2978,7 @@ class FeeReceipt extends React.Component {
                             <td>{item.fine}</td>
                             <td>{item.paid_fine}</td>
                             {/* <td>{item.grand_total}</td> */}
-                            <td>{item.paid_amount}</td>
+                            <td>{item.paid_fees}</td>
                             <td>{item.fine - item.paid_fine}</td>
                             <td>
                               {parseInt(item.dues_fee)}
@@ -2838,6 +2986,8 @@ class FeeReceipt extends React.Component {
                             <td>
                               {parseInt(Number(item.dues_fee) + Number(item.dues_fine))}
                             </td>
+                            <td>{item.paid_amount}</td>
+
                             <td>
                               {parseInt(item.balance) > 0 ? item.balance : "0"}
                             </td>
@@ -2909,12 +3059,12 @@ class FeeReceipt extends React.Component {
                             <td>{item.total_one_time_fee}</td>
                             <td>{item.total_annual_fee}</td>
                             <td>
-                              {/* {parseInt(item.paid_amount) -
+                              {/* {parseInt(item.paid_fees) -
                                 (parseInt(item.total_one_time_fee) +
                                   parseInt(item.total_annual_fee) +
                                   parseInt(item.balance)) >
                                 0
-                                ? parseInt(item.paid_amount) -
+                                ? parseInt(item.paid_fees) -
                                 (parseInt(item.total_one_time_fee) +
                                   parseInt(item.total_annual_fee) +
                                   parseInt(item.balance))
@@ -2923,7 +3073,7 @@ class FeeReceipt extends React.Component {
                             </td>
                             <td>{item.fine}</td>
                             {/* <td>{item.grand_total}</td> */}
-                            <td>{item.paid_amount}</td>
+                            <td>{item.paid_fees}</td>
                             <td>
                               {parseInt(item.balance) < 0 ? item.balance : "0"}
                             </td>
@@ -2956,7 +3106,7 @@ class FeeReceipt extends React.Component {
                       if (item.session == this.state.session) {
                         previouspaidamount =
                           parseInt(previouspaidamount) +
-                          parseInt(item.paid_amount) +
+                          parseInt(item.paid_fees) +
                           parseInt(item.fine);
                         //   alert(previouspaidamount)
                         previousannualamount =
@@ -2964,14 +3114,14 @@ class FeeReceipt extends React.Component {
                           parseInt(item.total_annual_fee);
                         var a;
                         if (
-                          parseInt(item.paid_amount) -
+                          parseInt(item.paid_fees) -
                           (parseInt(item.total_one_time_fee) +
                             parseInt(item.total_annual_fee) +
                             parseInt(item.balance)) >
                           0
                         ) {
                           a =
-                            parseInt(item.paid_amount) -
+                            parseInt(item.paid_fees) -
                             (parseInt(item.total_one_time_fee) +
                               parseInt(item.total_annual_fee) +
                               parseInt(item.balance));
@@ -2987,12 +3137,12 @@ class FeeReceipt extends React.Component {
                           parseInt(previousfine) + parseInt(item.fine);
                       }
                     })} */}
-
+                    {/* 
                     {this.state.AllOldFees.map((item, index) => {
                       if (this.state.session == "") {
                         // previouspaidamount =
                         //   parseInt(previouspaidamount) +
-                        //   parseInt(item.paid_amount) +
+                        //   parseInt(item.paid_fees) +
                         //   parseInt(item.fine);
                         // //   alert(previouspaidamount)
                         // previousannualamount =
@@ -3000,14 +3150,14 @@ class FeeReceipt extends React.Component {
                         //   parseInt(item.total_annual_fee);
                         // var a;
                         // if (
-                        //   parseInt(item.paid_amount) -
+                        //   parseInt(item.paid_fees) -
                         //   (parseInt(item.total_one_time_fee) +
                         //     parseInt(item.total_annual_fee) +
                         //     parseInt(item.balance)) >
                         //   0
                         // ) {
                         //   a =
-                        //     parseInt(item.paid_amount) -
+                        //     parseInt(item.paid_fees) -
                         //     (parseInt(item.total_one_time_fee) +
                         //       parseInt(item.total_annual_fee) +
                         //       parseInt(item.balance));
@@ -3023,7 +3173,7 @@ class FeeReceipt extends React.Component {
                       }
 
 
-                    })}
+                    })} */}
 
                     <td>
                       <strong>GRAND_TOTAL</strong>
@@ -3031,41 +3181,22 @@ class FeeReceipt extends React.Component {
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td>
-                      <strong>{previousannualamount}</strong>
-                    </td>
                     <td>
                       <strong>{previousmonthlyamount}</strong>
                     </td>
-                    <td></td>
                     <td>
                       <strong>{previousfine > 0 ? previousfine : 0}</strong>
                     </td>
-                    {/* <td><strong>{previousgrandTotal}</strong></td> */}
+                    <td>
+                      <strong>{previousPaidFine > 0 ? previousPaidFine : 0}</strong>
+                    </td>
                     <td>
                       <strong>{parseInt(previouspaidamount)}</strong>
                     </td>
-                    <td></td>
-                    <td></td>
-
-                    {this.state.AllOldFees.map((item, index) => {
-                      if (index == this.state.AllOldFees.length - 1) {
-                        if (parseInt(item.balance) <= 0) {
-                          return (
-                            <td>
-                              <strong>{parseInt(item.balance)}</strong>
-                            </td>
-                          );
-                        } else {
-                          return (
-                            <td>
-                              <strong>0</strong>
-                            </td>
-                          );
-                        }
-                      }
-                    })}
+                    <td><strong>{previousDuesFine > 0 ? previousDuesFine : 0}</strong></td>
+                    <td><strong>{previousDuesFee > 0 ? previousDuesFee : 0}</strong></td>
+                    <td><strong>{previousTotalDuesFee > 0 ? previousTotalDuesFee : 0}</strong></td>
+                    <td><strong>{previousTotalPaidAmount > 0 ? previousTotalPaidAmount : 0}</strong></td>
                     {
                       this.state.AllOldFees.map((item, index) => {
                         if (index === this.state.AllOldFees.length - 1) {
@@ -4228,11 +4359,32 @@ class FeeReceipt extends React.Component {
                       <span style={{ float: "right" }}>
 
                         <button
-                          className={`btn btn-success btn-sm ${this.state.annual ? '' : 'd-none'}`}
-                          id="ShowAnnual"
+                          className={`btn btn-success btn-sm ml-2 ${this.state.annual ? '' : 'd-none'}`}
+                          // id="ShowAnnual"
                           onClick={() => this.getAnnualFeeAmount()}
                         >
-                          + Annual Fee
+                          {this.state.showTotalAnnualFee ? "- Annual/Terms Fee" : "+ Annual/Terms Fee"}
+                        </button>
+                        <button
+                          className={`btn btn-success btn-sm ml-2 ${this.state.annual ? '' : 'd-none'}`}
+                          // id="ShowAnnual"
+                          onClick={() => this.getExaminationFeeAmount()}
+                        >
+                          {this.state.showTotalExaminationFee ? "- Examination Fee" : "+ Examination fee"}
+                        </button>
+                        <button
+                          className={`btn btn-success btn-sm ml-2 ${this.state.annual ? '' : 'd-none'}`}
+                          // id="ShowAnnual"
+                          onClick={() => this.getRegistrationFeeAmount()}
+                        >
+                          {this.state.showTotalRegistrationFee ? "- Registration Fee" : "+ Registration Fee"}
+                        </button>
+                        <button
+                          className={`btn btn-success btn-sm ml-2 ${this.state.annual ? '' : 'd-none'}`}
+                          // id="ShowAnnual"
+                          onClick={() => this.getAdmissionFeeAmount()}
+                        >
+                          {this.state.showTotalAdmissionFee ? "- Admission Fee" : "+ Admission Fee"}
                         </button>
 
 
@@ -4288,8 +4440,17 @@ class FeeReceipt extends React.Component {
                       Fine
                     </label>
                     <input
+                      className="checkbox-for-tuition-fee"
+                      style={{ width: "22px" }}
+                      type="checkbox"
+                      onChange={(e) => {
+                        this.ChangemanualFineState(e);
+                      }}
+                    />
+                    <input
                       type="text"
                       className="defaultFine ml-2"
+                      style={{ width: "30%" }}
                       value={this.state.getStudentData && this.state.admission_no ? this.state.delayFineFee : 0}
                     />
                   </div>
@@ -4300,15 +4461,16 @@ class FeeReceipt extends React.Component {
                     <input
                       type="text"
                       className="manualFine ml-2"
-                      // style={{ display: "none" }}
                       value={this.state.manualFine}
                       onChange={(e) => {
-                        this.setState({
-                          manualFine: e.target.value.toUpperCase(),
+                        this.setState({ manualFine: e.target.value.toUpperCase() },
+                        () => {
+                          this.calculateTotalAmount();
                         });
                         this.setBalance();
                       }}
                     />
+
                   </div>
                   <div className="col-2 form-group">
                     <label>Total_Dues  </label>
@@ -4319,28 +4481,49 @@ class FeeReceipt extends React.Component {
                         // parseInt(this.state.remaning_balance) < 0
                         //   ? parseInt(this.state.remaning_balance) * -1
                         //   : "0"
-                        this.state.getStudentData && this.state.admission_no && this.getGrandTotal() > 0 ? this.getGrandTotal() - Number(this.state.paid_amount) : 0
+                        this.state.getStudentData && this.state.admission_no && this.getGrandTotal() > 0 ? this.getGrandTotal() - Number(this.state.paid_total_amount) : 0
 
                       }
                       onChange={() => {
                         this.setState({
-                          remaning_balance: (this.getGrandTotal() - Number(this.state.paid_amount))
+                          remaning_balance: (this.getGrandTotal() - Number(this.state.paid_total_amount)) <= 0 ? Math.abs((this.getGrandTotal() - Number(this.state.paid_total_amount))) : 0
                         })
                       }}
                     />
                   </div>
                   <div className="col-3 form-group">
-                    <label>Paid_FEE  </label>
+                    <label>Paid_Fee  </label>
                     <input
                       type="text"
                       id="lastInput"
                       className=""
-                      value={this.state.paid_amount}
+                      value={this.state.paid_fees}
                       onChange={(e) => {
                         this.setState({
-                          paid_amount: e.target.value.toUpperCase(),
+                          paid_fees: e.target.value.toUpperCase(),
+                        },()=>{
+                          this.calculateTotalAmount();
                         });
                         this.setBalance();
+                      }}
+                      onKeyUp={() => {
+                        this.setBalance();
+                      }}
+                      tabindex="4"
+                    />
+                  </div>
+                  <div className="col-3 form-group">
+                    <label>Paid_Amount  </label>
+                    <input
+                      type="number"
+                      id="lastInput"
+                      className=""
+                      value={this.state.paid_total_amount}
+                      onChange={(e) => {
+                        this.setState({
+                          paid_total_amount: e.target.value
+                        });
+                        // this.setBalance();
                       }}
                       onKeyUp={() => {
                         this.setBalance();
@@ -4381,7 +4564,7 @@ class FeeReceipt extends React.Component {
                             <label>Bus Fare</label>
                             <input type="text" className="" defaultValue="0" value={this.state.bus_fare} onChange={(e)=>{this.setState({bus_fare:e.target.value.toUpperCase()})}}/>
                         </div> */}
-                  <div className="col-3 form-group">
+                  {/* <div className="col-3 form-group">
                     <label>One Time Fee  </label>
                     <input
                       type="text"
@@ -4389,22 +4572,82 @@ class FeeReceipt extends React.Component {
                       className=""
                       Value={this.state.TakeOneTimeFee ? this.state.one_time_fees : 0}
                     />
-                  </div>
-
-                  <div className="col-3 form-group">
-                    <label>Annual Fee  </label>
-                    <input
-                      type="text"
-                      style={{ backgroundColor: "orange" }}
-                      className=""
-                      value={this.state.showTotalAnnualFee && this.state.admission_no ? this.state.annual_fee : 0}
-                      onChange={(e) => {
-                        this.setState({
-                          annual_fee: e.target.value.toUpperCase(),
-                        });
-                      }}
-                    />
-                  </div>
+                  </div> */}
+                  {
+                    this.state.showTotalAdmissionFee &&
+                    <div className="col-3 form-group">
+                      <label>Admission Fee </label>
+                      <input
+                        type="text"
+                        style={{ backgroundColor: "orange" }}
+                        className=""
+                        value={this.state.showTotalAdmissionFee ? this.state.admission_fee : 0}
+                        onChange={(e) => {
+                          this.setState({ admission_fee: e.target.value.toUpperCase() },
+                           () => {
+                            this.calculateTotalAmount();
+                          });
+                        }}
+                      />
+                    </div>
+                  }
+                  {
+                    this.state.showTotalRegistrationFee &&
+                    <div className="col-3 form-group">
+                      <label>Registration Fee  </label>
+                      <input
+                        type="text"
+                        style={{ backgroundColor: "orange" }}
+                        className=""
+                        value={this.state.showTotalRegistrationFee && this.state.admission_no ? Number(this.state.registration_fee) : 0}
+                        onChange={(e) => {
+                          this.setState({
+                            registration_fee: e.target.value.toUpperCase(),
+                          });
+                        }}
+                      />
+                    </div>
+                  }
+                  {
+                    this.state.showTotalAnnualFee &&
+                    <div className="col-4 form-group">
+                      <label>Annual / Terms Fee  </label>
+                      <input
+                        type="text"
+                        style={{ backgroundColor: "orange" }}
+                        className=""
+                        value={this.state.showTotalAnnualFee && this.state.admission_no ? this.state.annual_terms_fee : 0}
+                        onChange={(e) => {
+                          this.setState({
+                            annual_terms_fee: e.target.value.toUpperCase(),
+                          },
+                            () => {
+                              this.calculateTotalAmount();
+                            });
+                        }}
+                      />
+                    </div>
+                  }
+                  {
+                    this.state.showTotalExaminationFee &&
+                    <div className="col-3 form-group">
+                      <label>Examination Fee  </label>
+                      <input
+                        type="text"
+                        style={{ backgroundColor: "orange" }}
+                        className=""
+                        value={this.state.showTotalExaminationFee && this.state.admission_no ? this.state.examination_fee : 0}
+                        onChange={(e) => {
+                          this.setState({
+                            examination_fee: e.target.value.toUpperCase(),
+                          },
+                            () => {
+                              this.calculateTotalAmount();
+                            });
+                        }}
+                      />
+                    </div>
+                  }
                   <div className="col-3 form-group">
                     <label>Monthly Fee  </label>
                     <input
@@ -4438,7 +4681,7 @@ class FeeReceipt extends React.Component {
                       value={
 
                         this.state.getStudentData && this.state.admission_no && Number(this.state.AllDueFees) > 0 ? Number(this.state.AllDueFees) : 0
-                        // this.getGrandTotal()-Number(this.state.paid_amount)
+                        // this.getGrandTotal()-Number(this.state.paid_fees)
                       }
                     />
                   </div>

@@ -17,7 +17,7 @@ const Paytype = () => {
     
     const getPayType = () => {
       
-        fetch("http://144.91.110.221:4800/getPayType"
+        fetch("http://144.91.210.221:4800/getPayType"
         , {
           method: 'POST',
           headers: {
@@ -44,7 +44,7 @@ const Paytype = () => {
         data.append('name', name)
         data.append('category', category)
         data.append('description', description)
-        const url = "http://144.91.110.221:4800/StorePayType"
+        const url = "http://144.91.210.221:4800/StorePayType"
         fetch(url, {
                 method: 'post',
                 body: data
@@ -62,7 +62,7 @@ const Paytype = () => {
     }
 
     const getPayCategoty = () => {
-      fetch("http://144.91.110.221:4800/getPayCategoty"
+      fetch("http://144.91.210.221:4800/getPayCategoty"
       , {
         method: 'POST',
         headers: {
