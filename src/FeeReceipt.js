@@ -12,10 +12,10 @@ var previousmonthlyamount = 0;
 var previousannualamount = 0;
 var previousgrandTotal = 0;
 var previousfine = 0;
-var previousPaidFine=0;
-var previousDuesFine=0;
-var previousTotalPaidAmount=0;
-var previousTotalDuesFee=0;
+var previousPaidFine = 0;
+var previousDuesFine = 0;
+var previousTotalPaidAmount = 0;
+var previousTotalDuesFee = 0;
 var previousDuesFee = 0;
 var submitonce = 0;
 var nothing = "";
@@ -78,7 +78,7 @@ class FeeReceipt extends React.Component {
       fine: "",
       previousPaidFine: "",
       previousDuesFine: "",
-      previousTotalPaidAmount :"",
+      previousTotalPaidAmount: "",
       previousTotalDuesFee: "",
       previousDuesFee: "",
       last_fee_status: true,
@@ -462,11 +462,11 @@ class FeeReceipt extends React.Component {
     previousmonthlyamount = 0;
     previousgrandTotal = 0;
     previousfine = 0;
-    previousPaidFine=0;
-    previousDuesFine=0;
-    previousTotalPaidAmount=0;
-    previousTotalDuesFee=0;
-    previousDuesFee=0;
+    previousPaidFine = 0;
+    previousDuesFine = 0;
+    previousTotalPaidAmount = 0;
+    previousTotalDuesFee = 0;
+    previousDuesFee = 0;
     this.setState({
       TotalPreviosSeissionBalance: "",
       last_fee_status: true,
@@ -651,7 +651,7 @@ class FeeReceipt extends React.Component {
     if (monthsDifference > 0) {
       let tutionFee = this.state.StudentTutionFee
       return ((tutionFee * Number(monthsDifference)) + (this.state.AllDueFees ? Number(this.state.AllDueFees) : 0) + (this.state.showTotalAdmissionFee ? + Number(this.state.admission_fee) : 0)
-        + (this.state.showTotalAnnualFee ? Number(this.state.annual_terms_fee) : 0) + (this.state.showTotalExaminationFee ? Number(this.state.examination_fee) : 0) + (this.state.showTotalRegistrationFee ? Number(this.state.registration_fee) : 0) + Number(this.state.manualFine)>0 ? Number(this.state.manualFine) : 0)
+        + (this.state.showTotalAnnualFee ? Number(this.state.annual_terms_fee) : 0) + (this.state.showTotalExaminationFee ? Number(this.state.examination_fee) : 0) + (this.state.showTotalRegistrationFee ? Number(this.state.registration_fee) : 0) + Number(this.state.manualFine) > 0 ? Number(this.state.manualFine) : 0)
     }
     else {
       console.log("inside the else part")
@@ -664,8 +664,8 @@ class FeeReceipt extends React.Component {
         : (this.state.admission_no ? this.state.StudentTutionFee : 0)
         : 0) + (this.state.AllDueFees ? Number(this.state.AllDueFees) : 0)
         + (this.state.showTotalAdmissionFee ? + Number(this.state.admission_fee) : 0)
-        + (this.state.showTotalAnnualFee ? Number(this.state.annual_terms_fee) : 0) + (this.state.showTotalExaminationFee ? Number(this.state.examination_fee) : 0) + (this.state.showTotalRegistrationFee ? Number(this.state.registration_fee) : 0 )
-        + (Number(this.state.manualFine)>0 ? Number(this.state.manualFine) : 0)
+        + (this.state.showTotalAnnualFee ? Number(this.state.annual_terms_fee) : 0) + (this.state.showTotalExaminationFee ? Number(this.state.examination_fee) : 0) + (this.state.showTotalRegistrationFee ? Number(this.state.registration_fee) : 0)
+        + (Number(this.state.manualFine) > 0 ? Number(this.state.manualFine) : 0)
     }
   };
   getCertificateDetails = async () => {
@@ -1748,7 +1748,7 @@ class FeeReceipt extends React.Component {
               previousPaidFine = 0;
               previousDuesFine = 0;
               previousTotalPaidAmount = 0;
-              previousTotalDuesFee=0;
+              previousTotalDuesFee = 0;
               previousDuesFee = 0;
               submitonce = 0;
               nothing = "";
@@ -2155,14 +2155,14 @@ class FeeReceipt extends React.Component {
     if (this.state.showTotalAnnualFee) {
       this.setState({
         showTotalAnnualFee: false,
-      },()=>{
+      }, () => {
         this.calculateTotalAmount();
       })
     }
     else {
       this.setState({
         showTotalAnnualFee: true,
-      },()=>{
+      }, () => {
         this.calculateTotalAmount();
       })
     }
@@ -2171,14 +2171,14 @@ class FeeReceipt extends React.Component {
     if (this.state.showTotalAdmissionFee) {
       this.setState({
         showTotalAdmissionFee: false,
-      },()=>{
+      }, () => {
         this.calculateTotalAmount();
       })
     }
     else {
       this.setState({
         showTotalAdmissionFee: true,
-      },()=>{
+      }, () => {
         this.calculateTotalAmount();
       })
     }
@@ -2187,14 +2187,14 @@ class FeeReceipt extends React.Component {
     if (this.state.showTotalExaminationFee) {
       this.setState({
         showTotalExaminationFee: false,
-      },()=>{
+      }, () => {
         this.calculateTotalAmount();
       })
     }
     else {
       this.setState({
         showTotalExaminationFee: true,
-      },()=>{
+      }, () => {
         this.calculateTotalAmount();
       })
     }
@@ -2203,14 +2203,14 @@ class FeeReceipt extends React.Component {
     if (this.state.showTotalRegistrationFee) {
       this.setState({
         showTotalRegistrationFee: false,
-      },()=>{
+      }, () => {
         this.calculateTotalAmount();
       })
     }
     else {
       this.setState({
         showTotalRegistrationFee: true,
-      },()=>{
+      }, () => {
         this.calculateTotalAmount();
       })
     }
@@ -2228,11 +2228,47 @@ class FeeReceipt extends React.Component {
     }));
   };
 
+  numberToWords = (number) => {
+    const oneDigit = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
+    const twoDigits = ["", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+    const teens = ["", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
+
+    function twoDigitToWords(num) {
+      if (num < 10) {
+        return oneDigit[num];
+      } else if (num >= 11 && num <= 19) {
+        return teens[num - 10];
+      } else {
+        const tens = Math.floor(num / 10);
+        const ones = num % 10;
+        return twoDigits[tens] + (ones > 0 ? "-" + oneDigit[ones] : "");
+      }
+    }
+
+    if (number === 0) {
+      return "Zero";
+    } else if (number < 10) {
+      return oneDigit[number];
+    } else if (number >= 11 && number <= 19) {
+      return teens[number - 10];
+    } else if (number < 100) {
+      return twoDigitToWords(number);
+    } else if (number < 1000) {
+      const hundreds = Math.floor(number / 100);
+      const remainder = number % 100;
+      return oneDigit[hundreds] + " Hundred" + (remainder > 0 ? " " + twoDigitToWords(remainder) : "");
+    } else if (number < 10000) {
+      const thousands = Math.floor(number / 1000);
+      const remainder = number % 1000;
+      return oneDigit[thousands] + " Thousand" + (remainder > 0 ? " " + this.numberToWords(remainder) : "");
+    }
+  }
 
   // End GetAllStudentCount Api
 
   // End StudentCount Api
   render() {
+    console.log(this.state.total_monthly_fee, "monthly fee")
     //commented by sandeep on 4 sept
     // $("#recpddate").on("click", function () {
     //   localStorage.setItem("R_date", Moment().format("YYYY-MM-DD"));
@@ -2973,7 +3009,7 @@ class FeeReceipt extends React.Component {
                                   parseInt(item.total_annual_fee) +
                                   parseInt(item.balance))
                                 : 0} */}
-                              {item.total_monthly_fee}
+                              {this.state.StudentTutionFee}
                             </td>
                             <td>{item.fine}</td>
                             <td>{item.paid_fine}</td>
@@ -3522,6 +3558,406 @@ class FeeReceipt extends React.Component {
         </div>
         {/* end fee structure Modal */}
 
+        {/* Print Fee receipt modal */}
+        <div id="CurrentFeeReceipt" class="modal fade col-6" style={{ border: "1px solid black" }} role="dialog">
+          <div class="modal-dialog modal-xl w-100">
+            <div class="modal-content printReciept w-100 mt-3">
+              <button type="button" class="close d-none" data-dismiss="modal">
+                &times;
+              </button>
+              <div className="moda-body" style={{ border: "1px solid black" }}>
+                <div className="row">
+                  <div className="col-12">
+                    <div className="col-12 text-center pb-2">
+                      <h3 className="m-1">
+                        CONSTANCIA SCHOOL
+                      </h3>
+                      {this.state.AllOldFees.map((item, index) => {
+                        // if(item.security_fee !='0' ){
+                        // if(item.prospectus_fee !='0' || item.registration_fee !='0'  || item.admission_fee !='0'  || item.security_fee !='0' ){
+                        return (
+                          <div>
+                            {item.security_fee != "0" ? (
+                              <h4 className="w-100">
+                                {" "}
+                                Security Dep-{item.security_fee}
+                              </h4>
+                            ) : null}
+                          </div>
+                        );
+                        // }
+                      })}
+                      {this.state.is_teacher_ward == "true" ? (
+                        <h4 className="w-100"> Security Dep- 0</h4>
+                      ) : null}
+                      {/* <p>WEST CANAL ROAD P.O MAJRA, DEHRADUN</p>
+                                    <p>0135-2640930,0135-2642828,FAX:0135-2644353</p> */}
+                    </div>
+                    <div className="col-12 text-center pb-1">
+                      <h5 className="m-1">Majra, Dehradun(UK), Ph : 0135-2640177</h5>
+                    </div>
+                    <div className="col-12 text-center pb-1">
+                      <h5 className="m-1">Session 2023-2024</h5>
+                    </div>
+                    <div className="col-12 text-center pb-1" style={{ borderTop: "1px solid black", borderBottom: "1px solid black" }}>
+                      <h5 className="m-1">Fee Receipt</h5>
+                    </div>
+                    <div className="col-12 mt-2">
+                      <div className="row">
+                        <div className="col-6 p-0">
+                          <div className="d-flex align-items-center">
+
+                            <h5>Receipt No</h5>
+                            {
+                              this.state.AllOldFees.length > 0 && this.state.AllOldFees.map((item, index) => {
+                                if (this.state.AllOldFees.length - 1 == index) {
+                                  return (
+                                    <span>.  {item.receipt_no}</span>
+                                  )
+                                }
+                                return null;
+                              })
+                            }
+                          </div>
+                        </div>
+                        <div className="col-6">
+                          <div className="d-flex align-items-center">
+                            <h5>Admission No.</h5>
+                            {
+                              this.state.AllOldFees.length > 0 && this.state.AllOldFees.map((item, index) => {
+                                if (this.state.AllOldFees.length - 1 == index) {
+                                  return (
+                                    <span className="ml-2">{item.admission_no}</span>
+                                  )
+                                }
+                                return null;
+                              })
+                            }
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-12 mt-2 pt-1">
+                      <div className="row">
+                        <div className="col-6 d-flex align-items-center">
+                          <h5>Month</h5>
+                          {
+                            this.state.AllOldFees.length > 0 && this.state.AllOldFees.map((item, index) => {
+                              if (this.state.AllOldFees.length - 1 == index) {
+                                return (
+                                  <>
+                                    <span className="ml-2">
+                                      {item.paid_month == "1"
+                                        ? "Jan" +
+                                        "-" +
+                                        Moment(item.last_fee_date).format("YYYY")
+                                        : item.paid_month == "2"
+                                          ? "Feb" +
+                                          "-" +
+                                          Moment(item.last_fee_date).format("YYYY")
+                                          : item.paid_month == "3"
+                                            ? "Mar" +
+                                            "-" +
+                                            Moment(item.last_fee_date).format("YYYY")
+                                            : item.paid_month == "4"
+                                              ? "Apr" +
+                                              "-" +
+                                              Moment(item.last_fee_date).format("YYYY")
+                                              : item.paid_month == "5"
+                                                ? "May" +
+                                                "-" +
+                                                Moment(item.last_fee_date).format("YYYY")
+                                                : item.paid_month == "6"
+                                                  ? "Jun" +
+                                                  "-" +
+                                                  Moment(item.last_fee_date).format("YYYY")
+                                                  : item.paid_month == "7"
+                                                    ? "July" +
+                                                    "-" +
+                                                    Moment(item.last_fee_date).format("YYYY")
+                                                    : item.paid_month == "8"
+                                                      ? "Aug" +
+                                                      "-" +
+                                                      Moment(item.last_fee_date).format("YYYY")
+                                                      : item.paid_month == "9"
+                                                        ? "Sept" +
+                                                        "-" +
+                                                        Moment(item.last_fee_date).format("YYYY")
+                                                        : item.paid_month == "10"
+                                                          ? "Oct" +
+                                                          "-" +
+                                                          Moment(item.last_fee_date).format("YYYY")
+                                                          : item.paid_month == "11"
+                                                            ? "Nov" +
+                                                            "-" +
+                                                            Moment(item.last_fee_date).format("YYYY")
+                                                            : item.paid_month == "12"
+                                                              ? "Dec" +
+                                                              "-" +
+                                                              Moment(item.last_fee_date).format("YYYY")
+                                                              : null}
+                                    </span>
+                                  </>
+                                )
+                              }
+                            })
+                          }
+                        </div>
+                        <div className="col-6">
+                          <div className="d-flex align-items-center">
+                            <h5>Date</h5>
+                            {
+                              this.state.AllOldFees.length > 0 && this.state.AllOldFees.map((item, index) => {
+                                if (this.state.AllOldFees.length - 1 == index) {
+                                  return (
+                                    <span> : {Moment(item.receipt_date).format("DD-MM-YYYY")}</span>
+                                  )
+                                }
+                                return null;
+                              })
+                            }
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-12 mt-2 ">
+                      <div className="row">
+                        <div className="col-6 d-flex align-items-center">
+                          <h5>Received from</h5>
+                          {
+                            this.state.AllOldFees.length > 0 && this.state.AllOldFees.map((item, index) => {
+                              if (this.state.AllOldFees.length - 1 == index) {
+                                return (
+                                  <span className="ml-2">{item.name}</span>
+                                )
+                              }
+                              return null;
+                            })
+                          }
+                        </div>
+                        <div className="col-6 d-flex align-items-center">
+                          <h5>Class-</h5>
+                          {
+                            this.state.AllOldFees.length > 0 && this.state.AllOldFees.map((item, index) => {
+                              if (this.state.AllOldFees.length - 1 == index) {
+                                return (
+                                  <span className="ml-2">{item.class_name}{item.section}</span>
+                                )
+                              }
+                              return null;
+                            })
+                          }
+                        </div>
+                      </div>
+
+                    </div>
+                    <div className="col-12 mt-2 ">
+                      <div className="row">
+                        <div className="col-6 d-flex align-items-center">
+                          <h5>Father's Name</h5>
+
+                          <span className="ml-2">Father</span>
+
+                        </div>
+                        <div className="col-6 d-flex align-items-center">
+                          <h5>Mother's Name</h5>
+
+                          <span className="ml-2">Mother</span>
+
+                        </div>
+                      </div>
+
+                    </div>
+                    <div className="col-12 mt-2">
+                      <table class="table print_table">
+                        <tbody className="">
+                          <tr>
+                            <th ><h4 className="table-print-receipt">S/NO.</h4></th>
+                            <th >Particulars</th>
+                            <th ><h4 className="table-print-receipt">Amount</h4></th>
+                            <th></th>
+                          </tr>
+                          {
+                            this.state.AllOldFees.length > 0 && this.state.AllOldFees.map((item, index) => {
+                              if (this.state.AllOldFees.length - 1 == index) {
+                                return (
+                                  <>
+                                    <tr className="currentReceiptTableRow">
+                                      <td><h4 className="table-print-receipt-data">1</h4></td>
+                                      <td><h4 className="table-print-receipt">Tuition Fees</h4></td>
+                                      <td><p className="table-print-receipt-data">{item.paid_fees}</p></td>
+                                    </tr>
+                                  </>
+                                )
+                              }
+                            })
+                          }
+                          {
+                            this.state.AllOldFees.length > 0 && this.state.AllOldFees.map((item, index) => {
+                              if (this.state.AllOldFees.length - 1 == index && this.state.manualFineState == false) {
+                                return (
+                                  <>
+                                    <tr className="currentReceiptTableRow">
+                                      <td><h4 className="table-print-receipt-data">2</h4></td>
+                                      <td><h4 className="table-print-receipt">Late Fees</h4></td>
+                                      <td><p className="table-print-receipt-data">{item.paid_fine > 0 ? item.paid_fine : 0}</p></td>
+                                    </tr>
+                                  </>
+                                )
+                              }
+                              return null;
+                            })
+                          }
+                          {this.state.AllOldFees.map((item, index) => {
+                            if ((this.state.AllOldFees.length - 1 == index) && (item.admission_fee > 0)) {
+                              return (
+                                <>
+                                  <tr className="currentReceiptTableRow">
+                                    <td>
+                                      <h4 className="table-print-receipt-data">3</h4></td>
+                                    <td><h4 className="table-print-receipt">Admission Fees</h4></td>
+                                    <td><p className="table-print-receipt-data">
+                                      {item.admission_fee}
+                                    </p></td>
+                                  </tr>
+                                </>
+                              );
+                            }
+                            return null;
+                          })}
+                          {this.state.AllOldFees.map((item, index) => {
+                            if ((this.state.AllOldFees.length - 1 == index) && item.registration_fee > 0) {
+                              return (
+                                <>
+                                  <tr className="currentReceiptTableRow">
+                                    <td><h4 className="table-print-receipt-data">3</h4></td>
+                                    <td><h4 className="table-print-receipt">Registration Fees</h4></td>
+                                    <td><p className="table-print-receipt-data">
+                                      {item.registration_fee}
+                                    </p></td>
+                                  </tr>
+                                </>
+                              );
+                            }
+                            return null;
+                          })}
+                          {this.state.AllOldFees.map((item, index) => {
+                            if ((this.state.AllOldFees.length - 1 == index) && item.annual_terms_fee > 0) {
+                              return (
+                                <>
+                                  <tr className="currentReceiptTableRow">
+                                    <td><h4 className="table-print-receipt-data">3</h4></td>
+                                    <td><h4 className="table-print-receipt">Term Fees(Games,Library,Other Activites)</h4></td>
+                                    <td><p className="table-print-receipt-data">
+                                      {item.annual_terms_fee}
+                                    </p></td>
+                                  </tr>
+                                </>
+                              );
+                            }
+                            return null;
+                          })}
+                          {this.state.AllOldFees.map((item, index) => {
+                            if ((this.state.AllOldFees.length - 1 == index) && item.examination_fee > 0) {
+                              return (
+                                <>
+                                  <tr className="currentReceiptTableRow">
+                                    <td><h4 className="table-print-receipt-data">3</h4></td>
+                                    <td><h4 className="table-print-receipt">Examination Fees</h4></td>
+                                    <td><p className="table-print-receipt-data">
+                                      {item.examination_fee}
+                                    </p></td>
+                                  </tr>
+                                </>
+                              );
+                            }
+                            return null;
+                          })}
+                          <tr className="currentReceiptTableRow">
+                            <td><h4 className="table-print-receipt">Total Paid Amount</h4></td>
+                            <td><p className="table-print-receipt-data"></p></td>
+                            <td><p className="table-print-receipt-data">
+                              {
+                                this.state.AllOldFees.length > 0 && this.state.AllOldFees.map((item, index) => {
+                                  if (this.state.AllOldFees.length - 1 == index) {
+                                    return item.paid_amount;
+                                  }
+                                })
+                              }
+                            </p></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div className="col-12 mt-2 ">
+                      <div className="row">
+                        <div className="col-5 d-flex align-items-center p-0">
+                          <h5>Amount Received Rupees</h5>
+                        </div>
+                        <div className="col-7 d-flex align-items-center  p-0" style={{ position: "relative", right: "16px" }}>
+                          {this.state.AllOldFees.length > 0 && this.state.AllOldFees.map((item, index) => {
+                            if (this.state.AllOldFees.length - 1 == index) {
+                              return (
+                                <span className="ml-2 m">{this.numberToWords(item.paid_amount)} only </span>
+                              )
+                            }
+                            return null
+                          })}
+                        </div>
+                      </div>
+                      <div className="col-12 d-flex align-items-center mt-1 p-0" >
+                        <h5 className="ml-2"> through CASH / UPI / BANK.</h5>
+                      </div>
+                    </div>
+
+                    <div className="col-12 mt-3">
+                      <div className="d-flex align-items-center">
+                        <h6 className="table-print-receipt">Balance Due as on Date is RS</h6>
+                        <span style={{ fontSize: "11px", marginLeft: "5px" }}> {this.state.AllOldFees.length > 0 &&
+                          this.state.AllOldFees.map((item, index) => {
+                            if (this.state.AllOldFees.length - 1 == index) {
+                              return Number(item.dues_fee) + Number(item.dues_fine);
+                            }
+                          })}
+                          .
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="col-12">
+                      <div className="text-right mr-5" style={{ marginTop: "50px" }}>
+                        <h5>For Principal</h5>
+                      </div>
+                    </div>
+                    <div className="col-12 mt-3 mb-2">
+                      <div className="d-flex align-items-center">
+                        <h5 style={{ fontWeight: "bold", fontSize: "15px" }}>Note :</h5><sapn>Fee Once Paid is Not Refundable Or Transferable</sapn>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-right mt-2">
+                <button
+                  class="hide-on-print btn btn-success btn-md mr-2"
+                  onClick={this.printReceipt}
+                >
+                  Print
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-default mr-2"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Print Fee receipt modal */}
+
         <div className="row">
           <div className="col-12">
             <div className="row ReceiptLayoutCard">
@@ -3701,7 +4137,7 @@ class FeeReceipt extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <div className="col-3 form-group">
+                  <div className="col-4 form-group">
                     <div className="form-row">
                       <div className="col-4 form-group">
                         <label>Payment</label>
@@ -3792,6 +4228,17 @@ class FeeReceipt extends React.Component {
                       data-target="#OldFeeModal"
                     >
                       Fee Details
+                    </button>
+                    {/* <button type="button" onClick={()=>{this.ShowModalStudent(this.state.admission_no);this.setState({admission_no:this.state.admission_no});this.searchByAdmission_no()}} class="btn btn-info btn-sm" data-toggle="modal" data-target="#OldFeeModal">Fee Details</button>    */}
+                  </div>
+                  <div className="col-1 form-group ml-4">
+                    <button
+                      type="button"
+                      class="btn btn-info btn-sm"
+                      data-toggle="modal"
+                      data-target="#CurrentFeeReceipt"
+                    >
+                      Fee Receipt
                     </button>
                     {/* <button type="button" onClick={()=>{this.ShowModalStudent(this.state.admission_no);this.setState({admission_no:this.state.admission_no});this.searchByAdmission_no()}} class="btn btn-info btn-sm" data-toggle="modal" data-target="#OldFeeModal">Fee Details</button>    */}
                   </div>
@@ -4357,38 +4804,51 @@ class FeeReceipt extends React.Component {
                     <h3 className="receipt_h3 pb-5 ">
                       <u>Monthly Fee Class wise</u>
                       <span style={{ float: "right" }}>
-
-                        <button
-                          className={`btn btn-success btn-sm ml-2 ${this.state.annual ? '' : 'd-none'}`}
-                          // id="ShowAnnual"
-                          onClick={() => this.getAnnualFeeAmount()}
-                        >
-                          {this.state.showTotalAnnualFee ? "- Annual/Terms Fee" : "+ Annual/Terms Fee"}
-                        </button>
-                        <button
-                          className={`btn btn-success btn-sm ml-2 ${this.state.annual ? '' : 'd-none'}`}
-                          // id="ShowAnnual"
-                          onClick={() => this.getExaminationFeeAmount()}
-                        >
-                          {this.state.showTotalExaminationFee ? "- Examination Fee" : "+ Examination fee"}
-                        </button>
-                        <button
-                          className={`btn btn-success btn-sm ml-2 ${this.state.annual ? '' : 'd-none'}`}
-                          // id="ShowAnnual"
-                          onClick={() => this.getRegistrationFeeAmount()}
-                        >
-                          {this.state.showTotalRegistrationFee ? "- Registration Fee" : "+ Registration Fee"}
-                        </button>
-                        <button
-                          className={`btn btn-success btn-sm ml-2 ${this.state.annual ? '' : 'd-none'}`}
-                          // id="ShowAnnual"
-                          onClick={() => this.getAdmissionFeeAmount()}
-                        >
-                          {this.state.showTotalAdmissionFee ? "- Admission Fee" : "+ Admission Fee"}
-                        </button>
-
-
-                      </span>
+                        {
+                          this.state.AllOldFees.some(item => item.annual_terms_fee > 0) ? null : (
+                            <button
+                              className={`btn btn-success btn-sm ml-2 ${this.state.annual ? '' : 'd-none'}`}
+                              // id="ShowAnnual"
+                              onClick={() => this.getAnnualFeeAmount()}
+                            >
+                              {this.state.showTotalAnnualFee ? "- Annual/Terms Fee" : "+ Annual/Terms Fee"}
+                            </button>
+                          )
+                        }
+                        {
+                          this.state.AllOldFees.some(item=>item.examination_fee>0) ? null : (
+                            <button
+                            className={`btn btn-success btn-sm ml-2 ${this.state.annual ? '' : 'd-none'}`}
+                            // id="ShowAnnual"
+                            onClick={() => this.getExaminationFeeAmount()}
+                          >
+                            {this.state.showTotalExaminationFee ? "- Examination Fee" : "+ Examination fee"}
+                          </button>
+                          )
+                        }
+                        {
+                          this.state.AllOldFees.some(item=>item.registration_fee>0) ? null : (
+                            <button
+                            className={`btn btn-success btn-sm ml-2 ${this.state.annual ? '' : 'd-none'}`}
+                            // id="ShowAnnual"
+                            onClick={() => this.getRegistrationFeeAmount()}
+                          >
+                            {this.state.showTotalRegistrationFee ? "- Registration Fee" : "+ Registration Fee"}
+                          </button>
+                          )
+                        }
+                        {
+                          this.state.AllOldFees.some(item=>item.admission_fee>0) ? null : (
+                            <button
+                            className={`btn btn-success btn-sm ml-2 ${this.state.annual ? '' : 'd-none'}`}
+                            // id="ShowAnnual"
+                            onClick={() => this.getAdmissionFeeAmount()}
+                          >
+                            {this.state.showTotalAdmissionFee ? "- Admission Fee" : "+ Admission Fee"}
+                          </button>
+                          )
+                        }
+                  </span>
                     </h3>
                   </div>
                   {this.state.Allfees.map((item, index) => {
@@ -4464,9 +4924,9 @@ class FeeReceipt extends React.Component {
                       value={this.state.manualFine}
                       onChange={(e) => {
                         this.setState({ manualFine: e.target.value.toUpperCase() },
-                        () => {
-                          this.calculateTotalAmount();
-                        });
+                          () => {
+                            this.calculateTotalAmount();
+                          });
                         this.setBalance();
                       }}
                     />
@@ -4501,7 +4961,7 @@ class FeeReceipt extends React.Component {
                       onChange={(e) => {
                         this.setState({
                           paid_fees: e.target.value.toUpperCase(),
-                        },()=>{
+                        }, () => {
                           this.calculateTotalAmount();
                         });
                         this.setBalance();
@@ -4584,9 +5044,9 @@ class FeeReceipt extends React.Component {
                         value={this.state.showTotalAdmissionFee ? this.state.admission_fee : 0}
                         onChange={(e) => {
                           this.setState({ admission_fee: e.target.value.toUpperCase() },
-                           () => {
-                            this.calculateTotalAmount();
-                          });
+                            () => {
+                              this.calculateTotalAmount();
+                            });
                         }}
                       />
                     </div>
@@ -4654,7 +5114,7 @@ class FeeReceipt extends React.Component {
                       type="text"
                       style={{ backgroundColor: "orange" }}
                       className=""
-                      value={this.state.admission_no ? this.state.total_monthly_fee : 0}
+                      value={this.state.admission_no ? this.state.StudentTutionFee : 0}
                       onChange={(e) => {
                         this.setState({
                           total_monthly_fee: e.target.value.toUpperCase(),

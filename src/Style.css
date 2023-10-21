@@ -11,6 +11,19 @@
     transition: all .4s ease-in-out;
     background-color:#ffffff !important;
 }
+/* .currentReceiptTableRow{
+  background-color: #fff!important;
+} */
+/* .currentReceiptTableRow td{
+  border: 1px solid #fff!important;
+} */
+.table-print-receipt{
+  font-size: 14px!important;
+  font-weight: bold;
+}
+.table-print-receipt-data{
+  font-size: 12px!important;
+}
 .dashboard-card h4{
     font-weight: 700;
     color: #000000;
