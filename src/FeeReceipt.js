@@ -227,6 +227,7 @@ class FeeReceipt extends React.Component {
   }
 
   isTextSelected = (input) => {
+    console.log("checking console")
     var startPos = input.selectionStart;
     var endPos = input.selectionEnd;
     var doc = document.selection;
@@ -238,6 +239,7 @@ class FeeReceipt extends React.Component {
     }
     return false;
   };
+  
   // getFeeSubCategory = () => {
   //     fetch("http://144.91.210.221:4800/getSubCategory")
   //         .then(res => res.json())
