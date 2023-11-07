@@ -23,7 +23,7 @@ class VehicleCreation extends React.Component{
         this.getVehicleType()
     }
     getVehicle = () => {
-        fetch("http://144.91.210.221:4800/getVehicle")
+        fetch("http://144.91.110.221:4800/getVehicle")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -32,7 +32,7 @@ class VehicleCreation extends React.Component{
             .then(err => console.log(err))
     }
     getVehicleType = () => {
-        fetch("http://144.91.210.221:4800/getVehicleType")
+        fetch("http://144.91.110.221:4800/getVehicleType")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -63,7 +63,7 @@ class VehicleCreation extends React.Component{
         data.append('driver_name', this.state.driver_name)
         data.append('contact_no', this.state.contact_no)
         data.append('owner_address', this.state.owner_address)
-        const url="http://144.91.210.221:4800/updateVehicle"
+        const url="http://144.91.110.221:4800/updateVehicle"
                 fetch(url,
                     {
                     method:'put',
@@ -78,7 +78,7 @@ class VehicleCreation extends React.Component{
               }
       }
       deleteVehicleType = (id) => {
-        const apiUrl = 'http://144.91.210.221:4800/deleteVehicle';
+        const apiUrl = 'http://144.91.110.221:4800/deleteVehicle';
         fetch(apiUrl, {
           headers : { 
             'Content-Type': 'application/json',
@@ -131,7 +131,7 @@ class VehicleCreation extends React.Component{
         data.append('driver_name', this.state.driver_name)
         data.append('contact_no', this.state.contact_no)
         data.append('owner_address', this.state.owner_address)
-        const url = "http://144.91.210.221:4800/StoreVehicle"
+        const url = "http://144.91.110.221:4800/StoreVehicle"
         fetch(url, {
                 method: 'post',
                 body: data

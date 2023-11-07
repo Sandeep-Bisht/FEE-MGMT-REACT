@@ -21,7 +21,7 @@ class ClassCreation extends React.Component {
   }
   getClass = async () => {
     await console.log("wait wait");
-    fetch("http://144.91.210.221:4800/getClass", {
+    fetch("http://144.91.110.221:4800/getClass", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -68,7 +68,7 @@ class ClassCreation extends React.Component {
       data.append("description", this.state.description);
       data.append("session", this.state.session);
       data.append("school_id", "UT015");
-      const url = "http://144.91.210.221:4800/updateClass";
+      const url = "http://144.91.110.221:4800/updateClass";
       fetch(url, {
         method: "put",
         body: data,
@@ -82,7 +82,7 @@ class ClassCreation extends React.Component {
     }
   };
   deleteClass = (id) => {
-    const apiUrl = "http://144.91.210.221:4800/deleteClass";
+    const apiUrl = "http://144.91.110.221:4800/deleteClass";
     fetch(apiUrl, {
       headers: {
         "Content-Type": "application/json",
@@ -98,7 +98,7 @@ class ClassCreation extends React.Component {
       });
   };
   getSession = () => {
-    fetch("http://144.91.210.221:4800/getSession", {
+    fetch("http://144.91.110.221:4800/getSession", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -124,7 +124,7 @@ class ClassCreation extends React.Component {
       data.append("description", this.state.description);
       // data.append('session', this.state.session)
       data.append("school_id", "UT015");
-      const url = "http://144.91.210.221:4800/StoreClass";
+      const url = "http://144.91.110.221:4800/StoreClass";
       fetch(url, {
         method: "post",
         body: data,

@@ -15,7 +15,7 @@ class CategoryCreation extends React.Component{
         this.getCategory()
     }
     getCategory = () => {
-        fetch("http://144.91.210.221:4800/getCastCategory")
+        fetch("http://144.91.110.221:4800/getCastCategory")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -36,7 +36,7 @@ class CategoryCreation extends React.Component{
         data.append('_id',this.state._id)
         data.append('category', this.state.category)
         data.append('description',this.state.description)
-        const url="http://144.91.210.221:4800/updateCategory"
+        const url="http://144.91.110.221:4800/updateCategory"
                 fetch(url,
                     {
                     method:'put',
@@ -51,7 +51,7 @@ class CategoryCreation extends React.Component{
               }
       }
       deleteCategory = (id) => {
-        const apiUrl = 'http://144.91.210.221:4800/deleteCategory';
+        const apiUrl = 'http://144.91.110.221:4800/deleteCategory';
         fetch(apiUrl, {
           headers : { 
             'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ class CategoryCreation extends React.Component{
         const data = new FormData()
         data.append('category', this.state.category)
         data.append('description', this.state.description)
-        const url = "http://144.91.210.221:4800/StoreCategory"
+        const url = "http://144.91.110.221:4800/StoreCategory"
         fetch(url, {
                 method: 'post',
                 body: data
