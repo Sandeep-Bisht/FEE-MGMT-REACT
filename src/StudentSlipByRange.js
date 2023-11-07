@@ -109,7 +109,7 @@ class StudentSlipByRange extends React.Component{
        this.getStudent()
     }
     getSession = () => {
-      fetch("http://144.91.210.221:4800/getSession"
+      fetch("http://144.91.110.221:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -128,7 +128,7 @@ class StudentSlipByRange extends React.Component{
           .then(err => console.log(err))
   }
     getStudent = () => {      
-      fetch("http://144.91.210.221:4800/getStudent"
+      fetch("http://144.91.110.221:4800/getStudent"
           , {
             method: 'POST',
             headers: {

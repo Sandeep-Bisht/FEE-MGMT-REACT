@@ -53,7 +53,7 @@ class DefaulterMaker extends React.Component{
       this.getSection()
     }
     // getFeeReceipt = () => {
-    //   fetch("http://144.91.210.221:4800/getFeeReceipt")
+    //   fetch("http://144.91.110.221:4800/getFeeReceipt")
     //       .then(res => res.json())
     //       .then(data => {
     //           console.log(data)
@@ -81,7 +81,7 @@ class DefaulterMaker extends React.Component{
   PreviousStudentArray=[]
   PreviousStudentArrayWithFee=[]
   PreviousPaidFees=[]
-        fetch("http://144.91.210.221:4800/StudentStrenght"
+        fetch("http://144.91.110.221:4800/StudentStrenght"
         ,{
             method: 'POST',
             headers: {
@@ -118,7 +118,7 @@ class DefaulterMaker extends React.Component{
       console.log("checking response SearchOldfee")
       await  console.log("wait wait")
       const admission_no = item.admission_no
-      fetch("http://144.91.210.221:4800/SearchOldfee"
+      fetch("http://144.91.110.221:4800/SearchOldfee"
       ,{
           method: 'POST',
           headers: {
@@ -182,7 +182,7 @@ this.setStudentFeeStructure()
     this.setState({studentArrayWithFee:[]})
     console.log("checking response FeesClasswise " +item.class_name)
     const currentMonth =  Moment().format('MM')       
-     fetch("http://144.91.210.221:4800/FeesClasswise"
+     fetch("http://144.91.110.221:4800/FeesClasswise"
      ,{
          method: 'POST',
          headers: {
@@ -313,7 +313,7 @@ paidFees.push({"session":this.state.session,"class_name":item.class_name,"sectio
   console.log(paidFees.length)
   dataa.append('AllDefaulterData', JSON.stringify(paidFees))
   // dataa.append('StudentAcademicData', JSON.stringify(AcademicuserList))
-  const url = "http://144.91.210.221:4800/ImportallDefaulter"
+  const url = "http://144.91.110.221:4800/ImportallDefaulter"
   fetch(url, {
       // headers : { 
       //   'Content-Type':'application/json',
@@ -329,7 +329,7 @@ paidFees.push({"session":this.state.session,"class_name":item.class_name,"sectio
     }).catch(err => {});
  }
     getSession = () => {
-      fetch("http://144.91.210.221:4800/getSession"
+      fetch("http://144.91.110.221:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -348,7 +348,7 @@ paidFees.push({"session":this.state.session,"class_name":item.class_name,"sectio
           .then(err => console.log(err))
   }
     getFine = () => {
-        fetch("http://144.91.210.221:4800/getFine")
+        fetch("http://144.91.110.221:4800/getFine")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -357,7 +357,7 @@ paidFees.push({"session":this.state.session,"class_name":item.class_name,"sectio
             .then(err => console.log(err))
     }
     getSection = () => {
-      fetch("http://144.91.210.221:4800/getSection"
+      fetch("http://144.91.110.221:4800/getSection"
           ,{
           method: 'POST',
           headers: {
@@ -379,7 +379,7 @@ paidFees.push({"session":this.state.session,"class_name":item.class_name,"sectio
     DefaulterByMonth=async()=>{
      this.setState({AllDefaulter:[]})
       await console.log(this.state.DefaulterByMonth)
-       fetch("http://144.91.210.221:4800/DefaulterByMonth"
+       fetch("http://144.91.110.221:4800/DefaulterByMonth"
        ,{
            method: 'POST',
            headers: {
@@ -403,7 +403,7 @@ paidFees.push({"session":this.state.session,"class_name":item.class_name,"sectio
        })
     }
     getClass = () => {
-      fetch("http://144.91.210.221:4800/getClass")
+      fetch("http://144.91.110.221:4800/getClass")
           .then(res => res.json())
           .then(data => {
               console.log(data)
@@ -415,7 +415,7 @@ paidFees.push({"session":this.state.session,"class_name":item.class_name,"sectio
     global_class_name =  class_name
     console.log("checking response FeesClasswise")
     const currentMonth =  Moment().format('MM')       
-     fetch("http://144.91.210.221:4800/FeesClasswise"
+     fetch("http://144.91.110.221:4800/FeesClasswise"
      ,{
          method: 'POST',
          headers: {

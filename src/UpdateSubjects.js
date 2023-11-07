@@ -40,7 +40,7 @@ class UpdateSubjects extends React.Component{
       this.StudentStrenght()
     }
     getSection = () => {
-      fetch("http://144.91.210.221:4800/getSection"
+      fetch("http://144.91.110.221:4800/getSection"
           ,{
           method: 'POST',
           headers: {
@@ -60,7 +60,7 @@ class UpdateSubjects extends React.Component{
           .then(err => console.log(err))
   }
     getSession = () => {
-      fetch("http://144.91.210.221:4800/getSession"
+      fetch("http://144.91.110.221:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -79,7 +79,7 @@ class UpdateSubjects extends React.Component{
           .then(err => console.log(err))
   }
     // getFine = () => {
-    //     fetch("http://144.91.210.221:4800/getFine")
+    //     fetch("http://144.91.110.221:4800/getFine")
     //         .then(res => res.json())
     //         .then(data => {
     //             console.log(data)
@@ -94,7 +94,7 @@ class UpdateSubjects extends React.Component{
     }
 
     getSubjects = () => {
-      fetch("http://144.91.210.221:4800/getSubjects")
+      fetch("http://144.91.110.221:4800/getSubjects")
           .then(res => res.json())
           .then(data => {
               console.log(data)
@@ -105,7 +105,7 @@ class UpdateSubjects extends React.Component{
     StudentStrenght=async()=>{
       // this.getSubjects()
      this.setState({AllStudent:[]})
-       fetch("http://144.91.210.221:4800/StudentStrenght"
+       fetch("http://144.91.110.221:4800/StudentStrenght"
        ,{
            method: 'POST',
            headers: {
@@ -128,7 +128,7 @@ class UpdateSubjects extends React.Component{
        })
     }
     getClass = () => {
-      fetch("http://144.91.210.221:4800/getClass")
+      fetch("http://144.91.110.221:4800/getClass")
           .then(res => res.json())
           .then(data => {
               console.log(data)
@@ -140,7 +140,7 @@ class UpdateSubjects extends React.Component{
     global_class_name =  class_name
     console.log("checking response FeesClasswise")
     const currentMonth =  Moment().format('MM')       
-     fetch("http://144.91.210.221:4800/FeesClasswise"
+     fetch("http://144.91.110.221:4800/FeesClasswise"
      ,{
          method: 'POST',
          headers: {
@@ -217,7 +217,7 @@ UpdateSubjects(item) {
   data.append('StudentData', JSON.stringify(StudentData))
   data.append('IdArray', JSON.stringify(IdArray))
   data.append('subjects', JSON.stringify(this.state.subjects))
-  const url = "http://144.91.210.221:4800/UpdateSubjects"
+  const url = "http://144.91.110.221:4800/UpdateSubjects"
   fetch(url,
       {
           method: 'PATCH',

@@ -50,7 +50,7 @@ class PrintTc extends React.Component {
   }
   // getCertificateDetails = async() => {
   //   // this.setState({name:'',account_no:'',class_name:'',section:'',parents:'',fee_concession:'',left_on:'',dob:'',date_of_admission:''})
-  //     fetch("http://144.91.210.221:4800/singlestudentdata_with_session"
+  //     fetch("http://144.91.110.221:4800/singlestudentdata_with_session"
   //     ,{
   //     method: 'POST',
   //     headers: {
@@ -132,7 +132,7 @@ class PrintTc extends React.Component {
   getCertificateDetails = async () => {
     this.setState({ name: '', account_no: '', class_name: '', section: '', parents: '', fee_concession: '', left_on: '', dob: '', date_of_admission: '', father_name: '', mother_name: '', sex: '' })
     await console.log("wait wait")
-    fetch("http://144.91.210.221:4800/singlestudentdata_with_session"
+    fetch("http://144.91.110.221:4800/singlestudentdata_with_session"
       , {
         method: 'POST',
         headers: {
@@ -232,7 +232,7 @@ class PrintTc extends React.Component {
     if (admission_no == '0') {
       return false;
     }
-    fetch("http://144.91.210.221:4800/singlestudentdata"
+    fetch("http://144.91.110.221:4800/singlestudentdata"
       , {
         method: 'POST',
         headers: {
@@ -278,7 +278,7 @@ class PrintTc extends React.Component {
   FeesClasswise=(class_names,sections)=>{    
     console.log("checking response FeesClasswise")
     const currentMonth =  Moment().format('MM')       
-     fetch("http://144.91.210.221:4800/FeesClasswise"
+     fetch("http://144.91.110.221:4800/FeesClasswise"
      ,{
          method: 'POST',
          headers: {

@@ -8,7 +8,7 @@ class Landing extends React.Component{
         }
     }
     login = () => {
-        const url = "http://144.91.210.221:4800/signin"
+      const url = "http://144.91.110.221:4800/signin";
         fetch(url
           , {
             method: 'POST',
@@ -25,7 +25,6 @@ class Landing extends React.Component{
           )
           .then((res) => {
             try{
-                console.log(res.user + "this is admin data")
             if (res.user.role === "Admin"  ) {
               localStorage.setItem('access', res.user.role);
               localStorage.setItem('user_id', res.user._id);
