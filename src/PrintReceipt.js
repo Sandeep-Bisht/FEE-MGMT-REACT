@@ -24,7 +24,7 @@ class PrintReceipt extends React.Component{
         if(admission_no =='0'){
              return false;
         }
-        fetch("http://144.91.210.221:4800/singlestudentdata"
+        fetch("http://144.91.110.221:4800/singlestudentdata"
         ,{
             method: 'POST',
             headers: {
@@ -50,7 +50,7 @@ class PrintReceipt extends React.Component{
     }
     FeesClasswise=(studentData)=>{    
          //   const currentMonth ='4'
-         fetch("http://144.91.210.221:4800/FeesClasswise"
+         fetch("http://144.91.110.221:4800/FeesClasswise"
          ,{
              method: 'POST',
              headers: {
@@ -86,7 +86,7 @@ class PrintReceipt extends React.Component{
     }
     SearchOldfee=()=>{
         const admission_no = this.state.admission_no.toUpperCase()
-        fetch("http://144.91.210.221:4800/SearchOldfee"
+        fetch("http://144.91.110.221:4800/SearchOldfee"
         ,{
             method: 'POST',
             headers: {
