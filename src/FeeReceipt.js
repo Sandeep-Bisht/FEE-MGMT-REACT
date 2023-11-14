@@ -4578,7 +4578,7 @@ class FeeReceipt extends React.Component {
                         }
 
                       </div>
-                      <div className="col-2 ">
+                      <div className="col-2">
                         <label>Surplus : {this.state.surplus}</label>
                       </div>
                       <div className="col-2 ">
