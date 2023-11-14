@@ -17,7 +17,7 @@ class UpdateStudentPreviousSessionAmount extends React.Component{
         this.getSession()
     }
     getSession = () => {
-      fetch("http://144.91.210.221:4800/getSession"
+      fetch("http://144:91:110:210:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -37,7 +37,7 @@ class UpdateStudentPreviousSessionAmount extends React.Component{
   }
     GetData = (admission_no) => {
       this.setState({TotalPreviousBalance:0,name:'',account_no:''})
-        fetch("http://144.91.210.221:4800/GetDefaulterMoneySingleStudent"
+        fetch("http://144:91:110:210:4800/GetDefaulterMoneySingleStudent"
         , {
           method: 'POST',
           headers: {
@@ -65,7 +65,7 @@ class UpdateStudentPreviousSessionAmount extends React.Component{
         data.append('_id', this.state._id)        
         data.append('name', this.state.name)
         data.append('TotalPreviousBalance', parseInt(this.state.TotalPreviousBalance)*-1)
-        const url = "http://144.91.210.221:4800/UpdateSpeceficPreviousSessionAmount"
+        const url = "http://144:91:110:210:4800/UpdateSpeceficPreviousSessionAmount"
         fetch(url, {
                 method: 'put',
                 body: data

@@ -25,7 +25,7 @@ class FeeCategory extends React.Component{
             const data = new FormData()
             data.append('category', this.state.category)
             data.append('description', this.state.description)
-            const url = "http://144.91.210.221:4800/StoreFeeCatogory"
+            const url = "http://144:91:110:210:4800/StoreFeeCatogory"
             fetch(url, {
                     method: 'post',
                     body: data
@@ -39,7 +39,7 @@ class FeeCategory extends React.Component{
         }
     }
     getFeeCategory = () => {
-        fetch("http://144.91.210.221:4800/getCategory")
+        fetch("http://144:91:110:210:4800/getCategory")
             .then(res => res.json())
             .then(data => {
                 console.log(data)

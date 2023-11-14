@@ -30,7 +30,7 @@ class StudentUpgrade extends React.Component{
     }
     getStudentForUpgrade = async() => {
     await console.log("wait wait")
-      const url = "http://144.91.210.221:4800/getStudentForUpgrade"
+      const url = "http://144:91:110:210:4800/getStudentForUpgrade"
       fetch(url
         , {
           method: 'POST',
@@ -51,7 +51,7 @@ class StudentUpgrade extends React.Component{
       })
     }
     getSection = () => {
-      fetch("http://144.91.210.221:4800/getSection")
+      fetch("http://144:91:110:210:4800/getSection")
           .then(res => res.json())
           .then(data => {
               console.log(data)
@@ -60,7 +60,7 @@ class StudentUpgrade extends React.Component{
           .then(err => console.log(err))
     }
     // getStudent = () => {
-    //     fetch("http://144.91.210.221:4800/getStudent")
+    //     fetch("http://144:91:110:210:4800/getStudent")
     //         .then(res => res.json())
     //         .then(data => {
     //             console.log(data)
@@ -69,7 +69,7 @@ class StudentUpgrade extends React.Component{
     //         .then(err => console.log(err))
     // }
     getSession = () => {
-      fetch("http://144.91.210.221:4800/getSession"
+      fetch("http://144:91:110:210:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -88,7 +88,7 @@ class StudentUpgrade extends React.Component{
           .then(err => console.log(err))
     }
     getToSession = () => {
-      fetch("http://144.91.210.221:4800/getSession"
+      fetch("http://144:91:110:210:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -108,7 +108,7 @@ class StudentUpgrade extends React.Component{
     }
     getToClass = async() => {
       await console.log("wait wait")
-      const url = "http://144.91.210.221:4800/getClass"
+      const url = "http://144:91:110:210:4800/getClass"
       fetch(url
         , {
           method: 'POST',
@@ -129,7 +129,7 @@ class StudentUpgrade extends React.Component{
     }
     getClass = async() => {
     await console.log("wait wait")
-    const url = "http://144.91.210.221:4800/getClass"
+    const url = "http://144:91:110:210:4800/getClass"
     fetch(url
       , {
         method: 'POST',
@@ -157,7 +157,7 @@ class StudentUpgrade extends React.Component{
   await console.log("wait")
   const data = new FormData()
   data.append('StudentData', JSON.stringify(StudentData))
-  const url = "http://144.91.210.221:4800/StoreUpgradeStudent"
+  const url = "http://144:91:110:210:4800/StoreUpgradeStudent"
   fetch(url, {
           method: 'post',
           body: data

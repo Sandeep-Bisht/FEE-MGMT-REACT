@@ -50,7 +50,7 @@ class NonTransferCertificate extends React.Component{
     searchByAdmission_no_with_session = async() => {
         this.setState({name:'',account_no:'',class_name:'',section:'',parents:'',fee_concession:'',left_on:'',dob:'',date_of_admission:'',result_remark:'GRANTED',sex:''})
           await console.log("wait wait")
-          fetch("http://144.91.210.221:4800/singlestudentdata_with_session"
+          fetch("http://144:91:110:210:4800/singlestudentdata_with_session"
           ,{
           method: 'POST',
           headers: {
@@ -125,7 +125,7 @@ class NonTransferCertificate extends React.Component{
       FeesClasswise=(class_names,sections)=>{    
         console.log("checking response FeesClasswise")
         const currentMonth =  Moment().format('MM')       
-         fetch("http://144.91.210.221:4800/FeesClasswise"
+         fetch("http://144:91:110:210:4800/FeesClasswise"
          ,{
              method: 'POST',
              headers: {

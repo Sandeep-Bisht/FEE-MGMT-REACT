@@ -48,7 +48,7 @@ const PayScale = () => {
 
     const getPayType = () => {
       
-      fetch("http://144.91.210.221:4800/getPayType"
+      fetch("http://144:91:110:210:4800/getPayType"
       , {
         method: 'POST',
         headers: {
@@ -73,7 +73,7 @@ const PayScale = () => {
   }
 
   const getPayCategoty = () => {
-    fetch("http://144.91.210.221:4800/getPayCategoty"
+    fetch("http://144:91:110:210:4800/getPayCategoty"
     , {
       method: 'POST',
       headers: {
@@ -94,7 +94,7 @@ const PayScale = () => {
         .then(err => console.log(err))
 }
     const getPayScale = () => {
-        fetch("http://144.91.210.221:4800/getPayScale"
+        fetch("http://144:91:110:210:4800/getPayScale"
         , {
           method: 'POST',
           headers: {
@@ -121,7 +121,7 @@ const PayScale = () => {
         const data = new FormData()
         data.append('PayScaleName', PayScaleName)
         data.append('PayScale', JSON.stringify(AllPayTypeWithValueState))
-        const url = "http://144.91.210.221:4800/StorePayScale"
+        const url = "http://144:91:110:210:4800/StorePayScale"
         fetch(url, {
                 method: 'post',
                 body: data
@@ -144,7 +144,7 @@ const PayScale = () => {
         data.append('_id', _id)
         data.append('PayScaleName', PayScaleName)
         data.append('PayScale', JSON.stringify(AllPayTypeWithValueState))
-        const url = "http://144.91.210.221:4800/UpdatePayScale"
+        const url = "http://144:91:110:210:4800/UpdatePayScale"
         fetch(url, {
                 method: 'put',
                 body: data
@@ -162,7 +162,7 @@ const PayScale = () => {
     }
 
     const getPayScaleType = () => {
-      fetch("http://144.91.210.221:4800/getPayScaleType"
+      fetch("http://144:91:110:210:4800/getPayScaleType"
       , {
         method: 'POST',
         headers: {
@@ -191,7 +191,7 @@ const PayScale = () => {
 
   }
   let DeletePayScale = (id) => {
-    const apiUrl = 'http://144.91.210.221:4800/DeletePayScale';
+    const apiUrl = 'http://144:91:110:210:4800/DeletePayScale';
     fetch(apiUrl, {
       headers : { 
         'Content-Type': 'application/json',

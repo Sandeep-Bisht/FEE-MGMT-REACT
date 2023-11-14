@@ -51,7 +51,7 @@ class RecoverTc extends React.Component{
     }
     getAllCertificateDetails = async() => {
         await console.log("wait wait")
-        fetch("http://144.91.210.221:4800/getAllTransferCertificate"
+        fetch("http://144:91:110:210:4800/getAllTransferCertificate"
         ,{
         method: 'POST',
         headers: {
@@ -72,7 +72,7 @@ class RecoverTc extends React.Component{
     }
     RecoverFromTc =async(item)=>{
       await console.log("wait wait")
-      fetch("http://144.91.210.221:4800/RecoverFromTc"
+      fetch("http://144:91:110:210:4800/RecoverFromTc"
       ,{
       method: 'POST',
       headers: {

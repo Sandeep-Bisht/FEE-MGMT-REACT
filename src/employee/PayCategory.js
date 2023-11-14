@@ -12,7 +12,7 @@ const PayCategory = () => {
     const [AllPayCaregory,setAllPayCategory]=useState([])
     
     const getPayCategoty = () => {
-        fetch("http://144.91.210.221:4800/getPayCategoty"
+        fetch("http://144:91:110:210:4800/getPayCategoty"
         , {
           method: 'POST',
           headers: {
@@ -38,7 +38,7 @@ const PayCategory = () => {
         const data = new FormData()
         data.append('name', name)
         data.append('description', description)
-        const url = "http://144.91.210.221:4800/StorePayCategory"
+        const url = "http://144:91:110:210:4800/StorePayCategory"
         fetch(url, {
                 method: 'post',
                 body: data

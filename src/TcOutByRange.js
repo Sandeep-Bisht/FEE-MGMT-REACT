@@ -113,7 +113,7 @@ class TcOutByRange extends React.Component{
        this.getAllCertificateDetails()
     }
     getSection = () => {
-      fetch("http://144.91.210.221:4800/getSection"
+      fetch("http://144:91:110:210:4800/getSection"
           ,{
           method: 'POST',
           headers: {
@@ -134,7 +134,7 @@ class TcOutByRange extends React.Component{
   }
     getClass = async() => {
       await console.log("wait wait")
-      fetch("http://144.91.210.221:4800/getClass"
+      fetch("http://144:91:110:210:4800/getClass"
       ,{
       method: 'POST',
       headers: {
@@ -155,7 +155,7 @@ class TcOutByRange extends React.Component{
           .then(err => console.log(err))
   }
     getSession = () => {
-      fetch("http://144.91.210.221:4800/getSession"
+      fetch("http://144:91:110:210:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -175,7 +175,7 @@ class TcOutByRange extends React.Component{
   }
   getAllCertificateDetails = async() => {
     await console.log("wait wait")
-    fetch("http://144.91.210.221:4800/getAllTransferCertificate"
+    fetch("http://144:91:110:210:4800/getAllTransferCertificate"
     ,{
     method: 'POST',
     headers: {

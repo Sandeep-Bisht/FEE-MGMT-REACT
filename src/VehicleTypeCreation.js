@@ -14,7 +14,7 @@ class VehicleTypeCreation extends React.Component{
         this.getVehicleType()
     }
     getVehicleType = () => {
-        fetch("http://144.91.210.221:4800/getVehicleType")
+        fetch("http://144:91:110:210:4800/getVehicleType")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -33,7 +33,7 @@ class VehicleTypeCreation extends React.Component{
         const data = new FormData()
         data.append('_id',this.state._id)
         data.append('vehicle_type',this.state.vehicle_type)
-        const url="http://144.91.210.221:4800/updateVehicleType"
+        const url="http://144:91:110:210:4800/updateVehicleType"
                 fetch(url,
                     {
                     method:'put',
@@ -48,7 +48,7 @@ class VehicleTypeCreation extends React.Component{
               }
       }
       deleteVehicleType = (id) => {
-        const apiUrl = 'http://144.91.210.221:4800/deleteVehicleType';
+        const apiUrl = 'http://144:91:110:210:4800/deleteVehicleType';
         fetch(apiUrl, {
           headers : { 
             'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ class VehicleTypeCreation extends React.Component{
         if (this.checkValidation()) {
         const data = new FormData()
         data.append('vehicle_type', this.state.vehicle_type)
-        const url = "http://144.91.210.221:4800/StoreVehicleType"
+        const url = "http://144:91:110:210:4800/StoreVehicleType"
         fetch(url, {
                 method: 'post',
                 body: data

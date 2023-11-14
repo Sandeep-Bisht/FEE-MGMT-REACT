@@ -37,7 +37,7 @@ class Dashboard extends React.Component{
     await console.log("wait")
     this.setState({ voucher_by_date: [] })
     await console.log("wait")
-    fetch("http://144.91.210.221:4800/VoucherByDate"
+    fetch("http://144:91:110:210:4800/VoucherByDate"
       , {
         method: 'POST',
         headers: {
@@ -61,7 +61,7 @@ class Dashboard extends React.Component{
     await console.log("wait")
     this.setState({ voucher_by_date_pnb: [] })
     await console.log("wait")
-    fetch("http://144.91.210.221:4800/VoucherByDate"
+    fetch("http://144:91:110:210:4800/VoucherByDate"
       , {
         method: 'POST',
         headers: {
@@ -84,7 +84,7 @@ class Dashboard extends React.Component{
     await console.log("wait")
     this.setState({ voucher_by_date_sbi: [] })
     await console.log("wait")
-    fetch("http://144.91.210.221:4800/VoucherByDate"
+    fetch("http://144:91:110:210:4800/VoucherByDate"
       , {
         method: 'POST',
         headers: {
@@ -105,7 +105,7 @@ class Dashboard extends React.Component{
 
     await console.log("wait")
     this.setState({ SuspiciousVoucherByDate: 0 })
-    fetch("http://144.91.210.221:4800/SuspiciousVoucherByDate"
+    fetch("http://144:91:110:210:4800/SuspiciousVoucherByDate"
       , {
         method: 'POST',
         headers: {
@@ -125,7 +125,7 @@ class Dashboard extends React.Component{
       }).catch((error)=>console.log(error))
   }
   getClass = () => {
-    fetch("http://144.91.210.221:4800/getClass")
+    fetch("http://144:91:110:210:4800/getClass")
         .then(res => res.json())
         .then(data => {
             console.log(data)
@@ -135,7 +135,7 @@ class Dashboard extends React.Component{
   }
   getSection = () => {
     ActiveSection=0
-    fetch("http://144.91.210.221:4800/getSection"
+    fetch("http://144:91:110:210:4800/getSection"
         ,{
         method: 'POST',
         headers: {
@@ -160,7 +160,7 @@ class Dashboard extends React.Component{
         .catch(err => console.log(err))
 }
   getStudent = () => {
-    fetch("http://144.91.210.221:4800/getStudentCount"
+    fetch("http://144:91:110:210:4800/getStudentCount"
         , {
           method: 'POST',
           headers: {
@@ -255,13 +255,15 @@ class Dashboard extends React.Component{
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">BANK</th>
-                        <th scope="col">admission no</th>
-                        <th scope="col">one time</th>
-                        <th scope="col">anuual</th>
-                        <th scope="col">monthly</th>
-                        <th scope="col">fine</th>
-                        <th scope="col">total</th>
+                        <th scope="col">Mode</th>
+                        <th scope="col">Admission no</th>
+                        <th scope="col">Addmission Fees</th>
+                        <th scope="col">Registration Fees</th>
+                        <th scope="col">ANNUAL / TERMS Fees</th>
+                        <th scope="col">Examination Fees</th>
+                        <th scope="col">Total Paid Fees</th>
+                        <th scope="col">Fine</th>
+                        <th scope="col">Total</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -270,11 +272,13 @@ class Dashboard extends React.Component{
                           return(
                             <tr>
                             <th scope="row">{index+1}</th>
-                            <td>{item.bank}</td>
-                            <td>{item.admission_no} / {item.account_no}</td>
-                            <td>{item.total_one_time_fee}</td>
-                            <td>{item.total_annual_fee}</td>
-                            <td>{item.total_monthly_fee}</td>
+                            <td>{item.payment_mode}</td>
+                            <td>{item.admission_no}</td>
+                            <td>{item.admission_fee}</td>
+                            <td>{item.registration_fee}</td>
+                            <td>{item.annual_terms_fee}</td>
+                            <td>{item.examination_fee}</td>
+                            <td>{item.paid_fees}</td>
                             <td>{item.fine}</td>
                             <td>{item.paid_amount}</td>
                           </tr>  
