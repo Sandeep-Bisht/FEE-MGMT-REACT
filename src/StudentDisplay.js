@@ -160,7 +160,7 @@ class StudentDisplay extends React.Component{
 
   // GetAllStudentCount Api
   getStudentCount = () => {
-    fetch("http://144.91.110.221:4800/getStudentCount"
+    fetch("http://144:91:110:210:4800/getStudentCount"
         , {
           method: 'POST',
           headers: {
@@ -177,12 +177,12 @@ class StudentDisplay extends React.Component{
             this.setState({AllStudentcount: data.count})
             localStorage.setItem("AllStudentcount", this.state.AllStudentcount);
         })
-        .then(err => console.log(err))
-  }
+        .catch(err => console.log(err))
+      }
   // End GetAllStudentCount Api
 
     getSession = () => {
-      fetch("http://144.91.110.221:4800/getSession"
+      fetch("http://144:91:110:210:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -198,10 +198,10 @@ class StudentDisplay extends React.Component{
               console.log(data)
               this.setState({AllSession: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
     getStudent = () => {
-      fetch("http://144.91.110.221:4800/getStudent"
+      fetch("http://144:91:110:210:4800/getStudent"
           , {
             method: 'POST',
             headers: {
@@ -221,11 +221,11 @@ class StudentDisplay extends React.Component{
               this.getStudentCount();
               this.PaginationCall();
           })
-          .then(err => console.log(err))
-    }
+          .catch(err => console.log(err))
+        }
     getCertificateDetails = async() => {
       await console.log("wait wait")
-      fetch("http://144.91.110.221:4800/getTransferCertificate"
+      fetch("http://144:91:110:210:4800/getTransferCertificate"
       ,{
       method: 'POST',
       headers: {
@@ -243,8 +243,8 @@ class StudentDisplay extends React.Component{
               // alert(data.security_deposit)
               
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
     // DisplayStudentObject = (obj) => {
     //     let _id   =   obj._id
     //     let session = obj.session
@@ -326,7 +326,7 @@ class StudentDisplay extends React.Component{
       if(admission_no =='0'){
            return false;
       }
-      fetch("http://144.91.110.221:4800/singlestudentdata"
+      fetch("http://144:91:110:210:4800/singlestudentdata"
       ,{
         method: 'POST',
         headers: {
@@ -374,6 +374,7 @@ class StudentDisplay extends React.Component{
           })
           }
       })
+      .catch(err => console.log(err))
   }
   SearchOldfee= async(e)=>{
     this.setState({AllOldFees:[]})
@@ -383,7 +384,7 @@ class StudentDisplay extends React.Component{
     if(admission_no =='0'){
          return false;
     }
-    fetch("http://144.91.110.221:4800/SearchOldfee"
+    fetch("http://144:91:110:210:4800/SearchOldfee"
     ,{
         method: 'POST',
         headers: {
@@ -416,6 +417,7 @@ class StudentDisplay extends React.Component{
         }
         // this.setState({account_no:data[0].account_no,father_name:data[0].father_name,mother_name:data[0].mother_name,father_occu:data[0].father_occu,father_designation:data[0].father_designation,father_annual_income:data[0].father_annual_income,mother_occu:data[0].mother_occu,mother_designation:data[0].mother_designation,mother_annual_income:data[0].mother_annual_income,parent_address:data[0].parent_address,parent_mobile:data[0].parent_mobile,gaurdian_name:data[0].gaurdian_name,gaurdian_address:data[0].gaurdian_address,gaurdian_mobile:data[0].gaurdian_mobile,gaurdian_annual_income:data[0].gaurdian_annual_income,gaurdian_occu:data[0].gaurdian_occu,gaurdian_designation:data[0].gaurdian_designation})
     })
+    .catch(err => console.log(err))
   
 }
 viewParent= async(e)=>{
@@ -426,7 +428,7 @@ viewParent= async(e)=>{
     if(account_no =='0'){
          return false;
     }
-  fetch("http://144.91.110.221:4800/singleparentdata"
+  fetch("http://144:91:110:210:4800/singleparentdata"
   , {
       method: 'POST',
       headers: {
@@ -442,6 +444,7 @@ viewParent= async(e)=>{
   .then(async (data) => {  
       this.setState({AllSibling:data})
   })
+  .catch(err => console.log(err))
 }
     handleFocusInput (e){
       e.target.select(); 
@@ -811,33 +814,33 @@ viewParent= async(e)=>{
           <div class="row">
             <div class="col-lg-3">
             <ModalImage
-            small={this.state.image !=undefined ?"http://144.91.110.221:4800/" + this.state.image:"http://144.91.110.221:4800/public/admission/" + this.state.admission_no+".jpg"}
-            medium={this.state.image !=undefined ?"http://144.91.110.221:4800/" + this.state.image:"http://144.91.110.221:4800/public/admission/" + this.state.admission_no+".jpg"}
-            large={this.state.image !=undefined ?"http://144.91.110.221:4800/" + this.state.image:"http://144.91.110.221:4800/public/admission/" + this.state.admission_no+".jpg"}
+            small={this.state.image !=undefined ?"http://144:91:110:210:4800/" + this.state.image:"http://144:91:110:210:4800/public/admission/" + this.state.admission_no+".jpg"}
+            medium={this.state.image !=undefined ?"http://144:91:110:210:4800/" + this.state.image:"http://144:91:110:210:4800/public/admission/" + this.state.admission_no+".jpg"}
+            large={this.state.image !=undefined ?"http://144:91:110:210:4800/" + this.state.image:"http://144:91:110:210:4800/public/admission/" + this.state.admission_no+".jpg"}
             alt={this.state.image}
             />;
             </div>
             <div class="col-lg-3">
             <ModalImage
-            small={"http://144.91.110.221:4800/" + this.state.image2}
-            medium={"http://144.91.110.221:4800/" + this.state.image2}
-            large={"http://144.91.110.221:4800/" + this.state.image2}
+            small={"http://144:91:110:210:4800/" + this.state.image2}
+            medium={"http://144:91:110:210:4800/" + this.state.image2}
+            large={"http://144:91:110:210:4800/" + this.state.image2}
             alt={this.state.image2}
            />;
             </div>
             <div class="col-lg-3">
             <ModalImage
-            small={"http://144.91.110.221:4800/" + this.state.image3}
-            medium={"http://144.91.110.221:4800/" + this.state.image3}
-            large={"http://144.91.110.221:4800/" + this.state.image3}
+            small={"http://144:91:110:210:4800/" + this.state.image3}
+            medium={"http://144:91:110:210:4800/" + this.state.image3}
+            large={"http://144:91:110:210:4800/" + this.state.image3}
             alt={this.state.image3}
            />;
             </div>
             <div class="col-lg-3">
             <ModalImage
-            small={"http://144.91.110.221:4800/" + this.state.image4}
-            medium={"http://144.91.110.221:4800/" + this.state.image4}
-            large={"http://144.91.110.221:4800/" + this.state.image4}
+            small={"http://144:91:110:210:4800/" + this.state.image4}
+            medium={"http://144:91:110:210:4800/" + this.state.image4}
+            large={"http://144:91:110:210:4800/" + this.state.image4}
             alt={this.state.image4}
            />;
             </div>

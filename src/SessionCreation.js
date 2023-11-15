@@ -16,7 +16,7 @@ componentDidMount(){
     this.getSession()
 }
 getSession = () => {
-    fetch("http://144.91.110.221:4800/getSession"
+    fetch("http://144:91:110:210:4800/getSession"
     ,{
         method: 'POST',
         headers: {
@@ -32,8 +32,8 @@ getSession = () => {
             console.log(data)
             this.setState({AllSession: data})
         })
-        .then(err => console.log(err))
-}
+        .catch(err => console.log(err))
+    }
 checkValidation = () => {
     if (this.state.from === "") {
         this.setState({fromErrorMessage: "Please Choose Start Date"})
@@ -46,7 +46,7 @@ checkValidation = () => {
     }
   }
   deleteSession = (id) => {
-    const apiUrl = 'http://144.91.110.221:4800/deleteSession';
+    const apiUrl = 'http://144:91:110:210:4800/deleteSession';
     fetch(apiUrl, {
       headers : { 
         'Content-Type': 'application/json',
@@ -61,6 +61,7 @@ checkValidation = () => {
     this.getSession()
       
     })
+    .catch(err => console.log(err))
   }
 submitSessionData = () => {
     if(this.checkValidation()){
@@ -70,7 +71,7 @@ submitSessionData = () => {
     data.append('to', Moment(this.state.to).format('DD-MM-YYYY'))
     data.append('session_code',this.state.session_code)
     data.append('school_id',"UT015")
-    const url = "http://144.91.110.221:4800/StoreSession"
+    const url = "http://144:91:110:210:4800/StoreSession"
     fetch(url, {
             method: 'post',
             body: data

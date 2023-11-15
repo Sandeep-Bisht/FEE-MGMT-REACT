@@ -51,7 +51,7 @@ class AddressReport extends React.Component{
               console.log(data)
               this.setState({AllSection: data})
           })
-          .then(err => console.log(err))
+          .catch(err => console.log(err))
   }
     getSession = () => {
       fetch("http://144.91.110.221:4800/getSession"
@@ -70,7 +70,7 @@ class AddressReport extends React.Component{
               console.log(data)
               this.setState({AllSession: data})
           })
-          .then(err => console.log(err))
+          .catch(err => console.log(err))
   }
     // getFine = () => {
     //     fetch("http://144.91.110.221:4800/getFine")
@@ -104,6 +104,7 @@ class AddressReport extends React.Component{
                  alert("No Result Found")
                }
        })
+       .catch(err => console.log(err))
     }
     getClass = () => {
       fetch("http://144.91.110.221:4800/getClass")
@@ -112,7 +113,7 @@ class AddressReport extends React.Component{
               console.log(data)
               this.setState({AllClass: data})
           })
-          .then(err => console.log(err))
+          .catch(err => console.log(err))
    }
    getFeesOfStudent=(class_name)=>{ 
     global_class_name =  class_name
@@ -138,6 +139,7 @@ class AddressReport extends React.Component{
             //  console.log("done")
      }
      })
+     .catch(err => console.log(err))
  }
 printDefaulter() {
   window.print();

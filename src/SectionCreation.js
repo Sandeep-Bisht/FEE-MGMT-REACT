@@ -22,7 +22,7 @@ class SectionCreation extends React.Component{
         this.getSession()
     }
     getSession = () => {
-        fetch("http://144.91.110.221:4800/getSession"
+        fetch("http://144:91:110:210:4800/getSession"
         ,{
             method: 'POST',
             headers: {
@@ -38,10 +38,10 @@ class SectionCreation extends React.Component{
                 console.log(data)
                 this.setState({AllSession: data})
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+          }
     getSection = () => {
-        fetch("http://144.91.110.221:4800/getSection"
+        fetch("http://144:91:110:210:4800/getSection"
             ,{
             method: 'POST',
             headers: {
@@ -58,11 +58,11 @@ class SectionCreation extends React.Component{
                 console.log(data)
                 this.setState({AllSection: data})
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+          }
     getClass = async() => {
         await console.log("wait wait")
-        fetch("http://144.91.110.221:4800/getClass"
+        fetch("http://144:91:110:210:4800/getClass"
         ,{
         method: 'POST',
         headers: {
@@ -80,8 +80,8 @@ class SectionCreation extends React.Component{
                 this.setState({AllClass: data})
                 this.getSection()
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+          }
  
     editSectionObject = (obj) => {
         this.setState({updateBtn:true})
@@ -100,7 +100,7 @@ class SectionCreation extends React.Component{
         data.append('description',this.state.description)
         // data.append('session', this.state.session)
         data.append('school_id', "UT015")
-        const url="http://144.91.110.221:4800/updateSection"
+        const url="http://144:91:110:210:4800/updateSection"
                 fetch(url,
                     {
                     method:'put',
@@ -111,11 +111,11 @@ class SectionCreation extends React.Component{
                alert('Class updated successfully !');
                this.getSection()
                 })            
-                .then(err=>console.log(err))
+                .catch(err => console.log(err))
               }
       }
       deleteSe = (id) => {
-        const apiUrl = 'http://144.91.110.221:4800/deleteSection';
+        const apiUrl = 'http://144:91:110:210:4800/deleteSection';
         fetch(apiUrl, {
           headers : { 
             'Content-Type': 'application/json',
@@ -128,9 +128,8 @@ class SectionCreation extends React.Component{
         .then((res) => {
         alert("Section Deleted Successfully")
         this.getSection()
-          
         })
-        
+        .catch(err => console.log(err))
       }
       checkValidation = () => {
         if (this.state.class_name === "") {
@@ -152,7 +151,7 @@ class SectionCreation extends React.Component{
         data.append('description', this.state.description)
         // data.append('session', this.state.session)
         data.append('school_id', "UT015")
-        const url = "http://144.91.110.221:4800/StoreSection"
+        const url = "http://144:91:110:210:4800/StoreSection"
         fetch(url, {
                 method: 'post',
                 body: data

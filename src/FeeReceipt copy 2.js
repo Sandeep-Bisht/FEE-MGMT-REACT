@@ -316,7 +316,11 @@
 //         if(admission_no =='0'){
 //              return false;
 //         }
+<<<<<<< HEAD
+//         fetch("http://144:91:110:210:4800/singlestudentdata"
+=======
 //         fetch("http://144.91.110.221:4800/singlestudentdata"
+>>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //             ,{
 //               method: 'POST',
 //               headers: {
@@ -350,7 +354,11 @@
 //         })
 //     }
 //     // getFeeReceipt = () => {
+<<<<<<< HEAD
+//     //     fetch("http://144:91:110:210:4800/getFeeReceipt")
+=======
 //     //     fetch("http://144.91.110.221:4800/getFeeReceipt")
+>>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //     //         .then(res => res.json())
 //     //         .then(data => {
 //     //             this.set_receipt_no(data)
@@ -361,7 +369,11 @@
 //         var fetchPromise = "" ;   
 //         console.log("checking response FeesClasswise")
 //         // const currentMonth =  Moment().format('MM')       
+<<<<<<< HEAD
+//           fetchPromise=  fetch("http://144:91:110:210:4800/getFeeReceipt"
+=======
 //           fetchPromise=  fetch("http://144.91.110.221:4800/getFeeReceipt"
+>>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //          ,{
 //              method: 'POST',
 //              headers: {
@@ -400,7 +412,11 @@
 //         console.log("checking response SearchOldfee")
 //         await  console.log("wait wait")
 //         const admission_no = this.state.admission_no.toUpperCase()
+<<<<<<< HEAD
+//         fetch("http://144:91:110:210:4800/SearchOldfee"
+=======
 //         fetch("http://144.91.110.221:4800/SearchOldfee"
+>>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //         ,{
 //             method: 'POST',
 //             headers: {
@@ -462,7 +478,11 @@
 //     FeesClasswise=(class_names,sections)=>{    
 //        console.log("checking response FeesClasswise")
 //        const currentMonth =  Moment().format('MM')       
+<<<<<<< HEAD
+//         fetch("http://144:91:110:210:4800/FeesClasswise"
+=======
 //         fetch("http://144.91.110.221:4800/FeesClasswise"
+>>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //         ,{
 //             method: 'POST',
 //             headers: {
@@ -878,7 +898,11 @@
 //      if(admission_no =='0'){
 //              return false;
 //         }
+<<<<<<< HEAD
+//         fetch("http://144:91:110:210:4800/singlestudentdata"
+=======
 //         fetch("http://144.91.110.221:4800/singlestudentdata"
+>>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //         ,{
 //             method: 'POST',
 //             headers: {
@@ -906,7 +930,11 @@
 //         // if(admission_no =='0'){
 //         //      return false;
 //         // }
+<<<<<<< HEAD
+//         // fetch("http://144:91:110:210:4800/singlestudentdata"
+=======
 //         // fetch("http://144.91.110.221:4800/singlestudentdata"
+>>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //         // ,{
 //         //     method: 'POST',
 //         //     headers: {
@@ -994,7 +1022,11 @@
 //             data.append('bank_v_no', this.state.bank_v_no)
 //             data.append('check_no', this.state.check_no)
 //             data.append('bank_date', this.state.bank_date)
+<<<<<<< HEAD
+//             const url = "http://144:91:110:210:4800/StoreReceipt"
+=======
 //             const url = "http://144.91.110.221:4800/StoreReceipt"
+>>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //             fetch(url, {
 //                     method: 'post',
 //                     body: data
@@ -1016,7 +1048,11 @@
 //             const data = new FormData()
 //             data.append('_id',this.state._id)   
 //             data.append('balance',this.state.balance)    
+<<<<<<< HEAD
+//             const url="http://144:91:110:210:4800/UpdateBalance"
+=======
 //             const url="http://144.91.110.221:4800/UpdateBalance"
+>>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //                     fetch(url,
 //                         {
 //                         method:'PATCH',
@@ -1048,7 +1084,11 @@
 //                 window.print();
 //               }      
 //         DeleteReceipt(id){
+<<<<<<< HEAD
+//                 const apiUrl = 'http://144:91:110:210:4800/DeleteReceipt';
+=======
 //                 const apiUrl = 'http://144.91.110.221:4800/DeleteReceipt';
+>>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //                 fetch(apiUrl, {
 //                   headers : { 
 //                     'Content-Type':'application/json',
@@ -1097,7 +1137,11 @@
 //             data.append('receipt_no', this.state.Rreceiptno)
 //             data.append('receipt_date', this.state.Rreceiptdate)
 //             data.append('balance', this.state.Rbalance)
+<<<<<<< HEAD
+//             const url="http://144:91:110:210:4800/UpdateReceipt"
+=======
 //             const url="http://144.91.110.221:4800/UpdateReceipt"
+>>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //                     fetch(url,
 //                         {
 //                         method:'put',
@@ -1249,25 +1293,43 @@
 //                 <div className="row">
 //                     <div className="col-4">
 //                                 <ModalImage
+<<<<<<< HEAD
+//                                 small={"http://144:91:110:210:4800/" + this.state.image}
+//                                 medium={"http://144:91:110:210:4800/" + this.state.image}
+//                                 large={"http://144:91:110:210:4800/" + this.state.image}
+=======
 //                                 small={"http://144.91.110.221:4800/" + this.state.image}
 //                                 medium={"http://144.91.110.221:4800/" + this.state.image}
 //                                 large={"http://144.91.110.221:4800/" + this.state.image}
+>>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //                                 alt={this.state.image}
 //                                 />;
 //                     </div>
 //                     <div className="col-4">
 //                                 <ModalImage
+<<<<<<< HEAD
+//                                 small={"http://144:91:110:210:4800/" + this.state.image}
+//                                 medium={"http://144:91:110:210:4800/" + this.state.image}
+//                                 large={"http://144:91:110:210:4800/" + this.state.image}
+=======
 //                                 small={"http://144.91.110.221:4800/" + this.state.image}
 //                                 medium={"http://144.91.110.221:4800/" + this.state.image}
 //                                 large={"http://144.91.110.221:4800/" + this.state.image}
+>>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //                                 alt={this.state.image}
 //                                 />;
 //                     </div>
 //                     <div className="col-4">
 //                                 <ModalImage
+<<<<<<< HEAD
+//                                 small={"http://144:91:110:210:4800/" + this.state.image}
+//                                 medium={"http://144:91:110:210:4800/" + this.state.image}
+//                                 large={"http://144:91:110:210:4800/" + this.state.image}
+=======
 //                                 small={"http://144.91.110.221:4800/" + this.state.image}
 //                                 medium={"http://144.91.110.221:4800/" + this.state.image}
 //                                 large={"http://144.91.110.221:4800/" + this.state.image}
+>>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //                                 alt={this.state.image}
 //                                 />;
 //                     </div>

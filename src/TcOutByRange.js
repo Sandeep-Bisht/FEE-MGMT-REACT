@@ -113,7 +113,7 @@ class TcOutByRange extends React.Component{
        this.getAllCertificateDetails()
     }
     getSection = () => {
-      fetch("http://144.91.110.221:4800/getSection"
+      fetch("http://144:91:110:210:4800/getSection"
           ,{
           method: 'POST',
           headers: {
@@ -130,11 +130,11 @@ class TcOutByRange extends React.Component{
               console.log(data)
               this.setState({AllSection: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
     getClass = async() => {
       await console.log("wait wait")
-      fetch("http://144.91.110.221:4800/getClass"
+      fetch("http://144:91:110:210:4800/getClass"
       ,{
       method: 'POST',
       headers: {
@@ -152,10 +152,10 @@ class TcOutByRange extends React.Component{
               this.setState({AllClass: data})
               this.getSection()
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
     getSession = () => {
-      fetch("http://144.91.110.221:4800/getSession"
+      fetch("http://144:91:110:210:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -171,11 +171,11 @@ class TcOutByRange extends React.Component{
               console.log(data)
               this.setState({AllSession: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
   getAllCertificateDetails = async() => {
     await console.log("wait wait")
-    fetch("http://144.91.110.221:4800/getAllTransferCertificate"
+    fetch("http://144:91:110:210:4800/getAllTransferCertificate"
     ,{
     method: 'POST',
     headers: {
@@ -192,8 +192,8 @@ class TcOutByRange extends React.Component{
             this.setState({AllStudent:data})
             
         })
-        .then(err => console.log(err))
-}
+        .catch(err => console.log(err))
+      }
   
     handleFocusInput (e){
       e.target.select(); 

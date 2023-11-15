@@ -46,7 +46,7 @@ class UpdateReceiptByRange extends React.Component{
       // this.StudentStrenght()
     }
     getBankData = () => {
-      fetch("http://144.91.110.221:4800/getBankData"
+      fetch("http://144:91:110:210:4800/getBankData"
       , {
         method: 'POST',
         headers: {
@@ -65,10 +65,10 @@ class UpdateReceiptByRange extends React.Component{
               this.setState({AllBank: data})
               console.log(data)
           })
-          .then(err => console.log(err))
+          .catch(err => console.log(err))
   }
     getSection = () => {
-      fetch("http://144.91.110.221:4800/getSection"
+      fetch("http://144:91:110:210:4800/getSection"
           ,{
           method: 'POST',
           headers: {
@@ -85,10 +85,10 @@ class UpdateReceiptByRange extends React.Component{
               console.log(data)
               this.setState({AllSection: data})
           })
-          .then(err => console.log(err))
+          .catch(err => console.log(err))
   }
     getSession = () => {
-      fetch("http://144.91.110.221:4800/getSession"
+      fetch("http://144:91:110:210:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -104,10 +104,10 @@ class UpdateReceiptByRange extends React.Component{
               console.log(data)
               this.setState({AllSession: data})
           })
-          .then(err => console.log(err))
+          .catch(err => console.log(err))
   }
     // getFine = () => {
-    //     fetch("http://144.91.110.221:4800/getFine")
+    //     fetch("http://144:91:110:210:4800/getFine")
     //         .then(res => res.json())
     //         .then(data => {
     //             console.log(data)
@@ -122,19 +122,19 @@ class UpdateReceiptByRange extends React.Component{
     }
 
     getSubjects = () => {
-      fetch("http://144.91.110.221:4800/getSubjects")
+      fetch("http://144:91:110:210:4800/getSubjects")
           .then(res => res.json())
           .then(data => {
               console.log(data)
               this.setState({AllSubjects: data})
           })
-          .then(err => console.log(err))
+          .catch(err => console.log(err))
   }
   GetData=async()=>{
       // this.getSubjects()
     $("#getBtn").text("Please Wait...")
      this.setState({AllStudent:[]})
-       fetch("http://144.91.110.221:4800/GetFeeReceiptByRange"
+       fetch("http://144:91:110:210:4800/GetFeeReceiptByRange"
        ,{
            method: 'POST',
            headers: {
@@ -159,21 +159,23 @@ class UpdateReceiptByRange extends React.Component{
                  $("#getBtn").text("Get Data")
                }
        })
+       .catch(err => console.log(err))
+
     }
     getClass = () => {
-      fetch("http://144.91.110.221:4800/getClass")
+      fetch("http://144:91:110:210:4800/getClass")
           .then(res => res.json())
           .then(data => {
               console.log(data)
               this.setState({AllClass: data})
           })
-          .then(err => console.log(err))
+          .catch(err => console.log(err))
    }
    getFeesOfStudent=(class_name)=>{ 
     global_class_name =  class_name
     console.log("checking response FeesClasswise")
     const currentMonth =  Moment().format('MM')       
-     fetch("http://144.91.110.221:4800/FeesClasswise"
+     fetch("http://144:91:110:210:4800/FeesClasswise"
      ,{
          method: 'POST',
          headers: {
@@ -193,6 +195,7 @@ class UpdateReceiptByRange extends React.Component{
             //  console.log("done")
      }
      })
+     .catch(err => console.log(err))
  }
  CheckAll=async()=>{
   IdArray=[]
@@ -254,7 +257,7 @@ UpdateFeeReceiptByRange(item) {
   data.append('IdArray', JSON.stringify(IdArray))
   data.append('bank',this.state.bank)
   data.append('receipt_date',this.state.receipt_date)
-  const url = "http://144.91.110.221:4800/UpdateFeeReceiptByRange"
+  const url = "http://144:91:110:210:4800/UpdateFeeReceiptByRange"
   fetch(url,
       {
           method: 'PATCH',
@@ -272,8 +275,8 @@ UpdateFeeReceiptByRange(item) {
           
           alert("updated Successfully :)")
       })
-      .then(err => console.log(err))
-}
+      .catch(err => console.log(err))
+    }
 printDefaulter() {
   window.print();
 }    

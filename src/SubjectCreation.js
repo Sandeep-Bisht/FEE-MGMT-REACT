@@ -24,7 +24,7 @@ componentDidMount(){
     this.getSubjects()
 }
 getSession = () => {
-    fetch("http://144.91.110.221:4800/getSession"
+    fetch("http://144:91:110:210:4800/getSession"
     ,{
         method: 'POST',
         headers: {
@@ -40,10 +40,10 @@ getSession = () => {
             console.log(data)
             this.setState({AllSession: data})
         })
-        .then(err => console.log(err))
-}
+        .catch(err => console.log(err))
+    }
 getSection = () => {
-    fetch("http://144.91.110.221:4800/getSection"
+    fetch("http://144:91:110:210:4800/getSection"
         ,{
         method: 'POST',
         headers: {
@@ -60,12 +60,12 @@ getSection = () => {
             console.log(data)
             this.setState({AllSection: data})
         })
-        .then(err => console.log(err))
-}
+        .catch(err => console.log(err))
+    }
 getClass = async() => {
     this.getSubjects()
     await console.log("wait wait")
-    fetch("http://144.91.110.221:4800/getClass"
+    fetch("http://144:91:110:210:4800/getClass"
     ,{
     method: 'POST',
     headers: {
@@ -83,18 +83,18 @@ getClass = async() => {
             this.setState({AllClass: data})
             this.getSection()
         })
-        .then(err => console.log(err))
-}
+        .catch(err => console.log(err))
+    }
 getSubjects = async(e) => {
   await console.log("wait")
-  fetch("http://144.91.110.221:4800/getSubjects")
+  fetch("http://144:91:110:210:4800/getSubjects")
       .then(res => res.json())
       .then(data => {
           console.log(data)
           this.setState({AllSubjects: data})
       })
-      .then(err => console.log(err))
-}
+      .catch(err => console.log(err))
+    }
 editSubjectObject = (obj) => {
     this.setState({updateBtn:true})
     let _id   =   obj._id
@@ -118,7 +118,7 @@ updateSubjectData =()=>{
     data.append('description', this.state.description)
     data.append('session', this.state.session)
     data.append('school_id', "UT015")
-    const url="http://144.91.110.221:4800/updateSubject"
+    const url="http://144:91:110:210:4800/updateSubject"
             fetch(url,
                 {
                 method:'put',
@@ -129,11 +129,11 @@ updateSubjectData =()=>{
         alert('Subject updated successfully !');
         this.getSubjects()
             })            
-            .then(err=>console.log(err))
-          }
+            .catch(err => console.log(err))
+        }
   }
   deleteSubject = (id) => {
-    const apiUrl = 'http://144.91.110.221:4800/deleteSubject';
+    const apiUrl = 'http://144:91:110:210:4800/deleteSubject';
     fetch(apiUrl, {
       headers : { 
         'Content-Type': 'application/json',
@@ -146,9 +146,8 @@ updateSubjectData =()=>{
     .then((res) => {
     alert("Vehicle Deleted Successfully")
     this.getSubjects()
-      
     })
-    
+    .catch(err => console.log(err))
   }
   checkValidation = () => {
     if (this.state.class_name === "") {
@@ -175,7 +174,7 @@ submitSubjectData = () => {
     data.append('description', this.state.description)
     data.append('session', this.state.session)
     data.append('school_id', "UT015")
-    const url = "http://144.91.110.221:4800/StoreSubject"
+    const url = "http://144:91:110:210:4800/StoreSubject"
     fetch(url, {
             method: 'post',
             body: data
@@ -185,7 +184,7 @@ submitSubjectData = () => {
             alert("Subject Created Successfully")  
             this.getSubjects()                
         })
-        .then(err => {})
+        .catch(err => console.log(err))
     }
 }
     render(){

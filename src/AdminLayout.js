@@ -66,16 +66,8 @@ class AdminLayout extends React.Component{
         <nav id="sidebar">
             <div className="sidebar-header text-center constencia-sidebar">
                 <div>
-            <Link to="/">
-            <img src={require('./images/logo.png').default} className='constencia-image' style={{height:"50px"}}/>
-            </Link>
             </div>
-            <div className='w-100'>
-            <p className="text-center border-text constencia-sidebar-text">Constancia School <br/> Fees Management System</p>
-            </div>
-            </div>
-            <ul className="list-unstyled components">
-                <p className="text-center border-text ">Session - 
+            <p className="text-center border-text" style={{ marginBottom: "0px"}}>Session - 
                             <select className="text-dark" value= { localStorage.getItem('SessionAccess') == "" ? this.state.session :localStorage.getItem('SessionAccess')}  onChange={(e)=>{this.setState({session:e.target.value.toUpperCase()});this.setSession()}}>
                                <option value="" className="text-dark">Select Session</option>
                                 {this.state.AllSession.map((item,index)=>{
@@ -85,6 +77,8 @@ class AdminLayout extends React.Component{
                               })}
                             </select>
                 </p>
+            </div>
+            <ul className="list-unstyled components">
                 <li>
                     <Link to="/dashboard" onClick={()=>{{this.setState({NavHeading:'Dashboard'})}}}><i class="fas fa-home" ></i>Dashboard</Link>
                 </li>
@@ -359,18 +353,32 @@ class AdminLayout extends React.Component{
                     <Link to="/DropStatus" onClick={()=>{{this.setState({NavHeading:'Dashboard'})}}}><i class="fas fa-file" ></i>Drop Status</Link>
                 </li>
 
-                <li>
-                    <Link to="" onClick={()=>{this.logout()}}> <i class="fas fa-sign-out-alt"></i>Logout</Link>
-                </li>
             </ul>
             <ul className="list-unstyled CTAs text-center constancia-list-CTAs">
                 <li>
-                <h6><span>  <img src={require('./images/giks_logo.png').default} style={{height:"32px"}}/></span> Powered By GIKS @ {currentYear}</h6>
+                <h6><span>  <img src={require('./images/giks_logo.png').default} style={{height:"23px"}}/></span> Powered By GIKS @ {currentYear}</h6>
                 </li>
                 
             </ul>
         </nav>
-        <div id="content">
+        <div id="content" style={{paddingLeft:"40px", paddingRight:"40px"}}>
+        <div className='col-12 d-flex justify-content-space-between align-items-center' style={{background:"#285d9c",color:"#fff", cursor:"pointer", position:"sticky", top:"0px", zIndex:"200"}}>
+                  <div className='col-1 text-staLrt' >
+                  <Link to="/">
+            <img src={require('./images/logo.png').default} className='constencia-image' style={{height:"50px"}}/>
+            </Link>
+            </div>
+            <div className='col-7 text-staLrt' >
+
+                    <h3 style={{marginTop:"10px"}}>
+                      CONSTANCIA SCHOOL
+                    </h3>
+                    <h6 className='col-8 text-start'>P.O. MAJRA, DEHRADUN (U.K.)-248001</h6>
+                  </div>
+                  <div className='col-4  text-right'>
+                    <Link to="" onClick={()=>{this.logout()}} style={{fontSize:"17px"}}> <i class="fas fa-sign-out-alt"></i>Logout</Link>
+                  </div>
+                </div>
             {/* <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
                     <h4 className="m-0" style={{textTransform:"uppercase"}}><u>{this.state.NavHeading}</u></h4>

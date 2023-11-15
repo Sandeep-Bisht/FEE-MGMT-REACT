@@ -51,7 +51,7 @@ class RecoverTc extends React.Component{
     }
     getAllCertificateDetails = async() => {
         await console.log("wait wait")
-        fetch("http://144.91.110.221:4800/getAllTransferCertificate"
+        fetch("http://144:91:110:210:4800/getAllTransferCertificate"
         ,{
         method: 'POST',
         headers: {
@@ -68,11 +68,11 @@ class RecoverTc extends React.Component{
                 this.setState({AllStudentTC:data})
                 
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
     }
     RecoverFromTc =async(item)=>{
       await console.log("wait wait")
-      fetch("http://144.91.110.221:4800/RecoverFromTc"
+      fetch("http://144:91:110:210:4800/RecoverFromTc"
       ,{
       method: 'POST',
       headers: {
@@ -95,8 +95,8 @@ class RecoverTc extends React.Component{
               alert("Recover Sucessfully !")
               this.getAllCertificateDetails()
           })
-          .then(err => console.log(err))
-    }
+          .catch(err => console.log(err))
+        }
     render(){
         const data =[];
         {this.state.AllStudentTC.map((item,index)=>{

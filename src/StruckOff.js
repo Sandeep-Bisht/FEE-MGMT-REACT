@@ -77,7 +77,7 @@ class StruckOff extends React.Component{
         if(admission_no =='0'){
              return false;
         }
-        fetch("http://144.91.110.221:4800/searchByAdmission_noForTc"
+        fetch("http://144:91:110:210:4800/searchByAdmission_noForTc"
             ,{
               method: 'POST',
               headers: {
@@ -147,10 +147,11 @@ class StruckOff extends React.Component{
             })
             }
         })
+        .catch(err => console.log(err))
     }
     SearchOldfee= async()=>{
        await  console.log("wait wait")
-       fetch("http://144.91.110.221:4800/SearchOldfee"
+       fetch("http://144:91:110:210:4800/SearchOldfee"
        ,{
            method: 'POST',
            headers: {
@@ -173,9 +174,10 @@ class StruckOff extends React.Component{
              })   
            }
        })
+       .catch(err => console.log(err))
    }
     getSection = () => {
-        fetch("http://144.91.110.221:4800/getSection"
+        fetch("http://144:91:110:210:4800/getSection"
             ,{
             method: 'POST',
             headers: {
@@ -192,11 +194,11 @@ class StruckOff extends React.Component{
                 console.log(data)
                 this.setState({AllSection: data})
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+        }
     getClass = async() => {
         await console.log("wait wait")
-        fetch("http://144.91.110.221:4800/getClass"
+        fetch("http://144:91:110:210:4800/getClass"
         ,{
         method: 'POST',
         headers: {
@@ -214,28 +216,28 @@ class StruckOff extends React.Component{
                 this.setState({AllClass: data})
                 this.getSection()
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+        }
     getCategory = () => {
-        fetch("http://144.91.110.221:4800/getCastCategory")
+        fetch("http://144:91:110:210:4800/getCastCategory")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
                 this.setState({AllCategory: data})
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+        }
     getHouse = () => {
-        fetch("http://144.91.110.221:4800/getHouse")
+        fetch("http://144:91:110:210:4800/getHouse")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
                 this.setState({AllHouse: data})
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+        }
     getBankData = () => {
-        fetch("http://144.91.110.221:4800/getBankData"
+        fetch("http://144:91:110:210:4800/getBankData"
         , {
           method: 'POST',
           headers: {
@@ -254,8 +256,8 @@ class StruckOff extends React.Component{
                 this.setState({AllBank: data})
                 console.log(data)
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+        }
 
     //   checkValidation = () => {
     //     if (this.state.vehicle_type === "") {
@@ -312,7 +314,7 @@ class StruckOff extends React.Component{
         data.append('conduct', this.state.conduct)
        
 
-        const url = "http://144.91.110.221:4800/StoreTcDetails"
+        const url = "http://144:91:110:210:4800/StoreTcDetails"
         fetch(url, {
                 method: 'post',
                 body: data
@@ -323,8 +325,8 @@ class StruckOff extends React.Component{
                 this.setState({ 
                 admission_no:'',name:'',account_no:'',parents:'',class_name:'',section:'',category:'',nationality:'',date_of_admission:'',dob:'',house:'',address:'',security_deposit:'',return_mode:'',bank:'',tc_no:'',cheque_no:'',reason:'',working_days:'',present_days:'',is_promoted:'',promoted_in:'',result:'',last_school:'',result_remark:'',concession:'',concession_remark:'',games_remark:'',other_remark:'',conduct:'',parent_address:'',parent_city:'',parent_state:'',parent_country:'',father_name:'',mother_name:'',student_id:'',academic_id:''})             
             })
-            .then(err => {})
-        // }
+            .catch(err => console.log(err))
+            // }
     }
     render(){
     

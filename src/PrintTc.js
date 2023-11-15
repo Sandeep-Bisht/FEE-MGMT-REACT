@@ -219,7 +219,7 @@ class PrintTc extends React.Component {
 
         }
       })
-      .then(err => console.log(err))
+      .catch(err => console.log(err))
   }
   PrintTc() {
     window.print();
@@ -254,6 +254,7 @@ class PrintTc extends React.Component {
           this.setState({ sex: '' })
         }
       })
+      .catch(err => console.log(err))
   }
 
   dateToWords(date) {
@@ -299,6 +300,7 @@ class PrintTc extends React.Component {
 
      }
      })
+     .catch(err => console.log(err))
  }
 
 

@@ -17,7 +17,7 @@ class FeeSubCategoryFine extends React.Component{
         this.getFine()
     }
     // getFeeCategory = () => {
-    //     fetch("http://144.91.110.221:4800/getCategory")
+    //     fetch("http://144:91:110:210:4800/getCategory")
     //         .then(res => res.json())
     //         .then(data => {
     //             console.log(data)
@@ -43,7 +43,7 @@ class FeeSubCategoryFine extends React.Component{
         data.append('category', this.state.category)
         data.append('fine_date', this.state.fine_date)
         data.append('amount', this.state.amount)
-        const url="http://144.91.110.221:4800/updateFine"
+        const url="http://144:91:110:210:4800/updateFine"
                 fetch(url,
                     {
                     method:'put',
@@ -54,7 +54,7 @@ class FeeSubCategoryFine extends React.Component{
             alert('Fine updated successfully !');
             this.getFine()
                 })            
-                .then(err=>console.log(err))
+                .catch(err=>console.log(err))
               }
       }
       checkValidation = () => {
@@ -79,7 +79,7 @@ class FeeSubCategoryFine extends React.Component{
         data.append('fine_date', this.state.fine_date)
         data.append('amount', this.state.amount)
     
-        const url = "http://144.91.110.221:4800/StoreFine"
+        const url = "http://144:91:110:210:4800/StoreFine"
         fetch(url, {
                 method: 'post',
                 body: data
@@ -89,17 +89,17 @@ class FeeSubCategoryFine extends React.Component{
                 alert("Fine Created Successfully")  
                 this.getFine()                
             })
-            .then(err => {})
+            .catch(err => {})
         }
     }
     getFine = () => {
-        fetch("http://144.91.110.221:4800/getFine")
+        fetch("http://144:91:110:210:4800/getFine")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
                 this.setState({_id:data[0]?._id,category:data[0]?.category,fine_date:data[0]?.fine_date,amount:data[0]?.amount})
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
     }
         // setFeeType=(e)=>{
         //     if(e.target.value == 'Amount'){

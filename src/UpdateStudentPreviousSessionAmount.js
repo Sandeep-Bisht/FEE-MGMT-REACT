@@ -17,7 +17,7 @@ class UpdateStudentPreviousSessionAmount extends React.Component{
         this.getSession()
     }
     getSession = () => {
-      fetch("http://144.91.110.221:4800/getSession"
+      fetch("http://144:91:110:210:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -33,11 +33,11 @@ class UpdateStudentPreviousSessionAmount extends React.Component{
               console.log(data)
               this.setState({AllSession: data})
           })
-          .then(err => console.log(err))
+          .catch(err => console.log(err))
   }
     GetData = (admission_no) => {
       this.setState({TotalPreviousBalance:0,name:'',account_no:''})
-        fetch("http://144.91.110.221:4800/GetDefaulterMoneySingleStudent"
+        fetch("http://144:91:110:210:4800/GetDefaulterMoneySingleStudent"
         , {
           method: 'POST',
           headers: {
@@ -56,7 +56,7 @@ class UpdateStudentPreviousSessionAmount extends React.Component{
                 this.setState({_id:data._id,TotalPreviousBalance:parseInt(data.TotalPreviousBalance)*-1,account_no:data.account_no,name:data.name,})
                 }
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
     }
    
     UpdateSpeceficPreviousSessionAmount = () => {
@@ -65,7 +65,7 @@ class UpdateStudentPreviousSessionAmount extends React.Component{
         data.append('_id', this.state._id)        
         data.append('name', this.state.name)
         data.append('TotalPreviousBalance', parseInt(this.state.TotalPreviousBalance)*-1)
-        const url = "http://144.91.110.221:4800/UpdateSpeceficPreviousSessionAmount"
+        const url = "http://144:91:110:210:4800/UpdateSpeceficPreviousSessionAmount"
         fetch(url, {
                 method: 'put',
                 body: data
@@ -76,7 +76,7 @@ class UpdateStudentPreviousSessionAmount extends React.Component{
                 // this.GetData()   
                 this.setState({admission_no:'',TotalPreviousBalance:'',account_no:'',name:''})            
             })
-            .then(err => {})
+            .catch(err => {})
         // }
     }
     render(){

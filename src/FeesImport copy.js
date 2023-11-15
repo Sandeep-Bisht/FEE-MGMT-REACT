@@ -3505,7 +3505,11 @@ class FeesImport extends Component {
         console.log(userList.length)
         dataa.append('AllFeeData', JSON.stringify(userList))
         // dataa.append('StudentAcademicData', JSON.stringify(AcademicuserList))
+<<<<<<< HEAD
+        const url = "http://144:91:110:210:4800/Importallfees"
+=======
         const url = "http://144.91.110.221:4800/Importallfees"
+>>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
         fetch(url, {
             // headers : { 
             //   'Content-Type':'application/json',

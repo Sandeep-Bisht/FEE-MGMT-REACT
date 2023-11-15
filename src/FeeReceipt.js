@@ -1652,7 +1652,7 @@ class FeeReceipt extends React.Component {
     } else if (this.state.account_no === "") {
       this.setState({ account_noErrorMessage: "Please Enter Account Number" });
       return false;
-    } else if (this.state.bank === "") {
+    } else if (this.state.payment_mode == "BANK" && this.state.bank === "") {
       this.setState({ bankErrorMessage: "Please Select Bank" });
       return false;
     } else {
@@ -2263,6 +2263,12 @@ class FeeReceipt extends React.Component {
       const remainder = number % 1000;
       return oneDigit[thousands] + " Thousand" + (remainder > 0 ? " " + this.numberToWords(remainder) : "");
     }
+  }
+
+  handlePaymentModeChange = (e) => {
+    this.setState({
+      payment_mode: e.target.value.toUpperCase(),
+    });
   }
 
   // End GetAllStudentCount Api
@@ -2917,7 +2923,7 @@ class FeeReceipt extends React.Component {
                     <tr>
                       <th scope="col">RECEIPT DATE</th>
                       <th scope="col">MONTH</th>
-                      <th scope="col">BANK</th>
+                      <th scope="col">Mode</th>
                       <th scope="col">R.NO</th>
                       <th scope="col">MONTHLY</th>
                       <th scope="col">FINE</th>
@@ -2995,7 +3001,7 @@ class FeeReceipt extends React.Component {
                                                       Moment(item.last_fee_date).format("YYYY")
                                                       : null}
                             </td>
-                            <td>{item.bank}</td>
+                            <td>{item.payment_mode}</td>
                             <td>{item.receipt_no}</td>
                             <td>
                               {/* {parseInt(item.paid_fees) -
@@ -3639,61 +3645,89 @@ class FeeReceipt extends React.Component {
                     <div className="col-12 mt-2 pt-1">
                       <div className="row">
                         <div className="col-6 d-flex align-items-center">
-                          <h5>Month</h5>
+                          <h5>Month </h5>
+                          {
+                            this.state.AllOldFees.length > 1 ? this.state.AllOldFees.map((item, index) => {
+                              if (this.state.AllOldFees.length - 2 == index) {
+                                return (
+                                  <>
+                                    <span className="ml-2">
+                                      {Number(item.paid_month) + 1 == "1"
+                                        ? "Jan" +
+                                        "-"
+                                        : Number(item.paid_month) + 1 == "2"
+                                          ? "Feb" +
+                                          "-"
+                                          : Number(item.paid_month) + 1 == "3"
+                                            ? "Mar" +
+                                            "-"
+                                            : Number(item.paid_month) + 1 == "4"
+                                              ? "Apr" +
+                                              "-"
+                                              : Number(item.paid_month) + 1 == "5"
+                                                ? "May" +
+                                                "-"
+                                                : Number(item.paid_month) + 1 == "6"
+                                                  ? "Jun" +
+                                                  "-"
+                                                  : Number(item.paid_month) + 1 == "7"
+                                                    ? "July" +
+                                                    "-"
+                                                    : Number(item.paid_month) + 1 == "8"
+                                                      ? "Aug" +
+                                                      "-"
+                                                      : Number(item.paid_month) + 1 == "9"
+                                                        ? "Sept" +
+                                                        "-"
+                                                        : Number(item.paid_month) + 1 == "10"
+                                                          ? "Oct" +
+                                                          "-"
+                                                          : Number(item.paid_month) + 1 == "11"
+                                                            ? "Nov" +
+                                                            "-"
+                                                            : Number(item.paid_month) + 1 == "12"
+                                                              ? "Dec" +
+                                                              "-"
+                                                              : null
+                                      }
+                                    </span>
+                                  </>
+                                )
+                              }
+                            })
+                            :
+                            <span className="ml-2">Apr-</span>
+                          }
                           {
                             this.state.AllOldFees.length > 0 && this.state.AllOldFees.map((item, index) => {
                               if (this.state.AllOldFees.length - 1 == index) {
                                 return (
                                   <>
-                                    <span className="ml-2">
+                                    <span className="">
                                       {item.paid_month == "1"
-                                        ? "Jan" +
-                                        "-" +
-                                        Moment(item.last_fee_date).format("YYYY")
+                                        ? "Jan"
                                         : item.paid_month == "2"
-                                          ? "Feb" +
-                                          "-" +
-                                          Moment(item.last_fee_date).format("YYYY")
+                                          ? "Feb"
                                           : item.paid_month == "3"
-                                            ? "Mar" +
-                                            "-" +
-                                            Moment(item.last_fee_date).format("YYYY")
+                                            ? "Mar"
                                             : item.paid_month == "4"
-                                              ? "Apr" +
-                                              "-" +
-                                              Moment(item.last_fee_date).format("YYYY")
+                                              ? "Apr"
                                               : item.paid_month == "5"
-                                                ? "May" +
-                                                "-" +
-                                                Moment(item.last_fee_date).format("YYYY")
+                                                ? "May"
                                                 : item.paid_month == "6"
-                                                  ? "Jun" +
-                                                  "-" +
-                                                  Moment(item.last_fee_date).format("YYYY")
+                                                  ? "Jun"
                                                   : item.paid_month == "7"
-                                                    ? "July" +
-                                                    "-" +
-                                                    Moment(item.last_fee_date).format("YYYY")
+                                                    ? "July"
                                                     : item.paid_month == "8"
-                                                      ? "Aug" +
-                                                      "-" +
-                                                      Moment(item.last_fee_date).format("YYYY")
+                                                      ? "Aug"
                                                       : item.paid_month == "9"
-                                                        ? "Sept" +
-                                                        "-" +
-                                                        Moment(item.last_fee_date).format("YYYY")
+                                                        ? "Sept"
                                                         : item.paid_month == "10"
-                                                          ? "Oct" +
-                                                          "-" +
-                                                          Moment(item.last_fee_date).format("YYYY")
+                                                          ? "Oct"
                                                           : item.paid_month == "11"
-                                                            ? "Nov" +
-                                                            "-" +
-                                                            Moment(item.last_fee_date).format("YYYY")
+                                                            ? "Nov"
                                                             : item.paid_month == "12"
-                                                              ? "Dec" +
-                                                              "-" +
-                                                              Moment(item.last_fee_date).format("YYYY")
+                                                              ? "Dec"
                                                               : null}
                                     </span>
                                   </>
@@ -3735,12 +3769,12 @@ class FeeReceipt extends React.Component {
                           }
                         </div>
                         <div className="col-6 d-flex align-items-center">
-                          <h5>Class-</h5>
+                          <h5>Class</h5>
                           {
                             this.state.AllOldFees.length > 0 && this.state.AllOldFees.map((item, index) => {
                               if (this.state.AllOldFees.length - 1 == index) {
                                 return (
-                                  <span className="ml-2">{item.class_name}{item.section}</span>
+                                  <span className="ml-2">{item.class_name} {item.section == "KG" || item.section == "PG" ? "" : item.section}</span>
                                 )
                               }
                               return null;
@@ -3754,15 +3788,29 @@ class FeeReceipt extends React.Component {
                       <div className="row">
                         <div className="col-6 d-flex align-items-center">
                           <h5>Father's Name</h5>
-
-                          <span className="ml-2">Father</span>
-
+                          {
+                            this.state.AllStudent.length > 0 && this.state.AllStudent.map((item, index) => {
+                              if (this.state.AllStudent.length - 1 == index) {
+                                return (
+                                  <span className="ml-2">{item.father_name}</span>
+                                )
+                              }
+                              return null;
+                            })
+                          }
                         </div>
                         <div className="col-6 d-flex align-items-center">
                           <h5>Mother's Name</h5>
-
-                          <span className="ml-2">Mother</span>
-
+                          {
+                            this.state.AllStudent.length > 0 && this.state.AllStudent.map((item, index) => {
+                              if (this.state.AllStudent.length - 1 == index) {
+                                return (
+                                  <span className="ml-2">{item.mother_name}</span>
+                                )
+                              }
+                              return null;
+                            })
+                          }
                         </div>
                       </div>
 
@@ -3962,12 +4010,12 @@ class FeeReceipt extends React.Component {
             <div className="row ReceiptLayoutCard">
               <div className="col-12">
                 <div className="form-row">
-                  <div className="col-3 form-group">
+                  <div className="col-3 form-group" style={{ marginBottom: "0px" }}>
                     <div className="form-row">
-                      <div className="col-4 form-group">
+                      <div className="col-4 form-group" style={{ marginBottom: "0px" }}>
                         <label>Session *</label>
                       </div>
-                      <div className="col-8 form-group " id="focusguard-1">
+                      <div className="col-8 form-group " style={{ marginBottom: "0px" }} id="focusguard-1">
                         <select
                           className=""
                           value={this.state.session}
@@ -3996,14 +4044,14 @@ class FeeReceipt extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <div className="col-3 form-group">
+                  <div className="col-3 form-group" style={{ marginBottom: "0px" }}>
                     <div className="form-row">
                       <div className="col-4 form-group">
                         <label id="recpddate" className="bg-primary text-white">
                           Recp_Date
                         </label>
                       </div>
-                      <div className="col-8 form-group " id="focusguard-1">
+                      <div className="col-8 form-group " style={{ marginBottom: "0px" }} id="focusguard-1">
                         <input
                           type="date"
                           className="w-100"
@@ -4024,12 +4072,12 @@ class FeeReceipt extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <div className="col-3 form-group">
+                  <div className="col-3 form-group" style={{ marginBottom: "0px" }}>
                     <div className="form-row">
-                      <div className="col-4 form-group">
+                      <div className="col-4 form-group" style={{ marginBottom: "0px" }}>
                         <label>Admn No </label>
                       </div>
-                      <div className="col-8 form-group">
+                      <div className="col-8 form-group" style={{ marginBottom: "0px" }}>
                         <input
                           type="text"
                           id="admissionno"
@@ -4083,12 +4131,12 @@ class FeeReceipt extends React.Component {
                     </div>
                   </div>
 
-                  <div className="col-3 form-group">
+                  <div className="col-3 form-group" style={{ marginBottom: "0px" }}>
                     <div className="form-row">
-                      <div className="col-4 form-group">
+                      <div className="col-4 form-group" style={{ marginBottom: "0px" }}>
                         <label>Recp_No </label>
                       </div>
-                      <div className="col-8 form-group">
+                      <div className="col-8 form-group" style={{ marginBottom: "0px" }}>
                         <input
                           type="text"
                           value={this.state.receipt_no}
@@ -4108,10 +4156,10 @@ class FeeReceipt extends React.Component {
                         </div> */}
                   <div className="col-4 form-group">
                     <div className="form-row">
-                      <div className="col-4 form-group">
+                      <div className="col-4 form-group" style={{ marginBottom: "0px" }}>
                         <label>Account No </label>
                       </div>
-                      <div className="col-6 form-group">
+                      <div className="col-6 form-group" style={{ marginBottom: "0px" }}>
                         <input
                           type="text"
                           value={this.state.account_no}
@@ -4136,36 +4184,27 @@ class FeeReceipt extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <div className="col-4 form-group">
+                  <div className="col-4 form-group" style={{ marginBottom: "0px" }}>
                     <div className="form-row">
-                      <div className="col-4 form-group">
+                      <div className="col-4 form-group" style={{ marginBottom: "0px" }}>
                         <label>Payment</label>
                       </div>
-                      <div className="col-8 form-group">
+                      <div className="col-8 form-group" style={{ marginBottom: "0px" }}>
                         <label>CASH   </label>
                         <input
                           type="radio"
                           className=""
-                          name="payment_mode"
+                          checked={this.state.payment_mode === "CASH"} name="payment_mode"
                           value="CASH"
-                          onChange={(e) => {
-                            this.setState({
-                              payment_mode: e.target.value.toUpperCase(),
-                            });
-                          }}
+                          onChange={(e) => this.handlePaymentModeChange(e)}
                         />
                         <label>  BANK  </label>
                         <input
                           type="radio"
                           className=""
-                          checked
-                          name="payment_mode"
+                          checked={this.state.payment_mode === "BANK"} name="payment_mode"
                           value="BANK"
-                          onChange={(e) => {
-                            this.setState({
-                              payment_mode: e.target.value.toUpperCase(),
-                            });
-                          }}
+                          onChange={(e) => this.handlePaymentModeChange(e)}
                         />
                         {/* <label>  UPI</label>
                         <input
@@ -4183,12 +4222,12 @@ class FeeReceipt extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <div className="col-4 form-group">
+                  <div className="col-4 form-group" style={{ marginBottom: "0px" }}>
                     <div className="form-row">
-                      <div className="col-4 form-group">
+                      <div className="col-4 form-group" style={{ marginBottom: "0px" }}>
                         <label>Select Bank</label>
                       </div>
-                      <div className="col-8 form-group">
+                      <div className="col-8 form-group" style={{ marginBottom: "0px" }}>
                         <select
                           onChange={(e) => {
                             this.setState({
@@ -4219,7 +4258,7 @@ class FeeReceipt extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <div className="col-1 form-group">
+                  <div className="col-1 form-group" style={{ marginBottom: "10px" }}>
                     <button
                       type="button"
                       class="btn btn-info btn-sm"
@@ -4230,7 +4269,7 @@ class FeeReceipt extends React.Component {
                     </button>
                     {/* <button type="button" onClick={()=>{this.ShowModalStudent(this.state.admission_no);this.setState({admission_no:this.state.admission_no});this.searchByAdmission_no()}} class="btn btn-info btn-sm" data-toggle="modal" data-target="#OldFeeModal">Fee Details</button>    */}
                   </div>
-                  <div className="col-1 form-group ml-4">
+                  <div className="col-1 form-group ml-4" style={{ marginBottom: "10px" }}>
                     <button
                       type="button"
                       class="btn btn-info btn-sm"
@@ -4580,11 +4619,11 @@ class FeeReceipt extends React.Component {
                         }
 
                       </div>
-                      <div className="col-2 ">
+                      <div className="col-2">
                         <label>Surplus : {this.state.surplus}</label>
                       </div>
                       <div className="col-2 ">
-                        <label>Dues : {this.state.due}</label>
+                        <label>Dues : {Number(this.state.AllDueFees) > 0 ? Number(this.state.AllDueFees) : 0}</label>
                       </div>
                       <div className="col-2 ">
                         <label>Fee Concession : {this.state.fee_concession ? this.state.fee_concession : 0}</label>
@@ -4833,39 +4872,39 @@ class FeeReceipt extends React.Component {
                           )
                         }
                         {
-                          this.state.AllOldFees.some(item=>item.examination_fee>0) ? null : (
+                          this.state.AllOldFees.some(item => item.examination_fee > 0) ? null : (
                             <button
-                            className={`btn btn-success btn-sm ml-2 ${this.state.annual ? '' : 'd-none'}`}
-                            // id="ShowAnnual"
-                            onClick={() => this.getExaminationFeeAmount()}
-                          >
-                            {this.state.showTotalExaminationFee ? "- Examination Fee" : "+ Examination fee"}
-                          </button>
+                              className={`btn btn-success btn-sm ml-2 ${this.state.annual ? '' : 'd-none'}`}
+                              // id="ShowAnnual"
+                              onClick={() => this.getExaminationFeeAmount()}
+                            >
+                              {this.state.showTotalExaminationFee ? "- Examination Fee" : "+ Examination fee"}
+                            </button>
                           )
                         }
                         {
-                          this.state.AllOldFees.some(item=>item.registration_fee>0) ? null : (
+                          this.state.AllOldFees.some(item => item.registration_fee > 0) ? null : (
                             <button
-                            className={`btn btn-success btn-sm ml-2 ${this.state.annual ? '' : 'd-none'}`}
-                            // id="ShowAnnual"
-                            onClick={() => this.getRegistrationFeeAmount()}
-                          >
-                            {this.state.showTotalRegistrationFee ? "- Registration Fee" : "+ Registration Fee"}
-                          </button>
+                              className={`btn btn-success btn-sm ml-2 ${this.state.annual ? '' : 'd-none'}`}
+                              // id="ShowAnnual"
+                              onClick={() => this.getRegistrationFeeAmount()}
+                            >
+                              {this.state.showTotalRegistrationFee ? "- Registration Fee" : "+ Registration Fee"}
+                            </button>
                           )
                         }
                         {
-                          this.state.AllOldFees.some(item=>item.admission_fee>0) ? null : (
+                          this.state.AllOldFees.some(item => item.admission_fee > 0) ? null : (
                             <button
-                            className={`btn btn-success btn-sm ml-2 ${this.state.annual ? '' : 'd-none'}`}
-                            // id="ShowAnnual"
-                            onClick={() => this.getAdmissionFeeAmount()}
-                          >
-                            {this.state.showTotalAdmissionFee ? "- Admission Fee" : "+ Admission Fee"}
-                          </button>
+                              className={`btn btn-success btn-sm ml-2 ${this.state.annual ? '' : 'd-none'}`}
+                              // id="ShowAnnual"
+                              onClick={() => this.getAdmissionFeeAmount()}
+                            >
+                              {this.state.showTotalAdmissionFee ? "- Admission Fee" : "+ Admission Fee"}
+                            </button>
                           )
                         }
-                  </span>
+                      </span>
                     </h3>
                   </div>
                   {this.state.Allfees.map((item, index) => {

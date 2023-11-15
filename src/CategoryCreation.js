@@ -21,8 +21,8 @@ class CategoryCreation extends React.Component{
                 console.log(data)
                 this.setState({AllCategory: data})
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+        }
     editCategoryObject = (obj) => {
         this.setState({updateBtn:true})
         let _id   =   obj._id
@@ -47,8 +47,8 @@ class CategoryCreation extends React.Component{
                alert('Category updated successfully !');
                this.getCategory()
                 })            
-                .then(err=>console.log(err))
-              }
+                .catch(err => console.log(err))
+            }
       }
       deleteCategory = (id) => {
         const apiUrl = 'http://144.91.110.221:4800/deleteCategory';
@@ -64,8 +64,8 @@ class CategoryCreation extends React.Component{
         .then((res) => {
         alert("Category Deleted Successfully")
         this.getCategory()
-          
         })
+        .catch(err => console.log(err))
         
       }
       checkValidation = () => {
@@ -91,7 +91,7 @@ class CategoryCreation extends React.Component{
                 alert("Category Created Successfully") 
                 this.getCategory()               
             })
-            .then(err => {})
+            .catch(err => console.log(err))
         }
     }
     

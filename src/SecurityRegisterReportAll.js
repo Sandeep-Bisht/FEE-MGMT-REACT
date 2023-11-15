@@ -39,7 +39,7 @@ class SecurityRegisterReportAll extends React.Component{
       this.StudentStrenght()
     }
     getSection = () => {
-      fetch("http://144.91.110.221:4800/getSection"
+      fetch("http://144:91:110:210:4800/getSection"
           ,{
           method: 'POST',
           headers: {
@@ -56,10 +56,12 @@ class SecurityRegisterReportAll extends React.Component{
               console.log(data)
               this.setState({AllSection: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch((error)=>{
+            console.log(error)
+          })  
+        }
     getSession = () => {
-      fetch("http://144.91.110.221:4800/getSession"
+      fetch("http://144:91:110:210:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -75,8 +77,10 @@ class SecurityRegisterReportAll extends React.Component{
               console.log(data)
               this.setState({AllSession: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch((error)=>{
+            console.log(error)
+          }) 
+         }
 
   getTransferCertificate= async (item,security_deposit)=>{    
     await console.log("wait")
@@ -85,7 +89,7 @@ class SecurityRegisterReportAll extends React.Component{
     if(admission_no =='0'){
          return false;
     }
-    fetch("http://144.91.110.221:4800/getTransferCertificate"
+    fetch("http://144:91:110:210:4800/getTransferCertificate"
     ,{
     method: 'POST',
     headers: {
@@ -110,6 +114,8 @@ class SecurityRegisterReportAll extends React.Component{
             this.setState({StudentWithFees:StudentWithFees})
           }
         }
+    }).catch((error)=>{
+      console.log(error)
     })
     return true;
 }
@@ -177,7 +183,7 @@ class SecurityRegisterReportAll extends React.Component{
      console.log("checking response SearchOldfeeSecurityRegisterAll")
      await  console.log("wait wait")
      const admission_no = item.admission_no
-     fetch("http://144.91.110.221:4800/SearchOldfeeSecurityRegisterAll"
+     fetch("http://144:91:110:210:4800/SearchOldfeeSecurityRegisterAll"
      ,{
          method: 'POST',
          headers: {
@@ -217,22 +223,25 @@ class SecurityRegisterReportAll extends React.Component{
              this.setState({StudentWithFees:StudentWithFees})
             }
          }
-     })
+     }).catch((error)=>{
+      console.log(error)
+    })
  }
     getClass = () => {
-      fetch("http://144.91.110.221:4800/getClass")
+      fetch("http://144:91:110:210:4800/getClass")
           .then(res => res.json())
           .then(data => {
               console.log(data)
               this.setState({AllClass: data})
           })
-          .then(err => console.log(err))
-   }
+          .catch((error)=>{
+            console.log(error)
+          })   }
    getFeesOfStudent=(class_name)=>{ 
     global_class_name =  class_name
     console.log("checking response FeesClasswise")
     const currentMonth =  Moment().format('MM')       
-     fetch("http://144.91.110.221:4800/FeesClasswise"
+     fetch("http://144:91:110:210:4800/FeesClasswise"
      ,{
          method: 'POST',
          headers: {
@@ -251,7 +260,9 @@ class SecurityRegisterReportAll extends React.Component{
              this.setState({Allfees:JSON.parse(data[0].fees)})
             //  console.log("done")
      }
-     })
+     }).catch((error)=>{
+      console.log(error)
+    })
  }
 printDefaulter() {
   window.print();

@@ -37,8 +37,8 @@ class BankCreation extends React.Component{
                 this.setState({AllBank: data})
                 console.log(data)
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+          }
     editVehicleTypeObject = (obj) => {
         this.setState({updateBtn:true})
         let _id   =   obj._id
@@ -62,7 +62,7 @@ class BankCreation extends React.Component{
                alert('Bank updated successfully !');
                this.getBankData()
                 })            
-                .then(err=>console.log(err))
+                .catch(err => console.log(err))
               }
       }
       deleteBank = (id) => {
@@ -81,6 +81,7 @@ class BankCreation extends React.Component{
         this.getBankData()
           
         })
+        .catch(err => console.log(err))
         
       }
       checkValidation = () => {
@@ -107,8 +108,8 @@ class BankCreation extends React.Component{
                 // alert("Bank Created Successfully") 
                 this.getBankData()               
             })
-            .then(err => {})
-        }
+            .catch(err => console.log(err))
+          }
     }
     render(){
         const data =[];

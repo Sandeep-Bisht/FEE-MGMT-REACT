@@ -119,7 +119,7 @@ class FeeVoucher extends React.Component {
     this.SuspiciousVoucherByDate()
   }
   getBankData = () => {
-    fetch("http://144.91.110.221:4800/getBankData"
+    fetch("http://144:91:110:210:4800/getBankData"
       , {
         method: 'POST',
         headers: {
@@ -137,10 +137,10 @@ class FeeVoucher extends React.Component {
         this.setState({ AllBank: data })
         console.log(data)
       })
-      .then(err => console.log(err))
+      .catch(err => console.log(err))
   }
   getFeeReceipt = () => {
-    fetch("http://144.91.110.221:4800/getFeeReceipt")
+    fetch("http://144:91:110:210:4800/getFeeReceipt")
       .then(res => res.json())
       .then(data => {
         console.log(data)
@@ -179,7 +179,7 @@ class FeeVoucher extends React.Component {
     
 
     await console.log("wait")
-    fetch("http://144.91.110.221:4800/getFeeSummary"
+    fetch("http://144:91:110:210:4800/getFeeSummary"
       , {
         method: 'POST',
         headers: {
@@ -1070,7 +1070,7 @@ class FeeVoucher extends React.Component {
   //   this.setState({ voucher_by_date:[],voucher_in_detail:[],voucher_by_class:[],SummaryData:[]})
   //   paidamountbydate=0
   //   paidamountbyclass=0
-  //   fetch("http://144.91.110.221:4800/getFeeSummary")
+  //   fetch("http://144:91:110:210:4800/getFeeSummary")
   //   .then(res => res.json())
   //   .then(data => {
   //       console.log(data)
@@ -1104,7 +1104,7 @@ class FeeVoucher extends React.Component {
     paidamountbydate = 0
     paidamountbyclass = 0
     await console.log("wait")
-    fetch("http://144.91.110.221:4800/VoucherByDate"
+    fetch("http://144:91:110:210:4800/VoucherByDate"
       , {
         method: 'POST',
         headers: {
@@ -1124,6 +1124,9 @@ class FeeVoucher extends React.Component {
         }
         $(".get_data_by_date").text("By Date")
       })
+      .catch((error)=>{
+        console.log(error)
+      })
   }
   printvoucherbydate = async () => {
     sumOfTutionFeePrint = 0
@@ -1141,7 +1144,7 @@ class FeeVoucher extends React.Component {
     this.setState({ voucher_by_date: [], voucher_in_detail: [], voucher_by_class: [], SummaryData: [],SummaryDataPNB:[],SummaryDataCSV:[] })
     paidamountbydate = 0
     paidamountbyclass = 0
-    fetch("http://144.91.110.221:4800/printvoucherbydate"
+    fetch("http://144:91:110:210:4800/printvoucherbydate"
       , {
         method: 'POST',
         headers: {
@@ -1450,13 +1453,15 @@ class FeeVoucher extends React.Component {
           console.log("obj 2 " + JSON.stringify(obj2));
           this.setState({ sumOfAllFeePrintPNB: obj2 })
         }
+      }).catch((error)=>{
+        console.log(error)
       })
   }
   SuspiciousVoucherByDate = async () => {
 
     await console.log("wait")
     this.setState({ SuspiciousVoucherByDate: [] })
-    fetch("http://144.91.110.221:4800/SuspiciousVoucherByDate"
+    fetch("http://144:91:110:210:4800/SuspiciousVoucherByDate"
       , {
         method: 'POST',
         headers: {
@@ -1473,6 +1478,8 @@ class FeeVoucher extends React.Component {
       .then(async (data) => {
         this.setState({ SuspiciousVoucherByDate: data })
         console.log("sespiciol data " + JSON.stringify(this.state.SuspiciousVoucherByDate))
+      }).catch((error)=>{
+        console.log(error)
       })
   }
   VoucherInDetail = async () => {
@@ -1501,7 +1508,7 @@ class FeeVoucher extends React.Component {
     paidamountbydate = 0
     paidamountbyclass = 0
     await console.log("wait")
-    fetch("http://144.91.110.221:4800/VoucherInDetail"
+    fetch("http://144:91:110:210:4800/VoucherInDetail"
       , {
         method: 'POST',
         headers: {
@@ -1820,7 +1827,7 @@ class FeeVoucher extends React.Component {
     paidamountbydate = 0
     paidamountbyclass = 0
     await console.log("wait")
-    fetch("http://144.91.110.221:4800/VoucherByClass"
+    fetch("http://144:91:110:210:4800/VoucherByClass"
       , {
         method: 'POST',
         headers: {
@@ -1844,13 +1851,13 @@ class FeeVoucher extends React.Component {
 
   }
   getClass = () => {
-    fetch("http://144.91.110.221:4800/getClass")
+    fetch("http://144:91:110:210:4800/getClass")
       .then(res => res.json())
       .then(data => {
         console.log(data)
         this.setState({ AllClass: data })
       })
-      .then(err => console.log(err))
+      .catch(err => console.log(err))
   }
   printVoucher() {
     $('.printsummary').hide()

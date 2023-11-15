@@ -255,13 +255,15 @@ class Dashboard extends React.Component{
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">BANK</th>
-                        <th scope="col">admission no</th>
-                        <th scope="col">one time</th>
-                        <th scope="col">anuual</th>
-                        <th scope="col">monthly</th>
-                        <th scope="col">fine</th>
-                        <th scope="col">total</th>
+                        <th scope="col">Mode</th>
+                        <th scope="col">Admission no</th>
+                        <th scope="col">Addmission Fees</th>
+                        <th scope="col">Registration Fees</th>
+                        <th scope="col">ANNUAL / TERMS Fees</th>
+                        <th scope="col">Examination Fees</th>
+                        <th scope="col">Total Paid Fees</th>
+                        <th scope="col">Fine</th>
+                        <th scope="col">Total</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -270,11 +272,13 @@ class Dashboard extends React.Component{
                           return(
                             <tr>
                             <th scope="row">{index+1}</th>
-                            <td>{item.bank}</td>
-                            <td>{item.admission_no} / {item.account_no}</td>
-                            <td>{item.total_one_time_fee}</td>
-                            <td>{item.total_annual_fee}</td>
-                            <td>{item.total_monthly_fee}</td>
+                            <td>{item.payment_mode}</td>
+                            <td>{item.admission_no}</td>
+                            <td>{item.admission_fee}</td>
+                            <td>{item.registration_fee}</td>
+                            <td>{item.annual_terms_fee}</td>
+                            <td>{item.examination_fee}</td>
+                            <td>{item.paid_fees}</td>
                             <td>{item.fine}</td>
                             <td>{item.paid_amount}</td>
                           </tr>  

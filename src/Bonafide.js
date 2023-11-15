@@ -71,8 +71,8 @@ class Bonafide extends React.Component{
           .then(data => {              
               this.setState({AllClass: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
     searchByAdmission_no_with_session = async() => {
         this.setState({name:'',account_no:'',class_name:'',section:'',parents:'',fee_concession:'',left_on:'',dob:'',date_of_admission:'',father_name:'',mother_name:'',sex:''})
           await console.log("wait wait")
@@ -158,8 +158,8 @@ class Bonafide extends React.Component{
 
                 }
               })
-              .then(err => console.log(err))
-      }
+              .catch(err => console.log(err))
+            }
       FeesClasswise=(class_names,sections)=>{    
         console.log("checking response FeesClasswise")
         const currentMonth =  Moment().format('MM')       
@@ -184,6 +184,7 @@ class Bonafide extends React.Component{
   
          }
          })
+         .catch(err => console.log(err))
      }
 
     

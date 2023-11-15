@@ -16,14 +16,14 @@ class HouseCreation extends React.Component{
     this.getHouse()
     }
     getHouse = () => {
-        fetch("http://144.91.110.221:4800/getHouse")
+        fetch("http://144:91:110:210:4800/getHouse")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
                 this.setState({AllHouse: data})
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+        }
     editHouseObject = (obj) => {
         this.setState({updateBtn:true})
         let _id   =   obj._id
@@ -37,7 +37,7 @@ class HouseCreation extends React.Component{
         data.append('_id',this.state._id)
         data.append('house_name', this.state.house_name)
         data.append('color', this.state.color)
-        const url="http://144.91.110.221:4800/updateHouse"
+        const url="http://144:91:110:210:4800/updateHouse"
                 fetch(url,
                     {
                     method:'put',
@@ -48,11 +48,11 @@ class HouseCreation extends React.Component{
             alert('House updated successfully !');
             this.getHouse()
                 })            
-                .then(err=>console.log(err))
-            //   }
+                .catch(err => console.log(err))
+                //   }
       }
       deleteHouse = (id) => {
-        const apiUrl = 'http://144.91.110.221:4800/deleteHouse';
+        const apiUrl = 'http://144:91:110:210:4800/deleteHouse';
         fetch(apiUrl, {
           headers : { 
             'Content-Type': 'application/json',
@@ -65,15 +65,14 @@ class HouseCreation extends React.Component{
         .then((res) => {
         alert("House Deleted Successfully")
         this.getHouse()
-          
         })
-        
+        .catch(err => console.log(err))
       }
     submitHouseData = () => {
         const data = new FormData()
         data.append('house_name', this.state.house_name)
         data.append('color', this.state.color)
-        const url = "http://144.91.110.221:4800/StoreHouse"
+        const url = "http://144:91:110:210:4800/StoreHouse"
         fetch(url, {
                 method: 'post',
                 body: data
@@ -83,8 +82,8 @@ class HouseCreation extends React.Component{
                 alert("House Created Successfully")    
                 this.getHouse()              
             })
-            .then(err => {})
-    }
+            .catch(err => console.log(err))
+        }
     render(){
         const data =[];
         {this.state.AllHouse.map((item,index)=>{

@@ -35,7 +35,7 @@ class StudentStrengthSectionWise extends React.Component{
       this.StudentStrenght()
     }
     getSection = () => {
-      fetch("http://144.91.110.221:4800/getSection"
+      fetch("http://144:91:110:210:4800/getSection"
           ,{
           method: 'POST',
           headers: {
@@ -52,10 +52,10 @@ class StudentStrengthSectionWise extends React.Component{
               console.log(data)
               this.setState({AllSection: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
     getSession = () => {
-      fetch("http://144.91.110.221:4800/getSession"
+      fetch("http://144:91:110:210:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -71,10 +71,10 @@ class StudentStrengthSectionWise extends React.Component{
               console.log(data)
               this.setState({AllSession: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
     // getFine = () => {
-    //     fetch("http://144.91.110.221:4800/getFine")
+    //     fetch("http://144:91:110:210:4800/getFine")
     //         .then(res => res.json())
     //         .then(data => {
     //             console.log(data)
@@ -84,7 +84,7 @@ class StudentStrengthSectionWise extends React.Component{
     // }
     StudentStrenght=async()=>{
      this.setState({AllStudent:[]})
-       fetch("http://144.91.110.221:4800/StudentStrenght"
+       fetch("http://144:91:110:210:4800/StudentStrenght"
        ,{
            method: 'POST',
            headers: {
@@ -105,21 +105,22 @@ class StudentStrengthSectionWise extends React.Component{
                  alert("No Result Found")
                }
        })
+       .catch(err => console.log(err))
     }
     getClass = () => {
-      fetch("http://144.91.110.221:4800/getClass")
+      fetch("http://144:91:110:210:4800/getClass")
           .then(res => res.json())
           .then(data => {
               console.log(data)
               this.setState({AllClass: data})
           })
-          .then(err => console.log(err))
-   }
+          .catch(err => console.log(err))
+        }
    getFeesOfStudent=(class_name)=>{ 
     global_class_name =  class_name
     console.log("checking response FeesClasswise")
     const currentMonth =  Moment().format('MM')       
-     fetch("http://144.91.110.221:4800/FeesClasswise"
+     fetch("http://144:91:110:210:4800/FeesClasswise"
      ,{
          method: 'POST',
          headers: {
@@ -139,6 +140,7 @@ class StudentStrengthSectionWise extends React.Component{
             //  console.log("done")
      }
      })
+     .catch(err => console.log(err))
  }
 printDefaulter() {
   window.print();

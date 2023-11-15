@@ -118,16 +118,16 @@ class StudentEdit extends React.Component{
         this.getSubjects()
     }
     getSubjects = () => {
-        fetch("http://144.91.110.221:4800/getSubjects")
+        fetch("http://144:91:110:210:4800/getSubjects")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
                 this.setState({AllSubjects: data})
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
     }
     getSession = () => {
-        fetch("http://144.91.110.221:4800/getSession"
+        fetch("http://144:91:110:210:4800/getSession"
         ,{
             method: 'POST',
             headers: {
@@ -143,10 +143,10 @@ class StudentEdit extends React.Component{
                 console.log(data)
                 this.setState({AllSession: data})
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
     }
     getSection = () => {
-        fetch("http://144.91.110.221:4800/getSection"
+        fetch("http://144:91:110:210:4800/getSection"
             ,{
             method: 'POST',
             headers: {
@@ -163,12 +163,12 @@ class StudentEdit extends React.Component{
                 console.log(data)
                 this.setState({AllSection: data})
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
     }
     getClass = async() => {
         await console.log("wait wait")
         this.getSubjects()
-        fetch("http://144.91.110.221:4800/getClass"
+        fetch("http://144:91:110:210:4800/getClass"
         ,{
         method: 'POST',
         headers: {
@@ -186,38 +186,38 @@ class StudentEdit extends React.Component{
                 this.setState({AllClass: data})
                 this.getSection()
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
     }
     getParent = () => {
-        fetch("http://144.91.110.221:4800/getParent")
+        fetch("http://144:91:110:210:4800/getParent")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
                 this.setState({AllParent: data})
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
     }
     getCategory = () => {
-        fetch("http://144.91.110.221:4800/getCastCategory")
+        fetch("http://144:91:110:210:4800/getCastCategory")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
                 this.setState({AllCategory: data})
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
     }
     getHouse = () => {
-        fetch("http://144.91.110.221:4800/getHouse")
+        fetch("http://144:91:110:210:4800/getHouse")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
                 this.setState({AllHouse: data})
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
     }
     getStudent = async() => {
         await console.log("wait wait")
-        fetch("http://144.91.110.221:4800/getStudent"
+        fetch("http://144:91:110:210:4800/getStudent"
             , {
               method: 'POST',
               headers: {
@@ -234,7 +234,7 @@ class StudentEdit extends React.Component{
                 this.setState({AllStudent:data})
                 this.admission_no(data)
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
       }
     admission_no = (data) => {
         if(data[0] != undefined){
@@ -315,7 +315,7 @@ class StudentEdit extends React.Component{
         data.append('image2', this.state.image2)
         data.append('image3', this.state.image3)
         data.append('image4', this.state.image4)
-        const url = "http://144.91.110.221:4800/StoreStudent"
+        const url = "http://144:91:110:210:4800/StoreStudent"
         fetch(url, {
                 method: 'post',
                 body: data
@@ -325,7 +325,7 @@ class StudentEdit extends React.Component{
                 alert("Student Created Successfully") 
                 this.getStudent()                 
             })
-            .then(err => {})
+            .catch(err => console.log(err))
     }
 
 
@@ -339,7 +339,7 @@ class StudentEdit extends React.Component{
         if(account_no =='0'){
              return false;
         }
-        fetch("http://144.91.110.221:4800/singleparentdata"
+        fetch("http://144:91:110:210:4800/singleparentdata"
         , {
             method: 'POST',
             headers: {
@@ -356,6 +356,7 @@ class StudentEdit extends React.Component{
             console.log( 'single parent'+data )    
             this.setState({account_no:data[0].account_no,father_name:data[0].student.father_name,mother_name:data[0].student.mother_name,father_occu:data[0].student.father_occu,father_designation:data[0].student.father_designation,father_annual_income:data[0].student.father_annual_income,mother_occu:data[0].student.mother_occu,mother_designation:data[0].student.mother_designation,mother_annual_income:data[0].student.mother_annual_income,parent_address:data[0].student.parent_address,parent_mobile:data[0].student.parent_mobile,gaurdian_name:data[0].student.gaurdian_name,gaurdian_address:data[0].student.gaurdian_address,gaurdian_mobile:data[0].student.gaurdian_mobile,gaurdian_annual_income:data[0].student.gaurdian_annual_income,gaurdian_occu:data[0].student.gaurdian_occu,gaurdian_designation:data[0].student.gaurdian_designation})
         })
+        .catch(err => console.log(err))
      }
      editStudentObject = (obj) => {
         let image   = obj.student.image
@@ -575,7 +576,7 @@ class StudentEdit extends React.Component{
         data.append('image2', this.state.image2)
         data.append('image3', this.state.image3)
         data.append('image4', this.state.image4)
-        const url="http://144.91.110.221:4800/updateStudent"
+        const url="http://144:91:110:210:4800/updateStudent"
                 fetch(url,
                     {
                     method:'put',
@@ -587,11 +588,11 @@ class StudentEdit extends React.Component{
             this.setState({parent:'',admission_no:'',security_no:'',old_admission_no:'',aadhar_no:'',class_name:'',section:'',subjects:[],is_start_from_first_class:false,last_class:'',category:'',house:'',name:'',sex:'',dob:'',nationality:'',last_school:'',balance:'',changebalance:'',fee_concession:'',bus_fare_concession:'',vehicle_no:'',is_teacher_ward:false,paid_upto_year:'',last_school_performance:'',is_full_free_ship:false,avail_transport:false,take_computer:false,no_exempt_security_deposit:false,ncc:false,no_exempt_registration:false,no_exempt_admission:false,is_repeater:false,other_details:'',misc_details:'',religion:'',reg_no:'',roll_no:'',board_roll_no:'',parent_per_address:'',parent_per_city:'',parent_per_state:'',parent_per_country:'',gaurdian_per_address:'',gaurdian_per_city:'',gaurdian_per_state:'',gaurdian_per_country:'',parentcopyaddress:false,gaurdiancopyaddress:false,parentcopyaddressASgaurdian:false,account_no:'',father_name:'',mother_name:'',father_occu:'',father_designation:'',father_annual_income:'',mother_occu:'',mother_designation:'',mother_annual_income:'',parent_address:'',parent_city:'',parent_state:'',parent_country:'',parent_phone:'',parent_mobile:'',gaurdian_name:'',gaurdian_occu:'',gaurdian_designation:'',gaurdian_annual_income:'',gaurdian_address:'',gaurdian_city:'',gaurdian_state:'',gaurdian_country:'',gaurdian_phone:'',gaurdian_mobile:'',image:'',image2:'',image3:'',image4:'',})
             this.getStudent()
                 })            
-                .then(err=>console.log(err))
-              }
+                .catch(err => console.log(err))
+            }
       }
       deleteFeeStructure = (id) => {
-        const apiUrl = 'http://144.91.110.221:4800/deleteFeeStructure';
+        const apiUrl = 'http://144:91:110:210:4800/deleteFeeStructure';
         fetch(apiUrl, {
           headers : { 
             'Content-Type': 'application/json',
@@ -604,10 +605,11 @@ class StudentEdit extends React.Component{
         .then((res) => {
         alert("Fee Sub Category Deleted Successfully")
         })
+        .catch(err => console.log(err))
       }
      FeeAmount= async()=>{
       await console.log(this.state.class_name)
-        fetch("http://144.91.110.221:4800/FeeAmount"
+        fetch("http://144:91:110:210:4800/FeeAmount"
         , {
             method: 'POST',
             headers: {
@@ -628,6 +630,7 @@ class StudentEdit extends React.Component{
             }
             
             })
+            .catch(err => console.log(err))
            
         
      }
@@ -659,8 +662,8 @@ class StudentEdit extends React.Component{
         if(admission_no =='0'){
              return false;
         }
-        // fetch("http://144.91.110.221:4800/singlestudentdata_with_session"
-        fetch("http://144.91.110.221:4800/singlestudentdata"
+        // fetch("http://144:91:110:210:4800/singlestudentdata_with_session"
+        fetch("http://144:91:110:210:4800/singlestudentdata"
             ,{
               method: 'POST',
               headers: {
@@ -679,6 +682,7 @@ class StudentEdit extends React.Component{
                 this.editStudentObject(data[0])
             }
         })
+        .catch(err => console.log(err))
     }
     render(){
         const data =[];

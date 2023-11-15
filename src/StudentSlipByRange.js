@@ -109,7 +109,7 @@ class StudentSlipByRange extends React.Component{
        this.getStudent()
     }
     getSession = () => {
-      fetch("http://144.91.110.221:4800/getSession"
+      fetch("http://144:91:110:210:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -125,10 +125,10 @@ class StudentSlipByRange extends React.Component{
               console.log(data)
               this.setState({AllSession: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
     getStudent = () => {      
-      fetch("http://144.91.110.221:4800/getStudent"
+      fetch("http://144:91:110:210:4800/getStudent"
           , {
             method: 'POST',
             headers: {
@@ -145,8 +145,8 @@ class StudentSlipByRange extends React.Component{
             console.log("dfds"+data.length)
               this.setState({AllStudent: data})
           })
-          .then(err => console.log(err))
-    }
+          .catch(err => console.log(err))
+        }
 
     // DisplayStudentObject = (obj) => {
     //     let _id   =   obj._id

@@ -12,7 +12,7 @@ class FeeWaiverCategory extends React.Component{
         this.getWaiverCategory()
       }
       getWaiverCategory = () => {
-        fetch("http://144.91.110.221:4800/getWaiverCategory")
+        fetch("http://144:91:110:210:4800/getWaiverCategory")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -23,7 +23,7 @@ class FeeWaiverCategory extends React.Component{
     submitWaiverCategoryData = () => {
         const data = new FormData()
         data.append('category', this.state.category)
-        const url = "http://144.91.110.221:4800/StoreWaiverCategory"
+        const url = "http://144:91:110:210:4800/StoreWaiverCategory"
         fetch(url, {
                 method: 'post',
                 body: data
