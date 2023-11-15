@@ -40,8 +40,8 @@ getSession = () => {
             console.log(data)
             this.setState({AllSession: data})
         })
-        .then(err => console.log(err))
-}
+        .catch(err => console.log(err))
+    }
 getSection = () => {
     fetch("http://144:91:110:210:4800/getSection"
         ,{
@@ -60,8 +60,8 @@ getSection = () => {
             console.log(data)
             this.setState({AllSection: data})
         })
-        .then(err => console.log(err))
-}
+        .catch(err => console.log(err))
+    }
 getClass = async() => {
     this.getSubjects()
     await console.log("wait wait")
@@ -83,8 +83,8 @@ getClass = async() => {
             this.setState({AllClass: data})
             this.getSection()
         })
-        .then(err => console.log(err))
-}
+        .catch(err => console.log(err))
+    }
 getSubjects = async(e) => {
   await console.log("wait")
   fetch("http://144:91:110:210:4800/getSubjects")
@@ -93,8 +93,8 @@ getSubjects = async(e) => {
           console.log(data)
           this.setState({AllSubjects: data})
       })
-      .then(err => console.log(err))
-}
+      .catch(err => console.log(err))
+    }
 editSubjectObject = (obj) => {
     this.setState({updateBtn:true})
     let _id   =   obj._id
@@ -129,8 +129,8 @@ updateSubjectData =()=>{
         alert('Subject updated successfully !');
         this.getSubjects()
             })            
-            .then(err=>console.log(err))
-          }
+            .catch(err => console.log(err))
+        }
   }
   deleteSubject = (id) => {
     const apiUrl = 'http://144:91:110:210:4800/deleteSubject';
@@ -146,9 +146,8 @@ updateSubjectData =()=>{
     .then((res) => {
     alert("Vehicle Deleted Successfully")
     this.getSubjects()
-      
     })
-    
+    .catch(err => console.log(err))
   }
   checkValidation = () => {
     if (this.state.class_name === "") {
@@ -185,7 +184,7 @@ submitSubjectData = () => {
             alert("Subject Created Successfully")  
             this.getSubjects()                
         })
-        .then(err => {})
+        .catch(err => console.log(err))
     }
 }
     render(){

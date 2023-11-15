@@ -22,8 +22,8 @@ class HouseCreation extends React.Component{
                 console.log(data)
                 this.setState({AllHouse: data})
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+        }
     editHouseObject = (obj) => {
         this.setState({updateBtn:true})
         let _id   =   obj._id
@@ -48,8 +48,8 @@ class HouseCreation extends React.Component{
             alert('House updated successfully !');
             this.getHouse()
                 })            
-                .then(err=>console.log(err))
-            //   }
+                .catch(err => console.log(err))
+                //   }
       }
       deleteHouse = (id) => {
         const apiUrl = 'http://144:91:110:210:4800/deleteHouse';
@@ -65,9 +65,8 @@ class HouseCreation extends React.Component{
         .then((res) => {
         alert("House Deleted Successfully")
         this.getHouse()
-          
         })
-        
+        .catch(err => console.log(err))
       }
     submitHouseData = () => {
         const data = new FormData()
@@ -83,8 +82,8 @@ class HouseCreation extends React.Component{
                 alert("House Created Successfully")    
                 this.getHouse()              
             })
-            .then(err => {})
-    }
+            .catch(err => console.log(err))
+        }
     render(){
         const data =[];
         {this.state.AllHouse.map((item,index)=>{

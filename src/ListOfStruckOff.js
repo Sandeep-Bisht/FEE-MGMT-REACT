@@ -52,7 +52,7 @@ class ListOfStruckOff extends React.Component{
               console.log(data)
               this.setState({AllSection: data})
           })
-          .then(err => console.log(err))
+          .catch(err => console.log(err))
   }
     getSession = () => {
       fetch("http://144:91:110:210:4800/getSession"
@@ -71,7 +71,7 @@ class ListOfStruckOff extends React.Component{
               console.log(data)
               this.setState({AllSession: data})
           })
-          .then(err => console.log(err))
+          .catch(err => console.log(err))
   }
     // getFine = () => {
     //     fetch("http://144:91:110:210:4800/getFine")
@@ -105,6 +105,7 @@ class ListOfStruckOff extends React.Component{
                  alert("No Result Found")
                }
        })
+       .catch(err => console.log(err))
     }
     updateStruckOff =async(item)=>{
         await console.log("wait wait")
@@ -131,8 +132,8 @@ class ListOfStruckOff extends React.Component{
                 alert("Recover Sucessfully !")
                 this.StudentStrenght()
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+          }
     getClass = () => {
       fetch("http://144:91:110:210:4800/getClass")
           .then(res => res.json())
@@ -140,7 +141,7 @@ class ListOfStruckOff extends React.Component{
               console.log(data)
               this.setState({AllClass: data})
           })
-          .then(err => console.log(err))
+          .catch(err => console.log(err))
    }
    getFeesOfStudent=(class_name)=>{ 
     global_class_name =  class_name
@@ -166,6 +167,7 @@ class ListOfStruckOff extends React.Component{
             //  console.log("done")
      }
      })
+     .catch(err => console.log(err))
  }
 printDefaulter() {
   window.print();

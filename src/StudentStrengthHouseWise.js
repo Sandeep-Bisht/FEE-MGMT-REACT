@@ -39,8 +39,8 @@ class StudentStrengthHouseWise extends React.Component{
               console.log(data)
               this.setState({AllHouse: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
     getSection = () => {
       fetch("http://144:91:110:210:4800/getSection"
           ,{
@@ -59,8 +59,8 @@ class StudentStrengthHouseWise extends React.Component{
               console.log(data)
               this.setState({AllSection: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
     getSession = () => {
       fetch("http://144:91:110:210:4800/getSession"
       ,{
@@ -78,8 +78,8 @@ class StudentStrengthHouseWise extends React.Component{
               console.log(data)
               this.setState({AllSession: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
     // getFine = () => {
     //     fetch("http://144:91:110:210:4800/getFine")
     //         .then(res => res.json())
@@ -112,6 +112,7 @@ class StudentStrengthHouseWise extends React.Component{
                  alert("No Result Found")
                }
        })
+       .catch(err => console.log(err))
     }
     getClass = () => {
       fetch("http://144:91:110:210:4800/getClass")
@@ -120,8 +121,8 @@ class StudentStrengthHouseWise extends React.Component{
               console.log(data)
               this.setState({AllClass: data})
           })
-          .then(err => console.log(err))
-   }
+          .catch(err => console.log(err))
+        }
    getFeesOfStudent=(class_name)=>{ 
     global_class_name =  class_name
     console.log("checking response FeesClasswise")
@@ -146,6 +147,7 @@ class StudentStrengthHouseWise extends React.Component{
             //  console.log("done")
      }
      })
+     .catch(err => console.log(err))
  }
 printDefaulter() {
   window.print();

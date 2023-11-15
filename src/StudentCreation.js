@@ -127,8 +127,8 @@ class StudentCreation extends React.Component{
                 console.log(data)
                 this.setState({AllSubjects: data})
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+        }
     getSession = () => {
         fetch("http://144:91:110:210:4800/getSession"
         ,{
@@ -146,8 +146,8 @@ class StudentCreation extends React.Component{
                 console.log(data)
                 this.setState({AllSession: data})
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+        }
     getParent = () => {
         fetch("http://144:91:110:210:4800/getParent")
             .then(res => res.json())
@@ -155,8 +155,8 @@ class StudentCreation extends React.Component{
                 console.log(data)
                 this.setState({AllParent: data})
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+        }
     getSection = () => {
         fetch("http://144:91:110:210:4800/getSection"
             ,{
@@ -175,8 +175,8 @@ class StudentCreation extends React.Component{
                 console.log(data)
                 this.setState({AllSection: data})
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+        }
     getClass = async() => {
         await console.log("wait wait")
         this.getSubjects()
@@ -198,8 +198,8 @@ class StudentCreation extends React.Component{
                 this.setState({AllClass: data})
                 this.getSection()
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+        }
     getCategory = () => {
         fetch("http://144:91:110:210:4800/getCastCategory")
             .then(res => res.json())
@@ -207,8 +207,8 @@ class StudentCreation extends React.Component{
                 console.log(data)
                 this.setState({AllCategory: data})
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+        }
     getHouse = () => {
         fetch("http://144:91:110:210:4800/getHouse")
             .then(res => res.json())
@@ -216,8 +216,8 @@ class StudentCreation extends React.Component{
                 console.log(data)
                 this.setState({AllHouse: data})
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+        }
     getStudent = async() => {
         await console.log("wait wait")
         fetch("http://144:91:110:210:4800/getStudent"
@@ -236,8 +236,8 @@ class StudentCreation extends React.Component{
             .then(data => {                
                 this.setState({AllStudent:data})
             })
-            .then(err => console.log(err))
-      }
+            .catch(err => console.log(err))
+        }
       getStudentAccount_no = async() => {
         await console.log("wait wait")
 
@@ -256,8 +256,8 @@ class StudentCreation extends React.Component{
             .then(data => {              
                 this.setState({AllStudentAccount_no:data})
             })
-            .then(err => console.log(err))
-      }
+            .catch(err => console.log(err))
+        }
       
     getadmission_no = async() => {
         await console.log("wait wait")
@@ -277,8 +277,8 @@ class StudentCreation extends React.Component{
             .then(data => {                
                 this.admission_no(data)
             })
-            .then(err => console.log(err))
-      }
+            .catch(err => console.log(err))
+        }
     admission_no = (data) => {
         if(data != ""){
         var admission_no=parseInt(data.admission_no)+1
@@ -421,7 +421,7 @@ class StudentCreation extends React.Component{
                 this.getClass()
                 this.getSection()          
             })
-            .then(err => {})
+            .catch(err => console.log(err))
         }
         console.log("error"+JSON.stringify(res))
     }
@@ -450,6 +450,7 @@ class StudentCreation extends React.Component{
             console.log( 'single parent'+data )    
             this.setState({account_no:data[0].account_no,father_name:data[0].student.father_name,mother_name:data[0].student.mother_name,father_occu:data[0].student.father_occu,father_designation:data[0].student.father_designation,father_annual_income:data[0].student.father_annual_income,mother_occu:data[0].student.mother_occu,mother_designation:data[0].student.mother_designation,mother_annual_income:data[0].student.mother_annual_income,parent_address:data[0].student.parent_address,parent_mobile:data[0].student.parent_mobile,gaurdian_name:data[0].student.gaurdian_name,gaurdian_address:data[0].student.gaurdian_address,gaurdian_mobile:data[0].student.gaurdian_mobile,gaurdian_annual_income:data[0].student.gaurdian_annual_income,gaurdian_occu:data[0].student.gaurdian_occu,gaurdian_designation:data[0].student.gaurdian_designation})
         })
+        .catch(err => console.log(err))
      }
      FeeAmount= async()=>{
       await console.log(this.state.class_name)
@@ -473,6 +474,7 @@ class StudentCreation extends React.Component{
             console.log(this.state.balance)
             }
             })
+            .catch(err => console.log(err))
      }
      SelectSubjects = async(e) => {
         let value = Array.from(e.target.selectedOptions, option => option.value);

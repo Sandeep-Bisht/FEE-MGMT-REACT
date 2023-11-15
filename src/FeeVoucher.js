@@ -137,7 +137,7 @@ class FeeVoucher extends React.Component {
         this.setState({ AllBank: data })
         console.log(data)
       })
-      .then(err => console.log(err))
+      .catch(err => console.log(err))
   }
   getFeeReceipt = () => {
     fetch("http://144:91:110:210:4800/getFeeReceipt")
@@ -1124,6 +1124,9 @@ class FeeVoucher extends React.Component {
         }
         $(".get_data_by_date").text("By Date")
       })
+      .catch((error)=>{
+        console.log(error)
+      })
   }
   printvoucherbydate = async () => {
     sumOfTutionFeePrint = 0
@@ -1450,6 +1453,8 @@ class FeeVoucher extends React.Component {
           console.log("obj 2 " + JSON.stringify(obj2));
           this.setState({ sumOfAllFeePrintPNB: obj2 })
         }
+      }).catch((error)=>{
+        console.log(error)
       })
   }
   SuspiciousVoucherByDate = async () => {
@@ -1473,6 +1478,8 @@ class FeeVoucher extends React.Component {
       .then(async (data) => {
         this.setState({ SuspiciousVoucherByDate: data })
         console.log("sespiciol data " + JSON.stringify(this.state.SuspiciousVoucherByDate))
+      }).catch((error)=>{
+        console.log(error)
       })
   }
   VoucherInDetail = async () => {
@@ -1850,7 +1857,7 @@ class FeeVoucher extends React.Component {
         console.log(data)
         this.setState({ AllClass: data })
       })
-      .then(err => console.log(err))
+      .catch(err => console.log(err))
   }
   printVoucher() {
     $('.printsummary').hide()

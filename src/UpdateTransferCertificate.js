@@ -126,6 +126,9 @@ class UpdateTransferCertificate extends React.Component{
             })
             }
         })
+        .catch((error)=>{
+            console.log(error)
+        })
     }
     getSection = () => {
         fetch("http://144:91:110:210:4800/getSection"
@@ -145,7 +148,7 @@ class UpdateTransferCertificate extends React.Component{
                 console.log(data)
                 this.setState({AllSection: data})
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
     }
     getClass = async() => {
         await console.log("wait wait")
@@ -167,7 +170,7 @@ class UpdateTransferCertificate extends React.Component{
                 this.setState({AllClass: data})
                 this.getSection()
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
     }
     getCategory = () => {
         fetch("http://144:91:110:210:4800/getCastCategory")
@@ -176,7 +179,7 @@ class UpdateTransferCertificate extends React.Component{
                 console.log(data)
                 this.setState({AllCategory: data})
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
     }
     getHouse = () => {
         fetch("http://144:91:110:210:4800/getHouse")
@@ -185,7 +188,7 @@ class UpdateTransferCertificate extends React.Component{
                 console.log(data)
                 this.setState({AllHouse: data})
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
     }
     getBankData = () => {
         fetch("http://144:91:110:210:4800/getBankData"
@@ -207,7 +210,7 @@ class UpdateTransferCertificate extends React.Component{
                 this.setState({AllBank: data})
                 console.log(data)
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
     }
 
     //   checkValidation = () => {
@@ -277,7 +280,7 @@ class UpdateTransferCertificate extends React.Component{
                 this.setState({ 
                 admission_no:'',name:'',account_no:'',parents:'',class_name:'',section:'',category:'',nationality:'',date_of_admission:'',dob:'',house:'',address:'',security_deposit:'',return_mode:'',bank:'SBI',tc_no:'',cheque_no:'',reason:'',working_days:'',present_days:'',is_promoted:'',promoted_in:'',result:'',last_school:'',result_remark:'',concession:'',concession_remark:'',games_remark:'',other_remark:'',conduct:'',parent_address:'',parent_city:'',parent_state:'',parent_country:'',father_name:'',mother_name:'',student_id:'',academic_id:''})             
             })
-            .then(err => {})
+            .catch(err => console.log(err))
         // }
     }
     render(){

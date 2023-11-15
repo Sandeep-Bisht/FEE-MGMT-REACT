@@ -130,7 +130,7 @@ class SosByRange extends React.Component{
               console.log(data)
               this.setState({AllSection: data})
           })
-          .then(err => console.log(err))
+          .catch(err => console.log(err))
   }
     getClass = async() => {
       await console.log("wait wait")
@@ -152,7 +152,7 @@ class SosByRange extends React.Component{
               this.setState({AllClass: data})
               this.getSection()
           })
-          .then(err => console.log(err))
+          .catch(err => console.log(err))
   }
     getSession = () => {
       fetch("http://144:91:110:210:4800/getSession"
@@ -171,7 +171,7 @@ class SosByRange extends React.Component{
               console.log(data)
               this.setState({AllSession: data})
           })
-          .then(err => console.log(err))
+          .catch(err => console.log(err))
   }
   getAllCertificateDetails = async() => {
     await console.log("wait wait")
@@ -191,8 +191,8 @@ class SosByRange extends React.Component{
             this.setState({AllStudent:data})
             
         })
-        .then(err => console.log(err))
-}
+        .catch(err => console.log(err))
+      }
   
     handleFocusInput (e){
       e.target.select(); 

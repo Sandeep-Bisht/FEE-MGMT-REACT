@@ -54,7 +54,7 @@ class FeeSubCategoryFine extends React.Component{
             alert('Fine updated successfully !');
             this.getFine()
                 })            
-                .then(err=>console.log(err))
+                .catch(err=>console.log(err))
               }
       }
       checkValidation = () => {
@@ -89,7 +89,7 @@ class FeeSubCategoryFine extends React.Component{
                 alert("Fine Created Successfully")  
                 this.getFine()                
             })
-            .then(err => {})
+            .catch(err => {})
         }
     }
     getFine = () => {
@@ -99,7 +99,7 @@ class FeeSubCategoryFine extends React.Component{
                 console.log(data)
                 this.setState({_id:data[0]?._id,category:data[0]?.category,fine_date:data[0]?.fine_date,amount:data[0]?.amount})
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
     }
         // setFeeType=(e)=>{
         //     if(e.target.value == 'Amount'){

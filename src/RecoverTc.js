@@ -68,7 +68,7 @@ class RecoverTc extends React.Component{
                 this.setState({AllStudentTC:data})
                 
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
     }
     RecoverFromTc =async(item)=>{
       await console.log("wait wait")
@@ -95,8 +95,8 @@ class RecoverTc extends React.Component{
               alert("Recover Sucessfully !")
               this.getAllCertificateDetails()
           })
-          .then(err => console.log(err))
-    }
+          .catch(err => console.log(err))
+        }
     render(){
         const data =[];
         {this.state.AllStudentTC.map((item,index)=>{

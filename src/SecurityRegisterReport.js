@@ -54,8 +54,9 @@ class SecurityRegisterReport extends React.Component{
               console.log(data)
               this.setState({AllSection: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch((error)=>{
+            console.log(error)
+          })  }
     getSession = () => {
       fetch("http://144:91:110:210:4800/getSession"
       ,{
@@ -73,8 +74,9 @@ class SecurityRegisterReport extends React.Component{
               console.log(data)
               this.setState({AllSession: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch((error)=>{
+            console.log(error)
+          })  }
 
   getTransferCertificate= async (item,security_deposit)=>{    
     await console.log("wait")
@@ -108,6 +110,8 @@ class SecurityRegisterReport extends React.Component{
             this.setState({StudentWithFees:StudentWithFees})
           }
         }
+    }).catch((error)=>{
+      console.log(error)
     })
     return true;
 }
@@ -140,7 +144,9 @@ class SecurityRegisterReport extends React.Component{
                if(data[0] == undefined){
                  alert("No Result Found")
                }
-       })
+       }).catch((error)=>{
+        console.log(error)
+      })
     }
 
     SearchOldfee= async(item)=>{
@@ -190,7 +196,9 @@ class SecurityRegisterReport extends React.Component{
  }
              
          }
-     })
+     }).catch((error)=>{
+      console.log(error)
+    })
  }
     getClass = () => {
       fetch("http://144:91:110:210:4800/getClass")
@@ -199,8 +207,9 @@ class SecurityRegisterReport extends React.Component{
               console.log(data)
               this.setState({AllClass: data})
           })
-          .then(err => console.log(err))
-   }
+          .catch((error)=>{
+            console.log(error)
+          })   }
    getFeesOfStudent=(class_name)=>{ 
     global_class_name =  class_name
     console.log("checking response FeesClasswise")
@@ -224,7 +233,9 @@ class SecurityRegisterReport extends React.Component{
              this.setState({Allfees:JSON.parse(data[0].fees)})
             //  console.log("done")
      }
-     })
+     }).catch((error)=>{
+      console.log(error)
+    })
  }
 printDefaulter() {
   window.print();

@@ -48,6 +48,8 @@ getFeeReceipt=(class_names,sections)=>{
         await console.log( 'Class Wise'+data ) 
             this.set_receipt_no(data)
             await console.log( 'Class Wise'+data ) 
+     }).catch((error)=>{
+        console.log(error)
      })
     // alert(val)
     if(fetchPromise !=""){
@@ -85,7 +87,7 @@ getBankData = () => {
             this.setState({AllBank: data})
             console.log(data)
         })
-        .then(err => console.log(err))
+        .catch(err => console.log(err))
 }
 checkValidation = () => {
     if (this.state.receipt_date === undefined || this.state.receipt_date == "") {
@@ -175,7 +177,7 @@ getFine = () => {
             console.log(data)
             this.setState({fine_date:data[0]?.fine_date,defaultFine:data[0]?.amount})
         })
-        .then(err => console.log(err))
+        .catch(err => console.log(err))
 }
   onDrop(files) {
 

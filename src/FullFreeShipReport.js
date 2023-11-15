@@ -45,7 +45,7 @@ class FullFreeShipReport extends React.Component{
               console.log(data)
               this.setState({AllCategory: data})
           })
-          .then(err => console.log(err))
+          .catch(err => console.log(err))
   }
     getSection = () => {
       fetch("http://144:91:110:210:4800/getSection"
@@ -65,7 +65,7 @@ class FullFreeShipReport extends React.Component{
               console.log(data)
               this.setState({AllSection: data})
           })
-          .then(err => console.log(err))
+          .catch(err => console.log(err))
   }
     getSession = () => {
       fetch("http://144:91:110:210:4800/getSession"
@@ -84,7 +84,7 @@ class FullFreeShipReport extends React.Component{
               console.log(data)
               this.setState({AllSession: data})
           })
-          .then(err => console.log(err))
+          .catch(err => console.log(err))
   }
    
     StudentStrenght=async()=>{
@@ -121,6 +121,7 @@ class FullFreeShipReport extends React.Component{
                }
               
        })
+       .catch(err => console.log(err))
     }
     getClass = () => {
       fetch("http://144:91:110:210:4800/getClass")
@@ -129,7 +130,7 @@ class FullFreeShipReport extends React.Component{
               console.log(data)
               this.setState({AllClass: data})
           })
-          .then(err => console.log(err))
+          .catch(err => console.log(err))
    }    
    printDefaulter() {
     window.print();

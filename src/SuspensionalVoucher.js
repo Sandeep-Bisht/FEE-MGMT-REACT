@@ -54,8 +54,9 @@ class SuspensionalVoucher extends React.Component{
             .then(data => {
                 this.setState({AllSession: data})
             })
-            .then(err => console.log(err))
-    }
+            .catch((error)=>{
+              console.log(error)
+            })    }
     getBankData = () => {
         fetch("http://144:91:110:210:4800/getBankData"
         , {
@@ -74,8 +75,9 @@ class SuspensionalVoucher extends React.Component{
                 this.setState({AllBank: data})
                 console.log(data)
             })
-            .then(err => console.log(err))
-    }
+            .catch((error)=>{
+              console.log(error)
+            })    }
     getClass = async() => {
         await console.log("wait wait")        
         fetch("http://144:91:110:210:4800/getClass"
@@ -95,8 +97,9 @@ class SuspensionalVoucher extends React.Component{
                 console.log(data)
                 this.setState({AllClass: data})
             })
-            .then(err => console.log(err))
-    }
+            .catch((error)=>{
+              console.log(error)
+            })    }
     getSuspensionalFee= async()=>{
         fetch("http://144:91:110:210:4800/getSuspensionalFeeWithAdmissionNoZero"
         ,{
@@ -116,6 +119,8 @@ class SuspensionalVoucher extends React.Component{
             if(data[0] !=undefined){
                 this.setState({AllSuspensionalFees: data})
             }
+        }).catch((error)=>{
+          console.log(error)
         })
         // await this.setBalance()
     }
@@ -180,6 +185,8 @@ class SuspensionalVoucher extends React.Component{
         alert("Deleted Successfully")
         this.setState({AllOldFees:[]})
         this.getSuspensionalFee()
+        }).catch((error)=>{
+          console.log(error)
         })
 }
     //   deleteSuspensionalFee = (id) => {
@@ -257,8 +264,9 @@ class SuspensionalVoucher extends React.Component{
                     this.getSuspensionalFee()
                         
                 })
-                .then(err => {})            
-    
+                .catch((error)=>{
+                  console.log(error)
+                })    
         }
     // submitSuspensionalFeeData = () => {
     //     const data = new FormData()

@@ -32,8 +32,8 @@ getSession = () => {
             console.log(data)
             this.setState({AllSession: data})
         })
-        .then(err => console.log(err))
-}
+        .catch(err => console.log(err))
+    }
 checkValidation = () => {
     if (this.state.from === "") {
         this.setState({fromErrorMessage: "Please Choose Start Date"})
@@ -61,6 +61,7 @@ checkValidation = () => {
     this.getSession()
       
     })
+    .catch(err => console.log(err))
   }
 submitSessionData = () => {
     if(this.checkValidation()){

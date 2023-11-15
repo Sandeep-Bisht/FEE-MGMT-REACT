@@ -21,7 +21,7 @@ class ClassCreation extends React.Component {
   }
   getClass = async () => {
     await console.log("wait wait");
-    fetch("http://144:91:110:210:4800/getClass", {
+    fetch("http://144.91.110.221:4800/getClass", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -37,8 +37,8 @@ class ClassCreation extends React.Component {
         console.log(data);
         this.setState({ AllClass: data });
       })
-      .then((err) => console.log(err));
-  };
+      .catch(err => console.log(err))
+    };
   checkValidation = () => {
     if (this.state.class_name === "") {
       this.setState({ class_nameErrorMessage: "Please Enter Class Name" });
@@ -68,7 +68,7 @@ class ClassCreation extends React.Component {
       data.append("description", this.state.description);
       data.append("session", this.state.session);
       data.append("school_id", "UT015");
-      const url = "http://144:91:110:210:4800/updateClass";
+      const url = "http://144.91.110.221:4800/updateClass";
       fetch(url, {
         method: "put",
         body: data,
@@ -78,11 +78,11 @@ class ClassCreation extends React.Component {
           alert("Class updated successfully !");
           this.getClass();
         })
-        .then((err) => console.log(err));
-    }
+        .catch(err => console.log(err))
+      }
   };
   deleteClass = (id) => {
-    const apiUrl = "http://144:91:110:210:4800/deleteClass";
+    const apiUrl = "http://144.91.110.221:4800/deleteClass";
     fetch(apiUrl, {
       headers: {
         "Content-Type": "application/json",
@@ -95,10 +95,11 @@ class ClassCreation extends React.Component {
       .then((res) => {
         alert("Class Deleted Successfully");
         this.getClass();
-      });
+      })
+      .catch(err => console.log(err))
   };
   getSession = () => {
-    fetch("http://144:91:110:210:4800/getSession", {
+    fetch("http://144.91.110.221:4800/getSession", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -113,8 +114,8 @@ class ClassCreation extends React.Component {
         console.log(data);
         this.setState({ AllSession: data });
       })
-      .then((err) => console.log(err));
-  };
+      .catch(err => console.log(err))
+    };
   submitClassData = async () => {
     await console.log("wait");
     if (this.checkValidation()) {
@@ -124,7 +125,7 @@ class ClassCreation extends React.Component {
       data.append("description", this.state.description);
       // data.append('session', this.state.session)
       data.append("school_id", "UT015");
-      const url = "http://144:91:110:210:4800/StoreClass";
+      const url = "http://144.91.110.221:4800/StoreClass";
       fetch(url, {
         method: "post",
         body: data,
@@ -134,8 +135,8 @@ class ClassCreation extends React.Component {
           alert("Class Created Successfully");
           this.getClass();
         })
-        .catch((err) => {});
-    }
+        .catch(err => console.log(err))
+      }
   };
   render() {
     const data = [];

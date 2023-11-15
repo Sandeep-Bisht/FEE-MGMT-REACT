@@ -150,7 +150,7 @@ class App extends Component {
         const dataa = new FormData()
         dataa.append('StudentData', JSON.stringify(userList))
         //dataa.append('StudentAcademicData', JSON.stringify(AcademicuserList))
-        const url = "http://144:91:110:210:4800/ImportStudent"
+        const url = "http://144.91.110.221:4800/ImportStudent"
         fetch(url, {
                 method: 'post',
                 body: dataa

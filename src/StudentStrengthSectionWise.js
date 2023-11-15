@@ -46,8 +46,8 @@ class StudentStrengthSectionWise extends React.Component{
               console.log(data)
               this.setState({AllCategory: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
     getSection = () => {
       fetch("http://144:91:110:210:4800/getSection"
           ,{
@@ -66,8 +66,8 @@ class StudentStrengthSectionWise extends React.Component{
               console.log(data)
               this.setState({AllSection: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
     getSession = () => {
       fetch("http://144:91:110:210:4800/getSession"
       ,{
@@ -85,8 +85,8 @@ class StudentStrengthSectionWise extends React.Component{
               console.log(data)
               this.setState({AllSession: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
    
     FeeConcessonStudent=async()=>{
       grand_total=0
@@ -122,6 +122,7 @@ class StudentStrengthSectionWise extends React.Component{
               alert("No Result Found")
             }
     })
+    .catch(err => console.log(err))
     }
     FeesClasswise=(item)=>{    
       // console.log("checking response FeesClasswise")
@@ -148,6 +149,7 @@ class StudentStrengthSectionWise extends React.Component{
               //  await this.SearchOldfee()
        }
        })
+       .catch(err => console.log(err))
    }
     getClass = () => {
       fetch("http://144:91:110:210:4800/getClass")
@@ -156,8 +158,8 @@ class StudentStrengthSectionWise extends React.Component{
               console.log(data)
               this.setState({AllClass: data})
           })
-          .then(err => console.log(err))
-   }    
+          .catch(err => console.log(err))
+        }    
    printDefaulter() {
     window.print();
   }  

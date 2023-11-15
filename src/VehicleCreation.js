@@ -29,8 +29,8 @@ class VehicleCreation extends React.Component{
                 console.log(data)
                 this.setState({AllVehicle: data})
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+        }
     getVehicleType = () => {
         fetch("http://144:91:110:210:4800/getVehicleType")
             .then(res => res.json())
@@ -38,8 +38,8 @@ class VehicleCreation extends React.Component{
                 console.log(data)
                 this.setState({AllVehicleType: data})
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+        }
     editVehicleObject = (obj) => {
         this.setState({updateBtn:true})
         let _id   =   obj._id
@@ -74,8 +74,8 @@ class VehicleCreation extends React.Component{
                alert('Vehicle updated successfully !');
                this.getVehicle()
                 })            
-                .then(err=>console.log(err))
-              }
+                .catch(err => console.log(err))
+            }
       }
       deleteVehicleType = (id) => {
         const apiUrl = 'http://144:91:110:210:4800/deleteVehicle';
@@ -91,9 +91,8 @@ class VehicleCreation extends React.Component{
         .then((res) => {
         alert("Vehicle Deleted Successfully")
         this.getVehicle()
-          
         })
-        
+        .catch(err => console.log(err))
       }
       checkValidation = () => {
         if (this.state.vehicle_type === "") {
@@ -141,7 +140,7 @@ class VehicleCreation extends React.Component{
                 alert("Vehicle Created Successfully") 
                 this.getVehicle()               
             })
-            .then(err => {})
+            .catch(err => console.log(err))
         }
     }
     render(){

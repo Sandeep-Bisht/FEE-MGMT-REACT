@@ -37,8 +37,8 @@ class StudentStrengthCategoryWise extends React.Component{
               console.log(data)
               this.setState({AllCategory: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
     getSection = () => {
       fetch("http://144:91:110:210:4800/getSection"
           ,{
@@ -57,8 +57,8 @@ class StudentStrengthCategoryWise extends React.Component{
               console.log(data)
               this.setState({AllSection: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
     getSession = () => {
       fetch("http://144:91:110:210:4800/getSession"
       ,{
@@ -76,8 +76,8 @@ class StudentStrengthCategoryWise extends React.Component{
               console.log(data)
               this.setState({AllSession: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
     StudentStrenght=async()=>{
       grand_total=0
     $("#getBtn").text("Please Wait...")
@@ -107,6 +107,7 @@ class StudentStrengthCategoryWise extends React.Component{
                  alert("No Result Found")
                }
        })
+       .catch(err => console.log(err))
     }
     getClass = () => {
       fetch("http://144:91:110:210:4800/getClass")
@@ -115,8 +116,8 @@ class StudentStrengthCategoryWise extends React.Component{
               console.log(data)
               this.setState({AllClass: data})
           })
-          .then(err => console.log(err))
-   }    
+          .catch(err => console.log(err))
+        }    
    printDefaulter() {
     window.print();
   }  

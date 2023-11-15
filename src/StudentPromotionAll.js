@@ -43,6 +43,7 @@ class StudentPromotionAll extends React.Component{
         .then(data => {
           this.setState({AllStudent: data})
       })
+      .catch(err => console.log(err))
     }
     // getStudent = () => {
     //     fetch("http://144:91:110:210:4800/getStudent")
@@ -70,8 +71,8 @@ class StudentPromotionAll extends React.Component{
               console.log(data)
               this.setState({AllSession: data})
           })
-          .then(err => console.log(err))
-    }
+          .catch(err => console.log(err))
+        }
 
   upgradedata=async()=>{
   var StudentData = [];

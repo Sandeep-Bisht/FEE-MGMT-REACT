@@ -38,8 +38,8 @@ class SectionCreation extends React.Component{
                 console.log(data)
                 this.setState({AllSession: data})
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+          }
     getSection = () => {
         fetch("http://144:91:110:210:4800/getSection"
             ,{
@@ -58,8 +58,8 @@ class SectionCreation extends React.Component{
                 console.log(data)
                 this.setState({AllSection: data})
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+          }
     getClass = async() => {
         await console.log("wait wait")
         fetch("http://144:91:110:210:4800/getClass"
@@ -80,8 +80,8 @@ class SectionCreation extends React.Component{
                 this.setState({AllClass: data})
                 this.getSection()
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+          }
  
     editSectionObject = (obj) => {
         this.setState({updateBtn:true})
@@ -111,7 +111,7 @@ class SectionCreation extends React.Component{
                alert('Class updated successfully !');
                this.getSection()
                 })            
-                .then(err=>console.log(err))
+                .catch(err => console.log(err))
               }
       }
       deleteSe = (id) => {
@@ -128,9 +128,8 @@ class SectionCreation extends React.Component{
         .then((res) => {
         alert("Section Deleted Successfully")
         this.getSection()
-          
         })
-        
+        .catch(err => console.log(err))
       }
       checkValidation = () => {
         if (this.state.class_name === "") {

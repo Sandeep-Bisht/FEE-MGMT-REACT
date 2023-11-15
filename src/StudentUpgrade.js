@@ -49,6 +49,7 @@ class StudentUpgrade extends React.Component{
         .then(data => {
           this.setState({AllStudent: data})
       })
+      .catch(err => console.log(err))
     }
     getSection = () => {
       fetch("http://144:91:110:210:4800/getSection")
@@ -57,8 +58,8 @@ class StudentUpgrade extends React.Component{
               console.log(data)
               this.setState({AllSection: data})
           })
-          .then(err => console.log(err))
-    }
+          .catch(err => console.log(err))
+        }
     // getStudent = () => {
     //     fetch("http://144:91:110:210:4800/getStudent")
     //         .then(res => res.json())
@@ -85,8 +86,8 @@ class StudentUpgrade extends React.Component{
               console.log(data)
               this.setState({AllSession: data})
           })
-          .then(err => console.log(err))
-    }
+          .catch(err => console.log(err))
+        }
     getToSession = () => {
       fetch("http://144:91:110:210:4800/getSession"
       ,{
@@ -104,8 +105,8 @@ class StudentUpgrade extends React.Component{
               console.log(data)
               this.setState({AllToSession: data})
           })
-          .then(err => console.log(err))
-    }
+          .catch(err => console.log(err))
+        }
     getToClass = async() => {
       await console.log("wait wait")
       const url = "http://144:91:110:210:4800/getClass"
@@ -126,6 +127,7 @@ class StudentUpgrade extends React.Component{
         .then(data => {
           this.setState({AllToClass: data})
       })
+      .catch(err => console.log(err))
     }
     getClass = async() => {
     await console.log("wait wait")
@@ -147,6 +149,7 @@ class StudentUpgrade extends React.Component{
       .then(data => {
         this.setState({AllClass: data})
     })
+    .catch(err => console.log(err))
   }
   upgradedata=async()=>{
     var StudentData = [];

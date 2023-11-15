@@ -177,8 +177,8 @@ class StudentDisplay extends React.Component{
             this.setState({AllStudentcount: data.count})
             localStorage.setItem("AllStudentcount", this.state.AllStudentcount);
         })
-        .then(err => console.log(err))
-  }
+        .catch(err => console.log(err))
+      }
   // End GetAllStudentCount Api
 
     getSession = () => {
@@ -198,8 +198,8 @@ class StudentDisplay extends React.Component{
               console.log(data)
               this.setState({AllSession: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
     getStudent = () => {
       fetch("http://144:91:110:210:4800/getStudent"
           , {
@@ -221,8 +221,8 @@ class StudentDisplay extends React.Component{
               this.getStudentCount();
               this.PaginationCall();
           })
-          .then(err => console.log(err))
-    }
+          .catch(err => console.log(err))
+        }
     getCertificateDetails = async() => {
       await console.log("wait wait")
       fetch("http://144:91:110:210:4800/getTransferCertificate"
@@ -243,8 +243,8 @@ class StudentDisplay extends React.Component{
               // alert(data.security_deposit)
               
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
     // DisplayStudentObject = (obj) => {
     //     let _id   =   obj._id
     //     let session = obj.session
@@ -374,6 +374,7 @@ class StudentDisplay extends React.Component{
           })
           }
       })
+      .catch(err => console.log(err))
   }
   SearchOldfee= async(e)=>{
     this.setState({AllOldFees:[]})
@@ -416,6 +417,7 @@ class StudentDisplay extends React.Component{
         }
         // this.setState({account_no:data[0].account_no,father_name:data[0].father_name,mother_name:data[0].mother_name,father_occu:data[0].father_occu,father_designation:data[0].father_designation,father_annual_income:data[0].father_annual_income,mother_occu:data[0].mother_occu,mother_designation:data[0].mother_designation,mother_annual_income:data[0].mother_annual_income,parent_address:data[0].parent_address,parent_mobile:data[0].parent_mobile,gaurdian_name:data[0].gaurdian_name,gaurdian_address:data[0].gaurdian_address,gaurdian_mobile:data[0].gaurdian_mobile,gaurdian_annual_income:data[0].gaurdian_annual_income,gaurdian_occu:data[0].gaurdian_occu,gaurdian_designation:data[0].gaurdian_designation})
     })
+    .catch(err => console.log(err))
   
 }
 viewParent= async(e)=>{
@@ -442,6 +444,7 @@ viewParent= async(e)=>{
   .then(async (data) => {  
       this.setState({AllSibling:data})
   })
+  .catch(err => console.log(err))
 }
     handleFocusInput (e){
       e.target.select(); 

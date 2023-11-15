@@ -109,6 +109,8 @@ class PreviousDefaulter extends React.Component{
                 if(data[0] == undefined){
                   alert("No Result Found")
                 }
+        }).catch((error)=>{
+          console.log(error)
         })
         
           // this.setStudentFeeStructure()
@@ -170,6 +172,8 @@ this.setStudentFeeStructure()
               // }
           }
           // this.setState({account_no:data[0].account_no,father_name:data[0].father_name,mother_name:data[0].mother_name,father_occu:data[0].father_occu,father_designation:data[0].father_designation,father_annual_income:data[0].father_annual_income,mother_occu:data[0].mother_occu,mother_designation:data[0].mother_designation,mother_annual_income:data[0].mother_annual_income,parent_address:data[0].parent_address,parent_mobile:data[0].parent_mobile,gaurdian_name:data[0].gaurdian_name,gaurdian_address:data[0].gaurdian_address,gaurdian_mobile:data[0].gaurdian_mobile,gaurdian_annual_income:data[0].gaurdian_annual_income,gaurdian_occu:data[0].gaurdian_occu,gaurdian_designation:data[0].gaurdian_designation})
+      }).catch((error)=>{
+        console.log(error)
       })
   }
   setStudentFeeStructure =async()=>{
@@ -214,7 +218,9 @@ this.setStudentFeeStructure()
      })
      .then(()=>{
        this.setDefaulter()
-     })
+     }).catch((error)=>{
+      console.log(error)
+    })
 
  }
 setDefaulter(){
@@ -323,8 +329,9 @@ paidFees.push({"fee_concession":fee_concession,"is_full_free_ship":item.is_full_
               console.log(data)
               this.setState({AllSession: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch((error)=>{
+            console.log(error)
+          })  }
     getFine = () => {
         fetch("http://144:91:110:210:4800/getFine")
             .then(res => res.json())
@@ -332,7 +339,9 @@ paidFees.push({"fee_concession":fee_concession,"is_full_free_ship":item.is_full_
                 console.log(data)
                 this.setState({_id:data[0]?.id,category: data[0]?.category,fine_date:data[0]?.fine_date,defaultFine:data[0]?.amount})
             })
-            .then(err => console.log(err))
+            .catch((error)=>{
+              console.log(error)
+            })
     }
     getSection = () => {
       fetch("http://144:91:110:210:4800/getSection"
@@ -352,8 +361,9 @@ paidFees.push({"fee_concession":fee_concession,"is_full_free_ship":item.is_full_
               console.log(data)
               this.setState({AllSection: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch((error)=>{
+            console.log(error)
+          })  }
     DefaulterByMonth=async()=>{
      this.setState({AllDefaulter:[]})
       await console.log(this.state.DefaulterByMonth)
@@ -378,7 +388,9 @@ paidFees.push({"fee_concession":fee_concession,"is_full_free_ship":item.is_full_
                if(data[0] == undefined){
                  alert("No Result Found")
                }
-       })
+       }).catch((error)=>{
+        console.log(error)
+      })
     }
     getClass = () => {
       fetch("http://144:91:110:210:4800/getClass")
@@ -387,8 +399,10 @@ paidFees.push({"fee_concession":fee_concession,"is_full_free_ship":item.is_full_
               console.log(data)
               this.setState({AllClass: data})
           })
-          .then(err => console.log(err))
-   }
+          .catch((error)=>{
+            console.log(error)
+          })
+           }
    getFeesOfStudent=(class_name)=>{ 
     global_class_name =  class_name
     console.log("checking response FeesClasswise")
@@ -412,7 +426,9 @@ paidFees.push({"fee_concession":fee_concession,"is_full_free_ship":item.is_full_
              this.setState({Allfees:JSON.parse(data[0].fees)})
             //  console.log("done")
      }
-     })
+     }).catch((error)=>{
+      console.log(error)
+    })
  }
 //  setDefaulterList =async()=>{
 //   this.state.AllDefaulter.map((item,index)=>{

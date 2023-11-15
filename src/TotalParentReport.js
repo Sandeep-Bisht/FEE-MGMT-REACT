@@ -41,8 +41,8 @@ class TotalParentReport extends React.Component{
               console.log(data)
               this.setState({AllCategory: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
     getSection = () => {
       fetch("http://144:91:110:210:4800/getSection"
           ,{
@@ -61,8 +61,8 @@ class TotalParentReport extends React.Component{
               console.log(data)
               this.setState({AllSection: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
     getSession = () => {
       fetch("http://144:91:110:210:4800/getSession"
       ,{
@@ -80,8 +80,8 @@ class TotalParentReport extends React.Component{
               console.log(data)
               this.setState({AllSession: data})
           })
-          .then(err => console.log(err))
-  }
+          .catch(err => console.log(err))
+        }
    
     StudentStrenght=async()=>{
       grand_total=0
@@ -126,8 +126,8 @@ class TotalParentReport extends React.Component{
               console.log(data)
               this.setState({AllClass: data})
           })
-          .then(err => console.log(err))
-   }    
+          .catch(err => console.log(err))
+        }    
     render(){
       grand_total=0
         return(

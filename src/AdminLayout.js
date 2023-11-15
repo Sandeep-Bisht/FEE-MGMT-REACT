@@ -25,7 +25,7 @@ class AdminLayout extends React.Component{
         this.setState({ currentYear });
     }
     getSession = () => {
-        fetch("http://144:91:110:210:4800/getSession"
+        fetch("http://144.91.110.221:4800/getSession"
         ,{
             method: 'POST',
             headers: {

@@ -15,14 +15,14 @@ class CategoryCreation extends React.Component{
         this.getCategory()
     }
     getCategory = () => {
-        fetch("http://144:91:110:210:4800/getCastCategory")
+        fetch("http://144.91.110.221:4800/getCastCategory")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
                 this.setState({AllCategory: data})
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+        }
     editCategoryObject = (obj) => {
         this.setState({updateBtn:true})
         let _id   =   obj._id
@@ -36,7 +36,7 @@ class CategoryCreation extends React.Component{
         data.append('_id',this.state._id)
         data.append('category', this.state.category)
         data.append('description',this.state.description)
-        const url="http://144:91:110:210:4800/updateCategory"
+        const url="http://144.91.110.221:4800/updateCategory"
                 fetch(url,
                     {
                     method:'put',
@@ -47,11 +47,11 @@ class CategoryCreation extends React.Component{
                alert('Category updated successfully !');
                this.getCategory()
                 })            
-                .then(err=>console.log(err))
-              }
+                .catch(err => console.log(err))
+            }
       }
       deleteCategory = (id) => {
-        const apiUrl = 'http://144:91:110:210:4800/deleteCategory';
+        const apiUrl = 'http://144.91.110.221:4800/deleteCategory';
         fetch(apiUrl, {
           headers : { 
             'Content-Type': 'application/json',
@@ -64,8 +64,8 @@ class CategoryCreation extends React.Component{
         .then((res) => {
         alert("Category Deleted Successfully")
         this.getCategory()
-          
         })
+        .catch(err => console.log(err))
         
       }
       checkValidation = () => {
@@ -81,7 +81,7 @@ class CategoryCreation extends React.Component{
         const data = new FormData()
         data.append('category', this.state.category)
         data.append('description', this.state.description)
-        const url = "http://144:91:110:210:4800/StoreCategory"
+        const url = "http://144.91.110.221:4800/StoreCategory"
         fetch(url, {
                 method: 'post',
                 body: data
@@ -91,7 +91,7 @@ class CategoryCreation extends React.Component{
                 alert("Category Created Successfully") 
                 this.getCategory()               
             })
-            .then(err => {})
+            .catch(err => console.log(err))
         }
     }
     

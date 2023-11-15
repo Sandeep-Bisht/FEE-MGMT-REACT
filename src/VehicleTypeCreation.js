@@ -20,8 +20,8 @@ class VehicleTypeCreation extends React.Component{
                 console.log(data)
                 this.setState({AllVehicleType: data})
             })
-            .then(err => console.log(err))
-    }
+            .catch(err => console.log(err))
+        }
     editVehicleTypeObject = (obj) => {
         this.setState({updateBtn:true})
         let _id   =   obj._id
@@ -44,7 +44,7 @@ class VehicleTypeCreation extends React.Component{
                alert('Vehicle Type updated successfully !');
                this.getVehicleType()
                 })            
-                .then(err=>console.log(err))
+          .catch(err => console.log(err))
               }
       }
       deleteVehicleType = (id) => {
@@ -63,7 +63,7 @@ class VehicleTypeCreation extends React.Component{
         this.getVehicleType()
           
         })
-        
+        .catch(err => console.log(err))
       }
       checkValidation = () => {
         if (this.state.vehicle_type === "") {
@@ -87,7 +87,7 @@ class VehicleTypeCreation extends React.Component{
                 alert("Vehicle Type Created Successfully") 
                 this.getVehicleType()               
             })
-            .then(err => {})
+            .catch(err => console.log(err))
         }
     }
     render(){

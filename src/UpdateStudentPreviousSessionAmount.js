@@ -33,7 +33,7 @@ class UpdateStudentPreviousSessionAmount extends React.Component{
               console.log(data)
               this.setState({AllSession: data})
           })
-          .then(err => console.log(err))
+          .catch(err => console.log(err))
   }
     GetData = (admission_no) => {
       this.setState({TotalPreviousBalance:0,name:'',account_no:''})
@@ -56,7 +56,7 @@ class UpdateStudentPreviousSessionAmount extends React.Component{
                 this.setState({_id:data._id,TotalPreviousBalance:parseInt(data.TotalPreviousBalance)*-1,account_no:data.account_no,name:data.name,})
                 }
             })
-            .then(err => console.log(err))
+            .catch(err => console.log(err))
     }
    
     UpdateSpeceficPreviousSessionAmount = () => {
@@ -76,7 +76,7 @@ class UpdateStudentPreviousSessionAmount extends React.Component{
                 // this.GetData()   
                 this.setState({admission_no:'',TotalPreviousBalance:'',account_no:'',name:''})            
             })
-            .then(err => {})
+            .catch(err => {})
         // }
     }
     render(){

@@ -25,7 +25,6 @@ class Landing extends React.Component{
           )
           .then((res) => {
             try{
-                console.log(res.user + "this is admin data")
             if (res.user.role === "Admin"  ) {
               localStorage.setItem('access', res.user.role);
               localStorage.setItem('user_id', res.user._id);
