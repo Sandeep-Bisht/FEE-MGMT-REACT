@@ -3774,7 +3774,7 @@ class FeeReceipt extends React.Component {
                             this.state.AllOldFees.length > 0 && this.state.AllOldFees.map((item, index) => {
                               if (this.state.AllOldFees.length - 1 == index) {
                                 return (
-                                  <span className="ml-2">{item.class_name} {item.section == "KG" || item.section == "PG" ? "" : item.section}</span>
+                                  <span className="ml-2">{item.class_name} {item.section == "KG" || item.section == "PG" || item.section == "NURSERY" ? "" : item.section}</span>
                                 )
                               }
                               return null;
