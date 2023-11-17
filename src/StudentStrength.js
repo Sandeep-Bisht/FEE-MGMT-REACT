@@ -34,7 +34,7 @@ class StudentStrength extends React.Component{
       this.StudentStrenght()
     }
     getSection = () => {
-      fetch("http://144:91:110:210:4800/getSection"
+      fetch("http://144.91.110.221:4800/getSection"
           ,{
           method: 'POST',
           headers: {
@@ -54,7 +54,7 @@ class StudentStrength extends React.Component{
           .catch(err => console.log(err))
         }
     getSession = () => {
-      fetch("http://144:91:110:210:4800/getSession"
+      fetch("http://144.91.110.221:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -73,7 +73,7 @@ class StudentStrength extends React.Component{
           .catch(err => console.log(err))
         }
     // getFine = () => {
-    //     fetch("http://144:91:110:210:4800/getFine")
+    //     fetch("http://144.91.110.221:4800/getFine")
     //         .then(res => res.json())
     //         .then(data => {
     //             console.log(data)
@@ -83,7 +83,7 @@ class StudentStrength extends React.Component{
     // }
     StudentStrenght=async()=>{
      this.setState({AllStudent:[]})
-       fetch("http://144:91:110:210:4800/StudentStrenght"
+       fetch("http://144.91.110.221:4800/StudentStrenght"
        ,{
            method: 'POST',
            headers: {
@@ -107,7 +107,7 @@ class StudentStrength extends React.Component{
        .catch(err => console.log(err))
     }
     getClass = () => {
-      fetch("http://144:91:110:210:4800/getClass")
+      fetch("http://144.91.110.221:4800/getClass")
           .then(res => res.json())
           .then(data => {
               console.log(data)
@@ -119,7 +119,7 @@ class StudentStrength extends React.Component{
     global_class_name =  class_name
     console.log("checking response FeesClasswise")
     const currentMonth =  Moment().format('MM')       
-     fetch("http://144:91:110:210:4800/FeesClasswise"
+     fetch("http://144.91.110.221:4800/FeesClasswise"
      ,{
          method: 'POST',
          headers: {

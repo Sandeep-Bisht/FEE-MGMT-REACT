@@ -166,7 +166,7 @@ class PreviousFeeReceipt extends React.Component{
         }
     }
     // getFeeSubCategory = () => {
-    //     fetch("http://144:91:110:210:4800/getSubCategory")
+    //     fetch("http://144.91.110.221:4800/getSubCategory")
     //         .then(res => res.json())
     //         .then(data => {
 
@@ -194,7 +194,7 @@ class PreviousFeeReceipt extends React.Component{
         }
     }
     getBankData = () => {
-        fetch("http://144:91:110:210:4800/getBankData"
+        fetch("http://144.91.110.221:4800/getBankData"
         , {
           method: 'POST',
           headers: {
@@ -216,7 +216,7 @@ class PreviousFeeReceipt extends React.Component{
             .then(err => console.log(err))
     }
     getFine = () => {
-        fetch("http://144:91:110:210:4800/getFine")
+        fetch("http://144.91.110.221:4800/getFine")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -226,7 +226,7 @@ class PreviousFeeReceipt extends React.Component{
     }
     getStudent = async() => {
         await console.log("wait wait")
-        fetch("http://144:91:110:210:4800/getStudent"
+        fetch("http://144.91.110.221:4800/getStudent"
             , {
               method: 'POST',
               headers: {
@@ -248,7 +248,7 @@ class PreviousFeeReceipt extends React.Component{
             const data = new FormData()
             data.append('category', this.state.category)
             data.append('description', this.state.description)
-            const url = "http://144:91:110:210:4800/StoreFeeCatogory"
+            const url = "http://144.91.110.221:4800/StoreFeeCatogory"
             fetch(url, {
                     method: 'post',
                     body: data
@@ -261,7 +261,7 @@ class PreviousFeeReceipt extends React.Component{
                 .then(err => {})
     }
     getFeeCategory = () => {
-        fetch("http://144:91:110:210:4800/getCategory")
+        fetch("http://144.91.110.221:4800/getCategory")
             .then(res => res.json())
             .then(data => {
                 this.setState({AllCategory: data})
@@ -269,7 +269,7 @@ class PreviousFeeReceipt extends React.Component{
             .then(err => console.log(err))
     }
     getSession = () => {
-        fetch("http://144:91:110:210:4800/getSession"
+        fetch("http://144.91.110.221:4800/getSession"
         ,{
             method: 'POST',
             headers: {
@@ -292,7 +292,7 @@ class PreviousFeeReceipt extends React.Component{
         if(account_no =='0'){
              return false;
         }
-        fetch("http://144:91:110:210:4800/singleparentdataWithSession"
+        fetch("http://144.91.110.221:4800/singleparentdataWithSession"
         ,{
             method: 'POST',
             headers: {
@@ -324,7 +324,7 @@ class PreviousFeeReceipt extends React.Component{
         if(admission_no =='0'){
              return false;
         }
-        fetch("http://144:91:110:210:4800/singlestudentdata_with_session"
+        fetch("http://144.91.110.221:4800/singlestudentdata_with_session"
             ,{
               method: 'POST',
               headers: {
@@ -373,7 +373,7 @@ class PreviousFeeReceipt extends React.Component{
         })
     }
     // getFeeReceipt = () => {
-    //     fetch("http://144:91:110:210:4800/getFeeReceipt")
+    //     fetch("http://144.91.110.221:4800/getFeeReceipt")
     //         .then(res => res.json())
     //         .then(data => {
     //             this.set_receipt_no(data)
@@ -384,7 +384,7 @@ class PreviousFeeReceipt extends React.Component{
         var fetchPromise = "" ;   
         console.log("checking response FeesClasswise")
         // const currentMonth =  Moment().format('MM')       
-          fetchPromise=  fetch("http://144:91:110:210:4800/getFeeReceipt"
+          fetchPromise=  fetch("http://144.91.110.221:4800/getFeeReceipt"
          ,{
              method: 'POST',
              headers: {
@@ -423,7 +423,7 @@ class PreviousFeeReceipt extends React.Component{
         console.log("checking response SearchOldfee")
         await  console.log("wait wait")
         const admission_no = this.state.admission_no.toUpperCase()
-        fetch("http://144:91:110:210:4800/SearchOldfee"
+        fetch("http://144.91.110.221:4800/SearchOldfee"
         ,{
             method: 'POST',
             headers: {
@@ -486,7 +486,7 @@ class PreviousFeeReceipt extends React.Component{
     FeesClasswise=(class_names,sections)=>{    
        console.log("checking response FeesClasswise")
        const currentMonth =  Moment().format('MM')       
-        fetch("http://144:91:110:210:4800/FeesClasswise"
+        fetch("http://144.91.110.221:4800/FeesClasswise"
         ,{
             method: 'POST',
             headers: {
@@ -905,7 +905,7 @@ class PreviousFeeReceipt extends React.Component{
      if(admission_no =='0'){
              return false;
         }
-        fetch("http://144:91:110:210:4800/singlestudentdata"
+        fetch("http://144.91.110.221:4800/singlestudentdata"
         ,{
             method: 'POST',
             headers: {
@@ -933,7 +933,7 @@ class PreviousFeeReceipt extends React.Component{
         // if(admission_no =='0'){
         //      return false;
         // }
-        // fetch("http://144:91:110:210:4800/singlestudentdata"
+        // fetch("http://144.91.110.221:4800/singlestudentdata"
         // ,{
         //     method: 'POST',
         //     headers: {
@@ -1027,7 +1027,7 @@ class PreviousFeeReceipt extends React.Component{
             data.append('bank_v_no', this.state.bank_v_no)
             data.append('check_no', this.state.check_no)
             data.append('bank_date', this.state.bank_date)
-            const url = "http://144:91:110:210:4800/StoreReceipt"
+            const url = "http://144.91.110.221:4800/StoreReceipt"
             fetch(url, {
                     method: 'post',
                     body: data
@@ -1055,7 +1055,7 @@ class PreviousFeeReceipt extends React.Component{
             data.append('_id',this.state._id)   
             data.append('balance',this.state.balance)   
             data.append('paid_upto_month',this.state.last_fee_date)    
-            const url="http://144:91:110:210:4800/UpdateBalance"
+            const url="http://144.91.110.221:4800/UpdateBalance"
                     fetch(url,
                         {
                         method:'PATCH',
@@ -1104,7 +1104,7 @@ class PreviousFeeReceipt extends React.Component{
                 window.print();
               }      
         DeleteReceipt(id){
-                const apiUrl = 'http://144:91:110:210:4800/DeleteReceipt';
+                const apiUrl = 'http://144.91.110.221:4800/DeleteReceipt';
                 fetch(apiUrl, {
                   headers : { 
                     'Content-Type':'application/json',
@@ -1153,7 +1153,7 @@ class PreviousFeeReceipt extends React.Component{
             data.append('receipt_no', this.state.Rreceiptno)
             data.append('receipt_date', this.state.Rreceiptdate)
             data.append('balance', this.state.Rbalance)
-            const url="http://144:91:110:210:4800/UpdateReceipt"
+            const url="http://144.91.110.221:4800/UpdateReceipt"
                     fetch(url,
                         {
                         method:'put',
@@ -1307,25 +1307,25 @@ class PreviousFeeReceipt extends React.Component{
                 <div className="row">
                     <div className="col-4">
                                 <ModalImage
-                                small={"http://144:91:110:210:4800/" + this.state.image}
-                                medium={"http://144:91:110:210:4800/" + this.state.image}
-                                large={"http://144:91:110:210:4800/" + this.state.image}
+                                small={"http://144.91.110.221:4800/" + this.state.image}
+                                medium={"http://144.91.110.221:4800/" + this.state.image}
+                                large={"http://144.91.110.221:4800/" + this.state.image}
                                 alt={this.state.image}
                                 />;
                     </div>
                     <div className="col-4">
                                 <ModalImage
-                                small={"http://144:91:110:210:4800/" + this.state.image}
-                                medium={"http://144:91:110:210:4800/" + this.state.image}
-                                large={"http://144:91:110:210:4800/" + this.state.image}
+                                small={"http://144.91.110.221:4800/" + this.state.image}
+                                medium={"http://144.91.110.221:4800/" + this.state.image}
+                                large={"http://144.91.110.221:4800/" + this.state.image}
                                 alt={this.state.image}
                                 />;
                     </div>
                     <div className="col-4">
                                 <ModalImage
-                                small={"http://144:91:110:210:4800/" + this.state.image}
-                                medium={"http://144:91:110:210:4800/" + this.state.image}
-                                large={"http://144:91:110:210:4800/" + this.state.image}
+                                small={"http://144.91.110.221:4800/" + this.state.image}
+                                medium={"http://144.91.110.221:4800/" + this.state.image}
+                                large={"http://144.91.110.221:4800/" + this.state.image}
                                 alt={this.state.image}
                                 />;
                     </div>

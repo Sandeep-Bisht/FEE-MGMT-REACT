@@ -24,7 +24,7 @@ class StudentPromotionAll extends React.Component{
     getStudent = async() => {
     await console.log("wait wait")
     this.setState({AllStudent:[]})
-      const url = "http://144:91:110:210:4800/getStudent"
+      const url = "http://144.91.110.221:4800/getStudent"
       fetch(url
         , {
           method: 'POST',
@@ -46,7 +46,7 @@ class StudentPromotionAll extends React.Component{
       .catch(err => console.log(err))
     }
     // getStudent = () => {
-    //     fetch("http://144:91:110:210:4800/getStudent")
+    //     fetch("http://144.91.110.221:4800/getStudent")
     //         .then(res => res.json())
     //         .then(data => {
     //             console.log(data)
@@ -55,7 +55,7 @@ class StudentPromotionAll extends React.Component{
     //         .then(err => console.log(err))
     // }
     getSession = () => {
-      fetch("http://144:91:110:210:4800/getSession"
+      fetch("http://144.91.110.221:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -135,7 +135,7 @@ class StudentPromotionAll extends React.Component{
   await console.log("wait")
   const data = new FormData()
   data.append('StudentData', JSON.stringify(StudentData))
-  const url = "http://144:91:110:210:4800/StoreUpgradeStudent"
+  const url = "http://144.91.110.221:4800/StoreUpgradeStudent"
   fetch(url, {
           method: 'post',
           body: data

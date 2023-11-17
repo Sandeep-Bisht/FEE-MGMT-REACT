@@ -39,7 +39,7 @@ class TeacherWardReport extends React.Component{
       // this.StudentStrenght()
     }
     getCategory = () => {
-      fetch("http://144:91:110:210:4800/getCastCategory")
+      fetch("http://144.91.110.221:4800/getCastCategory")
           .then(res => res.json())
           .then(data => {
               console.log(data)
@@ -48,7 +48,7 @@ class TeacherWardReport extends React.Component{
           .catch(err => console.log(err))
         }
     getSection = () => {
-      fetch("http://144:91:110:210:4800/getSection"
+      fetch("http://144.91.110.221:4800/getSection"
           ,{
           method: 'POST',
           headers: {
@@ -68,7 +68,7 @@ class TeacherWardReport extends React.Component{
           .catch(err => console.log(err))
         }
     getSession = () => {
-      fetch("http://144:91:110:210:4800/getSession"
+      fetch("http://144.91.110.221:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -95,7 +95,7 @@ class TeacherWardReport extends React.Component{
       commanSection=''
     $("#getBtn").text("Please Wait...")
      this.setState({AllStudent:[]})
-       fetch("http://144:91:110:210:4800/StudentStrenght"
+       fetch("http://144.91.110.221:4800/StudentStrenght"
        ,{
            method: 'POST',
            headers: {
@@ -124,7 +124,7 @@ class TeacherWardReport extends React.Component{
        .catch(err => console.log(err))
     }
     getClass = () => {
-      fetch("http://144:91:110:210:4800/getClass")
+      fetch("http://144.91.110.221:4800/getClass")
           .then(res => res.json())
           .then(data => {
               console.log(data)
