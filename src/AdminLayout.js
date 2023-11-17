@@ -358,7 +358,6 @@ class AdminLayout extends React.Component{
                 <li>
                 <h6><span>  <img src={require('./images/giks_logo.png').default} style={{height:"23px"}}/></span> Powered By GIKS @ {currentYear}</h6>
                 </li>
-                
             </ul>
         </nav>
         <div id="content" style={{paddingLeft:"10px", paddingRight:"20px"}}>
