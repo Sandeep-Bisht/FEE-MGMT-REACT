@@ -121,7 +121,7 @@ class StudentCreation extends React.Component{
     getSubjects = async(e) => {
         await console.log("wait")
         this.getStudent()
-        fetch("http://144:91:110:210:4800/getSubjects")
+        fetch("http://144.91.110.221:4800/getSubjects")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -130,7 +130,7 @@ class StudentCreation extends React.Component{
             .then(err => console.log(err))
     }
     getSession = () => {
-        fetch("http://144:91:110:210:4800/getSession"
+        fetch("http://144.91.110.221:4800/getSession"
         ,{
             method: 'POST',
             headers: {
@@ -149,7 +149,7 @@ class StudentCreation extends React.Component{
             .then(err => console.log(err))
     }
     getParent = () => {
-        fetch("http://144:91:110:210:4800/getParent")
+        fetch("http://144.91.110.221:4800/getParent")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -158,7 +158,7 @@ class StudentCreation extends React.Component{
             .then(err => console.log(err))
     }
     getSection = () => {
-        fetch("http://144:91:110:210:4800/getSection"
+        fetch("http://144.91.110.221:4800/getSection"
             ,{
             method: 'POST',
             headers: {
@@ -180,7 +180,7 @@ class StudentCreation extends React.Component{
     getClass = async() => {
         await console.log("wait wait")
         this.getSubjects()
-        fetch("http://144:91:110:210:4800/getClass"
+        fetch("http://144.91.110.221:4800/getClass"
         ,{
         method: 'POST',
         headers: {
@@ -201,7 +201,7 @@ class StudentCreation extends React.Component{
             .then(err => console.log(err))
     }
     getCategory = () => {
-        fetch("http://144:91:110:210:4800/getCastCategory")
+        fetch("http://144.91.110.221:4800/getCastCategory")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -210,7 +210,7 @@ class StudentCreation extends React.Component{
             .then(err => console.log(err))
     }
     getHouse = () => {
-        fetch("http://144:91:110:210:4800/getHouse")
+        fetch("http://144.91.110.221:4800/getHouse")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -220,7 +220,7 @@ class StudentCreation extends React.Component{
     }
     getStudent = async() => {
         await console.log("wait wait")
-        fetch("http://144:91:110:210:4800/getStudent"
+        fetch("http://144.91.110.221:4800/getStudent"
             , {
               method: 'POST',
               headers: {
@@ -241,7 +241,7 @@ class StudentCreation extends React.Component{
       getStudentAccount_no = async() => {
         await console.log("wait wait")
 
-        fetch("http://144:91:110:210:4800/getStudentAccount_no"
+        fetch("http://144.91.110.221:4800/getStudentAccount_no"
             , {
               method: 'POST',
               headers: {
@@ -261,7 +261,7 @@ class StudentCreation extends React.Component{
       
     getadmission_no = async() => {
         await console.log("wait wait")
-        fetch("http://144:91:110:210:4800/getadmission_no"
+        fetch("http://144.91.110.221:4800/getadmission_no"
             , {
               method: 'POST',
               headers: {
@@ -403,7 +403,7 @@ class StudentCreation extends React.Component{
         data.append('image2', this.state.image2)
         data.append('image3', this.state.image3)
         data.append('image4', this.state.image4)
-        const url = "http://144:91:110:210:4800/StoreStudent"
+        const url = "http://144.91.110.221:4800/StoreStudent"
         var res =fetch(url, {
                 method: 'post',
                 body: data
@@ -433,7 +433,7 @@ class StudentCreation extends React.Component{
         if(account_no =='0'){
              return false;
         }
-        fetch("http://144:91:110:210:4800/singleparentdata"
+        fetch("http://144.91.110.221:4800/singleparentdata"
         , {
             method: 'POST',
             headers: {
@@ -453,7 +453,7 @@ class StudentCreation extends React.Component{
      }
      FeeAmount= async()=>{
       await console.log(this.state.class_name)
-        fetch("http://144:91:110:210:4800/FeeAmount"
+        fetch("http://144.91.110.221:4800/FeeAmount"
         , {
             method: 'POST',
             headers: {

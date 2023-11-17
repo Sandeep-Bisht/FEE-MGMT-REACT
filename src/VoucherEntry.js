@@ -32,7 +32,7 @@ getFeeReceipt=(class_names,sections)=>{
     var fetchPromise = "" ;   
     console.log("checking response FeesClasswise")
     // const currentMonth =  Moment().format('MM')       
-      fetchPromise=  fetch("http://144:91:110:210:4800/getFeeReceipt"
+      fetchPromise=  fetch("http://144.91.110.221:4800/getFeeReceipt"
      ,{
          method: 'POST',
          headers: {
@@ -68,7 +68,7 @@ set_receipt_no=(data)=>{
     return true
 }
 getBankData = () => {
-    fetch("http://144:91:110:210:4800/getBankData"
+    fetch("http://144.91.110.221:4800/getBankData"
     , {
       method: 'POST',
       headers: {
@@ -157,7 +157,7 @@ submitReceiptData = async(StudentData,paidFees,remainbalance,plus_one_time_fees,
       data.append('bank_date', this.state.bank_date)
       console.log("data  ,, "+JSON.stringify(StudentData))
 
-      const url = "http://144:91:110:210:4800/StoreCSVentry"
+      const url = "http://144.91.110.221:4800/StoreCSVentry"
       fetch(url, {
               method: 'post',
               body: data
@@ -171,7 +171,7 @@ submitReceiptData = async(StudentData,paidFees,remainbalance,plus_one_time_fees,
     }
       }
 getFine = () => {
-    fetch("http://144:91:110:210:4800/getFine")
+    fetch("http://144.91.110.221:4800/getFine")
         .then(res => res.json())
         .then(data => {
             console.log(data)
@@ -205,7 +205,7 @@ getFine = () => {
         // const dataa = new FormData()
         // dataa.append('AllFeeData', JSON.stringify(userList))
         // //   dataa.append('StudentAcademicData', JSON.stringify(AcademicuserList))
-        // const url = "http://144:91:110:210:4800/ImportallFees"
+        // const url = "http://144.91.110.221:4800/ImportallFees"
         // fetch(url, {
         //         // headers : { 
         //         //   'Content-Type':'application/json',
@@ -231,7 +231,7 @@ getFine = () => {
 
   searchByAdmission_no= async (admission_no,paid_amount)=>{
     await console.log("wait")
-    fetch("http://144:91:110:210:4800/singlestudentdata"
+    fetch("http://144.91.110.221:4800/singlestudentdata"
         ,{
           method: 'POST',
           headers: {
@@ -258,7 +258,7 @@ getFine = () => {
       FeesClasswise=(dataa,paid_amount)=>{    
         console.log("checking response FeesClasswise")
         const currentMonth =  Moment().format('MM')       
-        fetch("http://144:91:110:210:4800/FeesClasswise"
+        fetch("http://144.91.110.221:4800/FeesClasswise"
         ,{
             method: 'POST',
             headers: {
@@ -284,7 +284,7 @@ getFine = () => {
         await  console.log("wait wait")
         const admission_no = dataa[0].admission_no
         var StudentData=[]
-        fetch("http://144:91:110:210:4800/SearchOldfee"
+        fetch("http://144.91.110.221:4800/SearchOldfee"
         ,{
             method: 'POST',
             headers: {
@@ -339,7 +339,7 @@ getFine = () => {
       var b =this.state.session.split("-")[1];
       b=b-1
       var previousSession =a+"-"+b
-     await fetch("http://144:91:110:210:4800/GetDefaulterMoneySingleStudent"
+     await fetch("http://144.91.110.221:4800/GetDefaulterMoneySingleStudent"
           , {
             method: 'POST',
             headers: {
