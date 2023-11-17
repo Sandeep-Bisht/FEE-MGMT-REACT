@@ -186,7 +186,7 @@ class Dashboard extends React.Component{
 //  ActiveSection=0
         return(
             <>
-                <div className="row mt-5">
+                <div className="row mt-3 m-1">
                     <div className="col-lg-3 col-md-12">
                         <div className="dashboard-card">
                             <h4> Total Students <span><img src={require('./images/TotalStudents.png').default} style={{height:"43px"}}/></span></h4>
