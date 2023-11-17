@@ -361,21 +361,21 @@ class AdminLayout extends React.Component{
                 
             </ul>
         </nav>
-        <div id="content" style={{paddingLeft:"40px", paddingRight:"40px"}}>
+        <div id="content" style={{paddingLeft:"10px", paddingRight:"20px"}}>
         <div className='col-12 d-flex justify-content-space-between align-items-center' style={{background:"#285d9c",color:"#fff", cursor:"pointer", position:"sticky", top:"0px", zIndex:"200"}}>
                   <div className='col-1 text-staLrt' >
                   <Link to="/">
-            <img src={require('./images/logo.png').default} className='constencia-image' style={{height:"50px"}}/>
+            <img src={require('./images/logo.png').default} className='constencia-image' style={{height:"40px"}}/>
             </Link>
             </div>
-            <div className='col-7 text-staLrt' >
+            <div className='col-9 text-staLrt d-flex align-items-center' >
 
                     <h3 style={{marginTop:"10px"}}>
                       CONSTANCIA SCHOOL
                     </h3>
-                    <h6 className='col-8 text-start'>P.O. MAJRA, DEHRADUN (U.K.)-248001</h6>
+                    <h6 className='text-start ml-2'>P.O. MAJRA, DEHRADUN (U.K.)-248001</h6>
                   </div>
-                  <div className='col-4  text-right'>
+                  <div className='col-2  text-right'>
                     <Link to="" onClick={()=>{this.logout()}} style={{fontSize:"17px"}}> <i class="fas fa-sign-out-alt"></i>Logout</Link>
                   </div>
                 </div>
