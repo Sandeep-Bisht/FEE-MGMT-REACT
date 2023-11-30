@@ -356,7 +356,7 @@ class AdminLayout extends React.Component{
             </ul>
             <ul className="list-unstyled CTAs text-center constancia-list-CTAs">
                 <li>
-                <h6><span>  <img src={require('./images/giks_logo.png').default} style={{height:"23px"}}/></span> Powered By GIKS @ {currentYear}</h6>
+                {/* <h6><span>  <img src={require('./images/giks_logo.png').default} style={{height:"23px"}}/></span> {currentYear}</h6> */}
                 </li>
             </ul>
         </nav>
