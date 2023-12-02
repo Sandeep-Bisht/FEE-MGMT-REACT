@@ -257,24 +257,33 @@ class PrintTc extends React.Component {
       .catch(err => console.log(err))
   }
 
-  dateToWords(date) {
-    try {
-      const months = [
-        "January", "February", "March", "April",
-        "May", "June", "July", "August",
-        "September", "October", "November", "December"
-      ];
-
-      const [year, month, day] = date.split("-").map(Number);
-      const monthWord = months[month - 1];
-      const dayWord = day.toString();
-
-      return `${monthWord} ${dayWord}, ${year}`;
-    } catch (error) {
-      console.error("Error parsing date:", error);
-      return "";
-    }
+   dateToWords=(dateString)=> {
+    const months = [
+      "zero", "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+  
+    const numbers = [
+      "zero", "first", "second", "third", "fourth", "fifth", "sixth",
+      "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth",
+      "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth",
+      "eighteenth", "nineteenth", "twentieth", "twenty-first", "twenty-second",
+      "twenty-third", "twenty-fourth", "twenty-fifth", "twenty-sixth",
+      "twenty-seventh", "twenty-eighth", "twenty-ninth", "thirtieth", "thirty-first"
+    ];
+  
+    const dateParts = dateString.split("-");
+    const year = parseInt(dateParts[0]);
+    const monthIndex = parseInt(dateParts[1]);
+    const day = parseInt(dateParts[2]);
+  
+    const month = months[monthIndex];
+    const dayInWords = numbers[day];
+    const yearInWords = numbers[Math.floor(year / 1000)] + " thousand " + numbers[year % 1000];
+  
+    return `${numbers[day]} ${month} ${yearInWords}`;
   }
+  
 
   FeesClasswise=(class_names,sections)=>{    
     console.log("checking response FeesClasswise")
@@ -305,7 +314,7 @@ class PrintTc extends React.Component {
 
 
   render() {
-    console.log(this.state.open_class_wise,"for checking correct class")
+    console.log(this.state.dob,"for checking correct class")
     const data = [];
     {
       this.state.AllVehicleType.map((item, index) => {
@@ -404,11 +413,11 @@ class PrintTc extends React.Component {
                   </div>
                   <div className='col-12 w-100'>
                     <div className='row'>
-                      <div className='col-4'>
+                      <div className='col-5'>
                         <p>This is to certify that Master / Miss
                         </p>
                       </div>
-                      <div className='transfer-certificate-dotted-tc col-8'>{this.state.name}</div>
+                      <div className='transfer-certificate-dotted-tc col-7'>{this.state.name}</div>
                     </div>
         
                   </div>
@@ -490,10 +499,10 @@ class PrintTc extends React.Component {
                   </div>
                   <div className='col-12'>
                     <div className='row'>
-                      <div className='col-8'>
+                      <div className='col-9'>
                         <p>His / Her date of birth according to the Admission Register is (in figure)</p>
                       </div>
-                      <div className='transfer-certificate-dotted-tc col-4'>
+                      <div className='transfer-certificate-dotted-tc col-3'>
                         {this.state.dob}
                       </div>
         
@@ -597,11 +606,11 @@ class PrintTc extends React.Component {
                 </div> 
                 <div className='col-12 w-100'>
                   <div className='row'>
-                    <div className='col-4'>
+                    <div className='col-5'>
                       <p>This is to certify that Master / Miss
                       </p>
                     </div>
-                    <div className='transfer-certificate-dotted-tc col-8'>{this.state.name}</div>
+                    <div className='transfer-certificate-dotted-tc col-5'>{this.state.name}</div>
                   </div>
       
                 </div>
@@ -657,7 +666,10 @@ class PrintTc extends React.Component {
                   <div className='col-4'>
                   <p>He / She was then studying in (*)</p>
                 </div>
-                <div className='transfer-certificate-dotted-tc col-8'>ICSE</div>
+                <div className='transfer-certificate-dotted-tc col-6'>{this.state.class_name}</div>
+                <div className='col-2'>
+                  <p>class of</p>
+                </div>
                 </div>
                 </div>
                 <div className='col-12'>
@@ -665,7 +677,7 @@ class PrintTc extends React.Component {
                     <div className='col-2'>
                       <p>The (**)</p>
                     </div>
-                    <div className='transfer-certificate-dotted-tc col-6'></div>
+                    <div className='transfer-certificate-dotted-tc col-6'>ICSE</div>
                     <div className='col-2'>
                       <p>Stream.</p>
                     </div>
@@ -678,7 +690,7 @@ class PrintTc extends React.Component {
                         <div className='col-7'>
                           <p>The school year being from (*X)</p>
                         </div>
-                        <div className='transfer-certificate-dotted-tc col-5'>{Moment(this.state.date_of_admission).format("YYYY")}</div>
+                        <div className='transfer-certificate-dotted-tc col-5'>01/April/{Moment(this.state.date_of_admission).format("YYYY")}</div>
                       </div>
                     </div>
                     <div className='col-5'>
@@ -686,7 +698,7 @@ class PrintTc extends React.Component {
                         <div className='col-2'>
                           <p>to</p>
                         </div>
-                        <div className='transfer-certificate-dotted-tc col-10'>{Moment().format("YYYY")}</div>
+                        <div className='transfer-certificate-dotted-tc col-10'>31/March/{Moment().format("YYYY")}</div>
                       </div>
                     </div>
                   </div>
@@ -698,10 +710,10 @@ class PrintTc extends React.Component {
                 </div>
                 <div className='col-12'>
                   <div className='row'>
-                    <div className='col-8'>
+                    <div className='col-9'>
                       <p>His / Her date of birth according to the Admission Register is (in figure)</p>
                     </div>
-                    <div className='transfer-certificate-dotted-tc col-4'>
+                    <div className='transfer-certificate-dotted-tc col-3'>
                       {Moment(this.state.dob).format("DD/MM/YYYY")}
                     </div>
       

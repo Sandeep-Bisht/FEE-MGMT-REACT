@@ -34,9 +34,7 @@ class Dashboard extends React.Component{
   }
   VoucherByDate = async () => {
     paidamountbydate=0
-    await console.log("wait")
     this.setState({ voucher_by_date: [] })
-    await console.log("wait")
     fetch("http://144.91.110.221:4800/VoucherByDate"
       , {
         method: 'POST',
@@ -174,6 +172,7 @@ class Dashboard extends React.Component{
         })
         .then(res => res.json())
         .then(data => {
+          console.log(data,"check the data")
             this.setState({AllStudentcount: data.count})
             
         })
