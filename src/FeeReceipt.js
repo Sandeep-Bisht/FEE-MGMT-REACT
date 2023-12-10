@@ -177,12 +177,6 @@ class FeeReceipt extends React.Component {
     $(document).ready(() => {
       $("#admissionno").focus();
       $("#AnnualSection").hide();
-      // $("#admissionno").focus(function(){
-      //     setInterval(async () => {
-      //         $("#admissionno").select();
-      //     }, 5000)
-      // });
-      // if($("#FeeDetailAdmnNo").is(':focus'), function(){
       $("#FeeDetailAdmnNo").focus(() => {
         $("#FeeDetailAdmnNo").select();
         if (this.isTextSelected($("#FeeDetailAdmnNo")[0])) {
@@ -227,7 +221,6 @@ class FeeReceipt extends React.Component {
   }
 
   isTextSelected = (input) => {
-    console.log("checking console")
     var startPos = input.selectionStart;
     var endPos = input.selectionEnd;
     var doc = document.selection;
@@ -240,47 +233,6 @@ class FeeReceipt extends React.Component {
     return false;
   };
 
-  // getFeeSubCategory = () => {
-  //     fetch("http://144.91.110.221:4800/getSubCategory")
-  //         .then(res => res.json())
-  //         .then(data => {
-
-  //             const currentMonth =  Moment().format('MM')
-  //             this.setState({AllSubCategory:data,currentMonth:currentMonth})
-  //             data.map((item,index)=>{
-  //                 this.state.fees.push({"fee_sub_category":item.fee_sub_category,"amount":item.amount,"month":item.month})
-  //             })
-  //         })
-  //         .then(err => console.log(err))
-  // }
-
-  // ChangemanualFineState(e) {
-  //   if (e.target.checked) {
-  //     this.setState({ manualFineState: "true" ,
-  //   },
-  //   ()=>{
-  //     this.getFineFee();
-  //   });
-  //     // $(document).ready(function () {
-  //     //   $(".manualFine").css("display", "block");
-  //     //   $(".manualFine").css("display", "initial");
-  //     //   $(".defaultFine").css("display", "none");
-  //     // });
-
-  //   } else{
-  //     this.setState({manualFine:false},
-  //       ()=>{
-  //         this.getFineFee();
-  //       })
-  //   }
-
-  //   // else {
-  //   //   this.setState({ manualFineState: "false" });
-  //   //   $(".manualFine").css("display", "none");
-  //   //   $(".defaultFine").css("display", "block");
-  //   //   $(".defaultFine").css("display", "initial");
-  //   // }
-  // }
   ChangemanualFineState(e) {
     if (e.target.checked) {
       this.setState({ manualFineState: true }, () => {
@@ -639,14 +591,7 @@ class FeeReceipt extends React.Component {
     }
     // }
   }
-  // getFeeReceipt = () => {
-  //     fetch("http://144.91.110.221:4800/getFeeReceipt")
-  //         .then(res => res.json())
-  //         .then(data => {
-  //             this.set_receipt_no(data)
-  //         })
-  //         .then(err => console.log(err))
-  // }
+
   getGrandTotal = () => {
     let lastDate = this.state.AllOldFees.length > 0 ? this.state.AllOldFees[this.state.AllOldFees.length - 1].receipt_date : "";
     let currentDate = Moment(this.state.receipt_date).format("MM-YYYY");
@@ -1096,7 +1041,6 @@ class FeeReceipt extends React.Component {
               LastPaidDate.add(1, "month");
               monthlyfee = monthlytotal;
             }
-
             remainbalance = paidAmount - parseInt(monthlyfee);
             months.push(LastPaidDate.format("YYYY-MM-DD"));
             fromtomonths.push(LastPaidDate.format("M"));
@@ -1104,7 +1048,6 @@ class FeeReceipt extends React.Component {
             shortmonths.push(LastPaidDate.format("M"));
             var last_fee_date = lastmonth[months.length - 1];
             {
-
               this.setState({
                 remaning_balance: remainbalance,
                 months: shortmonths,
@@ -1180,22 +1123,6 @@ class FeeReceipt extends React.Component {
                   paidAmount =
                     paidAmount - student_tuition_fee - calculateOneTimeFee;
                 }
-
-                // if(parseInt(this.state.fee_concession) > 0 && this.state.fee_concession != ""){
-                //     if(parseInt(this.state.fromtomonths.length) < 5){
-                //         paidAmount = paidAmount - student_tuition_fee-calculateOneTimeFee-1050
-                //     }else{
-                //         paidAmount = paidAmount - student_tuition_fee-calculateOneTimeFee
-                //         // ****** this code when or Annual fess is aplicable  ******
-
-                //         // paidAmount = paidAmount - student_tuition_fee-calculateOneTimeFee-2400
-
-                //         // ****** End this code when or Annual fess is aplicable  ******
-                //     }
-
-                // }else{
-                //     paidAmount = paidAmount - (student_tuition_fee/2)-calculateOneTimeFee-monthlytotal
-                // }
               } else if (getOneTimeFeesinpaidAmount == false) {
                 if (this.state.is_teacher_ward == "false") {
                   if (this.state.take_computer == "false") {
@@ -1220,26 +1147,6 @@ class FeeReceipt extends React.Component {
                   }
                 }
 
-                //     if(this.state.take_computer=="false"){
-                //         paidAmount = paidAmount - student_tuition_fee-(annual_fees_sub*8/100)-10
-                //         //  paidAmount = paidAmount - student_tuition_fee-annual_fees_sub
-                //     }
-                //     if(this.state.take_computer=="true"){
-
-                //          paidAmount = paidAmount - student_tuition_fee-100
-
-                //         // ****** this code when computer or Annual fess is aplicable  ******
-
-                //         //  paidAmount = paidAmount - student_tuition_fee-1400
-
-                //         // ****** End this code when computer  or Annual fess is aplicable  ******
-
-                //     }
-                // }else if(this.state.is_teacher_ward=="true"){
-                //     if(this.state.take_computer=="false"){
-                //         paidAmount = paidAmount - student_tuition_fee-200np start
-                //     }
-                // }
                 else {
                   paidAmount = paidAmount - student_tuition_fee - 1100;
                 }
@@ -1263,65 +1170,6 @@ class FeeReceipt extends React.Component {
             this.getFineFee();
           });
       }
-      // alert(last_fee_date)
-      // }
-      // comment Deepak
-
-
-      // shortmonths.map((i, ind) => {
-      //   var annual_fees = 0;
-      //   var one_time_fees = 0;
-      //   this.state.Allfees.map((item, index) => {
-      //     console.log( this.state.Allfees,"inside the all fees to check the feeeeeeeeeeeeeeeeeee")
-      //     const newItem=item.filter((ele)=>{
-      //         return ele.fee_category=="ANNUAL"
-      //     })
-      //     console.log(newItem,"check the newItem Annual")
-      //     if (item.fee_category == "ANNUAL") {
-      //       if (i == item.month) {
-      //         if (item.fee_sub_category.includes("COMPUTER") != true) {
-      //           console.log(item.amount,"check amounttttttttttt")
-      //           annual_fees = annual_fees + parseInt(item.amount);
-      //         } else {
-      //           if (this.state.take_computer == "true") {
-      //             annual_fees = annual_fees + parseInt(item.amount);
-      //           }
-      //         }
-      //       } else if (item.month == "") {
-      //         if (item.fee_sub_category.includes("COMPUTER") != true) {
-      //           if (parseInt(item.amount) > 0) {
-      //             annual_fees = annual_fees + parseInt(item.amount);
-      //           } else {
-      //             annual_fees = annual_fees + parseInt(item.amount);
-      //           }
-      //         } else {
-      //           if (this.state.take_computer == "true") {
-      //             if (parseInt(item.amount) > 0) {
-      //               annual_fees = annual_fees + parseInt(item.amount);
-      //             } else {
-      //               annual_fees = annual_fees + parseInt(item.amount);
-      //             }
-      //           }
-      //         }
-      //       } else {
-      //         annual_fees = annual_fees + 0;
-      //       }
-      //     }
-      //   });
-      //   // alert(annual_fees)
-      //   console.log(annual_fees,"check after after after")
-      //   show_annual_fees = show_annual_fees + annual_fees;
-      //   if (this.state.TakeOneTimeFee == true) {
-      //     if (getOneTimeFees == true) {
-      //       this.state.Allfees.map((item, index) => {
-      //         if (item.fee_category == "ONE TIME") {
-      //           one_time_fees = one_time_fees + parseInt(item.amount);
-      //           plus_one_time_fees = parseInt(one_time_fees);
-      //         }
-      //         getOneTimeFees = false;
-      //       });
-      //     }
-      //   }
 
       this.state.Allfees.map((item, index) => {
         if (item.fee_category == "MONTHLY") {
@@ -1354,66 +1202,7 @@ class FeeReceipt extends React.Component {
           // }
         }
       });
-      //   if (this.state.is_teacher_ward == "false") {
-      //     if (
-      //       fromtomonths.length - 1 > 1 ||
-      //       parseInt(Moment(this.state.receipt_date).format("D")) >
-      //         parseInt(this.state.fine_date)
-      //     ) {
-      //       var finemonthscount;
-      //       finemonthscount = fromtomonths.length - 1;
-      //       finemonths = finemonthscount * parseInt(this.state.defaultFine);
-      //       if (
-      //         parseInt(Moment(this.state.receipt_date).format("D")) >
-      //         parseInt(this.state.fine_date)
-      //       ) {
-      //         finemonths = finemonths + parseInt(this.state.defaultFine);
-      //       }
-      //     }
-      //     if (this.state.manualFineState == "false") {
-      //       this.setState({ fine: finemonths });
-      //     } else {
-      //       this.setState({ fine: this.state.manualFine });
-      //     }
-      //   }
-      //   paidFees.push({
-      //     tuition_fee: this.state.StudentTutionFee,
-      //     fee_month: i,
-      //     annual_fees: annual_fees,
-      //     one_time: one_time_fees,
-      //   });
-      //   if (getgrandtotal == true) {
-      //     grand_total =
-      //       grand_total +
-      //       monthlytotal +
-      //       annual_fees +
-      //       plus_one_time_fees +
-      //       parseInt(this.state.fine);
-      //     getgrandtotal = false;
-      //   } else {
-      //     grand_total = grand_total + monthlytotal + annual_fees;
-      //   }
-      //   remainbalance =
-      //     parseInt(this.state.paid_fees) +
-      //     parseInt(this.state.surplus) +
-      //     parseInt(this.state.due) -
-      //     grand_total;
-      //   {
-      //     this.setState({
-      //       total_monthly_fee: total_monthly_fee,
-      //       grand_total: grand_total,
-      //       paidFees: paidFees,
-      //       remaning_balance: remainbalance,
-      //       one_time_fees: plus_one_time_fees,
-      //       annual_fee: show_annual_fees,
-      //     });
-      //   }
-      // });
     }
-    // else{
-    //     {this.setState({total_monthly_fee:0,grand_total:0,paidFees:0,remaning_balance:0,one_time_fees:0,annual_fee:0})}
-    // }
-    // this.FeesClasswise(this.state.class_name,this.state.section)
     if (
       parseInt(total_monthly_fee) +
       show_annual_fees +
@@ -1449,16 +1238,7 @@ class FeeReceipt extends React.Component {
     this.state.Allfees[index].amount = a;
     this.setState({ fees: this.state.Allfees });
   };
-  // total_monthly_fee=()=>{
-  //     var total_monthly_fee = 0
-  //     this.state.fees.map((item,index)=>{
-  //         if(item.fee_category=="MONTHLY"){
-  //             total_monthly_fee = (parseInt(item.amount))+total_monthly_fee
-  //         }
-  //         })
-  //         total_monthly_fee = total_monthly_fee *parseInt(this.state.feemonths.length)
-  //     {this.setState({total_monthly_fee:total_monthly_fee})}
-  // }
+
   ChangeFeeDate = async (e) => {
     if (defaultDateStatus == false) {
       defaultDate = localStorage.getItem("R_date");
@@ -1474,49 +1254,7 @@ class FeeReceipt extends React.Component {
 
     // alert(fee_date.format("YYYY-MM-DD"))
   };
-  // grand_total = () => {
-  //   console.log(this.state.StudentTutionFee,"check the StudentTutionFee")
-  //    let grand_total = parseInt(this.state.tution_fee)+parseInt(this.state.science_fee)+parseInt(this.state.bus_fare)
-  // const paidFees = [];
-  // let grand_total = 0;
-  // if (this.state.TakeOneTimeFee == true) {
-  //   this.state.fees.map((item, index) => {
-  //     if (item.fee_category == "ONE TIME") {
-  //       grand_total = parseInt(item.amount) + grand_total;
-  //       paidFees.push({
-  //         fee_category: item.fee_category,
-  //         fee_sub_category: item.fee_sub_category,
-  //         amount: item.amount,
-  //       });
-  //     }
-  //   });
-  // }
-  // this.state.fees.map((item, index) => {
-  //   if (
-  //     item.fee_category == "ANNUAL" &&
-  //     this.state.months.includes(item.month)
-  //   ) {
-  //     grand_total = parseInt(item.amount) + grand_total;
-  //     paidFees.push({
-  //       fee_category: item.fee_category,
-  //       fee_sub_category: item.fee_sub_category,
-  //       amount: item.amount,
-  //       month: item.month,
-  //     });
-  //   }
-  // });
-  // this.state.fees.map((item, index) => {
-  //   if (item.fee_category == "MONTHLY") {
-  //     grand_total = parseInt(item.amount) + grand_total;
-  //     paidFees.push({
-  //       fee_category: item.fee_category,
-  //       fee_sub_category: item.fee_sub_category,
-  //       amount: item.amount,
-  //     });
-  //   }
-  // });
-  // this.setState({ grand_total: grand_total, paidFees: paidFees });
-  // };
+
   searchByAdmission = (admsn_no) => {
     {
       this.setState({ admission_no: admsn_no });
@@ -1563,78 +1301,11 @@ class FeeReceipt extends React.Component {
     })
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.showTotalAnnualFee !== this.state.showTotalAnnualFee) {
-  //     console.log('showTotalAnnualFee changed:', this.state.showTotalAnnualFee);
-  //     if (this.state.showTotalAnnualFee) {
-  //       console.log('Logging tution fee and annual_fee:', this.state.annual_fee);
-  //     }
-  //   }
-
-  //   if (prevState.StudentTutionFee !== this.state.StudentTutionFee && this.state.fromtomonths.length>0) {
-  //     console.log('StudentTutionFee changed:', this.state.StudentTutionFee);
-  //     console.log('Logging tution fee StudentTutionFee and fromtomonths.length:', this.state.fromtomonths.length);
-  //   }
-  // }
-
-
-
-
-  // show modal call if its need from Fee Detail Button
-
-  // ShowModalStudent=async(data)=>{
-  // const admission_no = data
-  //  if(admission_no =='0'){
-  //          return false;
-  //     }
-  //     fetch("http://144.91.110.221:4800/singlestudentdata"
-  //     ,{
-  //         method: 'POST',
-  //         headers: {
-  //             Accept: 'application/json',
-  //             'Content-Type': 'application/json'
-  //         },
-  //         body: JSON.stringify({
-  //             session: this.state.session,
-  //             admission_no: admission_no,
-  //             school_id:"100",
-  //         })
-  //     })
-  //     .then((data) => data.json())
-  //     .then(async (data) => {
-  //         console.log( 'single parent'+data )
-  //         if(data[0] !=undefined){
-  //             this.setState({modal_account_no:data[0].account_no,date_of_admission:data[0].student.date_of_admission,modal_admission_no:data[0].admission_no,security_no:data[0].student.security_no,class_name:data[0].class_name,section:data[0].section,category:data[0].student.category,house:data[0].student.house,name:data[0].student.name,sex:data[0].student.sex,dob:data[0].student.dob,aadhar_no:data[0].student.aadhar_no,father_name:data[0].student.father_name,mother_name:data[0].student.mother_name,gaurdian_name:data[0].student.gaurdian_name,parent_address:data[0].student.parent_address,parent_mobile:data[0].student.parent_mobile,gaurdian_address:data[0].student.gaurdian_address,fee_concession:data[0].student.fee_concession,avail_transport:data[0].student.avail_transport,bus_fare_concession:data[0].student.bus_fare_concession,vehicle_no:data[0].student.vehicle_no,is_full_free_ship:data[0].student.is_full_free_ship,is_teacher_ward:data[0].student.is_teacher_ward,take_computer:data[0].student.take_computer,ncc:data[0].student.ncc,no_exempt_registration:data[0].student.no_exempt_registration,no_exempt_admission:data[0].student.no_exempt_admission,no_exempt_security_deposit:data[0].student.no_exempt_security_deposit,is_repeater:data[0].student.is_repeater,other_details:data[0].student.other_details,misc_details:data[0].student.misc_details,subjects:data[0].student.subjects,image:data[0].student.image})
-  //         }
-  //     })
-  // }
   ShowModal = async (data) => {
     localStorage.setItem("StudentDisplay", data);
     this.setState({ redirect: true });
-    // if(admission_no =='0'){
-    //      return false;
-    // }
-    // fetch("http://144.91.110.221:4800/singlestudentdata"
-    // ,{
-    //     method: 'POST',
-    //     headers: {
-    //         Accept: 'application/json',
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //         admission_no: admission_no
-    //     })
-    // })
-    // .then((data) => data.json())
-    // .then(async (data) => {
-    //     console.log( 'single parent'+data )
-    //     if(data[0] !=undefined){
-    //         this.setState({modal_account_no:data[0].account_no,date_of_admission:data[0].date_of_admission,modal_admission_no:data[0].admission_no,security_no:data[0].security_no,class_name:data[0].class_name,section:data[0].section,category:data[0].category,house:data[0].house,name:data[0].name,sex:data[0].sex,dob:data[0].dob,aadhar_no:data[0].aadhar_no,father_name:data[0].father_name,mother_name:data[0].mother_name,gaurdian_name:data[0].gaurdian_name,parent_address:data[0].parent_address,parent_mobile:data[0].parent_mobile,gaurdian_address:data[0].gaurdian_address,fee_concession:data[0].fee_concession,avail_transport:data[0].avail_transport,bus_fare_concession:data[0].bus_fare_concession,vehicle_no:data[0].vehicle_no,is_full_free_ship:data[0].is_full_free_ship,is_teacher_ward:data[0].is_teacher_ward,take_computer:data[0].take_computer,ncc:data[0].ncc,no_exempt_registration:data[0].no_exempt_registration,no_exempt_admission:data[0].no_exempt_admission,no_exempt_security_deposit:data[0].no_exempt_security_deposit,is_repeater:data[0].is_repeater,other_details:data[0].other_details,misc_details:data[0].misc_details,subjects:data[0].subjects,image:data[0].image})
-    //     }
-
-    //     // this.setState({account_no:data[0].account_no,father_name:data[0].father_name,mother_name:data[0].mother_name,father_occu:data[0].father_occu,father_designation:data[0].father_designation,father_annual_income:data[0].father_annual_income,mother_occu:data[0].mother_occu,mother_designation:data[0].mother_designation,mother_annual_income:data[0].mother_annual_income,parent_address:data[0].parent_address,parent_mobile:data[0].parent_mobile,gaurdian_name:data[0].gaurdian_name,gaurdian_address:data[0].gaurdian_address,gaurdian_mobile:data[0].gaurdian_mobile,gaurdian_annual_income:data[0].gaurdian_annual_income,gaurdian_occu:data[0].gaurdian_occu,gaurdian_designation:data[0].gaurdian_designation})
-    // })
   };
+
   checkValidation = () => {
     if (this.state.receipt_date === undefined) {
       this.setState({
@@ -1921,15 +1592,6 @@ class FeeReceipt extends React.Component {
     }
   };
 
-  // getDuesFee = ()=>{
-  //   let lastDate=this.state.last_receipt_submission_month;
-  //   let currentDate=this.state.receipt_date;
-  //   let newFormMonths=Moment(currentDate).format("MM");
-  //   if(newFormMonths == lastDate)
-  //   {
-  //     console.log(parseInt(((this.state.StudentTutionFee)*(newFormMonths-lastDate))-this.state.paid_fees))
-  //   }
-  // }
 
   UpdateBalance = () => {
     if (this.checkValidation()) {
@@ -2002,35 +1664,7 @@ class FeeReceipt extends React.Component {
         this.SearchOldfee();
       });
   }
-  // DeleteReceipt(password){
-  //     if("delete@1234"==password){
-  //         const apiUrl = 'http://144.91.110.221:4800/DeleteReceipt';
-  //         fetch(apiUrl, {
-  //           headers : {
-  //             'Content-Type':'application/json',
-  //             'Accept':'application/json'
-  //           },
-  //           method:'delete',
-  //           body:JSON.stringify({_id:this.state.DeleteId})
-  //           })
-  //         .then((response) => response.json())
-  //         .then((res) => {
-  //         alert("Deleted Successfully")
-  //         this.setState({AllOldFees:[],ConfModal:false})
-  //         this.SearchOldfee()
-  //         })
-  //     }else{
-  //         alert("Incorect Password")
-  //     }
-  // }
-  //     indexFunction(e) {
-  //     var x = document.getElementsByTagName("input")[9].tabIndex;
-  //    if(x==4){
-  //        if(this.state.bank == ""){
-  //         alert("Please Select Bank !")
-  //        }
-  //    }
-  // }
+
   handleFocusInput(e) {
     e.target.select();
   }
@@ -2275,13 +1909,8 @@ class FeeReceipt extends React.Component {
 
   // End StudentCount Api
   render() {
-    console.log("check the allready", this.state.paid_upto_month)
-    //commented by sandeep on 4 sept
-    // $("#recpddate").on("click", function () {
-    //   localStorage.setItem("R_date", Moment().format("YYYY-MM-DD"));
-    //   localStorage.setItem("R_bank", "");
-    //   window.location.reload();
-    // });
+    console.log(this.state.totalNewPaybleMonth,"check the allready", this.state.feemonths)
+
     $("#focusguard-2").on("focus", function () {
       // "last" focus guard got focus: set focus to the first field
       $("#firstInput").focus();
@@ -3672,46 +3301,44 @@ class FeeReceipt extends React.Component {
                               })
                               :
                               this.state.AllOldFees.length > 1 ? this.state.AllOldFees.map((item, index) => {
-                                console.log(item, "check the item which is persented on all old fees")
                                 if (this.state.AllOldFees.length - 2 == index) {
-                                  console.log("inside the all old fee of fee receipt")
                                   return (
                                     <>
                                       <span className="ml-2">
-                                        {Number(Moment(item.last_fee_date).format("MM")) + 1 == "1"
+                                        {Number(Moment(item?.last_fee_date).format("MM")) + 1 == "1"
                                           ? "Jan" + " " + Moment(item.last_fee_date).format("YYYY") +
                                           " - "
-                                          : Number(Moment(item.last_fee_date).format("MM"))  + 1 == "2"
+                                          : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "2"
                                             ? "Feb" + " " + Moment(item.last_fee_date).format("YYYY") +
                                             " - "
-                                            : Number(Moment(item.last_fee_date).format("MM"))  + 1 == "3"
+                                            : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "3"
                                               ? "Mar" + " " + Moment(item.last_fee_date).format("YYYY") +
                                               " - "
-                                              : Number(Moment(item.last_fee_date).format("MM"))  + 1 == "4"
+                                              : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "4"
                                                 ? "Apr" + " " + Moment(item.last_fee_date).format("YYYY") +
                                                 " - "
-                                                : Number(Moment(item.last_fee_date).format("MM"))  + 1 == "5"
+                                                : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "5"
                                                   ? "May" + " " + Moment(item.last_fee_date).format("YYYY") +
                                                   " - "
-                                                  : Number(Moment(item.last_fee_date).format("MM"))  + 1 == "6"
+                                                  : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "6"
                                                     ? "Jun" + " " + Moment(item.last_fee_date).format("YYYY") +
                                                     " - "
-                                                    : Number(Moment(item.last_fee_date).format("MM"))  + 1 == "7"
+                                                    : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "7"
                                                       ? "July" + " " + Moment(item.last_fee_date).format("YYYY") +
                                                       " - "
-                                                      : Number(Moment(item.last_fee_date).format("MM"))  + 1 == "8"
+                                                      : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "8"
                                                         ? "Aug" + " " + Moment(item.last_fee_date).format("YYYY") +
                                                         " - "
-                                                        : Number(Moment(item.last_fee_date).format("MM"))  + 1 == "9"
+                                                        : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "9"
                                                           ? "Sept" + " " + Moment(item.last_fee_date).format("YYYY") +
                                                           " - "
-                                                          : Number(Moment(item.last_fee_date).format("MM")) + 1 == "10"
+                                                          : Number(Moment(item?.last_fee_date).format("MM")) + 1 == "10"
                                                             ? "Oct" + " " + Moment(item.last_fee_date).format("YYYY") +
                                                             " - "
-                                                            : Number(Moment(item.last_fee_date).format("MM")) + 1 == "11"
+                                                            : Number(Moment(item?.last_fee_date).format("MM")) + 1 == "11"
                                                               ? "Nov" + " " + Moment(item.last_fee_date).format("YYYY") +
                                                               " - "
-                                                              : Number(Moment(item.last_fee_date).format("MM")) + 1 == "12"
+                                                              : Number(Moment(item?.last_fee_date).format("MM")) + 1 == "12"
                                                                 ? "Dec" + " " + Moment(item.last_fee_date).format("YYYY") +
                                                                 " - "
                                                                 : null
@@ -3727,36 +3354,11 @@ class FeeReceipt extends React.Component {
                           {
                             this.state.allready_fee_paided_student == "S/W" ? null :
                               this.state.AllOldFees.length > 0 && this.state.AllOldFees.map((item, index) => {
-                                if (this.state.AllOldFees.length - 1 == index) {
+                                if (this.state.AllOldFees.length > 0 && this.state.AllOldFees.length - 1 == index) {
                                   return (
                                     <>
                                       <span className="ml-2">
-                                        {Moment(item.last_fee_date).format("MM") == "1"
-                                          ? "Jan" + " " + Moment(item.last_fee_date).format("YYYY")
-                                          : Moment(item.last_fee_date).format("MM") == "2"
-                                            ? "Feb" + " " + Moment(item.last_fee_date).format("YYYY")
-                                            : Moment(item.last_fee_date).format("MM") == "3"
-                                              ? "Mar" + " " + Moment(item.last_fee_date).format("YYYY")
-                                              : Moment(item.last_fee_date).format("MM") == "4"
-                                                ? "Apr" + " " + Moment(item.last_fee_date).format("YYYY")
-                                                : Moment(item.last_fee_date).format("MM") == "5"
-                                                  ? "May" + " " + Moment(item.last_fee_date).format("YYYY")
-                                                  : Moment(item.last_fee_date).format("MM") == "6"
-                                                    ? "Jun" + " " + Moment(item.last_fee_date).format("YYYY")
-                                                    : Moment(item.last_fee_date).format("MM") == "7"
-                                                      ? "July" + " " + Moment(item.last_fee_date).format("YYYY")
-                                                      : Moment(item.last_fee_date).format("MM") == "8"
-                                                        ? "Aug" + " " + Moment(item.last_fee_date).format("YYYY")
-                                                        : Moment(item.last_fee_date).format("MM") == "9"
-                                                          ? "Sept" + " " + Moment(item.last_fee_date).format("YYYY")
-                                                          : Moment(item.last_fee_date).format("MM") == "10"
-                                                            ? "Oct" + " " + Moment(item.last_fee_date).format("YYYY")
-                                                            : Moment(item.last_fee_date).format("MM") == "11"
-                                                              ? "Nov" + " " + Moment(item.last_fee_date).format("YYYY")
-                                                              : Moment(item.last_fee_date).format("MM") == "12"
-                                                                ? "Dec" + " " + Moment(item.last_fee_date).format("YYYY")
-                                                                : null
-                                        }
+                                      {Moment(item.last_fee_date).format("MMM YYYY")}
                                       </span>
                                     </>
                                   )
@@ -5105,47 +4707,9 @@ class FeeReceipt extends React.Component {
                         />
                       </div>
                     </div>
-                    {/* <table class="table">
-                        <tbody>
-                            {this.state.Allfees.map((item,index)=>{
-                            if(item.fee_category==="MONTHLY"){
-                            return(
-                                <tr>
-                                <th>{item.fee_sub_category} ({item.fee_sub_category == "TUITION FEE" ? this.state.StudentTutionFee : null})</th>
-                                <td>
-                                <input type="text" className=""   value={parseInt(item.amount)*parseInt(this.state.feemonths.length)} onChange={(e)=>{this.setState(this.SetFee(index,e))}}/>
-                                </td>
-                                </tr>
-                               
-                                )
-                            }
-                            })}
-                        </tbody>
-                    </table>   */}
                   </div>
                   <div className="col-12">
                     <div className="form-row">
-                      {/* <div className="col-4 form-group">
-                            <label>Tution Fee</label>
-                            <input type="text" className="" defaultValue="0" value={this.state.tution_fee}  onChange={(e)=>{this.setState({tution_fee:e.target.value.toUpperCase()})}}/>
-                        </div>
-                        <div className="col-4 form-group">
-                            <label>Science Fee</label>
-                            <input type="text" className="" defaultValue="0" value={this.state.science_fee} onChange={(e)=>{this.setState({science_fee:e.target.value.toUpperCase()})}}/>
-                        </div>
-                        <div className="col-4 form-group">
-                            <label>Bus Fare</label>
-                            <input type="text" className="" defaultValue="0" value={this.state.bus_fare} onChange={(e)=>{this.setState({bus_fare:e.target.value.toUpperCase()})}}/>
-                        </div> */}
-                      {/* <div className="col-3 form-group">
-                    <label>One Time Fee  </label>
-                    <input
-                      type="text"
-                      style={{ backgroundColor: "orange" }}
-                      className=""
-                      Value={this.state.TakeOneTimeFee ? this.state.one_time_fees : 0}
-                    />
-                  </div> */}
                       {
                         this.state.showTotalAdmissionFee &&
                         <div className="col-3 form-group">
