@@ -934,6 +934,7 @@ class FeeReceipt extends React.Component {
             dateStart.format("M") === dateEnd.format("M")
           ) {
             if (
+
               Moment(this.state.last_fees_date).format("M") == "3" &&
               this.state.session == this.state.last_session &&
               this.state.last_fee_status == true
@@ -955,6 +956,7 @@ class FeeReceipt extends React.Component {
       } else {
         var EndDate = Moment(this.state.last_fees_date);
         if (
+          
           Moment(this.state.last_fees_date).format("M") == "3" &&
           this.state.session == this.state.last_session &&
           this.state.last_fee_status == true
@@ -1060,7 +1062,9 @@ class FeeReceipt extends React.Component {
             }
             return false;
           }
+
           while (paidAmount > 0) {
+
             if (
               Moment(this.state.last_fees_date).format("M") == "3" &&
               this.state.session == this.state.last_session &&
@@ -1076,7 +1080,6 @@ class FeeReceipt extends React.Component {
             fromtomonths.push(EndDate.format("M"));
             lastmonth.push(EndDate.format("YYYY-MM-DD"));
             shortmonths.push(EndDate.format("M"));
-
             if (this.state.is_teacher_ward == "true") {
               if (this.state.take_computer == "false") {
                 this.state.Allfees.map((item, index) => {
@@ -1154,7 +1157,8 @@ class FeeReceipt extends React.Component {
                 remainbalance = paidAmount;
               }
             }
-          }
+                  }
+          
         }
       }
       // if(Moment(this.state.last_fees_date).format('M')!="3"){
@@ -1909,8 +1913,6 @@ class FeeReceipt extends React.Component {
 
   // End StudentCount Api
   render() {
-    console.log(this.state.totalNewPaybleMonth,"check the allready", this.state.feemonths)
-
     $("#focusguard-2").on("focus", function () {
       // "last" focus guard got focus: set focus to the first field
       $("#firstInput").focus();
@@ -1965,25 +1967,7 @@ class FeeReceipt extends React.Component {
       // { title: "Address", data: "address"},
       { title: "Action", data: "action" },
     ];
-    //   const click = (row) => {
-    //     console.log(row);
-    //   };
 
-    //   const dataa =[];
-    //   { this.state.AllStudent.map((item,index)=>{
-    //   dataa.push( {"sr_no":index+1,"name":item.name,"admission_no":item.admission_no,"account_no":item.account_no,"session":item.session,"class":item.class_name,"section":item.section,'action': <button type="button" className="btn btn-info" onClick={() => this.searchByAdmission(item.admission_no)}>Get Details</button>,"show":<button type="button" onClick={()=>{this.ShowModal(item.admission_no)}} class="btn btn-info" data-toggle="modal" data-target="#myModal">SHOW</button>})
-    //   })}
-    //     const columnss = [
-    //       { title: "SR NO", dataa: "sr_no" },
-    //       { title: "Name", dataa: "name" },
-    //       { title: 'Admission No',dataa: "admission_no"},
-    //       { title: 'Account No', dataa: "account_no"},
-    //       { title: "Session", dataa: "session" },
-    //       { title: "Class", dataa: "class" },
-    //       { title: "Section", dataa: "section" },
-    //       { title: "Action", dataa: "action" },
-    //       { title: "Show", dataa: "show"},
-    //     ];
     const currentMonth = this.state.currentMonth;
     defaultDate = localStorage.getItem("R_date");
     // defaultDateStatus=false
