@@ -102,7 +102,7 @@ class FeeReceipt extends React.Component {
       bus_fare: "0",
       total_monthly_fee: "0",
       paid_total_amount: "0",
-      payment_mode: "BANK",
+      payment_mode: "CASH",
       grand_total: "",
       bank: "",
       bank_v_no: "",
