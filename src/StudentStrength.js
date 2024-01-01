@@ -98,7 +98,6 @@ class StudentStrength extends React.Component{
        })
        .then((data) => data.json())
        .then(async (data) => {  
-        console.log(data,"check the data")
                this.setState({AllStudent:data})
             //    this.setBalance()
                if(data[0] == undefined){

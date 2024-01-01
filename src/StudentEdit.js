@@ -2,6 +2,8 @@ import React from 'react';
 import DataTable from '@bit/adeoy.utils.data-table';
 import Moment from 'moment';
 import { now } from 'jquery';
+import $, { contains, timers } from "jquery";
+
 class StudentEdit extends React.Component{
     constructor (props){
         super(props)
@@ -47,7 +49,6 @@ class StudentEdit extends React.Component{
          other_details:'',
          misc_details:'',
          religion:'',
-
 
          reg_no:'',
          roll_no:'',
@@ -328,7 +329,6 @@ class StudentEdit extends React.Component{
             .catch(err => console.log(err))
     }
 
-
     is_start_from_first_class(){
        
              alert(this.state.is_start_from_first_class)
@@ -585,12 +585,15 @@ class StudentEdit extends React.Component{
                 .then(res => res.json())              
                 .then((res)=>{  
             alert('Student updated successfully !');
+            this.SearchOldfee()
+            this.submitReceiptData();
             this.setState({parent:'',admission_no:'',security_no:'',old_admission_no:'',aadhar_no:'',class_name:'',section:'',subjects:[],is_start_from_first_class:false,last_class:'',category:'',house:'',name:'',sex:'',dob:'',nationality:'',last_school:'',balance:'',changebalance:'',fee_concession:'',bus_fare_concession:'',vehicle_no:'',is_teacher_ward:false,paid_upto_year:'',last_school_performance:'',is_full_free_ship:false,avail_transport:false,take_computer:false,no_exempt_security_deposit:false,ncc:false,no_exempt_registration:false,no_exempt_admission:false,is_repeater:false,other_details:'',misc_details:'',religion:'',reg_no:'',roll_no:'',board_roll_no:'',parent_per_address:'',parent_per_city:'',parent_per_state:'',parent_per_country:'',gaurdian_per_address:'',gaurdian_per_city:'',gaurdian_per_state:'',gaurdian_per_country:'',parentcopyaddress:false,gaurdiancopyaddress:false,parentcopyaddressASgaurdian:false,account_no:'',father_name:'',mother_name:'',father_occu:'',father_designation:'',father_annual_income:'',mother_occu:'',mother_designation:'',mother_annual_income:'',parent_address:'',parent_city:'',parent_state:'',parent_country:'',parent_phone:'',parent_mobile:'',gaurdian_name:'',gaurdian_occu:'',gaurdian_designation:'',gaurdian_annual_income:'',gaurdian_address:'',gaurdian_city:'',gaurdian_state:'',gaurdian_country:'',gaurdian_phone:'',gaurdian_mobile:'',image:'',image2:'',image3:'',image4:'',})
             this.getStudent()
                 })            
                 .catch(err => console.log(err))
             }
       }
+
       deleteFeeStructure = (id) => {
         const apiUrl = 'http://144.91.110.221:4800/deleteFeeStructure';
         fetch(apiUrl, {
@@ -684,7 +687,29 @@ class StudentEdit extends React.Component{
         })
         .catch(err => console.log(err))
     }
+    SearchOldfee = async () => {
+        this.setState({ AllOldFees: [] });
+        const admission_no = this.state.admission_no.toUpperCase();
+        await fetch("http://144.91.110.221:4800/SearchOldfee", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            admission_no: admission_no,
+          }),
+        })
+          .then((data) => data.json())
+          .then(async (data) => {
+            if(data)
+            {
+                console.log(data,"check search old fee data")
+            }
+          })
+      };
     render(){
+        console.log(this.state.admission_no,"check")
         const data =[];
         {this.state.AllStudent.map((item,index)=>{
         data.push( {"sr_no":index+1,"name":item?.student?.name,"admission_no":parseInt(item?.admission_no),"account_no":parseInt(item?.account_no),"session":item?.session,"class":item?.class_name,"section":item?.section,"action":<td><button className="btn btn-secondary mr-2"  data-dismiss="modal" onClick={() => this.editStudentObject(item)}><i class="fas fa-pencil-alt"></i></button><button onClick = { () => this.deleteFeeStructure(item._id)} className="btn btn-danger"><i className="fa fa-trash" aria-hidden="true"></i></button></td>})

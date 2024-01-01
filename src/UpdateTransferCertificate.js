@@ -71,8 +71,6 @@ class UpdateTransferCertificate extends React.Component{
     }
     getTransferCertificate= async (e)=>{
         // this.setState({})
-        await console.log("wait")
-        console.log("checking response search by addmission no")
         const admission_no = this.state.admission_no
         if(admission_no =='0'){
              return false;
@@ -145,13 +143,11 @@ class UpdateTransferCertificate extends React.Component{
             })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({AllSection: data})
             })
             .catch(err => console.log(err))
     }
     getClass = async() => {
-        await console.log("wait wait")
         fetch("http://144.91.110.221:4800/getClass"
         ,{
         method: 'POST',
@@ -166,7 +162,6 @@ class UpdateTransferCertificate extends React.Component{
       })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({AllClass: data})
                 this.getSection()
             })
@@ -176,7 +171,6 @@ class UpdateTransferCertificate extends React.Component{
         fetch("http://144.91.110.221:4800/getCastCategory")
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({AllCategory: data})
             })
             .catch(err => console.log(err))
@@ -185,7 +179,6 @@ class UpdateTransferCertificate extends React.Component{
         fetch("http://144.91.110.221:4800/getHouse")
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({AllHouse: data})
             })
             .catch(err => console.log(err))
@@ -206,9 +199,7 @@ class UpdateTransferCertificate extends React.Component{
 
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({AllBank: data})
-                console.log(data)
             })
             .catch(err => console.log(err))
     }

@@ -131,7 +131,6 @@ class PrintTc extends React.Component {
   // }
   getCertificateDetails = async () => {
     this.setState({ name: '', account_no: '', class_name: '', section: '', parents: '', fee_concession: '', left_on: '', dob: '', date_of_admission: '', father_name: '', mother_name: '', sex: '' })
-    await console.log("wait wait")
     fetch("http://144.91.110.221:4800/singlestudentdata_with_session"
       , {
         method: 'POST',
@@ -177,10 +176,8 @@ class PrintTc extends React.Component {
           let tenth = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
 
           if (date.toString().length > 7) return myDiv.innerHTML = 'overlimit';
-          console.log(date);
           //let num = ('0000000000'+ date).slice(-10).match(/^(\d{1})(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
           let num = ('0000000' + date).slice(-7).match(/^(\d{1})(\d{1})(\d{2})(\d{1})(\d{2})$/);
-          console.log(num);
           if (!num) return;
 
           let outputText = num[1] != 0 ? (oneToTwenty[Number(num[1])] || `${tenth[num[1][0]]} ${oneToTwenty[num[1][1]]}`) + ' million ' : '';
@@ -201,10 +198,8 @@ class PrintTc extends React.Component {
           let tenthh = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
 
           if (year.toString().length > 7) return myDivv.innerHTML = 'overlimit';
-          console.log(year);
           //let num = ('0000000000'+ year).slice(-10).match(/^(\d{1})(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
           let numm = ('0000000' + year).slice(-7).match(/^(\d{1})(\d{1})(\d{2})(\d{1})(\d{2})$/);
-          console.log(numm);
           if (!numm) return;
 
           let outputYear = numm[1] != 0 ? (oneToTwentyy[Number(numm[1])] || `${tenthh[numm[1][0]]} ${oneToTwentyy[numm[1][1]]}`) + ' million ' : '';
@@ -226,8 +221,6 @@ class PrintTc extends React.Component {
   }
   searchByAdmission_no = async (e) => {
     this.setState({ sex: '' })
-    await console.log("wait")
-    console.log("checking response search by addmission no")
     const admission_no = this.state.admission_no
     if (admission_no == '0') {
       return false;
@@ -286,7 +279,6 @@ class PrintTc extends React.Component {
   
 
   FeesClasswise=(class_names,sections)=>{    
-    console.log("checking response FeesClasswise")
     const currentMonth =  Moment().format('MM')       
      fetch("http://144.91.110.221:4800/FeesClasswise"
      ,{
@@ -303,7 +295,6 @@ class PrintTc extends React.Component {
      })
      .then((data) => data.json())
      .then(async (data) => {  
-        await console.log( 'Class Wise'+data )  
          if(data[0] !=undefined){
              this.setState({Allfees:JSON.parse(data[0].fees)})
 
@@ -314,7 +305,6 @@ class PrintTc extends React.Component {
 
 
   render() {
-    console.log(this.state.dob,"for checking correct class")
     const data = [];
     {
       this.state.AllVehicleType.map((item, index) => {
