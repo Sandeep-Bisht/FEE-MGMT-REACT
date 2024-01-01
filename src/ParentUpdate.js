@@ -64,7 +64,6 @@ class ParentUpdate extends React.Component{
         fetch("http://144.91.110.221:4800/getSubjects")
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({AllSubjects: data})
             })
             .then(err => console.log(err))
@@ -83,7 +82,6 @@ class ParentUpdate extends React.Component{
           })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({AllSession: data})
             })
             .then(err => console.log(err))
@@ -159,7 +157,6 @@ class ParentUpdate extends React.Component{
             .then(err => console.log(err))
     }
     getStudent = async() => {
-        await console.log("wait wait")
         fetch("http://144.91.110.221:4800/getStudent"
             , {
               method: 'POST',
@@ -379,7 +376,6 @@ class ParentUpdate extends React.Component{
         }
       }
     UpdateStudentData =async ()=>{
-        await console.log(this.state.parent_per_address)
         if (this.checkValidation()) {
         const data = new FormData()
         
@@ -450,7 +446,6 @@ class ParentUpdate extends React.Component{
         })
       }
      FeeAmount= async()=>{
-      await console.log(this.state.class_name)
         fetch("http://144.91.110.221:4800/FeeAmount"
         , {
             method: 'POST',
@@ -466,9 +461,7 @@ class ParentUpdate extends React.Component{
         .then((data) => data.json())
         .then(async (data) => {  
             if(data[0] != undefined !=undefined){
-                console.log(data[0].total_monthly_fee)
             this.setState({balance:data[0].total_monthly_fee,changebalance:data[0].total_monthly_fee})
-            console.log(this.state.balance)
             }
             
             })
@@ -478,7 +471,6 @@ class ParentUpdate extends React.Component{
      SelectSubjects = async(e) => {
         let value = Array.from(e.target.selectedOptions, option => option.value);
         await this.setState({subjects:value})
-        console.log(this.state.subjects)
       }
       calculateBalance = async(e)=>{
        await this.setState({paid_upto_month:e.target.value.toUpperCase(),balance:this.state.changebalance})
@@ -497,8 +489,6 @@ class ParentUpdate extends React.Component{
     //       alert(this.state.admission_no)
     //   }
     searchByAdmission_no_with_session= async (e)=>{
-        await console.log("wait")
-        console.log("checking response search by addmission no")
         const admission_no = this.state.admission_no
         if(admission_no =='0'){
              return false;

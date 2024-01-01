@@ -195,7 +195,6 @@ class StudentDisplay extends React.Component{
         })
           .then(res => res.json())
           .then(data => {
-              console.log(data)
               this.setState({AllSession: data})
           })
           .catch(err => console.log(err))
@@ -224,7 +223,6 @@ class StudentDisplay extends React.Component{
           .catch(err => console.log(err))
         }
     getCertificateDetails = async() => {
-      await console.log("wait wait")
       fetch("http://144.91.110.221:4800/getTransferCertificate"
       ,{
       method: 'POST',
@@ -238,7 +236,6 @@ class StudentDisplay extends React.Component{
     })
           .then(res => res.json())
           .then(data => {
-              console.log(data)
               this.setState({left_on:data.left_on,date_of_tc:data.date_of_tc,cheque_no:data.cheque_no,security_deposit:data.security_deposit,tc_no:data.tc_no})
               // alert(data.security_deposit)
               
@@ -319,9 +316,6 @@ class StudentDisplay extends React.Component{
     //     this.setState({image,_id,session,date_of_admission,parent,admission_no,security_no,old_admission_no,aadhar_no,class_name,section,subjects,is_start_from_first_class,last_class,category,house,name,sex,dob,nationality,last_school,balance,fee_concession,bus_fare_concession,vehicle_no,is_teacher_ward,paid_upto_month,paid_upto_year,last_school_performance,is_full_free_ship,avail_transport,take_computer,no_exempt_security_deposit,ncc,no_exempt_registration,no_exempt_admission,is_repeater,other_details,misc_details,account_no,father_name,mother_name,father_occu,father_designation,father_annual_income,mother_occu,mother_designation,mother_annual_income,parent_address,parent_per_address,parent_city,parent_state,parent_country,parent_phone,parent_mobile,gaurdian_name,gaurdian_occu,gaurdian_designation,gaurdian_annual_income,gaurdian_address,gaurdian_city,gaurdian_state,gaurdian_country,gaurdian_phone,gaurdian_mobile})
     // }
     searchByAdmission_no= async (e)=>{
-     
-      await console.log("wait")
-      console.log("checking response search by addmission no")
       const admission_no = e
       if(admission_no =='0'){
            return false;
@@ -378,8 +372,6 @@ class StudentDisplay extends React.Component{
   }
   SearchOldfee= async(e)=>{
     this.setState({AllOldFees:[]})
-    console.log("checking response SearchOldfee")
-    await  console.log("wait wait")
     const admission_no = e
     if(admission_no =='0'){
          return false;
@@ -397,7 +389,6 @@ class StudentDisplay extends React.Component{
     })
     .then((data) => data.json())
     .then(async (data) => {  
-        console.log( 'single parent'+data )  
         if(data[0] !=undefined){
             this.setState({AllOldFees: data,last_fees_date:data[data.length-1].last_fee_date,balance:data[data.length-1].balance}) 
             
@@ -421,9 +412,6 @@ class StudentDisplay extends React.Component{
   
 }
 viewParent= async(e)=>{
-  await console.log("wait wait")
-  console.log("checking response SearchOldfee")
-    await  console.log("wait wait")
     const account_no = e
     if(account_no =='0'){
          return false;

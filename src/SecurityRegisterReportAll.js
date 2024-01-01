@@ -53,7 +53,6 @@ class SecurityRegisterReportAll extends React.Component{
           })
           .then(res => res.json())
           .then(data => {
-              console.log(data)
               this.setState({AllSection: data})
           })
           .catch((error)=>{
@@ -74,7 +73,6 @@ class SecurityRegisterReportAll extends React.Component{
         })
           .then(res => res.json())
           .then(data => {
-              console.log(data)
               this.setState({AllSession: data})
           })
           .catch((error)=>{
@@ -83,8 +81,6 @@ class SecurityRegisterReportAll extends React.Component{
          }
 
   getTransferCertificate= async (item,security_deposit)=>{    
-    await console.log("wait")
-    console.log("checking response search by addmission no")
     const admission_no = item.admission_no
     if(admission_no =='0'){
          return false;
@@ -163,13 +159,9 @@ class SecurityRegisterReportAll extends React.Component{
       }
       setTimeout(()=> {   //  call a 3s setTimeout when the loop is called
         //  your code here
-            console.log("length "+data.length)               //  increment the counter
         if (loop_i < data.length) { 
-         
-          console.log('hello loop i '+loop_i); 
-          // console.log('hello  '+JSON.stringify(data[loop_i])); 
+                   // console.log('hello  '+JSON.stringify(data[loop_i])); 
           this.SearchOldfeeSecurityRegisterAll(data[loop_i])    //  if the counter < data.length, call the loop function
-          console.log('hello search old fees');
           loop_i++;
           this.myLoop(data)
                   //  ..  again which will trigger another    
@@ -180,8 +172,6 @@ class SecurityRegisterReportAll extends React.Component{
     }
     SearchOldfeeSecurityRegisterAll= async(item)=>{
       this.setState({StudentWithFees:[]})
-     console.log("checking response SearchOldfeeSecurityRegisterAll")
-     await  console.log("wait wait")
      const admission_no = item.admission_no
      fetch("http://144.91.110.221:4800/SearchOldfeeSecurityRegisterAll"
      ,{
@@ -196,7 +186,6 @@ class SecurityRegisterReportAll extends React.Component{
      })
      .then((data) => data.json())
      .then(async (data) => {  
-         console.log( 'single parent'+data )  
          if(data[0] !=undefined){
           $('#getBtn').text("Get Data")
           var security_deposit=0
@@ -231,7 +220,6 @@ class SecurityRegisterReportAll extends React.Component{
       fetch("http://144.91.110.221:4800/getClass")
           .then(res => res.json())
           .then(data => {
-              console.log(data)
               this.setState({AllClass: data})
           })
           .catch((error)=>{
@@ -239,7 +227,6 @@ class SecurityRegisterReportAll extends React.Component{
           })   }
    getFeesOfStudent=(class_name)=>{ 
     global_class_name =  class_name
-    console.log("checking response FeesClasswise")
     const currentMonth =  Moment().format('MM')       
      fetch("http://144.91.110.221:4800/FeesClasswise"
      ,{
@@ -255,7 +242,6 @@ class SecurityRegisterReportAll extends React.Component{
      })
      .then((data) => data.json())
      .then(async (data) => {  
-        await console.log( 'Class Wise'+data )  
          if(data[0] !=undefined){
              this.setState({Allfees:JSON.parse(data[0].fees)})
             //  console.log("done")

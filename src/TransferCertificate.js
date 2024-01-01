@@ -71,8 +71,6 @@ class TransferCertificate extends React.Component{
     }
     searchByAdmission_noForTc= async (e)=>{
         // this.setState({})
-        await console.log("wait")
-        console.log("checking response search by addmission no")
         const admission_no = this.state.admission_no
         if(admission_no =='0'){
              return false;
@@ -150,7 +148,6 @@ class TransferCertificate extends React.Component{
         .catch(err => console.log(err))
     }
     SearchOldfee= async()=>{
-       await  console.log("wait wait")
        fetch("http://144.91.110.221:4800/SearchOldfee"
        ,{
            method: 'POST',
@@ -164,7 +161,6 @@ class TransferCertificate extends React.Component{
        })
        .then((data) => data.json())
        .then(async (data) => {  
-           console.log( 'single parent'+data )  
            if(data[0] !=undefined){
             data.map((item,index)=>{
                     if(item.security_fee != '0' )
@@ -191,13 +187,11 @@ class TransferCertificate extends React.Component{
             })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({AllSection: data})
             })
             .catch(err => console.log(err))
         }
     getClass = async() => {
-        await console.log("wait wait")
         fetch("http://144.91.110.221:4800/getClass"
         ,{
         method: 'POST',
@@ -212,7 +206,6 @@ class TransferCertificate extends React.Component{
       })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({AllClass: data})
                 this.getSection()
             })
@@ -222,7 +215,6 @@ class TransferCertificate extends React.Component{
         fetch("http://144.91.110.221:4800/getCastCategory")
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({AllCategory: data})
             })
             .catch(err => console.log(err))
@@ -231,7 +223,6 @@ class TransferCertificate extends React.Component{
         fetch("http://144.91.110.221:4800/getHouse")
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({AllHouse: data})
             })
             .catch(err => console.log(err))
@@ -252,9 +243,7 @@ class TransferCertificate extends React.Component{
 
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({AllBank: data})
-                console.log(data)
             })
             .catch(err => console.log(err))
         }

@@ -55,8 +55,14 @@ class FeeReceipt extends React.Component {
       fee_concession: "",
       bus_fare_concession: "",
       vehicle_no: "",
+      storeLastReceiptDate:"",
+      storeLastYearMonthlyFee:"",
       is_teacher_ward: false,
       paid_upto_month: "",
+      pendingPreviousYearFees:"",
+      pendingPreviousYearFine:"",
+      paidPendingPreviousYearFees:0,
+      paidPendingPreviousYearFine:0,
       manualTutionFeeState: false,
       previousReceiptDate: "",
       delayFineFee: "",
@@ -571,6 +577,7 @@ class FeeReceipt extends React.Component {
       const month = receiptDate.split("-")[1];
       const year = receiptDate.split("-")[0];
       let totalFineFinaly = 0;
+      const diffInMonths = receiptDate.diff(this.state.storeLastReceiptDate, 'months');
       if (year == PriviousYear && month > PriviousMonth) {
         if (day > 15) {
           duesMonthForPay = (month - PriviousMonth)
@@ -600,19 +607,27 @@ class FeeReceipt extends React.Component {
     if (monthsDifference > 0) {
       let tutionFee = this.state.StudentTutionFee
       return ((tutionFee * Number(monthsDifference)) + (this.state.AllDueFees ? Number(this.state.AllDueFees) : 0) + (this.state.showTotalAdmissionFee ? + Number(this.state.admission_fee) : 0)
-        + (this.state.showTotalAnnualFee ? Number(this.state.annual_terms_fee) : 0) + (this.state.showTotalExaminationFee ? Number(this.state.examination_fee) : 0) + (this.state.showTotalRegistrationFee ? Number(this.state.registration_fee) : 0) + Number(this.state.manualFine) > 0 ? Number(this.state.manualFine) : 0)
+        + (this.state.showTotalAnnualFee ? Number(this.state.annual_terms_fee) : 0) + (this.state.showTotalExaminationFee ? Number(this.state.examination_fee) : 0) + (this.state.showTotalRegistrationFee ? Number(this.state.registration_fee) : 0) + (Number(this.state.manualFine) > 0 ? Number(this.state.manualFine) : 0) + (Number(this.state.paidPendingPreviousYearFees)>0 ? Number(this.state.paidPendingPreviousYearFees) : 0) + (Number(this.state.paidPendingPreviousYearFine)>0 ? Number(this.state.paidPendingPreviousYearFine) : 0))
     }
     else {
       let currentDate = new Date();
       let paidFeeLastMonths = Moment(this.state.paid_upto_month).format("M");
       const newFormMonths = Moment(currentDate).format("M");
-      return (this.state.Allfees && this.state.Allfees.length > 0 ? this.state.Allfees.find((item) => item.fee_category === "MONTHLY" && item.fee_sub_category === 'TUITION FEE') ? parseInt(this.state.admission_no && this.state.AllDueFees > 0 ? 0 : this.state.admission_no ? this.state.StudentTutionFee : 0) *
+      if(Moment(this.state.paid_upto_month).format("YYYY")>Moment(currentDate).format("M"))
+      {
+        return this.state.paid_total_amount
+      }
+      else{
+        return (this.state.Allfees && this.state.Allfees.length > 0 ? this.state.Allfees.find((item) => item.fee_category === "MONTHLY" && item.fee_sub_category === 'TUITION FEE') ? parseInt(this.state.admission_no && this.state.AllDueFees > 0 ? 0 : this.state.admission_no ? this.state.StudentTutionFee : 0) *
         parseInt(Number(newFormMonths) - Number(paidFeeLastMonths))
         : (this.state.admission_no ? this.state.StudentTutionFee : 0)
         : 0) + (this.state.AllDueFees ? Number(this.state.AllDueFees) : 0)
         + (this.state.showTotalAdmissionFee ? + Number(this.state.admission_fee) : 0)
         + (this.state.showTotalAnnualFee ? Number(this.state.annual_terms_fee) : 0) + (this.state.showTotalExaminationFee ? Number(this.state.examination_fee) : 0) + (this.state.showTotalRegistrationFee ? Number(this.state.registration_fee) : 0)
         + (Number(this.state.manualFine) > 0 ? Number(this.state.manualFine) : 0)
+        + (Number(this.state.paidPendingPreviousYearFees) > 0 ? Number(this.state.paidPendingPreviousYearFees) : 0)
+        + (Number(this.state.paidPendingPreviousYearFine) > 0 ? Number(this.state.paidPendingPreviousYearFine) : 0)
+      }
     }
   };
   getCertificateDetails = async () => {
@@ -685,7 +700,7 @@ class FeeReceipt extends React.Component {
   SearchOldfee = async () => {
     this.setState({ AllOldFees: [] });
     const admission_no = this.state.admission_no.toUpperCase();
-    fetch("http://144.91.110.221:4800/SearchOldfee", {
+    await fetch("http://144.91.110.221:4800/SearchOldfee", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -702,6 +717,10 @@ class FeeReceipt extends React.Component {
           var aa = this.state.session.split("-")[0];
           var B = Moment(aa + "-04-01");
           this.state.last_receipt_submission_month = Moment(data[data.length - 1].receipt_date).format("MM");
+          this.setState({
+            storeLastReceiptDate:(data[data.length-1].last_fee_date),
+            storeLastYearMonthlyFee:data[data.length-1].total_monthly_fee,
+          })
           var last_date;
           // alert(Moment(data[data.length-1].last_fee_date).format("YYYY-MM-DD"))
           data.map((item) => {
@@ -724,7 +743,9 @@ class FeeReceipt extends React.Component {
               last_fee_date: data.last_fee_date,
               previousPaidFine: data[data.length - 1].paid_fine,
               AllDueFees: data[data.length - 1].grand_total - data[data.length - 1].paid_fees,
-              receipt_no: data[data.length - 1].receipt_no
+              receipt_no: data[data.length - 1].receipt_no,
+              pendingPreviousYearFees : data[data.length - 1].previous_year_dues_fee,
+              pendingPreviousYearFine : data[data.length - 1].previous_year_dues_fine,
             });
 
           } else {
@@ -735,7 +756,9 @@ class FeeReceipt extends React.Component {
               last_fee_date: data.last_fee_date,
               balance: data[data.length - 1].balance,
               AllDueFees: data[data.length - 1].dues_fee,
-              receipt_no: data[data.length - 1].receipt_no
+              receipt_no: data[data.length - 1].receipt_no,
+              pendingPreviousYearFees : data[data.length - 1].previous_year_dues_fee,
+              pendingPreviousYearFine : data[data.length - 1].previous_year_dues_fine,
             });
 
             if (parseInt(data[data.length - 1].balance) > 0) {
@@ -762,6 +785,7 @@ class FeeReceipt extends React.Component {
         }
       })
       .then(() => {
+        this.previousYearDues();
         this.setBalance();
       });
     // await this.setBalance()
@@ -790,9 +814,10 @@ class FeeReceipt extends React.Component {
       this.setState({ TakeHalfYearlyFee: false });
     }
   };
-  FeesClasswise = (class_names, sections) => {
+  FeesClasswise = async(class_names, sections) => {
+    console.log("elseeeeeeegh hghk check the diffrence chakkkkkkkkkkkk")
     const currentMonth = Moment().format("MM");
-    fetch("http://144.91.110.221:4800/FeesClasswise", {
+    await fetch("http://144.91.110.221:4800/FeesClasswise", {
       // fetch("http://144.91.110.221:4800/FeesClasswise", {
       method: "POST",
       headers: {
@@ -816,6 +841,7 @@ class FeeReceipt extends React.Component {
             orignaltotalonetime: data[0].total_one_time_fee,
             orignalannualfee: data[0].total_annual_fee,
             orignalmonthlyfee: data[0].total_monthly_fee,
+            StudentTutionFee: data[0].total_monthly_fee,
             orignalgrandtotal: data[0].grand_total,
             admission_fee: data[0].admission_fee,
             annual_terms_fee: data[0].annual_terms_fee,
@@ -922,6 +948,7 @@ class FeeReceipt extends React.Component {
       var show_annual_fees = 0;
       var total_monthly_fee = 0;
       if (this.state.paid_fees == "0") {
+       
         var dateStart = Moment(this.state.last_fees_date).add(1, "month");
         var dateEnd = Moment(this.state.receipt_date);
         if (
@@ -982,6 +1009,7 @@ class FeeReceipt extends React.Component {
           });
           this.setState(
             {
+              
               fromtomonths: fromtomonths,
               fine: 0,
               remaning_balance:
@@ -1064,7 +1092,7 @@ class FeeReceipt extends React.Component {
           }
 
           while (paidAmount > 0) {
-
+           
             if (
               Moment(this.state.last_fees_date).format("M") == "3" &&
               this.state.session == this.state.last_session &&
@@ -1401,6 +1429,10 @@ class FeeReceipt extends React.Component {
           data.append("bank_v_no", this.state.bank_v_no);
           data.append("check_no", this.state.check_no);
           data.append("bank_date", this.state.bank_date);
+          data.append("previous_year_dues_fee", Number(this.state.pendingPreviousYearFees)>0 ? this.state.pendingPreviousYearFees - this.state.paidPendingPreviousYearFees: 0);
+          data.append("previous_year_dues_fine", Number(this.state.pendingPreviousYearFine)>0 ? this.state.pendingPreviousYearFine - this.state.paidPendingPreviousYearFine: 0);
+          data.append("paid_previous_year_fees",Number(this.state.paidPendingPreviousYearFees)>0 ? this.state.paidPendingPreviousYearFees : 0)
+          data.append("paid_previous_year_fine",Number(this.state.paidPendingPreviousYearFine)>0 ? this.state.paidPendingPreviousYearFine : 0)
           const url = "http://144.91.110.221:4800/StoreReceipt";
           fetch(url, {
             method: "post",
@@ -1490,7 +1522,10 @@ class FeeReceipt extends React.Component {
                 is_repeater: false,
                 other_details: "",
                 misc_details: "",
-
+                paidPendingPreviousYearFees:0,
+                paidPendingPreviousYearFine:0,
+                pendingPreviousYearFees:"0",
+                pendingPreviousYearFine:"0",
                 fine: "",
                 manualFine: "",
                 last_fee_status: true,
@@ -1863,7 +1898,9 @@ class FeeReceipt extends React.Component {
         Number(this.state.showTotalAnnualFee ? this.state.annual_terms_fee : 0) +
         Number(this.state.showTotalExaminationFee ? this.state.examination_fee : 0) +
         Number(this.state.paid_fees > 0 ? this.state.paid_fees : 0) +
-        Number(this.state.manualFine > 0 ? this.state.manualFine : 0),
+        Number(this.state.manualFine > 0 ? this.state.manualFine : 0) +
+        Number(this.state.paidPendingPreviousYearFees > 0 ? this.state.paidPendingPreviousYearFees : 0) +
+        Number(this.state.paidPendingPreviousYearFine > 0 ? this.state.paidPendingPreviousYearFine : 0),
     }));
   };
 
@@ -1909,6 +1946,25 @@ class FeeReceipt extends React.Component {
     });
   }
 
+  previousYearDues = async () => {
+    const currentDate = new Date();
+    const currentYear = Moment(currentDate).format("YYYY");
+    const march31 = `${currentYear}-03-31`;
+    const formattedDate = Moment(march31, "YYYY-MM-DD");
+    const diffInMonths = formattedDate.diff(this.state.storeLastReceiptDate, 'months');
+    if(diffInMonths>0)
+    {
+      let previousFine=0;
+      for(let i=1; i<=diffInMonths; i++)
+      {
+        previousFine = i*30 + previousFine
+      }
+      this.setState({
+        pendingPreviousYearFees :this.state.storeLastYearMonthlyFee*diffInMonths,
+        pendingPreviousYearFine :previousFine,
+      })
+    }
+  }
   // End GetAllStudentCount Api
 
   // End StudentCount Api
@@ -3513,6 +3569,42 @@ class FeeReceipt extends React.Component {
                             }
                             return null;
                           })}
+                           {this.state.AllOldFees.map((item, index) => {
+                            if ((this.state.AllOldFees.length - 1 == index) && item.paid_previous_year_fees > 0) {
+                              return (
+                                <>
+                                  <tr className="currentReceiptTableRow">
+                                    <td><h4 className="table-print-receipt-data">
+                                      {this.state.allready_fee_paided_student == "S/W" ? "1" : "3"}
+                                    </h4></td>
+                                    <td><h4 className="table-print-receipt">Paid Previous year Fees</h4></td>
+                                    <td><p className="table-print-receipt-data">
+                                      {item.paid_previous_year_fees}
+                                    </p></td>
+                                  </tr>
+                                </>
+                              );
+                            }
+                            return null;
+                          })}
+                                                     {this.state.AllOldFees.map((item, index) => {
+                            if ((this.state.AllOldFees.length - 1 == index) && item.paid_previous_year_fine > 0) {
+                              return (
+                                <>
+                                  <tr className="currentReceiptTableRow">
+                                    <td><h4 className="table-print-receipt-data">
+                                      {this.state.allready_fee_paided_student == "S/W" ? "1" : "3"}
+                                    </h4></td>
+                                    <td><h4 className="table-print-receipt">Paid Previous year Fine</h4></td>
+                                    <td><p className="table-print-receipt-data">
+                                      {item.paid_previous_year_fine}
+                                    </p></td>
+                                  </tr>
+                                </>
+                              );
+                            }
+                            return null;
+                          })}
                           {this.state.AllOldFees.map((item, index) => {
                             if ((this.state.AllOldFees.length - 1 == index) && item.annual_terms_fee > 0) {
                               return (
@@ -4550,14 +4642,6 @@ class FeeReceipt extends React.Component {
                                   : null}
 
                               </label>
-                              {/* <input
-                      className="checkbox-for-tuition-fee"
-                      style={{width:"22px"}}
-                        type="checkbox"
-                        onChange={(e) => {
-                          this.ChangemanualTutionFeeState(e);
-                        }}
-                      /> */}
                               <input
                                 type="text"
                                 className="ml-2"
@@ -4671,7 +4755,7 @@ class FeeReceipt extends React.Component {
                             />
                           </div>
                       }
-                      <div className="col-3 form-group">
+                      <div className="col-4 form-group">
                         <label>Paid_Amount  </label>
                         <input
                           type="number"
@@ -4690,6 +4774,96 @@ class FeeReceipt extends React.Component {
                           tabindex="4"
                         />
                       </div>
+                      {
+                        this.state.pendingPreviousYearFees>0 &&
+                        <div className="col-4 form-group">
+                        <label>Previous year_Dues  </label>
+                        <input
+                          type="number"
+                          id="lastInput"
+                          className=""
+                          value={this.state.pendingPreviousYearFees}
+                          // onChange={(e) => {
+                          //   this.setState({
+                          //     paid_total_amount: e.target.value
+                          //   });
+                            // this.setBalance();
+                          // }}
+                          // onKeyUp={() => {
+                          //   this.setBalance();
+                          // }}
+                          tabindex="4"
+                        />
+                      </div>
+                      }
+                         {
+                        this.state.pendingPreviousYearFees>0 &&
+                        <div className="col-4 form-group">
+                        <label>Paid Previous year_Dues  </label>
+                        <input
+                          type="number"
+                          // id="lastInput"
+                          className=""
+                          value={this.state.paidPendingPreviousYearFees}
+                          onChange={(e) => {
+                            this.setState({
+                              paidPendingPreviousYearFees: e.target.value,
+                            }, ()=>{
+                              this.calculateTotalAmount();
+                            });
+                          }}
+                          // onKeyUp={() => {
+                          //   this.setBalance();
+                          // }}
+                          tabindex="4"
+                        />
+                      </div>
+                      }
+                      {
+                        this.state.pendingPreviousYearFine>0 &&
+                        <div className="col-4 form-group">
+                        <label>Previous year_fine  </label>
+                        <input
+                          type="number"
+                          id="lastInput"
+                          className=""
+                          value={this.state.pendingPreviousYearFine}
+                          // onChange={(e) => {
+                          //   this.setState({
+                          //     paid_total_amount: e.target.value
+                          //   });
+                            // this.setBalance();
+                          // }}
+                          // onKeyUp={() => {
+                          //   this.setBalance();
+                          // }}
+                          tabindex="4"
+                        />
+                      </div>
+                      }
+                                            {
+                        this.state.pendingPreviousYearFine>0 &&
+                        <div className="col-4 form-group">
+                        <label>Paid Previous year_fine  </label>
+                        <input
+                          type="number"
+                          id="lastInput"
+                          className=""
+                          value={this.state.paidPendingPreviousYearFine}
+                          onChange={(e) => {
+                            this.setState({
+                              paidPendingPreviousYearFine: e.target.value
+                            }, ()=>{
+                              this.calculateTotalAmount();
+                            });
+                          }}
+                          // onKeyUp={() => {
+                          //   this.setBalance();
+                          // }}
+                          tabindex="4"
+                        />
+                      </div>
+                      }
                     </div>
                   </div>
                   <div className="col-12">
