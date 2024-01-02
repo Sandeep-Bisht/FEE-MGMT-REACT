@@ -193,7 +193,6 @@ class StudentEdit extends React.Component{
         fetch("http://144.91.110.221:4800/getParent")
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({AllParent: data})
             })
             .catch(err => console.log(err))
@@ -202,7 +201,6 @@ class StudentEdit extends React.Component{
         fetch("http://144.91.110.221:4800/getCastCategory")
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({AllCategory: data})
             })
             .catch(err => console.log(err))
@@ -211,7 +209,6 @@ class StudentEdit extends React.Component{
         fetch("http://144.91.110.221:4800/getHouse")
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({AllHouse: data})
             })
             .catch(err => console.log(err))
@@ -353,7 +350,6 @@ class StudentEdit extends React.Component{
         })
         .then((data) => data.json())
         .then(async (data) => {  
-            console.log( 'single parent'+data )    
             this.setState({account_no:data[0].account_no,father_name:data[0].student.father_name,mother_name:data[0].student.mother_name,father_occu:data[0].student.father_occu,father_designation:data[0].student.father_designation,father_annual_income:data[0].student.father_annual_income,mother_occu:data[0].student.mother_occu,mother_designation:data[0].student.mother_designation,mother_annual_income:data[0].student.mother_annual_income,parent_address:data[0].student.parent_address,parent_mobile:data[0].student.parent_mobile,gaurdian_name:data[0].student.gaurdian_name,gaurdian_address:data[0].student.gaurdian_address,gaurdian_mobile:data[0].student.gaurdian_mobile,gaurdian_annual_income:data[0].student.gaurdian_annual_income,gaurdian_occu:data[0].student.gaurdian_occu,gaurdian_designation:data[0].student.gaurdian_designation})
         })
         .catch(err => console.log(err))
@@ -487,7 +483,6 @@ class StudentEdit extends React.Component{
         }
       }
     UpdateStudentData =async ()=>{
-        await console.log(this.state.parent_per_address)
         if (this.checkValidation()) {
         const data = new FormData()
         data.append('_id',this.state._id)
@@ -611,7 +606,6 @@ class StudentEdit extends React.Component{
         .catch(err => console.log(err))
       }
      FeeAmount= async()=>{
-      await console.log(this.state.class_name)
         fetch("http://144.91.110.221:4800/FeeAmount"
         , {
             method: 'POST',
@@ -627,9 +621,7 @@ class StudentEdit extends React.Component{
         .then((data) => data.json())
         .then(async (data) => {  
             if(data[0] != undefined !=undefined){
-                console.log(data[0].total_monthly_fee)
             this.setState({balance:data[0].total_monthly_fee,changebalance:data[0].total_monthly_fee})
-            console.log(this.state.balance)
             }
             
             })
