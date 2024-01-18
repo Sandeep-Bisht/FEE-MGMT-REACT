@@ -593,36 +593,78 @@ class FeeReceipt extends React.Component {
   
 
   getGrandTotal = () => {
-    let lastDate = this.state.AllOldFees.length > 0 ? this.state.AllOldFees[this.state.AllOldFees.length - 1].receipt_date : "";
-    let currentDate = Moment(this.state.receipt_date).format("MM-YYYY");
-    let lastDateMonth = Moment(lastDate).format("MM-YYYY");
-    let monthsDifference = Moment(currentDate, "MM-YYYY").diff(Moment(lastDateMonth, "MM-YYYY"), 'months');
-    if (monthsDifference > 0) {
-      let tutionFee = this.state.StudentTutionFee
-      return ((tutionFee * Number(monthsDifference)) + (this.state.AllDueFees ? Number(this.state.AllDueFees) : 0) + (this.state.showTotalAdmissionFee ? + Number(this.state.admission_fee) : 0)
-        + (this.state.showTotalAnnualFee ? Number(this.state.annual_terms_fee) : 0) + (this.state.showTotalExaminationFee ? Number(this.state.examination_fee) : 0) + (this.state.showTotalRegistrationFee ? Number(this.state.registration_fee) : 0) + (Number(this.state.manualFine) > 0 ? Number(this.state.manualFine) : 0) - (Number(this.state.pendingPreviousYearFees)>0 ? Number(this.state.pendingPreviousYearFees) : 0) - (Number(this.state.pendingPreviousYearFine)>0 ? Number(this.state.pendingPreviousYearFine) : 0))
-    }
-    else {
-      let currentDate = new Date();
-      let paidFeeLastMonths = Moment(this.state.paid_upto_month).format("M");
-      const newFormMonths = Moment(currentDate).format("M");
-      if(Moment(this.state.paid_upto_month).format("YYYY")>Moment(currentDate).format("M"))
-      {
-        return this.state.paid_total_amount
+
+    if (this.state.AllOldFees.length > 0) {
+      if (this.state.session!==this.state.last_session) {
+        const startDate = Moment(this.state.paid_upto_month, 'YYYY-MM-DD');
+        const endDate = Moment(this.state.receipt_date, 'YYYY-MM-DD');
+        const monthsDifference = Math.ceil(endDate.diff(startDate, 'months', true));
+        return this.state.StudentTutionFee * monthsDifference +
+          (this.state.showTotalAdmissionFee ? +Number(this.state.admission_fee) : 0) +
+          (this.state.showTotalAnnualFee ? Number(this.state.annual_terms_fee) : 0) +
+          (this.state.showTotalExaminationFee ? Number(this.state.examination_fee) : 0) +
+          (this.state.showTotalRegistrationFee ? Number(this.state.registration_fee) : 0) +
+          (Number(this.state.manualFine) > 0 ? Number(this.state.manualFine) : 0)
+      } else {
+        const lastDate = this.state.AllOldFees.length > 0 ? this.state.AllOldFees[this.state.AllOldFees.length - 1].last_fee_date : "";
+        const currentDate = Moment(this.state.receipt_date).format("MM-YYYY");
+        const lastDateMonth = Moment(lastDate).format("MM-YYYY");
+        const monthsDifference = Moment(currentDate, "MM-YYYY").diff(Moment(lastDateMonth, "MM-YYYY"), 'months');    
+        if (monthsDifference > 0) {
+          const tutionFee = this.state.StudentTutionFee;
+          return (
+            // tutionFee * Number(monthsDifference) +
+            (this.state.AllDueFees ? Number(this.state.AllDueFees) : 0) +
+            (this.state.showTotalAdmissionFee ? +Number(this.state.admission_fee) : 0) +
+            (this.state.showTotalAnnualFee ? Number(this.state.annual_terms_fee) : 0) +
+            (this.state.showTotalExaminationFee ? Number(this.state.examination_fee) : 0) +
+            (this.state.showTotalRegistrationFee ? Number(this.state.registration_fee) : 0) +
+            (Number(this.state.manualFine) > 0 ? Number(this.state.manualFine) : 0)
+          );
+        } else {
+          const currentDate = new Date();
+          const paidFeeLastMonths = Moment(this.state.paid_upto_month).format("M");
+          const newFormMonths = Moment(currentDate).format("M");
+  
+          if (Moment(this.state.paid_upto_month).format("YYYY") > Moment(currentDate).format("M")) {
+            return this.state.paid_total_amount;
+          } else {
+            return (
+              ((this.state.Allfees && this.state.Allfees.length > 0) ?
+                (this.state.Allfees.find((item) => item.fee_category === "MONTHLY" && item.fee_sub_category === 'TUITION FEE') ?
+                  parseInt(
+                    this.state.admission_no && this.state.AllDueFees > 0 ? 0 : this.state.admission_no ?
+                      this.state.StudentTutionFee : 0
+                  ) * parseInt(Number(newFormMonths) - Number(paidFeeLastMonths)) :
+                  (this.state.admission_no ? this.state.StudentTutionFee : 0)
+                ) : 0) +
+              (this.state.AllDueFees ? Number(this.state.AllDueFees) : 0) +
+              (this.state.showTotalAdmissionFee ? +Number(this.state.admission_fee) : 0) +
+              (this.state.showTotalAnnualFee ? Number(this.state.annual_terms_fee) : 0) +
+              (this.state.showTotalExaminationFee ? Number(this.state.examination_fee) : 0) +
+              (this.state.showTotalRegistrationFee ? Number(this.state.registration_fee) : 0) +
+              (Number(this.state.manualFine) > 0 ? Number(this.state.manualFine) : 0) -
+              (Number(this.state.pendingPreviousYearFees) > 0 ? Number(this.state.pendingPreviousYearFees) : 0) -
+              (Number(this.state.pendingPreviousYearFine) > 0 ? Number(this.state.pendingPreviousYearFine) : 0)
+            );
+          }
+        }
       }
-      else{
-        return (this.state.Allfees && this.state.Allfees.length > 0 ? this.state.Allfees.find((item) => item.fee_category === "MONTHLY" && item.fee_sub_category === 'TUITION FEE') ? parseInt(this.state.admission_no && this.state.AllDueFees > 0 ? 0 : this.state.admission_no ? this.state.StudentTutionFee : 0) *
-        parseInt(Number(newFormMonths) - Number(paidFeeLastMonths))
-        : (this.state.admission_no ? this.state.StudentTutionFee : 0)
-        : 0) + (this.state.AllDueFees ? Number(this.state.AllDueFees) : 0)
-        + (this.state.showTotalAdmissionFee ? + Number(this.state.admission_fee) : 0)
-        + (this.state.showTotalAnnualFee ? Number(this.state.annual_terms_fee) : 0) + (this.state.showTotalExaminationFee ? Number(this.state.examination_fee) : 0) + (this.state.showTotalRegistrationFee ? Number(this.state.registration_fee) : 0)
-        + (Number(this.state.manualFine) > 0 ? Number(this.state.manualFine) : 0)
-        - (Number(this.state.pendingPreviousYearFees) > 0 ? Number(this.state.pendingPreviousYearFees) : 0)
-        - (Number(this.state.pendingPreviousYearFine) > 0 ? Number(this.state.pendingPreviousYearFine) : 0)
-      }
+    } else {
+      const startDate = Moment(this.state.paid_upto_month, 'YYYY-MM-DD');
+      const endDate = Moment(this.state.receipt_date, 'YYYY-MM-DD');
+      const daysDifference = endDate.diff(startDate, 'days');
+      const monthsDifference = Math.round(daysDifference / 30.44); 
+      return this.state.StudentTutionFee * monthsDifference +
+        (this.state.showTotalAdmissionFee ? +Number(this.state.admission_fee) : 0) +
+        (this.state.showTotalAnnualFee ? Number(this.state.annual_terms_fee) : 0) +
+        (this.state.showTotalExaminationFee ? Number(this.state.examination_fee) : 0) +
+        (this.state.showTotalRegistrationFee ? Number(this.state.registration_fee) : 0) +
+        (Number(this.state.manualFine) > 0 ? Number(this.state.manualFine) : 0)
     }
   };
+  
+  
   getCertificateDetails = async () => {
     fetch("http://144.91.110.221:4800/getTransferCertificate", {
       method: "POST",
@@ -1905,9 +1947,9 @@ class FeeReceipt extends React.Component {
         Number(this.state.showTotalAnnualFee ? this.state.annual_terms_fee : 0) +
         Number(this.state.showTotalExaminationFee ? this.state.examination_fee : 0) +
         Number(this.state.paid_fees > 0 ? this.state.paid_fees : 0) +
-        Number(this.state.manualFine > 0 ? this.state.manualFine : 0) +
-        Number(this.state.paidPendingPreviousYearFees > 0 ? this.state.paidPendingPreviousYearFees : 0) +
-        Number(this.state.paidPendingPreviousYearFine > 0 ? this.state.paidPendingPreviousYearFine : 0),
+        Number(this.state.manualFine > 0 ? this.state.manualFine : 0) 
+        // Number(this.state.paidPendingPreviousYearFees > 0 ? this.state.paidPendingPreviousYearFees : 0) +
+        // Number(this.state.paidPendingPreviousYearFine > 0 ? this.state.paidPendingPreviousYearFine : 0),
     }));
   };
 
@@ -1917,35 +1959,44 @@ class FeeReceipt extends React.Component {
     const teens = ["", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
 
     function twoDigitToWords(num) {
-      if (num < 10) {
-        return oneDigit[num];
-      } else if (num >= 11 && num <= 19) {
-        return teens[num - 10];
-      } else {
-        const tens = Math.floor(num / 10);
-        const ones = num % 10;
-        return twoDigits[tens] + (ones > 0 ? "-" + oneDigit[ones] : "");
-      }
+        if (num < 10) {
+            return oneDigit[num];
+        } else if (num >= 11 && num <= 19) {
+            return teens[num - 10];
+        } else {
+            const tens = Math.floor(num / 10);
+            const ones = num % 10;
+            return twoDigits[tens] + (ones > 0 ? "-" + oneDigit[ones] : "");
+        }
     }
 
     if (number === 0) {
-      return "Zero";
+        return "Zero";
     } else if (number < 10) {
-      return oneDigit[number];
+        return oneDigit[number];
     } else if (number >= 11 && number <= 19) {
-      return teens[number - 10];
+        return teens[number - 10];
     } else if (number < 100) {
-      return twoDigitToWords(number);
+        return twoDigitToWords(number);
     } else if (number < 1000) {
-      const hundreds = Math.floor(number / 100);
-      const remainder = number % 100;
-      return oneDigit[hundreds] + " Hundred" + (remainder > 0 ? " " + twoDigitToWords(remainder) : "");
+        const hundreds = Math.floor(number / 100);
+        const remainder = number % 100;
+        return oneDigit[hundreds] + " Hundred" + (remainder > 0 ? " " + twoDigitToWords(remainder) : "");
     } else if (number < 10000) {
-      const thousands = Math.floor(number / 1000);
-      const remainder = number % 1000;
-      return oneDigit[thousands] + " Thousand" + (remainder > 0 ? " " + this.numberToWords(remainder) : "");
+        const thousands = Math.floor(number / 1000);
+        const remainder = number % 1000;
+        return oneDigit[thousands] + " Thousand" + (remainder > 0 ? " " + this.numberToWords(remainder) : "");
+    } else if (number < 100000) {
+        const tenThousands = Math.floor(number / 10000);
+        const remainder = number % 10000;
+        return twoDigitToWords(tenThousands) + " Thousand" + (remainder > 0 ? " " + this.numberToWords(remainder) : "");
+    } else if (number < 1000000) {
+        const hundredThousands = Math.floor(number / 100000);
+        const remainder = number % 100000;
+        return oneDigit[hundredThousands] + " Hundred Thousand" + (remainder > 0 ? " " + this.numberToWords(remainder) : "");
     }
-  }
+};
+
 
   handlePaymentModeChange = (e) => {
     this.setState({
@@ -3324,8 +3375,8 @@ class FeeReceipt extends React.Component {
                           <h5>Month </h5>
                           {
                             this.state.allready_fee_paided_student == "S/W" ?
-                              this.state.AllOldFees.length > 0 && this.state.AllOldFees.map((item, index) => {
-                                if (this.state.AllOldFees.length - 1 == index) {
+                              this.state.AllStudent.length > 0 && this.state.AllStudent.map((item, index) => {
+                                if (this.state.AllStudent.length - 1 == index) {
                                   return (
                                     <span> : {Moment(item.receipt_date).format("MM") == "1" ? "Jan" + "-" + Moment(item.receipt_date).format("YYYY")
                                       : Moment(item.receipt_date).format("MM") == "2" ? "Feb" + "-" + Moment(item.receipt_date).format("YYYY")
@@ -3347,52 +3398,66 @@ class FeeReceipt extends React.Component {
                                 return null;
                               })
                               :
-                              this.state.AllOldFees.length > 1 ? this.state.AllOldFees.map((item, index) => {
+                              this.state.AllOldFees.length > 1 && this.state.last_session != this.state.session  ?
+                                   <span className="ml-2">Apr {this.state.session.substring(0, 4)}-</span>
+                              :
+                                this.state.AllOldFees.length > 1 ? this.state.AllOldFees.map((item, index) => {
                                 if (this.state.AllOldFees.length - 2 == index) {
-                                  return (
-                                    <>
-                                      <span className="ml-2">
-                                        {Number(Moment(item?.last_fee_date).format("MM")) + 1 == "1"
-                                          ? "Jan" + " " + Moment(item.last_fee_date).format("YYYY") +
-                                          " - "
-                                          : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "2"
-                                            ? "Feb" + " " + Moment(item.last_fee_date).format("YYYY") +
+                                  if(Moment(item?.last_fee_date).format("MM") === "12") 
+                                  {
+                                    return   <span className="ml-2">
+                                    {Number(Moment(item?.last_fee_date).format("MM")) + 1 == 13
+                                      ? `Jan ${Number(Moment(item.last_fee_date).format("YYYY")) + 1} - `
+                                      : null
+                                    }
+                                  </span>
+                                  }
+                                  else{
+                                    return (
+                                      <>
+                                        <span className="ml-2">
+                                          {Number(Moment(item?.last_fee_date).format("MM")) + 1 == "1"
+                                            ? "Jan" + " " + Moment(item.last_fee_date).format("YYYY") +
                                             " - "
-                                            : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "3"
-                                              ? "Mar" + " " + Moment(item.last_fee_date).format("YYYY") +
+                                            : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "2"
+                                              ? "Feb" + " " + Moment(item.last_fee_date).format("YYYY") +
                                               " - "
-                                              : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "4"
-                                                ? "Apr" + " " + Moment(item.last_fee_date).format("YYYY") +
+                                              : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "3"
+                                                ? "Mar" + " " + Moment(item.last_fee_date).format("YYYY") +
                                                 " - "
-                                                : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "5"
-                                                  ? "May" + " " + Moment(item.last_fee_date).format("YYYY") +
+                                                : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "4"
+                                                  ? "Apr" + " " + Moment(item.last_fee_date).format("YYYY") +
                                                   " - "
-                                                  : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "6"
-                                                    ? "Jun" + " " + Moment(item.last_fee_date).format("YYYY") +
+                                                  : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "5"
+                                                    ? "May" + " " + Moment(item.last_fee_date).format("YYYY") +
                                                     " - "
-                                                    : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "7"
-                                                      ? "July" + " " + Moment(item.last_fee_date).format("YYYY") +
+                                                    : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "6"
+                                                      ? "Jun" + " " + Moment(item.last_fee_date).format("YYYY") +
                                                       " - "
-                                                      : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "8"
-                                                        ? "Aug" + " " + Moment(item.last_fee_date).format("YYYY") +
+                                                      : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "7"
+                                                        ? "July" + " " + Moment(item.last_fee_date).format("YYYY") +
                                                         " - "
-                                                        : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "9"
-                                                          ? "Sept" + " " + Moment(item.last_fee_date).format("YYYY") +
+                                                        : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "8"
+                                                          ? "Aug" + " " + Moment(item.last_fee_date).format("YYYY") +
                                                           " - "
-                                                          : Number(Moment(item?.last_fee_date).format("MM")) + 1 == "10"
-                                                            ? "Oct" + " " + Moment(item.last_fee_date).format("YYYY") +
+                                                          : Number(Moment(item?.last_fee_date).format("MM"))  + 1 == "9"
+                                                            ? "Sept" + " " + Moment(item.last_fee_date).format("YYYY") +
                                                             " - "
-                                                            : Number(Moment(item?.last_fee_date).format("MM")) + 1 == "11"
-                                                              ? "Nov" + " " + Moment(item.last_fee_date).format("YYYY") +
+                                                            : Number(Moment(item?.last_fee_date).format("MM")) + 1 == "10"
+                                                              ? "Oct" + " " + Moment(item.last_fee_date).format("YYYY") +
                                                               " - "
-                                                              : Number(Moment(item?.last_fee_date).format("MM")) + 1 == "12"
-                                                                ? "Dec" + " " + Moment(item.last_fee_date).format("YYYY") +
+                                                              : Number(Moment(item?.last_fee_date).format("MM")) + 1 == "11"
+                                                                ? "Nov" + " " + Moment(item.last_fee_date).format("YYYY") +
                                                                 " - "
-                                                                : null
-                                        }
-                                      </span>
-                                    </>
-                                  )
+                                                                : Number(Moment(item?.last_fee_date).format("MM")) + 1 == "12"
+                                                                  ? "Dec" + " " + Moment(item.last_fee_date).format("YYYY") +
+                                                                  " - "
+                                                                  : null
+                                          }
+                                        </span>
+                                      </>
+                                    )
+                                  }
                                 }
                               })
                                 :
@@ -4958,8 +5023,8 @@ class FeeReceipt extends React.Component {
                           type="text"
                           style={{ backgroundColor: "orange" }}
                           className=""
-
-                          value={this.state.getStudentData && this.state.admission_no && this.getGrandTotal() > 0 ? this.getGrandTotal() : 0}
+                          value={
+                            this.state.getStudentData && this.state.admission_no && this.getGrandTotal() > 0 ? this.getGrandTotal() : 0}
                         />
                       </div>
                       {

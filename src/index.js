@@ -33,6 +33,7 @@ import PrintReceipt from './PrintReceipt';
 import reportWebVitals from './reportWebVitals';
 import FeeVoucher from './FeeVoucher';
 import Defaulter from './Defaulter';
+import DefaulterPerMoth from './DefaulerPerMonthFees';
 import PreviousDefaulter from './PreviousSessionDefaulter';
 import DefaulterMaker from './DefaulterMaker';
 import StudentStrength from './StudentStrength';
@@ -113,6 +114,7 @@ ReactDOM.render(
       <AppRoute path ="/FeeSubCategory" layout={AdminLayout} component={FeeSubCategory} />
       <AppRoute path ="/FeeVoucher" layout={AdminLayout} component={FeeVoucher} />
       <AppRoute path ="/Defaulter" layout={AdminLayout} component={Defaulter} />
+      <AppRoute path ="/DefaulterPerMonth" layout={AdminLayout} component={DefaulterPerMoth} />
       <AppRoute path ="/PreviousDefaulter" layout={AdminLayout} component={PreviousDefaulter} />
       <AppRoute path ="/DefaulterMaker" layout={AdminLayout} component={DefaulterMaker} />
       <AppRoute path ="/StudentStrength" layout={AdminLayout} component={StudentStrength} />

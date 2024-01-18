@@ -38,13 +38,11 @@ class AdminLayout extends React.Component{
           })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({AllSession: data})
             })
             .catch(err => console.log(err))
     }
     setSession=async(e)=>{
-        await console.log("wait")
         if(localStorage.getItem('SessionAccess') == ""){            
         localStorage.setItem('SessionAccess','2021-2022')
         }else if(  localStorage.getItem('SessionAccess') != this.state.session ){
@@ -91,6 +89,9 @@ class AdminLayout extends React.Component{
                     <ul className="collapse list-unstyled" id="orders">
                         <li>
                         <Link to="/FeeReceipt"  onClick={()=>{this.setState({NavHeading:'Fees/Fee transaction'})}}>Fee Transaction</Link>
+                        </li>
+                        <li>
+                        <Link to="/DefaulterPerMonth"  onClick={()=>{this.setState({NavHeading:'Fees/Defaulter transaction per month'})}}>Defaulter PerMonth Fees</Link>
                         </li>
                         <li>
                         <Link to="/VoucherEntry"  onClick={()=>{this.setState({NavHeading:'Fees/Voucher Entry'})}}>Voucher Entry</Link>
