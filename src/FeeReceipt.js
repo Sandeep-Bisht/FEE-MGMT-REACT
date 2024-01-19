@@ -596,6 +596,7 @@ class FeeReceipt extends React.Component {
 
     if (this.state.AllOldFees.length > 0) {
       if (this.state.session!==this.state.last_session) {
+        console.log("inside second")
         const startDate = Moment(this.state.paid_upto_month, 'YYYY-MM-DD');
         const endDate = Moment(this.state.receipt_date, 'YYYY-MM-DD');
         const monthsDifference = Math.ceil(endDate.diff(startDate, 'months', true));
@@ -653,8 +654,7 @@ class FeeReceipt extends React.Component {
     } else {
       const startDate = Moment(this.state.paid_upto_month, 'YYYY-MM-DD');
       const endDate = Moment(this.state.receipt_date, 'YYYY-MM-DD');
-      const daysDifference = endDate.diff(startDate, 'days');
-      const monthsDifference = Math.round(daysDifference / 30.44); 
+      const monthsDifference = endDate.diff(startDate, 'months');
       return this.state.StudentTutionFee * monthsDifference +
         (this.state.showTotalAdmissionFee ? +Number(this.state.admission_fee) : 0) +
         (this.state.showTotalAnnualFee ? Number(this.state.annual_terms_fee) : 0) +
@@ -1953,7 +1953,7 @@ class FeeReceipt extends React.Component {
     }));
   };
 
-  numberToWords = (number) => {
+   numberToWords = function convertNumberToWords(number) {
     const oneDigit = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
     const twoDigits = ["", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
     const teens = ["", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
@@ -1966,35 +1966,31 @@ class FeeReceipt extends React.Component {
         } else {
             const tens = Math.floor(num / 10);
             const ones = num % 10;
-            return twoDigits[tens] + (ones > 0 ? "-" + oneDigit[ones] : "");
+            return twoDigits[tens] + (ones > 0 ? " " + oneDigit[ones] : "");
         }
     }
 
     if (number === 0) {
         return "Zero";
-    } else if (number < 10) {
-        return oneDigit[number];
-    } else if (number >= 11 && number <= 19) {
-        return teens[number - 10];
-    } else if (number < 100) {
-        return twoDigitToWords(number);
-    } else if (number < 1000) {
-        const hundreds = Math.floor(number / 100);
-        const remainder = number % 100;
-        return oneDigit[hundreds] + " Hundred" + (remainder > 0 ? " " + twoDigitToWords(remainder) : "");
-    } else if (number < 10000) {
-        const thousands = Math.floor(number / 1000);
-        const remainder = number % 1000;
-        return oneDigit[thousands] + " Thousand" + (remainder > 0 ? " " + this.numberToWords(remainder) : "");
-    } else if (number < 100000) {
-        const tenThousands = Math.floor(number / 10000);
-        const remainder = number % 10000;
-        return twoDigitToWords(tenThousands) + " Thousand" + (remainder > 0 ? " " + this.numberToWords(remainder) : "");
-    } else if (number < 1000000) {
-        const hundredThousands = Math.floor(number / 100000);
-        const remainder = number % 100000;
-        return oneDigit[hundredThousands] + " Hundred Thousand" + (remainder > 0 ? " " + this.numberToWords(remainder) : "");
     }
+
+    let result = "";
+
+    if (Math.floor(number / 1000) > 0) {
+        result += convertNumberToWords(Math.floor(number / 1000)) + " Thousand";
+        number %= 1000;
+    }
+
+    if (Math.floor(number / 100) > 0) {
+        result += (result !== "" ? " " : "") + oneDigit[Math.floor(number / 100)] + " Hundred";
+        number %= 100;
+    }
+
+    if (number > 0) {
+        result += (result !== "" ? " " : "") + twoDigitToWords(number);
+    }
+
+    return result;
 };
 
 
