@@ -652,16 +652,27 @@ class FeeReceipt extends React.Component {
         }
       }
     } else {
-      const startDate = Moment(this.state.paid_upto_month, 'YYYY-MM-DD');
-      const endDate = Moment(this.state.receipt_date, 'YYYY-MM-DD');
-      const monthsDifference = endDate.diff(startDate, 'months');
-      return this.state.StudentTutionFee * monthsDifference +
+      const getAbsoluteMonths = (momentDate) => {
+        var months = Number(momentDate.format("MM"));
+        var years = Number(momentDate.format("YYYY"));
+        return months + (years * 12);
+      };
+    
+      var startMonths = getAbsoluteMonths(Moment(this.state.paid_upto_month, 'YYYY-MM-DD'));
+      var endMonths = getAbsoluteMonths(Moment(this.state.receipt_date, 'YYYY-MM-DD'));
+      var monthDifference = endMonths - startMonths;
+    
+      // Now you can use 'monthDifference' in your calculations
+      return (
+        this.state.StudentTutionFee * monthDifference +
         (this.state.showTotalAdmissionFee ? +Number(this.state.admission_fee) : 0) +
         (this.state.showTotalAnnualFee ? Number(this.state.annual_terms_fee) : 0) +
         (this.state.showTotalExaminationFee ? Number(this.state.examination_fee) : 0) +
         (this.state.showTotalRegistrationFee ? Number(this.state.registration_fee) : 0) +
         (Number(this.state.manualFine) > 0 ? Number(this.state.manualFine) : 0)
+      );
     }
+    
   };
   
   
