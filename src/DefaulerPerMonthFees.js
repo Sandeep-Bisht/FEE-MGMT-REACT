@@ -31,7 +31,8 @@ class DefaulterPerMoth extends React.Component{
           class_name:'',
           session:localStorage.getItem('SessionAccess'),
           Allfees:[],
-          DefaulterByMonth:'',
+          DefaulterByStartDate:"",
+          DefaulterByEndDate:'',
           defaultFine:'',
           fine_date:'',
           session_code:'',
@@ -81,9 +82,10 @@ getSession = () => {
     const payload = {
       class_name:this.state.class_name,
       session:this.state.session_code,
-      date:this.state.DefaulterByMonth,
+      startDate:this.state.DefaulterByStartDate,
+      endDate:this.state.DefaulterByEndDate,
     }
-   const response = await axios.post('http://144.91.110.221:4800/AllReceiptsCurrentMonth',payload)
+   const response = await axios.post('http://144.91.110.221:4800/AllReceiptsCustomDateRange',payload)
    if(response){
     this.setState({
       AllReceipts:response.data,
@@ -120,8 +122,7 @@ getSession = () => {
             ["ADMISSSION NO", "STUDENT" ,"CLASS" , "DATE", "PAID ADDMISSION FEES", "PAID REGISTRATION FEES", "PAID EXAMINATION FEES", "PAID ANNUAL FEES", "PAID FEES", "PAID FINE", "TOTAL"],
           ];
           {this.state.AllReceipts.map((item,ind)=>{
-            console.log(item,"check item")
-            csvData.push( [item.admission_no,item.name,item.class_name+"-"+item.section,item.receipt_date,item.admission_fee,item.registration_fee,item.examination_fee,item.annual_terms_fee,item.paid_fees,item.paid_fine,item.paid_amount])
+            csvData.push( [item.admission_no,item.name,item.class_name,item.receipt_date,item.admission_fee,item.registration_fee,item.examination_fee,item.annual_terms_fee,item.paid_fees,item.paid_fine,item.paid_amount])
           // })}
           })
           }
@@ -146,14 +147,18 @@ getSession = () => {
                       </select> 
                 </div>
                 <div className="col-3 form-group">
-                  <label>Date</label>
-                  <input type="date" className="form-control" value={this.state.DefaulterByMonth} onChange={(e)=>{this.setState({DefaulterByMonth:e.target.value})}} />
+                  <label> Start Date</label>
+                  <input type="date" className="form-control" value={this.state.DefaulterByStartDate} onChange={(e)=>{this.setState({DefaulterByStartDate:e.target.value})}} />
+                </div>
+                <div className="col-3 form-group">
+                  <label> End Date</label>
+                  <input type="date" className="form-control" value={this.state.DefaulterByEndDate} onChange={(e)=>{this.setState({DefaulterByEndDate:e.target.value})}} />
                 </div>
                 <div className="col-3 form-group">
                 <label>Select Class</label>
                 <select className="form-control" onChange={(e)=>{this.setState({class_name:e.target.value})}}>
                 <option value="">Select Class</option>
-                           <option value="KG-to-V">KG-to-V</option>
+                           <option value="PG-to-V">PG-to-V</option>
                            <option value="VI-to-XII">VI-to-XII</option>
                 </select>
                 </div>
@@ -195,7 +200,7 @@ getSession = () => {
                               <td>{index+1}</td>
                               <td>{item.admission_no}</td>
                               <td>{item.name}</td>
-                              <td>{item.class_name}- {item.section}</td>
+                              <td>{item.class_name}</td>
                               <td>{item.receipt_date}</td>  
                               <td>{item.admission_fee}</td>                          
                               <td>{item.registration_fee}</td>                          
