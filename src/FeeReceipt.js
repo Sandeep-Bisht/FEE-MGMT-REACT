@@ -596,7 +596,6 @@ class FeeReceipt extends React.Component {
 
     if (this.state.AllOldFees.length > 0) {
       if (this.state.session!==this.state.last_session) {
-        console.log("inside second")
         const startDate = Moment(this.state.paid_upto_month, 'YYYY-MM-DD');
         const endDate = Moment(this.state.receipt_date, 'YYYY-MM-DD');
         const monthsDifference = Math.ceil(endDate.diff(startDate, 'months', true));
