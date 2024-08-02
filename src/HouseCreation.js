@@ -16,7 +16,7 @@ class HouseCreation extends React.Component{
     this.getHouse()
     }
     getHouse = () => {
-        fetch("http://144.91.110.221:4800/getHouse")
+        fetch("http://localhost:4800/getHouse")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -37,7 +37,7 @@ class HouseCreation extends React.Component{
         data.append('_id',this.state._id)
         data.append('house_name', this.state.house_name)
         data.append('color', this.state.color)
-        const url="http://144.91.110.221:4800/updateHouse"
+        const url="http://localhost:4800/updateHouse"
                 fetch(url,
                     {
                     method:'put',
@@ -52,7 +52,7 @@ class HouseCreation extends React.Component{
                 //   }
       }
       deleteHouse = (id) => {
-        const apiUrl = 'http://144.91.110.221:4800/deleteHouse';
+        const apiUrl = 'http://localhost:4800/deleteHouse';
         fetch(apiUrl, {
           headers : { 
             'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ class HouseCreation extends React.Component{
         const data = new FormData()
         data.append('house_name', this.state.house_name)
         data.append('color', this.state.color)
-        const url = "http://144.91.110.221:4800/StoreHouse"
+        const url = "http://localhost:4800/StoreHouse"
         fetch(url, {
                 method: 'post',
                 body: data

@@ -19,7 +19,7 @@ class BankCreation extends React.Component{
         this.getBankData()
     }
     getBankData = () => {
-        fetch("http://144.91.110.221:4800/getBankData"
+        fetch("http://localhost:4800/getBankData"
         , {
           method: 'POST',
           headers: {
@@ -51,7 +51,7 @@ class BankCreation extends React.Component{
         data.append('_id',this.state._id)
         data.append('bank',this.state.bank)
         data.append('school_id','UT015')
-        const url="http://144.91.110.221:4800/UpdateBankData"
+        const url="http://localhost:4800/UpdateBankData"
                 fetch(url,
                     {
                     method:'put',
@@ -66,7 +66,7 @@ class BankCreation extends React.Component{
               }
       }
       deleteBank = (id) => {
-        const apiUrl = 'http://144.91.110.221:4800/deleteBank';
+        const apiUrl = 'http://localhost:4800/deleteBank';
         fetch(apiUrl, {
           headers : { 
             'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ class BankCreation extends React.Component{
         const data = new FormData()
         data.append('bank', this.state.bank)
         data.append('school_id', "UT015")
-        const url = "http://144.91.110.221:4800/StoreBankData"
+        const url = "http://localhost:4800/StoreBankData"
         fetch(url, {
                 method: 'post',
                 body: data

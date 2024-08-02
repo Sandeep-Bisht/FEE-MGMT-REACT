@@ -39,7 +39,7 @@ class ParentCreation extends React.Component{
         this.getStudent()
     }
     getStudent = () => {
-        fetch("http://144.91.110.221:4800/getStudent")
+        fetch("http://localhost:4800/getStudent")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -48,7 +48,7 @@ class ParentCreation extends React.Component{
             .then(err => console.log(err))
     }
     // getParent = () => {
-    //     fetch("http://144.91.110.221:4800/getParent")
+    //     fetch("http://localhost:4800/getParent")
     //         .then(res => res.json())
     //         .then(data => {
     //             console.log(data)
@@ -86,7 +86,7 @@ class ParentCreation extends React.Component{
 //         data.append('gaurdian_mobile', this.state.gaurdian_mobile)
 
 //         data.append('image', this.state.image)
-//         const url = "http://144.91.110.221:4800/StoreParent"
+//         const url = "http://localhost:4800/StoreParent"
 //         fetch(url, {
 //                 method: 'post',
 //                 body: data

@@ -16,7 +16,7 @@ componentDidMount(){
     this.getSession()
 }
 getSession = () => {
-    fetch("http://144.91.110.221:4800/getSession"
+    fetch("http://localhost:4800/getSession"
     ,{
         method: 'POST',
         headers: {
@@ -46,7 +46,7 @@ checkValidation = () => {
     }
   }
   deleteSession = (id) => {
-    const apiUrl = 'http://144.91.110.221:4800/deleteSession';
+    const apiUrl = 'http://localhost:4800/deleteSession';
     fetch(apiUrl, {
       headers : { 
         'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ submitSessionData = () => {
     data.append('to', Moment(this.state.to).format('DD-MM-YYYY'))
     data.append('session_code',this.state.session_code)
     data.append('school_id',"UT015")
-    const url = "http://144.91.110.221:4800/StoreSession"
+    const url = "http://localhost:4800/StoreSession"
     fetch(url, {
             method: 'post',
             body: data

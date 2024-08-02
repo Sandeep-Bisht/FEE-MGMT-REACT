@@ -65,7 +65,7 @@ class FeeStructure extends React.Component{
         this.getFeeSubCategory()
     }
     getFeeSubCategory = () => {
-        fetch("http://144.91.110.221:4800/getSubCategory")
+        fetch("http://localhost:4800/getSubCategory")
             .then(res => res.json())
             .then(data => {
                 const currentMonth =  Moment().format('MM')
@@ -77,7 +77,7 @@ class FeeStructure extends React.Component{
             .then(err => console.log(err))
     }
     ImportSession =async()=>{
-            fetch("http://144.91.110.221:4800/getFeeStructure",{
+            fetch("http://localhost:4800/getFeeStructure",{
                 method: 'POST',
                 headers: {
                   Accept: 'application/json',
@@ -100,7 +100,7 @@ class FeeStructure extends React.Component{
             })
             const data = new FormData()
             data.append('AllImportFeeStructure', JSON.stringify(AllImportFeeStructure))
-            const url = "http://144.91.110.221:4800/storeImportStructure"
+            const url = "http://localhost:4800/storeImportStructure"
             fetch(url, {
                     method: 'post',
                     body: data
@@ -114,7 +114,7 @@ class FeeStructure extends React.Component{
             });
     }
     getSession = async() => {
-        fetch("http://144.91.110.221:4800/getSession"
+        fetch("http://localhost:4800/getSession"
         ,{
             method: 'POST',
             headers: {
@@ -133,7 +133,7 @@ class FeeStructure extends React.Component{
     }
     getClass = async() => {
         this.getFeeStructure()
-        fetch("http://144.91.110.221:4800/getClass"
+        fetch("http://localhost:4800/getClass"
         ,{
         method: 'POST',
         headers: {
@@ -153,7 +153,7 @@ class FeeStructure extends React.Component{
             .then(err => console.log(err))
     }
     getSection = () => {
-        fetch("http://144.91.110.221:4800/getSection")
+        fetch("http://localhost:4800/getSection")
             .then(res => res.json())
             .then(data => {
                 this.setState({AllSection: data})
@@ -161,7 +161,7 @@ class FeeStructure extends React.Component{
             .then(err => console.log(err))
     }
     getCategory = () => {
-        fetch("http://144.91.110.221:4800/getCategory")
+        fetch("http://localhost:4800/getCategory")
             .then(res => res.json())
             .then(data => {
                 this.setState({AllCategory: data})
@@ -169,7 +169,7 @@ class FeeStructure extends React.Component{
             .then(err => console.log(err))
     }
     getHouse = () => {
-        fetch("http://144.91.110.221:4800/getHouse")
+        fetch("http://localhost:4800/getHouse")
             .then(res => res.json())
             .then(data => {
                 this.setState({AllHouse: data})
@@ -177,7 +177,7 @@ class FeeStructure extends React.Component{
             .then(err => console.log(err))
     }
     getFeeStructure = () => {
-        fetch("http://144.91.110.221:4800/getFeeStructure",{
+        fetch("http://localhost:4800/getFeeStructure",{
             method: 'POST',
             headers: {
               Accept: 'application/json',
@@ -244,7 +244,7 @@ class FeeStructure extends React.Component{
         data.append('total_annual_fee', this.state.total_annual_fee)
         data.append('total_monthly_fee', this.state.total_monthly_fee)
         data.append('grand_total', this.state.grand_total)
-        const url="http://144.91.110.221:4800/updateFeeStructure"
+        const url="http://localhost:4800/updateFeeStructure"
                 fetch(url,
                     {
                     method:'put',
@@ -260,7 +260,7 @@ class FeeStructure extends React.Component{
             }
       }
       deleteFeeStructure = (id) => {
-        const apiUrl = 'http://144.91.110.221:4800/deleteFeeStructure';
+        const apiUrl = 'http://localhost:4800/deleteFeeStructure';
         fetch(apiUrl, {
           headers : { 
             'Content-Type': 'application/json',
@@ -310,7 +310,7 @@ class FeeStructure extends React.Component{
         data.append('examination_fee',this.state.examination_fee)
         data.append('admission_fee',this.state.admission_fee);
         data.append('registration_fee',this.state.registration_fee)
-        const url = "http://144.91.110.221:4800/StoreFeeStructure"
+        const url = "http://localhost:4800/StoreFeeStructure"
         fetch(url, {
                 method: 'post',
                 body: data

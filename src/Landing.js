@@ -8,7 +8,7 @@ class Landing extends React.Component{
         }
     }
     login = () => {
-        const url = "http://144.91.110.221:4800/signin"
+        const url = "http://localhost:4800/signin"
         fetch(url
           , {
             method: 'POST',

@@ -17,7 +17,7 @@ class FeeSubCategoryFine extends React.Component{
         this.getFine()
     }
     // getFeeCategory = () => {
-    //     fetch("http://144.91.110.221:4800/getCategory")
+    //     fetch("http://localhost:4800/getCategory")
     //         .then(res => res.json())
     //         .then(data => {
     //             console.log(data)
@@ -43,7 +43,7 @@ class FeeSubCategoryFine extends React.Component{
         data.append('category', this.state.category)
         data.append('fine_date', this.state.fine_date)
         data.append('amount', this.state.amount)
-        const url="http://144.91.110.221:4800/updateFine"
+        const url="http://localhost:4800/updateFine"
                 fetch(url,
                     {
                     method:'put',
@@ -79,7 +79,7 @@ class FeeSubCategoryFine extends React.Component{
         data.append('fine_date', this.state.fine_date)
         data.append('amount', this.state.amount)
     
-        const url = "http://144.91.110.221:4800/StoreFine"
+        const url = "http://localhost:4800/StoreFine"
         fetch(url, {
                 method: 'post',
                 body: data
@@ -93,7 +93,7 @@ class FeeSubCategoryFine extends React.Component{
         }
     }
     getFine = () => {
-        fetch("http://144.91.110.221:4800/getFine")
+        fetch("http://localhost:4800/getFine")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
