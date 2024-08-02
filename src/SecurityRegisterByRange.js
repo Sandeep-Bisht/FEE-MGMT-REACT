@@ -41,7 +41,7 @@ class SecurityRegisterReport extends React.Component{
       this.StudentStrenght()
     }
     getSection = () => {
-      fetch("http://localhost:4800/getSection"
+      fetch("http://144.91.110.221:4800/getSection"
           ,{
           method: 'POST',
           headers: {
@@ -62,7 +62,7 @@ class SecurityRegisterReport extends React.Component{
             console.log(error)
           })  }
     getSession = () => {
-      fetch("http://localhost:4800/getSession"
+      fetch("http://144.91.110.221:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -89,7 +89,7 @@ class SecurityRegisterReport extends React.Component{
     if(admission_no =='0'){
          return false;
     }
-    fetch("http://localhost:4800/getTransferCertificate"
+    fetch("http://144.91.110.221:4800/getTransferCertificate"
     ,{
     method: 'POST',
     headers: {
@@ -125,7 +125,7 @@ class SecurityRegisterReport extends React.Component{
     $('#getBtn').text("Please Wait...")
      this.setState({StudentWithFees:[]})
      StudentWithFees=[]
-       fetch("http://localhost:4800/StudentStrenghtForSecurityByRange"
+       fetch("http://144.91.110.221:4800/StudentStrenghtForSecurityByRange"
        ,{
            method: 'POST',
            headers: {
@@ -185,7 +185,7 @@ class SecurityRegisterReport extends React.Component{
      console.log("checking response SearchOldfeeSecurityRegisterAll")
      await  console.log("wait wait")
      const admission_no = item.admission_no
-     fetch("http://localhost:4800/SearchOldfeeSecurityRegisterAll"
+     fetch("http://144.91.110.221:4800/SearchOldfeeSecurityRegisterAll"
      ,{
          method: 'POST',
          headers: {
@@ -230,7 +230,7 @@ class SecurityRegisterReport extends React.Component{
     })
  }
     getClass = () => {
-      fetch("http://localhost:4800/getClass")
+      fetch("http://144.91.110.221:4800/getClass")
           .then(res => res.json())
           .then(data => {
               console.log(data)
@@ -243,7 +243,7 @@ class SecurityRegisterReport extends React.Component{
     global_class_name =  class_name
     console.log("checking response FeesClasswise")
     const currentMonth =  Moment().format('MM')       
-     fetch("http://localhost:4800/FeesClasswise"
+     fetch("http://144.91.110.221:4800/FeesClasswise"
      ,{
          method: 'POST',
          headers: {

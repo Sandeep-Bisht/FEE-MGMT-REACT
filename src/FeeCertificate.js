@@ -65,7 +65,7 @@ class FeeCertificate extends React.Component{
       
     }
     getSession = () => {
-      fetch("http://localhost:4800/getSession"
+      fetch("http://144.91.110.221:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -94,7 +94,7 @@ class FeeCertificate extends React.Component{
       previousmonthlyamountText=''
       this.setState({name:'',account_no:'',class_name:'',section:'',parents:'',fee_concession:'',last_fees_date:''})
         await console.log("wait wait")
-        fetch("http://localhost:4800/singlestudentdata_with_session"
+        fetch("http://144.91.110.221:4800/singlestudentdata_with_session"
         ,{
         method: 'POST',
         headers: {
@@ -122,7 +122,7 @@ class FeeCertificate extends React.Component{
       console.log("checking response SearchOldfee")
       await  console.log("wait wait")
       const admission_no = this.state.admission_no.toUpperCase()
-      fetch("http://localhost:4800/SearchOldfee"
+      fetch("http://144.91.110.221:4800/SearchOldfee"
       ,{
           method: 'POST',
           headers: {
@@ -153,7 +153,7 @@ class FeeCertificate extends React.Component{
   //   FeesClasswise=(class_names,sections)=>{    
   //     console.log("checking response FeesClasswise")
   //     const currentMonth =  Moment().format('MM')       
-  //      fetch("http://localhost:4800/FeesClasswise"
+  //      fetch("http://144.91.110.221:4800/FeesClasswise"
   //      ,{
   //          method: 'POST',
   //          headers: {

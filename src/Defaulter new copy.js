@@ -53,7 +53,7 @@ class Defaulter extends React.Component{
       this.getSection()
     }
     // getFeeReceipt = () => {
-    //   fetch("http://localhost:4800/getFeeReceipt")
+    //   fetch("http://144.91.110.221:4800/getFeeReceipt")
     //       .then(res => res.json())
     //       .then(data => {
     //           console.log(data)
@@ -75,7 +75,7 @@ PreviousStudentStrenght= async (item)=>{
   var b =this.state.session.split("-")[1];
   b=b-1
   var previousSession =a+"-"+b
-  fetch("http://localhost:4800/singlestudentdata_with_session"
+  fetch("http://144.91.110.221:4800/singlestudentdata_with_session"
       ,{
         method: 'POST',
         headers: {
@@ -107,7 +107,7 @@ PreviousStudentStrenght= async (item)=>{
   console.log("checking response SearchOldfee")
   await  console.log("wait wait")
   const admission_no = item.admission_no
-  fetch("http://localhost:4800/SearchOldfee"
+  fetch("http://144.91.110.221:4800/SearchOldfee"
   ,{
       method: 'POST',
       headers: {
@@ -177,7 +177,7 @@ PreviousFeesClasswise=(item)=>{
 this.setState({PreviousStudentArrayWithFee:[]})
 console.log("checking response FeesClasswise " +item.class_name)
 const currentMonth =  Moment().format('MM')       
- fetch("http://localhost:4800/FeesClasswise"
+ fetch("http://144.91.110.221:4800/FeesClasswise"
  ,{
      method: 'POST',
      headers: {
@@ -333,7 +333,7 @@ PrevioussetDefaulter =async()=>{
   PreviousStudentArray=[]
   PreviousStudentArrayWithFee=[]
   PreviousPaidFees=[]
-        fetch("http://localhost:4800/StudentStrenght"
+        fetch("http://144.91.110.221:4800/StudentStrenght"
         ,{
             method: 'POST',
             headers: {
@@ -371,7 +371,7 @@ PrevioussetDefaulter =async()=>{
       console.log("checking response SearchOldfee")
       await  console.log("wait wait")
       const admission_no = item.admission_no
-      fetch("http://localhost:4800/SearchOldfee"
+      fetch("http://144.91.110.221:4800/SearchOldfee"
       ,{
           method: 'POST',
           headers: {
@@ -442,7 +442,7 @@ this.setStudentFeeStructure()
     this.setState({studentArrayWithFee:[]})
     console.log("checking response FeesClasswise " +item.class_name)
     const currentMonth =  Moment().format('MM')       
-     fetch("http://localhost:4800/FeesClasswise"
+     fetch("http://144.91.110.221:4800/FeesClasswise"
      ,{
          method: 'POST',
          headers: {
@@ -562,7 +562,7 @@ paidFees.push({"fee_concession":fee_concession,"is_full_free_ship":item.is_full_
   this.SetFinalDefaulter()
  }
     getSession = () => {
-      fetch("http://localhost:4800/getSession"
+      fetch("http://144.91.110.221:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -581,7 +581,7 @@ paidFees.push({"fee_concession":fee_concession,"is_full_free_ship":item.is_full_
           .then(err => console.log(err))
   }
     getFine = () => {
-        fetch("http://localhost:4800/getFine")
+        fetch("http://144.91.110.221:4800/getFine")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -590,7 +590,7 @@ paidFees.push({"fee_concession":fee_concession,"is_full_free_ship":item.is_full_
             .then(err => console.log(err))
     }
     getSection = () => {
-      fetch("http://localhost:4800/getSection"
+      fetch("http://144.91.110.221:4800/getSection"
           ,{
           method: 'POST',
           headers: {
@@ -612,7 +612,7 @@ paidFees.push({"fee_concession":fee_concession,"is_full_free_ship":item.is_full_
     DefaulterByMonth=async()=>{
      this.setState({AllDefaulter:[]})
       await console.log(this.state.DefaulterByMonth)
-       fetch("http://localhost:4800/DefaulterByMonth"
+       fetch("http://144.91.110.221:4800/DefaulterByMonth"
        ,{
            method: 'POST',
            headers: {
@@ -636,7 +636,7 @@ paidFees.push({"fee_concession":fee_concession,"is_full_free_ship":item.is_full_
        })
     }
     getClass = () => {
-      fetch("http://localhost:4800/getClass")
+      fetch("http://144.91.110.221:4800/getClass")
           .then(res => res.json())
           .then(data => {
               console.log(data)
@@ -648,7 +648,7 @@ paidFees.push({"fee_concession":fee_concession,"is_full_free_ship":item.is_full_
     global_class_name =  class_name
     console.log("checking response FeesClasswise")
     const currentMonth =  Moment().format('MM')       
-     fetch("http://localhost:4800/FeesClasswise"
+     fetch("http://144.91.110.221:4800/FeesClasswise"
      ,{
          method: 'POST',
          headers: {

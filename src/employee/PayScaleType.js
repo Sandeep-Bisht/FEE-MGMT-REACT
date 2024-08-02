@@ -12,7 +12,7 @@ const PayScaleType = () => {
     const [AllPayScaleType,setAllPayScaleType]=useState([])
     
     const getPayScaleType = () => {
-        fetch("http://localhost:4800/getPayScaleType"
+        fetch("http://144.91.110.221:4800/getPayScaleType"
         , {
           method: 'POST',
           headers: {
@@ -38,7 +38,7 @@ const PayScaleType = () => {
         const data = new FormData()
         data.append('name', name)
         data.append('description', description)
-        const url = "http://localhost:4800/StorePayScaleType"
+        const url = "http://144.91.110.221:4800/StorePayScaleType"
         fetch(url, {
                 method: 'post',
                 body: data

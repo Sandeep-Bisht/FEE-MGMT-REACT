@@ -45,7 +45,7 @@ class FeeWaiver extends React.Component{
             data.append('CategoryOrGender', this.state.CategoryOrGender)
             data.append('WaiverCat', this.state.WaiverCat)
             data.append('Gender', this.state.Gender)
-            const url = "http://localhost:4800/StoreWaiver"
+            const url = "http://144.91.110.221:4800/StoreWaiver"
             fetch(url, {
                     method: 'post',
                     body: data

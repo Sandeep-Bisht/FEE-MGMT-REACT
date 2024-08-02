@@ -39,7 +39,7 @@ class SuspensionalVoucher extends React.Component{
         this.getSession()
     }
     getSession = () => {
-        fetch("http://localhost:4800/getSession"
+        fetch("http://144.91.110.221:4800/getSession"
         ,{
             method: 'POST',
             headers: {
@@ -58,7 +58,7 @@ class SuspensionalVoucher extends React.Component{
               console.log(error)
             })    }
     getBankData = () => {
-        fetch("http://localhost:4800/getBankData"
+        fetch("http://144.91.110.221:4800/getBankData"
         , {
           method: 'POST',
           headers: {
@@ -80,7 +80,7 @@ class SuspensionalVoucher extends React.Component{
             })    }
     getClass = async() => {
         await console.log("wait wait")        
-        fetch("http://localhost:4800/getClass"
+        fetch("http://144.91.110.221:4800/getClass"
         ,{
         method: 'POST',
         headers: {
@@ -101,7 +101,7 @@ class SuspensionalVoucher extends React.Component{
               console.log(error)
             })    }
     getSuspensionalFee= async()=>{
-        fetch("http://localhost:4800/getSuspensionalFeeWithAdmissionNoZero"
+        fetch("http://144.91.110.221:4800/getSuspensionalFeeWithAdmissionNoZero"
         ,{
             method: 'POST',
             headers: {
@@ -125,7 +125,7 @@ class SuspensionalVoucher extends React.Component{
         // await this.setBalance()
     }
     // getSuspensionalFee = () => {
-    //     fetch("http://localhost:4800/getSuspensionalFee")
+    //     fetch("http://144.91.110.221:4800/getSuspensionalFee")
     //         .then(res => res.json())
     //         .then(data => {
     //             console.log(data)
@@ -156,7 +156,7 @@ class SuspensionalVoucher extends React.Component{
     //     data.append('class_name', this.state.class_name)
     //     data.append('amount', this.state.amount)
     //     data.append('remark', this.state.remark)
-    //     const url="http://localhost:4800/SuspensionalFeeData"
+    //     const url="http://144.91.110.221:4800/SuspensionalFeeData"
     //             fetch(url,
     //                 {
     //                 method:'put',
@@ -171,7 +171,7 @@ class SuspensionalVoucher extends React.Component{
               
     //   }
     deleteSuspensionalFee(id){
-        const apiUrl = 'http://localhost:4800/DeleteReceipt';
+        const apiUrl = 'http://144.91.110.221:4800/DeleteReceipt';
         fetch(apiUrl, {
           headers : { 
             'Content-Type':'application/json',
@@ -190,7 +190,7 @@ class SuspensionalVoucher extends React.Component{
         })
 }
     //   deleteSuspensionalFee = (id) => {
-    //     const apiUrl = 'http://localhost:4800/deleteSuspensionalFee';
+    //     const apiUrl = 'http://144.91.110.221:4800/deleteSuspensionalFee';
     //     fetch(apiUrl, {
     //       headers : { 
     //         'Content-Type': 'application/json',
@@ -252,7 +252,7 @@ class SuspensionalVoucher extends React.Component{
             data.append('bank_v_no','')
             data.append('check_no', '')
             data.append('bank_date', '')
-            const url = "http://localhost:4800/StoreReceipt"
+            const url = "http://144.91.110.221:4800/StoreReceipt"
             fetch(url, {
                     method: 'post',
                     body: data
@@ -277,7 +277,7 @@ class SuspensionalVoucher extends React.Component{
     //     data.append('class_name', this.state.class_name)
     //     data.append('amount', this.state.amount)    
     //     data.append('remark', this.state.remark)  
-    //     const url = "http://localhost:4800/StoreSuspensionalVoucher"
+    //     const url = "http://144.91.110.221:4800/StoreSuspensionalVoucher"
     //     fetch(url, {
     //             method: 'post',
     //             body: data

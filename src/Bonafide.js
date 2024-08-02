@@ -55,7 +55,7 @@ class Bonafide extends React.Component{
     }
     getClass = async() => {
       await console.log("wait wait")
-      fetch("http://localhost:4800/getClass"
+      fetch("http://144.91.110.221:4800/getClass"
       ,{
       method: 'POST',
       headers: {
@@ -76,7 +76,7 @@ class Bonafide extends React.Component{
     searchByAdmission_no_with_session = async() => {
         this.setState({name:'',account_no:'',class_name:'',section:'',parents:'',fee_concession:'',left_on:'',dob:'',date_of_admission:'',father_name:'',mother_name:'',sex:''})
           await console.log("wait wait")
-          fetch("http://localhost:4800/singlestudentdata_with_session"
+          fetch("http://144.91.110.221:4800/singlestudentdata_with_session"
           ,{
           method: 'POST',
           headers: {
@@ -163,7 +163,7 @@ class Bonafide extends React.Component{
       FeesClasswise=(class_names,sections)=>{    
         console.log("checking response FeesClasswise")
         const currentMonth =  Moment().format('MM')       
-         fetch("http://localhost:4800/FeesClasswise"
+         fetch("http://144.91.110.221:4800/FeesClasswise"
          ,{
              method: 'POST',
              headers: {

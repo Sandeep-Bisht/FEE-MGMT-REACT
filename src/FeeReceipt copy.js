@@ -160,9 +160,9 @@
 //     }
 //     // getFeeSubCategory = () => {
 <<<<<<< HEAD
-//     //     fetch("http://localhost:4800/getSubCategory")
+//     //     fetch("http://144.91.110.221:4800/getSubCategory")
 =======
-//     //     fetch("http://localhost:4800/getSubCategory")
+//     //     fetch("http://144.91.110.221:4800/getSubCategory")
 >>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //     //         .then(res => res.json())
 //     //         .then(data => {
@@ -192,9 +192,9 @@
 //     }
 //     getBankData = () => {
 <<<<<<< HEAD
-//         fetch("http://localhost:4800/getBankData"
+//         fetch("http://144.91.110.221:4800/getBankData"
 =======
-//         fetch("http://localhost:4800/getBankData"
+//         fetch("http://144.91.110.221:4800/getBankData"
 >>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //         , {
 //           method: 'POST',
@@ -218,9 +218,9 @@
 //     }
 //     getFine = () => {
 <<<<<<< HEAD
-//         fetch("http://localhost:4800/getFine")
+//         fetch("http://144.91.110.221:4800/getFine")
 =======
-//         fetch("http://localhost:4800/getFine")
+//         fetch("http://144.91.110.221:4800/getFine")
 >>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //             .then(res => res.json())
 //             .then(data => {
@@ -232,9 +232,9 @@
 //     getStudent = async() => {
 //         await console.log("wait wait")
 <<<<<<< HEAD
-//         fetch("http://localhost:4800/getStudent"
+//         fetch("http://144.91.110.221:4800/getStudent"
 =======
-//         fetch("http://localhost:4800/getStudent"
+//         fetch("http://144.91.110.221:4800/getStudent"
 >>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //             , {
 //               method: 'POST',
@@ -258,9 +258,9 @@
 //             data.append('category', this.state.category)
 //             data.append('description', this.state.description)
 <<<<<<< HEAD
-//             const url = "http://localhost:4800/StoreFeeCatogory"
+//             const url = "http://144.91.110.221:4800/StoreFeeCatogory"
 =======
-//             const url = "http://localhost:4800/StoreFeeCatogory"
+//             const url = "http://144.91.110.221:4800/StoreFeeCatogory"
 >>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //             fetch(url, {
 //                     method: 'post',
@@ -275,9 +275,9 @@
 //     }
 //     getFeeCategory = () => {
 <<<<<<< HEAD
-//         fetch("http://localhost:4800/getCategory")
+//         fetch("http://144.91.110.221:4800/getCategory")
 =======
-//         fetch("http://localhost:4800/getCategory")
+//         fetch("http://144.91.110.221:4800/getCategory")
 >>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //             .then(res => res.json())
 //             .then(data => {
@@ -287,9 +287,9 @@
 //     }
 //     getSession = () => {
 <<<<<<< HEAD
-//         fetch("http://localhost:4800/getSession"
+//         fetch("http://144.91.110.221:4800/getSession"
 =======
-//         fetch("http://localhost:4800/getSession"
+//         fetch("http://144.91.110.221:4800/getSession"
 >>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //         ,{
 //             method: 'POST',
@@ -314,9 +314,9 @@
 //              return false;
 //         }
 <<<<<<< HEAD
-//         fetch("http://localhost:4800/singleparentdata"
+//         fetch("http://144.91.110.221:4800/singleparentdata"
 =======
-//         fetch("http://localhost:4800/singleparentdata"
+//         fetch("http://144.91.110.221:4800/singleparentdata"
 >>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //         ,{
 //             method: 'POST',
@@ -349,9 +349,9 @@
 //              return false;
 //         }
 <<<<<<< HEAD
-//         fetch("http://localhost:4800/singlestudentdata"
+//         fetch("http://144.91.110.221:4800/singlestudentdata"
 =======
-//         fetch("http://localhost:4800/singlestudentdata"
+//         fetch("http://144.91.110.221:4800/singlestudentdata"
 >>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //             ,{
 //               method: 'POST',
@@ -387,9 +387,9 @@
 //     }
 //     // getFeeReceipt = () => {
 <<<<<<< HEAD
-//     //     fetch("http://localhost:4800/getFeeReceipt")
+//     //     fetch("http://144.91.110.221:4800/getFeeReceipt")
 =======
-//     //     fetch("http://localhost:4800/getFeeReceipt")
+//     //     fetch("http://144.91.110.221:4800/getFeeReceipt")
 >>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //     //         .then(res => res.json())
 //     //         .then(data => {
@@ -402,9 +402,9 @@
 //         console.log("checking response FeesClasswise")
 //         // const currentMonth =  Moment().format('MM')       
 <<<<<<< HEAD
-//           fetchPromise=  fetch("http://localhost:4800/getFeeReceipt"
+//           fetchPromise=  fetch("http://144.91.110.221:4800/getFeeReceipt"
 =======
-//           fetchPromise=  fetch("http://localhost:4800/getFeeReceipt"
+//           fetchPromise=  fetch("http://144.91.110.221:4800/getFeeReceipt"
 >>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //          ,{
 //              method: 'POST',
@@ -445,9 +445,9 @@
 //         await  console.log("wait wait")
 //         const admission_no = this.state.admission_no.toUpperCase()
 <<<<<<< HEAD
-//         fetch("http://localhost:4800/SearchOldfee"
+//         fetch("http://144.91.110.221:4800/SearchOldfee"
 =======
-//         fetch("http://localhost:4800/SearchOldfee"
+//         fetch("http://144.91.110.221:4800/SearchOldfee"
 >>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //         ,{
 //             method: 'POST',
@@ -511,9 +511,9 @@
 //        console.log("checking response FeesClasswise")
 //        const currentMonth =  Moment().format('MM')       
 <<<<<<< HEAD
-//         fetch("http://localhost:4800/FeesClasswise"
+//         fetch("http://144.91.110.221:4800/FeesClasswise"
 =======
-//         fetch("http://localhost:4800/FeesClasswise"
+//         fetch("http://144.91.110.221:4800/FeesClasswise"
 >>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //         ,{
 //             method: 'POST',
@@ -892,9 +892,9 @@
 //              return false;
 //         }
 <<<<<<< HEAD
-//         fetch("http://localhost:4800/singlestudentdata"
+//         fetch("http://144.91.110.221:4800/singlestudentdata"
 =======
-//         fetch("http://localhost:4800/singlestudentdata"
+//         fetch("http://144.91.110.221:4800/singlestudentdata"
 >>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //         ,{
 //             method: 'POST',
@@ -924,9 +924,9 @@
 //         //      return false;
 //         // }
 <<<<<<< HEAD
-//         // fetch("http://localhost:4800/singlestudentdata"
+//         // fetch("http://144.91.110.221:4800/singlestudentdata"
 =======
-//         // fetch("http://localhost:4800/singlestudentdata"
+//         // fetch("http://144.91.110.221:4800/singlestudentdata"
 >>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //         // ,{
 //         //     method: 'POST',
@@ -1016,9 +1016,9 @@
 //             data.append('check_no', this.state.check_no)
 //             data.append('bank_date', this.state.bank_date)
 <<<<<<< HEAD
-//             const url = "http://localhost:4800/StoreReceipt"
+//             const url = "http://144.91.110.221:4800/StoreReceipt"
 =======
-//             const url = "http://localhost:4800/StoreReceipt"
+//             const url = "http://144.91.110.221:4800/StoreReceipt"
 >>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //             fetch(url, {
 //                     method: 'post',
@@ -1042,9 +1042,9 @@
 //             data.append('_id',this.state._id)   
 //             data.append('balance',this.state.balance)    
 <<<<<<< HEAD
-//             const url="http://localhost:4800/UpdateBalance"
+//             const url="http://144.91.110.221:4800/UpdateBalance"
 =======
-//             const url="http://localhost:4800/UpdateBalance"
+//             const url="http://144.91.110.221:4800/UpdateBalance"
 >>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //                     fetch(url,
 //                         {
@@ -1078,9 +1078,9 @@
 //               }      
 //         DeleteReceipt(id){
 <<<<<<< HEAD
-//                 const apiUrl = 'http://localhost:4800/DeleteReceipt';
+//                 const apiUrl = 'http://144.91.110.221:4800/DeleteReceipt';
 =======
-//                 const apiUrl = 'http://localhost:4800/DeleteReceipt';
+//                 const apiUrl = 'http://144.91.110.221:4800/DeleteReceipt';
 >>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //                 fetch(apiUrl, {
 //                   headers : { 
@@ -1131,9 +1131,9 @@
 //             data.append('receipt_date', this.state.Rreceiptdate)
 //             data.append('balance', this.state.Rbalance)
 <<<<<<< HEAD
-//             const url="http://localhost:4800/UpdateReceipt"
+//             const url="http://144.91.110.221:4800/UpdateReceipt"
 =======
-//             const url="http://localhost:4800/UpdateReceipt"
+//             const url="http://144.91.110.221:4800/UpdateReceipt"
 >>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //                     fetch(url,
 //                         {
@@ -1287,13 +1287,13 @@
 //                     <div className="col-4">
 //                                 <ModalImage
 <<<<<<< HEAD
-//                                 small={"http://localhost:4800/" + this.state.image}
-//                                 medium={"http://localhost:4800/" + this.state.image}
-//                                 large={"http://localhost:4800/" + this.state.image}
+//                                 small={"http://144.91.110.221:4800/" + this.state.image}
+//                                 medium={"http://144.91.110.221:4800/" + this.state.image}
+//                                 large={"http://144.91.110.221:4800/" + this.state.image}
 =======
-//                                 small={"http://localhost:4800/" + this.state.image}
-//                                 medium={"http://localhost:4800/" + this.state.image}
-//                                 large={"http://localhost:4800/" + this.state.image}
+//                                 small={"http://144.91.110.221:4800/" + this.state.image}
+//                                 medium={"http://144.91.110.221:4800/" + this.state.image}
+//                                 large={"http://144.91.110.221:4800/" + this.state.image}
 >>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //                                 alt={this.state.image}
 //                                 />;
@@ -1301,13 +1301,13 @@
 //                     <div className="col-4">
 //                                 <ModalImage
 <<<<<<< HEAD
-//                                 small={"http://localhost:4800/" + this.state.image}
-//                                 medium={"http://localhost:4800/" + this.state.image}
-//                                 large={"http://localhost:4800/" + this.state.image}
+//                                 small={"http://144.91.110.221:4800/" + this.state.image}
+//                                 medium={"http://144.91.110.221:4800/" + this.state.image}
+//                                 large={"http://144.91.110.221:4800/" + this.state.image}
 =======
-//                                 small={"http://localhost:4800/" + this.state.image}
-//                                 medium={"http://localhost:4800/" + this.state.image}
-//                                 large={"http://localhost:4800/" + this.state.image}
+//                                 small={"http://144.91.110.221:4800/" + this.state.image}
+//                                 medium={"http://144.91.110.221:4800/" + this.state.image}
+//                                 large={"http://144.91.110.221:4800/" + this.state.image}
 >>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //                                 alt={this.state.image}
 //                                 />;
@@ -1315,13 +1315,13 @@
 //                     <div className="col-4">
 //                                 <ModalImage
 <<<<<<< HEAD
-//                                 small={"http://localhost:4800/" + this.state.image}
-//                                 medium={"http://localhost:4800/" + this.state.image}
-//                                 large={"http://localhost:4800/" + this.state.image}
+//                                 small={"http://144.91.110.221:4800/" + this.state.image}
+//                                 medium={"http://144.91.110.221:4800/" + this.state.image}
+//                                 large={"http://144.91.110.221:4800/" + this.state.image}
 =======
-//                                 small={"http://localhost:4800/" + this.state.image}
-//                                 medium={"http://localhost:4800/" + this.state.image}
-//                                 large={"http://localhost:4800/" + this.state.image}
+//                                 small={"http://144.91.110.221:4800/" + this.state.image}
+//                                 medium={"http://144.91.110.221:4800/" + this.state.image}
+//                                 large={"http://144.91.110.221:4800/" + this.state.image}
 >>>>>>> 19f048a8e3bb35a901f7c8115cef9bec8af5e24c
 //                                 alt={this.state.image}
 //                                 />;

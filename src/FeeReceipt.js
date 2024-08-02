@@ -273,7 +273,7 @@ class FeeReceipt extends React.Component {
 
 
   getBankData = () => {
-    fetch("http://localhost:4800/getBankData", {
+    fetch("http://144.91.110.221:4800/getBankData", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -291,7 +291,7 @@ class FeeReceipt extends React.Component {
       .then((err) => console.log(err));
   };
   getFine = async() => {
-    await fetch("http://localhost:4800/getFine")
+    await fetch("http://144.91.110.221:4800/getFine")
       .then((res) => res.json())
       .then((data) => {
         this.setState({
@@ -304,7 +304,7 @@ class FeeReceipt extends React.Component {
       .catch((err) => console.log(err));
   };
   getStudent = async () => {
-    fetch("http://localhost:4800/getStudent", {
+    fetch("http://144.91.110.221:4800/getStudent", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -331,7 +331,7 @@ class FeeReceipt extends React.Component {
     var b = this.state.session.split("-")[1];
     b = b - 1;
     var previousSession = a + "-" + b;
-    await fetch("http://localhost:4800/GetDefaulterMoneySingleStudent", {
+    await fetch("http://144.91.110.221:4800/GetDefaulterMoneySingleStudent", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -359,7 +359,7 @@ class FeeReceipt extends React.Component {
     const data = new FormData();
     data.append("category", this.state.category);
     data.append("description", this.state.description);
-    const url = "http://localhost:4800/StoreFeeCatogory";
+    const url = "http://144.91.110.221:4800/StoreFeeCatogory";
     fetch(url, {
       method: "post",
       body: data,
@@ -372,7 +372,7 @@ class FeeReceipt extends React.Component {
       .then((err) => { });
   };
   getFeeCategory = () => {
-    fetch("http://localhost:4800/getCategory")
+    fetch("http://144.91.110.221:4800/getCategory")
       .then((res) => res.json())
       .then((data) => {
         this.setState({ AllCategory: data });
@@ -380,7 +380,7 @@ class FeeReceipt extends React.Component {
       .then((err) => console.log(err));
   };
   getSession = () => {
-    fetch("http://localhost:4800/getSession", {
+    fetch("http://144.91.110.221:4800/getSession", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -401,7 +401,7 @@ class FeeReceipt extends React.Component {
     if (account_no == "0") {
       return false;
     }
-    fetch("http://localhost:4800/singleparentdataWithSession", {
+    fetch("http://144.91.110.221:4800/singleparentdataWithSession", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -477,7 +477,7 @@ class FeeReceipt extends React.Component {
     if (admission_no == "0") {
       return false;
     }
-    fetch("http://localhost:4800/singlestudentdata", {
+    fetch("http://144.91.110.221:4800/singlestudentdata", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -624,7 +624,7 @@ class FeeReceipt extends React.Component {
     }
   };
   getCertificateDetails = async () => {
-    fetch("http://localhost:4800/getTransferCertificate", {
+    fetch("http://144.91.110.221:4800/getTransferCertificate", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -650,7 +650,7 @@ class FeeReceipt extends React.Component {
   getFeeReceipt = (class_names, sections) => {
     var fetchPromise = "";
     // const currentMonth =  Moment().format('MM')
-    fetchPromise = fetch("http://localhost:4800/getFeeReceipt", {
+    fetchPromise = fetch("http://144.91.110.221:4800/getFeeReceipt", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -693,7 +693,7 @@ class FeeReceipt extends React.Component {
   SearchOldfee = async () => {
     this.setState({ AllOldFees: [] });
     const admission_no = this.state.admission_no.toUpperCase();
-    await fetch("http://localhost:4800/SearchOldfee", {
+    await fetch("http://144.91.110.221:4800/SearchOldfee", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -825,8 +825,8 @@ class FeeReceipt extends React.Component {
   };
   FeesClasswise = async(class_names, sections) => {
     const currentMonth = Moment().format("MM");
-    await fetch("http://localhost:4800/FeesClasswise", {
-      // fetch("http://localhost:4800/FeesClasswise", {
+    await fetch("http://144.91.110.221:4800/FeesClasswise", {
+      // fetch("http://144.91.110.221:4800/FeesClasswise", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -1441,7 +1441,7 @@ class FeeReceipt extends React.Component {
           data.append("previous_year_dues_fine", Number(this.state.pendingPreviousYearFine)>0 ? this.state.pendingPreviousYearFine - this.state.paidPendingPreviousYearFine: 0);
           data.append("paid_previous_year_fees",Number(this.state.paidPendingPreviousYearFees)>0 ? this.state.paidPendingPreviousYearFees : 0)
           data.append("paid_previous_year_fine",Number(this.state.paidPendingPreviousYearFine)>0 ? this.state.paidPendingPreviousYearFine : 0)
-          const url = "http://localhost:4800/StoreReceipt";
+          const url = "http://144.91.110.221:4800/StoreReceipt";
           fetch(url, {
             method: "post",
             body: data,
@@ -1645,7 +1645,7 @@ class FeeReceipt extends React.Component {
       data.append("_id", this.state._id);
       data.append("balance", this.state.balance);
       data.append("paid_upto_month", this.state.last_fee_date);
-      const url = "http://localhost:4800/UpdateBalance";
+      const url = "http://144.91.110.221:4800/UpdateBalance";
       fetch(url, {
         method: "PATCH",
         body: data,
@@ -1694,7 +1694,7 @@ class FeeReceipt extends React.Component {
   }
 
   DeleteReceipt(id) {
-    const apiUrl = "http://localhost:4800/DeleteReceipt";
+    const apiUrl = "http://144.91.110.221:4800/DeleteReceipt";
     fetch(apiUrl, {
       headers: {
         "Content-Type": "application/json",
@@ -1752,7 +1752,7 @@ class FeeReceipt extends React.Component {
     data.append("receipt_no", this.state.Rreceiptno);
     data.append("receipt_date", this.state.Rreceiptdate);
     data.append("balance", this.state.Rbalance);
-    const url = "http://localhost:4800/UpdateReceipt";
+    const url = "http://144.91.110.221:4800/UpdateReceipt";
     fetch(url, {
       method: "put",
       body: data,
@@ -1813,7 +1813,7 @@ class FeeReceipt extends React.Component {
   // StudentCount Api Start
   // GetAllStudentCount Api
   getStudentCount = () => {
-    fetch("http://localhost:4800/getStudentCount", {
+    fetch("http://144.91.110.221:4800/getStudentCount", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -2225,27 +2225,27 @@ class FeeReceipt extends React.Component {
           <div className="row">
             <div className="col-4">
               <ModalImage
-                small={"http://localhost:4800/" + this.state.image}
-                medium={"http://localhost:4800/" + this.state.image}
-                large={"http://localhost:4800/" + this.state.image}
+                small={"http://144.91.110.221:4800/" + this.state.image}
+                medium={"http://144.91.110.221:4800/" + this.state.image}
+                large={"http://144.91.110.221:4800/" + this.state.image}
                 alt={this.state.image}
               />
               ;
             </div>
             <div className="col-4">
               <ModalImage
-                small={"http://localhost:4800/" + this.state.image}
-                medium={"http://localhost:4800/" + this.state.image}
-                large={"http://localhost:4800/" + this.state.image}
+                small={"http://144.91.110.221:4800/" + this.state.image}
+                medium={"http://144.91.110.221:4800/" + this.state.image}
+                large={"http://144.91.110.221:4800/" + this.state.image}
                 alt={this.state.image}
               />
               ;
             </div>
             <div className="col-4">
               <ModalImage
-                small={"http://localhost:4800/" + this.state.image}
-                medium={"http://localhost:4800/" + this.state.image}
-                large={"http://localhost:4800/" + this.state.image}
+                small={"http://144.91.110.221:4800/" + this.state.image}
+                medium={"http://144.91.110.221:4800/" + this.state.image}
+                large={"http://144.91.110.221:4800/" + this.state.image}
                 alt={this.state.image}
               />
               ;

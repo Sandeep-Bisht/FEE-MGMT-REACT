@@ -34,7 +34,7 @@ class Defaulter extends React.Component{
       this.getSection()
     }
     // getFeeReceipt = () => {
-    //   fetch("http://localhost:4800/getFeeReceipt")
+    //   fetch("http://144.91.110.221:4800/getFeeReceipt")
     //       .then(res => res.json())
     //       .then(data => {
     //           console.log(data)
@@ -43,7 +43,7 @@ class Defaulter extends React.Component{
     //       .then(err => console.log(err))
     // }
     getSession = () => {
-      fetch("http://localhost:4800/getSession"
+      fetch("http://144.91.110.221:4800/getSession"
       ,{
           method: 'POST',
           headers: {
@@ -62,7 +62,7 @@ class Defaulter extends React.Component{
           .then(err => console.log(err))
   }
     getFine = () => {
-        fetch("http://localhost:4800/getFine")
+        fetch("http://144.91.110.221:4800/getFine")
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -71,7 +71,7 @@ class Defaulter extends React.Component{
             .then(err => console.log(err))
     }
     getSection = () => {
-      fetch("http://localhost:4800/getSection"
+      fetch("http://144.91.110.221:4800/getSection"
           ,{
           method: 'POST',
           headers: {
@@ -93,7 +93,7 @@ class Defaulter extends React.Component{
     DefaulterByMonth=async()=>{
      this.setState({AllDefaulter:[]})
       await console.log(this.state.DefaulterByMonth)
-       fetch("http://localhost:4800/DefaulterByMonth"
+       fetch("http://144.91.110.221:4800/DefaulterByMonth"
        ,{
            method: 'POST',
            headers: {
@@ -117,7 +117,7 @@ class Defaulter extends React.Component{
        })
     }
     getClass = () => {
-      fetch("http://localhost:4800/getClass")
+      fetch("http://144.91.110.221:4800/getClass")
           .then(res => res.json())
           .then(data => {
               console.log(data)
@@ -129,7 +129,7 @@ class Defaulter extends React.Component{
     global_class_name =  class_name
     console.log("checking response FeesClasswise")
     const currentMonth =  Moment().format('MM')       
-     fetch("http://localhost:4800/FeesClasswise"
+     fetch("http://144.91.110.221:4800/FeesClasswise"
      ,{
          method: 'POST',
          headers: {
